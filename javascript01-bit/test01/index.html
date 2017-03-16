@@ -14,7 +14,15 @@
     이름 : <input type='text' name='name'><br>
     나이 : <input type='text' name='age'><br>
     전화 : <input type='text' name='tel'><br>
-    <button>등록</button>
+    <button id='btn' type='button'>등록</button>
     </form>
+<script>
+window.$ = window.jQuery = require('jquery');
+console.log($('#btn'));
+$('#btn').click(function() {
+  alert('okok')
+});
+
+</script>
   </body>
 </html>
