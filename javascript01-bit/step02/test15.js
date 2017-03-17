@@ -20,13 +20,8 @@ console.log("1" == true);  // true => 1 == 1
 console.log("true" == true); // false => NaN == 1
 console.log("hello" == true); // false => NaN == 1
 console.log("" == false); // true => 0 == 0
+console.log(NaN == false); // false => NaN == 0
 
-/* null, undefined, NaN 는 그 의미대로 비교한다.
-- 즉 암시적 형변환을 하지 않는다.
-*/
-console.log(false == null); // false
-console.log(false == undefined); // false
-console.log(false == NaN); // false
 
 console.log(false == 0); // true
 console.log(false == []); // true
@@ -41,11 +36,15 @@ console.log(true == 7); // 1 == 7
 
 /*
 규칙3)
+- null, undefined는 그 의미대로 비교한다.
+  즉 암시적 형변환을 하지 않는다.
 - null의 의미는 변수가 비어 있다.
 - undefined의 의미는 변수가 없다.
 */
-console.log("0" == null);
-console.log("0" == undefined);
+console.log(false == null); // false
+console.log(false == undefined); // false
+console.log("0" == null); // false
+console.log("0" == undefined); // false
 
 
 
