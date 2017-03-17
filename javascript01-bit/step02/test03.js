@@ -13,7 +13,9 @@ var b = "7";
   두 값의 타입이 다르고 그 중 하나가 number이면,
   다른 하나를 숫자로 타입으로 바꾼 후 비교한다.
 */
+console.log(typeof a, typeof b);
 console.log(a == b); // 7 == "7" --> 7 == 7 --> true
+console.log(typeof a, typeof b);
 
 /* "===" 연산자
 - 같은 타입에 대해서만 비교를 수행한다.
