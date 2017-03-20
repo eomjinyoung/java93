@@ -25,6 +25,13 @@ for (var a = 2; a <= 9; a++) {
 }
 console.log("------------------------------");
 
+var names = ["홍길동", "임꺽정", "유관순", "안중근", "윤봉길", "김구"];
+
+for (var i = 0; i < names.length; i++) {
+  console.log(names[i]);
+}
+console.log("------------------------------");
+
 
 
 
