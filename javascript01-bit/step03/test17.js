@@ -14,18 +14,12 @@ var prompt = require('prompt');
 
 prompt.start();
 
-prompt.get(['a', 'b'], function(err, result) {
-  var a = parseInt(result.a); // string --> number
-  var b = parseInt(result.b); // string --> number
 
-  console.log('계산결과:');
-  console.log('a + b =', a + b);
-  console.log('a - b =', a - b);
-  console.log('a * b =', a * b);
-  console.log('a / b =', a / b);
-  console.log('a % b =', a % b);
+prompt.get(['step'], function(err, result) {
+  var step = parseInt(result.step); // string --> number
+  for (var i = 1; i <= 9; i++)
+    console.log(step + " * " + i + " = " + (step * i));
 });
-
 
 
 
