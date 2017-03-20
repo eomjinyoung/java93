@@ -15,6 +15,9 @@ console.log(typeof name);
 name = "홍길동";
 console.log(typeof name);
 
+name = '임꺽정';
+console.log(typeof name);
+
 name = 20;
 console.log(typeof name);
 
