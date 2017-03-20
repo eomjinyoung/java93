@@ -46,7 +46,9 @@ console.log(false == undefined); // false
 console.log("0" == null); // false
 console.log("0" == undefined); // false
 
-
+/*
+https://github.com/dorey/JavaScript-Equality-Table 사이트 참고!
+*/
 
 
 
