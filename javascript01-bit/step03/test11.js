@@ -15,16 +15,29 @@ var prompt = require('prompt');
 
 prompt.start();
 
-prompt.get(['a', 'b'], function(err, result) {
+prompt.get(['a', 'b', 'op'], function(err, result) {
   var a = parseInt(result.a); // string --> number
   var b = parseInt(result.b); // string --> number
+  var op = result.op;
 
   console.log('계산결과:');
-  console.log('a + b =', a + b);
-  console.log('a - b =', a - b);
-  console.log('a * b =', a * b);
-  console.log('a / b =', a / b);
-  console.log('a % b =', a % b);
+  switch (op) {
+  case "+":
+    console.log(a, op, b, "=", a + b);
+    break;
+  case "-":
+    console.log(a, op, b, "=", a - b);
+    break;
+  case "*":
+    console.log(a, op, b, "=", a * b);
+    break;
+  case "/":
+    console.log(a, op, b, "=", a / b);
+    break;
+  case "%":
+    console.log(a, op, b, "=", a % b);
+    break;
+  }
 });
 
 
