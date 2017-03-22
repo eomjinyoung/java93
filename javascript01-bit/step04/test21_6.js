@@ -47,14 +47,13 @@ prompt: command: quit
 */
 "use strict"
 
-/* 7단계:
+/* 6단계:
 + 사용자로부터 command 값 입력 받기
 + 반복하기
 + 'quit' 명령 처리하기
 + 'list', 'add', 'delete' 명령 구분하기
 + 명령을 구분할 때 if 문 대신 switch 문 사용
 + 'list' 명령 처리하기
-+ 'add' 명령 처리하기
 */
 var prompt = require('prompt')
 
@@ -89,21 +88,7 @@ function inputCommand() {
       break;
     case 'add':
       console.log('[학생 입력]')
-      prompt.get(['name', 'kor', 'eng', 'math'], function(err, result) {
-        var student = [result.name,
-          parseInt(result.kor),
-          parseInt(result.eng),
-          parseInt(result.math)]
-        student[4] = student[1] + student[2] + student[3]
-        student[5] = student[4] / 3
-
-        studentList[studentList.length] = student
-        console.log('입력 되었습니다.')
-        console.log()
-        
-        inputCommand();
-      })
-      return;
+      break;
     case 'delete':
       console.log('[학생 삭제]')
       break;
