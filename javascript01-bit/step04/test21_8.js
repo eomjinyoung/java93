@@ -47,7 +47,7 @@ prompt: command: quit
 */
 "use strict"
 
-/* 7단계:
+/* 8단계:
 + 사용자로부터 command 값 입력 받기
 + 반복하기
 + 'quit' 명령 처리하기
@@ -55,6 +55,7 @@ prompt: command: quit
 + 명령을 구분할 때 if 문 대신 switch 문 사용
 + 'list' 명령 처리하기
 + 'add' 명령 처리하기
++ 'delete' 명령 처리하기
 */
 var prompt = require('prompt')
 
@@ -78,8 +79,9 @@ function inputCommand() {
       return; // 함수 실행을 끝낸다.
     case 'list':
       console.log('[학생 목록]')
+      var count = 0;
       for (var student of studentList) {
-        console.log(student[0] + "," +
+        console.log(count++ + ":" + student[0] + "," +
           student[1] + "," +
           student[2] + "," +
           student[3] + "," +
@@ -100,13 +102,32 @@ function inputCommand() {
         studentList[studentList.length] = student
         console.log('입력 되었습니다.')
         console.log()
-        
+
         inputCommand();
       })
       return;
     case 'delete':
       console.log('[학생 삭제]')
-      break;
+      prompt.get(['no'], function(err, result) {
+        var no = parseInt(result.no)
+        if (studentList.length == 0) {
+          console.log('삭제할 항목이 없습니다.')
+          inputCommand()
+          return
+        }
+
+        if (no < 0 || no >= studentList.length) {
+          console.log('학생 번호가 옳지 않습니다.')
+          inputCommand()
+          return
+        }
+
+        studentList.splice(no, 1)
+        console.log('삭제했습니다.')
+        console.log()
+        inputCommand()
+      })
+      return;
     default:
       console.log('해당 명령은 지원하지 않습니다.')
     }
