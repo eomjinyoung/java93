@@ -47,11 +47,9 @@ prompt: command: quit
 */
 "use strict"
 
-/* 4단계:
+/* 2단계:
 + 사용자로부터 command 값 입력 받기
 + 반복하기
-+ 'quit' 명령 처리하기
-+ 'list' 명령 처리하기
 */
 var prompt = require('prompt')
 
@@ -61,10 +59,7 @@ inputCommand()
 
 function inputCommand() {
   prompt.get(['command'], function(err, result) {
-    if (result.command == 'quit') {
-      console.log('안녕히 가세요!')
-      return; // 함수 실행을 끝낸다.
-    }
+    console.log(result.command);
     inputCommand();
   })
 }

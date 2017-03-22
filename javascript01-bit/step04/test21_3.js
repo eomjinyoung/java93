@@ -47,11 +47,10 @@ prompt: command: quit
 */
 "use strict"
 
-/* 4단계:
+/* 3단계:
 + 사용자로부터 command 값 입력 받기
 + 반복하기
 + 'quit' 명령 처리하기
-+ 'list' 명령 처리하기
 */
 var prompt = require('prompt')
 
