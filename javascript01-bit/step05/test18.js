@@ -46,7 +46,4 @@ console.log(r1, r2)
 
 
 
-
-
-
 //
