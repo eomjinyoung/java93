@@ -14,9 +14,10 @@
 
 // 방법1) 글로벌(모듈) 함수의 this 변수에 객체 주소를 전달하기
 function f1() {
-  console.log(this);
+  console.log(this)
 }
 // new 연산자를 통해 객체를 생성한 후 함수를 호출한다.
+f1()
 new f1()
 
 // 방법2) 객체에 저장된 함수 호출하기
