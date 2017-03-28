@@ -3,10 +3,6 @@
  */
 const {app, BrowserWindow} = require('electron')
 
-// 'path' 모듈은 현재 실행 중인 프로그램 경로를 기준으로
-// 파일 경로를 다룰 때 사용할 도구를 리턴한다.
-const path = require('path')
-
 let win
 
 app.on('ready', createWindow)

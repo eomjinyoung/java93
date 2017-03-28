@@ -20,7 +20,7 @@ console.log(path.join(__dirname, 'test01.js'))
 
 // - 경로를 붙일 때 상위 폴더로 이동하는 '..' 명령이나
 //   현재 폴더를 의미하는 '.' 명령을 자동으로 처리하여 경로를 계산한다.
-console.log(path.join(__dirname, '../../electron01-bit/step04/main.js'))
+console.log(path.join(__dirname, '/../../electron01-bit/step04/main.js'))
 
 
 

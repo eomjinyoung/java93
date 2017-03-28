@@ -21,6 +21,10 @@
 // 'electron' 모듈의 리턴 값 중에서
 // 애플리케이션을 다룰 때 사용할 도구를 꺼낸다.
 const {app} = require('electron')
+/*
+const electron = require('electron')
+const app = electron.app
+*/
 
 /* app.on(이벤트명, 리스너)
 - 지정된 이벤트가 발생할 때 호출될 함수를 등록한다.

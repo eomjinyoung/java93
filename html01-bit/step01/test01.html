@@ -1,0 +1,44 @@
+<!DOCTYPE html> <!-- 이 문서가 어떤 형식인지 선언한다. HTML5 규격.-->
+<!--
+HTML 주석
+=> 이 사이에 있는 텍스트는 웹브라우저가 무시한다.
+=> 태그 안에 작성할 수는 없다.
+-->
+<!--
+HTML4.x 에서는 다음과 같이 DOCTYPE을 선언한다.
+예) <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+HTML4.x의 DOCTYPE 규격
+<!DOCTYPE 루트태그명 공개여부 "공개이름" "HTML 태그의 사용 규칙을 담은 파일의 URL">
+1) 루트 태그명
+  => HTML 문서의 최상위 태그는 'html'이다.
+2) 공개 여부
+  => PUBLIC
+     - 모든 사람이 사용할 수 있도록 공개한 태그
+     - PUBLIC "공개이름" "규칙을 담은 파일의 URL"
+  => SYSTEM
+     - 개인이나 특정 회사에서 사용하기 위해 만든 태그
+     - SYSTEM "규칙을 담은 파일의 URL"
+3) 공개 이름
+  => "국제공인여부//태그관리조직이름//태그이름 및 버전//표기언어"
+  => 국제공인여부: 국제공인(국가 간의 약속; +), 비공인(-)
+4) DTD URL
+  => DTD(Document Type Definition): 태그의 사용 규칙을 정의한 문서
+
+HTML5의 DOCTYPE
+=> HTML4.x 보다 간결하게 선언하도록 문법이 변경되었다.
+
+주의!
+=> DOCTYPE 선언 앞에는 공백이나 다른 텍스트가 와서는 안된다.
+=> 물론 와도 웹브라우저가 대충 넘어갈 것이다.
+-->
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+</head>
+<body>
+
+</body>
+</html>
