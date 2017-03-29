@@ -42,6 +42,24 @@
   <code script="Java'Script"/>
   <code script="Java&quot;Script"/>
   <code script='Java&apos;Script'/>
+
+  <!-- 내용 전체에 대해 <나 & 등을 무시하라고 설정할 수 있다.
+       CDATA 섹션을 이용하여 내용을 작성한다.
+       <![CDATA[내용...]]>
+       CDATA 섹션 안의 내용물에 대해서는 일반 텍스트로 취급한다.
+       그래서 < 나 & 문자를 마음대로 사용할 수 있다.
+   -->
+  <code>
+  <![CDATA[
+    if (a < 10)
+      console.log("10보다 작다")
+
+    if (a && b)
+      console.log("a와 b 모두 참이다.")
+  ]]>
+  </code>
+
+
 </root-tag>
 
 

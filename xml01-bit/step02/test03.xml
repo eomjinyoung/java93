@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!--
+엘리먼트 규칙 정의하는 방법
+  <!ELEMENT 태그명 내용물의형식>
+
+내용물의 형식
+1) 자식 태그 정의
+  <!ELEMENT 태그명 (자식태그명, 자식태그명, 자식태그명, ...)>
+  => 자식 태그를 적을 때는 반드시 순서대로 적어야 한다.
+2) EMPTY
+  <!ELEMENT 태그명 EMPTY>
+  => 내용물을 작성하지 말아야 한다는 의미.
+  => 내용물이 있으면 오류이다.
+-->
+<!DOCTYPE student [
+<!ELEMENT student (name, tel, email)>
+<!ELEMENT name EMPTY>
+<!ELEMENT tel EMPTY>
+<!ELEMENT email EMPTY>
+]>
+<!-- OK!
+<student>
+  <name/>
+  <tel/>
+  <email/>
+</student>
+-->
+
+<!-- 순서를 바꿔서는 안된다.
+<student>
+<tel/>
+<name/>
+<email/>
+</student>
+-->
+
+<!-- 반드시 한 개가 와야 한다.
+<student>
+<name/>
+<name/>
+<tel/>
+<email/>
+</student>
+-->
+
+<!-- 태그 이름 뒤에 아무것도 적지 않으면 반드시 한 개가 와야 된다는 의미다.
+     안오면 오류이다!
+-->
+<student>
+  <name/>
+  <tel/>
+</student>
+
+
+
+
+
+
+<!-- -->

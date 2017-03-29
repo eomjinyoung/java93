@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- DTD 적용
+- 태그 사용 규칙을 정의하고 그 규칙에 따라 태그를 사용했는지 검사한다.
+- DTD 정의하는 방법
+1) 인라인(in-line) DTD
+  => XML 문서 안에 DTD 규칙을 정의한 것
+  => 다른 XML 문서와 규칙을 공유할 수 없는 문제가 있다.
+  => 문법
+  <!DOCTYPE 루트태그명 [규칙정의...]>
+2) 외부 파일 DTD
+  => 외부 파일에 DTD를 정의해두고, XML에서는 DTD 파일의 경로를 지정한다.
+  => 문법
+  <!DOCTYPE 루트태그명 SYSTEM "DTD 파일 URL">
+-->
+
+<!-- 인라인 DTD 사용하기 -->
+<!DOCTYPE student [
+<!ELEMENT student EMPTY>
+]>
+<!--
+DOCTYPE에 정의된 루트 태그이름과 다르면 오류이다.
+  <students/>
+student 태그는 내용물이 없어야 한다. 넣으면 오류!
+  <student>hong</student>
+-->
+
+<!-- OK!
+<student></student>
+-->
+<student/>
+
+
+
+
+
+
+<!-- -->
