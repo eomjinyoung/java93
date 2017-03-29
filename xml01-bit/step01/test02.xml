@@ -13,6 +13,10 @@ version="1.0"  <=== students 태그의 "속성(attribute)"이라 부른다.
 주의!
 주석 안에 대시(-)를 두 번 연속해 사용하면 주석의 끝으로 인식한다.
 -->
-<students version="1.0">
+<students version="1.0"> <!-- student 태그의 부모 태그라 부른다 -->
 내용...
+  <student>   <!-- 이 태그를 기준으로 삼는다면 -->
+    <name>홍길동</name> <!-- student 태그의 자식 태그라 부른다 -->
+    <tel>1111-1111</tel>
+  </student>
 </students>

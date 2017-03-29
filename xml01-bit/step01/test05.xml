@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!-- Well-formed XML III
+- XML 기본 작성 규칙에 따라 만든 XML을 말한다.
+- 시작태그와 끝태그 사이에 내용을 작성할 때 지켜야 할 규칙
+-->
+
+<root-tag>
+  <!-- 내용에 < 문자를 넣을 수 없다. -->
+  <!--
+  <tag>내용에 < 문자를 포함하면 XML을 분석하는 놈(파서)은 태그의 시작이라고
+       착각한다. 그래서 오류가 발생한다.</tag>
+  -->
+
+  <!-- 내용에 < 문자를 넣을 밖에 없는 상황이라면
+       < 문자 대신 XML에서 "특정한 문자를 위해 따로 정의한
+      표현(엔티티라 부른다.)"을 사용하라!
+      <   &lt;
+      >   &gt;
+      "   &quot;
+      '   &apos;
+      &   &amp;
+  -->
+  <!--
+    <code>if (a && b) console.log('okok')</code>
+    <code>if (a < b) console.log('okok')</code>
+  -->
+  <code>if (a > b) console.log('okok')</code><!-- > 문자는 그냥 써도 된다.-->
+
+  <code>if (a &amp;&amp; b) console.log('okok')</code>
+  <code>if (a &lt; b) console.log('okok')</code>
+  <code>if (a &gt; b) console.log('okok')</code>
+
+  <!-- 속성 값을 작성할 때
+      큰따옴표("") 안에 큰따옴표를 넣을 수 없다.
+      작은따옴표('') 안에 작은따옴표를 넣을 수 없다.
+     대시 XML에 정의된 엔티티를 사용하라! -->
+  <!-- 오류!
+    <code script="Java"Script"/>
+    <code script='Java'Script'/>
+  -->
+  <code script='Java"Script'/>
+  <code script="Java'Script"/>
+  <code script="Java&quot;Script"/>
+  <code script='Java&apos;Script'/>
+</root-tag>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -->
