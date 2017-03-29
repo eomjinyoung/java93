@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!--
+엘리먼트 규칙 정의하는 방법
+  <!ELEMENT 태그명 내용물의형식>
+
+내용물의 형식
+5) 여러 태그 중에서 한 개를 선택할 때
+  <!ELEMENT 태그명 ((자식태그1 | 자식태그2), ...)>
+
+-->
+<!DOCTYPE student [
+<!ELEMENT student (name, (home-tel | office-tel), email?, alias*)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT home-tel (#PCDATA)>
+<!ELEMENT office-tel (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT alias (#PCDATA)>
+]>
+
+<student>
+  <name>홍길동</name>
+  <home-tel>1111-1111</home-tel>
+</student>
+
+
+<!-- -->

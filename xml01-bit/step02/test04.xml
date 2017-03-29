@@ -18,18 +18,20 @@ none => 수량을 지정하지 않으면 필수이다.
 
 -->
 <!DOCTYPE student [
-<!ELEMENT student (name, tel, email?)>
+<!ELEMENT student (name, tel+, email?, alias*)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT tel (#PCDATA)>
 <!ELEMENT email (#PCDATA)>
+<!ELEMENT alias (#PCDATA)>
 ]>
 
 <student>
   <name>홍길동</name>
   <tel>1111-1111</tel>
-  <!-- ? 태그는 생략 가능하다
-  <email>hong@test.com</email>
-  -->
+  <tel>1111-2222</tel>
+  <tel>1111-3333</tel>
+  <alias>오소리</alias>
+  <alias>식충이</alias>
 </student>
 
 
