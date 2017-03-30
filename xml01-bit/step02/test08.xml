@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!--
+엔티티(entity) 정의하는 방법
+=> 특수 문자나 반복적으로 사용되는 텍스트를 별도의 변수로 정의해 놓고 사용하는 기법
+=> 종류
+   일반 엔티티: XML 문서에서 사용하는 값
+   파라미터 엔티티: DTD 문서에서 사용하는 값
+=> 내장 엔티티(built-in entity)
+  &lt;    ===> <
+  &gt;    ===> >
+  &quot;  ===> "
+  &apos;  ===> '
+  &amp;   ===> &
+=> 사용자(개발자) 정의 일반 엔티티
+문법
+  <!ENTITY 엔티티명 "값">
+사용
+  &엔티티명;
+-->
+<!DOCTYPE students [
+<!ELEMENT students (student)>
+<!ELEMENT student (#PCDATA)>
+
+<!ENTITY knbit "강남교육센터">
+<!ENTITY jrbit "종로교육센터">
+]>
+
+<students>
+  <student>홍길동(&jrbit;)</student>
+  <student>임꺽정(&knbit;)</student>
+  <student>유관순(&jrbit;)</student>
+</students>
+
+
+
+<!-- -->

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<!--
+=> 사용자(개발자) 정의 파라미터 엔티티
+문법
+  <!ENTITY % 엔티티명 "값">
+사용
+  %엔티티명;
+-->
+<!DOCTYPE students [
+<!ENTITY % coreattr "">
+
+<!ELEMENT students (class+,student+,loc+)>
+
+<!ELEMENT class EMPTY>
+<!ATTLIST class
+  id ID #REQUIRED
+  name CDATA #REQUIRED
+>
+
+<!ELEMENT student EMPTY>
+<!ATTLIST student
+  id ID #REQUIRED
+  name CDATA #REQUIRED
+  email CDATA #IMPLIED
+  cid IDREF #REQUIRED
+>
+
+<!ELEMENT loc EMPTY>
+<!ATTLIST loc
+  id ID #REQUIRED
+  name CDATA #REQUIRED
+  classes IDREFS #REQUIRED
+>
+]>
+
+<students>
+  <class id="C301" name="301 호"/>
+  <class id="C302" name="302 호"/>
+  <class id="C303" name="303 호"/>
+  <class id="C501" name="5층 1호"/>
+  <class id="C502" name="5층 2호"/>
+
+  <student id="S001" cid="C303" name="홍 길동"/>
+  <student id="S002" cid="C303" name="임 꺽정"/>
+  <student id="S003" cid="C301" name="유 관순"/>
+
+  <loc id="l01" name="강남지점" classes="C301 C302 C303"/>
+  <loc id="l02" name="종로지점" classes="C501 C502"/>
+</students>
+<!-- -->
