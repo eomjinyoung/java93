@@ -19,7 +19,7 @@
   &엔티티명;
 -->
 <!DOCTYPE students [
-<!ELEMENT students (student)>
+<!ELEMENT students (student+)>
 <!ELEMENT student (#PCDATA)>
 
 <!ENTITY knbit "강남교육센터">

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 외부 DTD를 가져오기
+<!DOCTYPE 루트태그명 SYSTEM "DTD URL">
+-->
+<!DOCTYPE students SYSTEM "students.dtd">
+
+<students>
+  <class id="C301" name="301 호"/>
+  <class id="C302" name="302 호"/>
+  <class id="C303" name="303 호"/>
+  <class id="C501" name="5층 1호"/>
+  <class id="C502" name="5층 2호"/>
+
+  <student id="S001" cid="C303" name="홍 길동"/>
+  <student id="S002" cid="C303" name="임 꺽정"/>
+  <student id="S003" cid="C301" name="유 관순"/>
+
+  <loc id="L01" name="강남지점" classes="C301 C302 C303"/>
+  <loc id="L02" name="종로지점" classes="C501 C502"/>
+</students>
+<!-- -->
