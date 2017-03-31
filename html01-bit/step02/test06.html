@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <style>
+  h1,h2,h3,h4,h5,h6,p,div,a,strong,b,i,form {
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+  }
+  </style>
+</head>
+<body>
+<!--
+form
+=> 입력 폼을 만들 때 사용한다.
+=> 한 폼 안에 여러 개의 입력 항목을 둘 수 있다.
+=> 폼 단위로 서버에 데이터를 보낸다.
+=> 속성
+  => action : 폼 값을 전송하는 목적지 URL
+              URL을 지정하지 않으면 현재 URL로 보낸다.
+  => method : get 또는 post.
+              값을 지정하지 않으면 get 방식으로 전송한다.
+input 태그
+=> 사용자로부터 값을 입력 받는 UI를 만들 때 사용한다.
+=> type
+  => text: 일반 텍스트를 입력 받을 때
+  => password: 암호를 입력 받을 때. 입력 값이 * 문자로 표시된다.
+  => checkbox: 체크박스를 표현할 때
+  => button: 일반 버튼을 만들 때. 미리 정의된 기능이 없다.
+            개발자가 버튼에 기능을 정의해서 써야 한다.
+  => reset: 초기화 버튼을 만들 때 사용한다. 기능이 미리 정의되어 있다.
+            누르면 폼 안에 있는 모든 항목을 처음 상태로 만든다.
+  => submit: 폼 안에 입력한 값을 서버에 보내는 기능이 미리 정의되어 있다.
+             어느 서버? form 태그의 action 속성에 정의된 URL
+             보내는 방식은? form 태그의 method 속성에 정의된 방식
+             이름이 부여된 항목의 값만 보낸다.
+-->
+
+<form action="http://www.naver.com" method="get">
+이름: <input type="text" name="name"><br>
+암호: <input type="password" name="pwd"><br>
+이메일: <input type="text" name="email"><br>
+전화번호: <input type="tel" name="tel"><br>
+재직여부: <input type="checkbox" name="working" checked> 재직중<br>
+<input type="submit" value="전송버튼">
+<input type="reset" value="초기화버튼">
+<input type="button" value="일반버튼"><br>
+</form>
+
+
+</body>
+</html>
+
+
+
+
+<!-- -->
