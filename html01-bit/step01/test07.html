@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <style>
+  h1,h2,h3,h4,h5,h6,p,div,ol,ul,table,th,td {
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+  }
+  </style>
+</head>
+<body>
+<!--
+table 안에 table 넣기
+=> 그냥 td 태그 안에 넣으면 된다.
+-->
+<h1>강의 과목</h1>
+<table>
+<thead>
+  <tr><th>번호</th><th>강의명</th><th>강사</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>자바프로그래밍</td><td>홍길동</td></tr>
+  <tr><td>2</td><td>C 프로그래밍</td><td>임꺽정</td></tr>
+  <tr><td>3</td><td>윈도우 프로그래밍</td><td>유관순</td></tr>
+  <tr><td>4</td><td>웹 프로그래밍</td><td>
+    <table> <!-- tbody를 생략하면 웹브라우저에서 자동으로 붙인다.-->
+    <tr><td>HTML,CSS</td><td>안중근</td></tr>
+    <tr><td>JavaScript</td><td>신채호</td></tr>
+    <tr><td>jQuery</td><td>김구</td></tr>
+    </table>
+  </td></tr>
+  <tr><td>5</td><td>IoT 프로그래밍</td><td>윤봉길</td></tr>
+</tbody>
+</table> 테스트
+
+</body>
+</html>
+
+
+
+
+<!-- -->
