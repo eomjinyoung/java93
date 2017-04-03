@@ -4,31 +4,32 @@
   <meta charset="UTF-8">
   <title>HTML</title>
   <style>
-  /* 안쪽 여백 주기*/
-  div {
+  /* 바깥쪽 여백 주기
+    => 테두리 바깥쪽에 여백을 지정한다.
+    => 좌,우 여백은 그대로 유지한다. 옆의 태그의 여백과 겹치지 않는다.
+    => 위,아래 여백은 다른 태그의 여백과 겹쳐서 표현한다.
+       여백이 큰 값으로 겹친다.
+  */
+  body, div {
     border: 2px solid gray;
   }
 
-  #menu {
-    padding-top: 10px;
-    padding-right: 20px;
-    padding-bottom: 30px;
-    padding-left: 40px;
+  div {
+    margin: 10px;
+  }
+
+  a {
+    border: 1px solid red;
+    margin: 10px;
   }
 
   #content {
-    padding: 10px 20px 30px 40px; /* 순서 => 시계 침이 도는 방향(12, 3, 6, 9)*/
+    margin-top: 15px;
+    border-width: 10px;
+    border-style: dashed;
+    border-color: white;
+    background-color: yellow;
   }
-
-  #footer {
-    padding: 10px 50px; /* 순서: (top/bottom) (left/right)*/
-  }
-
-  body {
-    border: 5px solid red;
-    padding: 10px; /* 모든 방향 */
-  }
-
 
   </style>
 </head>
