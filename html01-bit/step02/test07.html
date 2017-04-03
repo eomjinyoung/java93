@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <style>
+  h1,h2,h3,h4,h5,h6,p,div,a,strong,b,i,form {
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+  }
+
+  #ta1 {
+    width: 200px;
+    height: 100px;
+  }
+  </style>
+</head>
+<body>
+<!--
+select 태그
+=> radio 버튼처럼 여러 개 중에서 한 개를 선택하게 할 때 사용한다.
+=> 리스트 행태로 제공되면 그 중 한 개를 사용자에게 보여준다.
+=> input type="radio" vs select
+radio : 작은 수의 항목 중에서 선택하게 할 때 유용하다.
+select : 많은 수의 항목 중에서 선택하게 할 때 유용하다.
+
+textarea
+=> 여러 줄을 입력하는 상자를 만들 때 사용한다.
+=> 기본 값
+  => input 태그와 달리 기본 값은 콘텐츠 영역에 설정해야 한다.
+
+button
+=> submit, reset, button 을 만들 때 사용한다.
+=> type
+  => submit: <input type="submit"> 과 같다.
+     type 속성의 값을 지정하지 않으면 submit이 기본 값이 된다.
+     주의! 일반 버튼을 만들고 싶다면 반드시 type 속성의 값을 button으로 지정하라!
+  => reset : <input type="reset"> 과 같다.
+  => button: <input type="button"> 과 같다.
+-->
+
+<form action="http://www.naver.com" method="get">
+학력:
+<select name="school">
+  <option>선택하세요</option>
+  <option>고줄</option>
+  <option selected>학사</option>
+  <option>석사</option>
+  <option>박사</option>
+</select><br>
+
+<!-- textarea는 끝 태그를 넣어야 한다. -->
+내용: <textarea id="ta1"
+                name="content"
+                placeholder="내용을 입력하세요!"></textarea><br>
+자기소개: <textarea name="intro" rows="4" cols="50">내 소개...</textarea><br>
+
+<button>제출버튼</button>
+<button type="submit">제출번튼</button>
+<button type="reset">리셋버튼</button>
+<button type="button">일반버튼</button><br>
+
+</form>
+
+
+</body>
+</html>
+
+
+
+
+<!-- -->
