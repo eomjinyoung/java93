@@ -14,7 +14,7 @@
   /* 웹에서 다운로드 하는 폰트는 별도로 선언하고 써야 한다.*/
   @font-face {
     font-family: "myfont"; /* 폰트 그룹명을 설정한다. */
-    src: url('test.woff') format('woff');
+    src: url('icons.woff') format('woff');
   }
 
   #state {
@@ -24,7 +24,8 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    margin-left: 5px;
+    margin-left: 2px;
+    font-size: 20px;
   }
 
   </style>
@@ -49,10 +50,10 @@ btn.addEventListener('click', function() {
   // 입력 상자에 들어있는 값을 검사하여 이메일 중복 여부에 따라
   // 아이콘을 출력한다.
   if (email.value == "hong@test.com") { // 존재하는 사용자일 경우
-    state.innerHTML = "&#xf056";
+    state.innerHTML = "&#61453;";
     state.style["color"] = "#ff0000";
   } else {
-    state.innerHTML = "&#xf055";
+    state.innerHTML = "&#61452;";
     state.style.color = "#0000ff";
   }
 
