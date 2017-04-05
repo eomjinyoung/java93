@@ -5,8 +5,13 @@
   <title>HTML</title>
   <style>
   /*
-    position: absolute II
-    => float 대신 absolute를 사용하여 동일한 화면을 출력해보자!
+    position: fixed
+    => 웹브라우저의 클라이언트 영역을 기준으로 위치를 지정한다.
+    => 클라이언트 영역?
+       웹브라우저의 툴바 아래에 위치한 내용이 출력되는 화면이다.
+    => 내용을 위,아래로 스크롤하더라도 fixed 타입의 태그를 움직이지 않는다.
+    => 화면 스크롤과 상관없이 웹브라우저의 특정 영역에
+       내용을 띄우고 싶을 때 사용한다.
   */
   body {
     font-family: '맑은 고딕', 굴림체, 'Apple SD Gothic Neo', sans-serif;
@@ -66,12 +71,24 @@
 
   #footer > p {
     font-style: italic;
-    /* italic => 폰트 파일에 있는 이탤릭체를 사용한다.
-       oblique => 운영체제가 폰트를 강제로 기울여서 이탤릭체처럼 보이게 한다.
-                  폰트 파일에 이탤릭체가 없을 때 사용한다.
-    */
   }
 
+  #ad {
+    border: 5px solid orange;
+    position: fixed;
+    left: 35%;
+    top: 20%;
+  }
+
+  #ad > button {
+    background-color: red;
+    color: white;
+    border-style:none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+  }
 
   </style>
 </head>
@@ -117,6 +134,7 @@
   </ul>
   비트캠프는 우수한 개발자를 양성합니다.
   .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+  .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
   </div>
 
   <div id="footer">
@@ -126,7 +144,20 @@
   <p>Copyright by BITCamp</p>
   </div>
 
+<div id="ad">
+<button id="closeBtn" type="button">X</button>
+<img src="http://data.siwonschool.com/banner/img/www/2017/03/31/bimg_src_1490956508.jpg">
+<img src="http://data.siwonschool.com/banner/img/www/2017/03/31/bimg_src_1490927237.jpg">
+<img src="http://data.siwonschool.com/banner/img/www/2017/04/04/bimg_src_1491271205.jpg">
+</div>
 
+<script>
+var btn = document.getElementById("closeBtn");
+btn.addEventListener('click', function() {
+  var adDiv = document.getElementById("ad");
+  adDiv.style.display = "none";
+});
+</script>
 </body>
 </html>
 
