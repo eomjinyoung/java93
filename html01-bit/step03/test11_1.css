@@ -73,11 +73,13 @@
     cursor: pointer;
   }
 
+  /*
   #menu > img {
     position: relative;
     left: 50px;
     top: 10px;
   }
+  */
 
   #ad > img:last-child {
     position: relative;
