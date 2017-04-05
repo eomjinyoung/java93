@@ -44,6 +44,7 @@ local 방식?
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="sweetalert.css">
   <link rel="stylesheet" type="text/css" href="test11_1.css">
 </head>
 <body>
@@ -55,7 +56,7 @@ local 방식?
     <button type="button" class="btn btn-default">교육안내</button>
     <button type="button" class="btn btn-default">교육과정</button>
     <button type="button" class="btn btn-default">수강신청</button>
-    <button type="button" class="btn btn-default">온라인상담</button>
+    <button id="onlineBtn" type="button" class="btn btn-default">온라인상담</button>
     <div class="dropdown">
       <button class="btn btn-default dropdown-toggle"
               type="button"
@@ -129,7 +130,18 @@ local 방식?
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+<script src="sweetalert.min.js"></script>
 <script src="test11_1.js"></script>
+<script>
+  var onlineBtn = document.getElementById("onlineBtn");
+  onlineBtn.addEventListener('click', function() {
+    swal({
+      title: "정보!",
+      text: "커뮤니티 메뉴를 준비중입니다.",
+      type: "info"
+    });
+  });
+</script>
 </body>
 </html>
 
