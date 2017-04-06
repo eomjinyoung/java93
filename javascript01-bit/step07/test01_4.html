@@ -17,13 +17,15 @@
 
 <script>
 /* CSS selector 문법을 이용하여 태그 찾기
-=> document.querySelector("CSS selector 문법"):HTMLElement
+=> document.querySelector("CSS selector 문법"):Element
   여러 개 중에서 첫 번째 태그만 리턴한다.
-=> document.querySelectorAll("CSS selector 문법"):HTMLCollection
+=> document.querySelectorAll("CSS selector 문법"):NodeList
   찾은 모든 태그를 리턴한다.
 */
 var element = document.querySelector(".c1")
 console.log(element)
+console.log(element.constructor)
+
 
 console.log("-----------------------------")
 
