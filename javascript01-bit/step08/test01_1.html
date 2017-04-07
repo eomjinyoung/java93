@@ -32,13 +32,13 @@ btn1.addEventListener('click', function(event) {
   var xhr = new XMLHttpRequest()
 
   //2) 서버에 연결한다.
-  xhr.open('get', 'test01_1_p1.html', false)
+  xhr.open('get', 'http://localhost:8080/webapp/header.html', false)
 
   //3) 서버에 요청정보를 보낸다.
   xhr.send()
 
   //4) 서버가 응답한 데이터를 출력한다.
-  console.log(xhr.reponseText)
+  console.log(xhr.responseText)
 })
 
 
