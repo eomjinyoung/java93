@@ -5,7 +5,11 @@
   <meta charset="UTF-8">
   <title>HTML</title>
   <style>
-  div {
+  body {
+    background-color: gray;
+  }
+
+  body > div {
     border: 1px solid red;
     min-height: 300px;
   }
@@ -26,6 +30,7 @@
 
 */
 var btn1 = document.querySelector('#btn1')
+var d1 = document.querySelector('#d1')
 
 btn1.addEventListener('click', function(event) {
   //1) AJAX를 처리할 객체를 준비한다.
@@ -39,6 +44,9 @@ btn1.addEventListener('click', function(event) {
 
   //4) 서버가 응답한 데이터를 출력한다.
   console.log(xhr.responseText)
+
+  //5) 서버에서 받은 데이터를 div 태그에 넣는다.
+  d1.innerHTML = xhr.responseText
 })
 
 
