@@ -1,0 +1,150 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <style>
+  body {
+    background-color: gray;
+  }
+
+  body > div {
+    border: 1px solid red;
+    min-height: 300px;
+  }
+  </style>
+</head>
+<body>
+  <button id="btn1" type="button">서버에 요청하기</button><br>
+  <textarea id="ta" rows="20" cols="80"></textarea>
+<script>
+"use strict"
+/* HTTP(Hyper-Text Transfer Protocol) 프로토콜
+=> 웹서버(HTTP Server)와 웹브라우저(HTTP Client) 사이에 데이터를 주고 받는 형식
+*/
+var btn1 = document.querySelector('#btn1')
+var ta = document.querySelector('#ta')
+
+var xhr;
+
+btn1.addEventListener('click', function(event) {
+  xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState < 4)
+      return
+    ta.value = xhr.responseText
+  }
+  xhr.open('get', 'http://localhost:8080/webapp/student/list.json', true)
+  xhr.send()
+})
+
+/*
+GET 요청이 발생하는 경우?
+1) 웹브라우저의 주소창에 주소를 입력한 후 엔터를 칠 때,
+2) 페이지에서 링크를 클릭했을 때,
+3) 입력폼의 method 속성이 get 일 때,
+4) AJAX에서 서버에 연결할 때 'get'으로 설정한 경우,
+
+GET 요청 형식
+1) 요청 대상을 가리키는 한 줄 문자열을 보낸다. (Request-Line)
+  => 문법: 요청형식 공백 요청URI 공백 프로토콜버전 줄바꿈
+     예) GET /pub/WWW/TheProject.html HTTP/1.1 (CRLF)
+  => 서버에 보내는 데이터는 요청URI에 포함되어 있다.
+     형식: URL?이름=값&이름=값&이름=값
+     예) GET /student/list.jsp?pageNo=2&pageSize=5 HTTP/1.1 (CRLF)
+2) 요청 부가 정보를 표현하는 문자열을 여러 줄 보낸다.
+  => 요청 부가 정보 = 일반정보(general header) +
+                      요청정보(request header) +
+                      보내는 데이터에 대한 정보(entity header)
+  => 형식:
+    general header (CRLF)
+    ...
+    request header (CRLF)
+    ...
+    entity header (CRLF
+    ...
+  => 헤더의 문법
+    헤더명: 값
+  => 예)
+     Host: www.w3.org
+
+3) 빈 줄을 보낸다.
+  => (CRLF)
+
+HTTP GET 요청 프로토콜 예:
+-----------------------------------------
+GET /webapp/student/list.json?pageNo=2&pageSize=5 HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Origin: null
+Accept: *
+Accept-Encoding: gzip, deflate, sdch, br
+Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
+
+-----------------------------------------
+*/
+
+/*
+HTTP 응답 프로토콜
+1) 응답 상태 정보를 표현하는 문자열 한 줄 (Status-Line)
+  => 프로토콜버전 공백 상태코드 공백 간단한설명 (CRLF)
+  => 예) HTTP/1.1 200 OK
+  => 주요 상태 코드와 의미
+  200 : 요청한 자원을 줄 수 있다.
+  301 : 요청한 자원의 주소가 바뀌었다. 다시 요청하라!
+  304 : 요청한 자원이 변경되지 않았다.
+        그러니 웹브라우저가 캐시한 자원을 그냥 사용하라!
+  400 : 요청 형식에 문제가 있다. 올바르게 요청하라!
+  403 : 해당 자원에 대한 요청을 거절한다.
+  404 : 요청한 자원을 못 찾았다.
+
+2) 응답 결과에 대한 부가 정보
+  => 응답 부가 정보 = 일반정보(general header) +
+                     응답정보(request header) +
+                     보내는 데이터에 대한 정보(entity header)
+  => 형식:
+    general header (CRLF)
+    ...
+    response header (CRLF)
+    ...
+    entity header (CRLF
+    ...
+  => 헤더의 문법
+    헤더명: 값
+  => 예)
+     Server: Apache
+3) 부가 정보의 끝을 의미하는 빈 줄 (CRLF)
+4) 응답 결과
+
+HTTP 응답 프로토콜 예:
+--------------------------------------
+HTTP/1.1 200 OK
+Date: Mon, 10 Apr 2017 03:07:12 GMT
+Server: Apache
+X-Powered-By: PHP/5.5.20
+Vary: Accept-Encoding,User-Agent
+Cache-Control: max-age=0
+Expires: Mon, 10 Apr 2017 03:07:12 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+....
+--------------------------------------------
+*/
+
+</script>
+</body>
+</html>
+
+
+
+
+<!-- -->
