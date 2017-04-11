@@ -30,12 +30,20 @@ btn1.addEventListener('click', function(event) {
   // => 요청 결과로 페이지를 바꾸는 것.
 })
 
-btn2.addEventListener('click', function(event) {
+btn2.onclick = function() {
   p1.innerHTML = this.textContent
 
   // 태그에 미리 설정된 프로그램을 실행시키지 않기
   event.preventDefault()
-})
+}
+
+//다음 코드가 내부적으로 처리되는 방법
+//<a id="btn3" href="http://www.daum.net" onclick="f1(event); return false;">버튼3</a>
+/*
+btn3.onclick = function(event) {
+  f1(event); return false;
+}
+*/
 
 function f1(event) {
   p1.innerHTML = event.target.textContent

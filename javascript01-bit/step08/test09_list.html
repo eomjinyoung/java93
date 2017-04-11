@@ -45,7 +45,7 @@ xhr.onreadystatechange = function() {
   var result = JSON.parse(xhr.responseText)
 
   if (result.status != 'success') {
-    alert('학생 목록을 가져오는데 실패했습니다.')
+    alert('데이터를 가져오는데 실패했습니다.')
     return
   }
 
@@ -54,7 +54,7 @@ xhr.onreadystatechange = function() {
     // 객체를 가지고 tr 태그를 생성한다.
     var tr = document.createElement("tr")
     tr.innerHTML = "<td>" + s.memberNo +
-              "</td><td><a href='test09_view.html' class='view-link'>" + s.name +
+              "</td><td><a data-no='" + s.memberNo + "' class='view-link'>" + s.name +
               "</a></td><td>" + s.tel +
               "</td><td>" + s.email +
               "</td><td>" + (s.working ? "재직중" : "실업") + "</td>"
@@ -71,7 +71,10 @@ xhr.open('get', 'http://localhost:8080/webapp/student/list.json?pageNo=1&pageSiz
 xhr.send()
 
 function onClickViewLink(event) {
-  console.log(this.href)
+  //console.log(this["data-no"]) // 태그의 원래 있던 속성이 아닌 경우, 이런 식으로 값을 꺼낼 수 없다.
+  //console.log(this.getAttribute("data-no")) // getAttribute()를 호출해야 한다.
+
+  location.href = 'test09_view.html?no=' + this.getAttribute('data-no')
   event.preventDefault()
 }
 

@@ -26,7 +26,26 @@
 => 학생 상세 정보 출력
 */
 
-console.log('상세화면 출력!')
+// URL에서 학생 번호(no)를 추출한다.
+var no = location.search.substring(1).split('=')[1]
+
+// 학생 번호를 사용하여 서버에 상세 정보를 요청한다.
+var xhr = new XMLHttpRequest()
+xhr.onreadystatechange = function() {
+  if (xhr.readyState < 4)
+    return
+  var result = JSON.parse(xhr.responseText)
+
+  if (result.status != 'success') {
+    alert('데이터를 가져오는데 실패했습니다.')
+    return
+  }
+
+  console.log(result)
+}
+xhr.open('get', 'http://localhost:8080/webapp/student/detail.json?memberNo=' + no, true)
+xhr.send()
+
 </script>
 </body>
 </html>
