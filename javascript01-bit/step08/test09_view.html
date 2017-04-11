@@ -18,13 +18,53 @@
 <body>
 <div class="container">
 <h1>학생 정보</h1>
-
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="fi-email" class="col-sm-2 control-label">이메일</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="fi-email" placeholder="이메일">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-name" class="col-sm-2 control-label">이름</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-name" placeholder="이름">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-tel" class="col-sm-2 control-label">전화번호</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-tel" placeholder="전화번호">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-school-name" class="col-sm-2 control-label">학교명</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-school-name" placeholder="학교명">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="fi-working"> 재직중
+        </label>
+      </div>
+    </div>
+  </div>
+</form>
 </div>
 <script>
 "use strict"
 /* AJAX 응용 II
 => 학생 상세 정보 출력
 */
+
+var fiEmail = document.querySelector('#fi-email'),
+    fiName = document.querySelector('#fi-name'),
+    fiTel = document.querySelector('#fi-tel'),
+    fiSchoolName = document.querySelector('#fi-school-name'),
+    fiWorking = document.querySelector('#fi-working');
 
 // URL에서 학생 번호(no)를 추출한다.
 var no = location.search.substring(1).split('=')[1]
@@ -41,7 +81,15 @@ xhr.onreadystatechange = function() {
     return
   }
 
-  console.log(result)
+  var student = result.data
+  fiEmail.value = student.email
+  fiName.value = student.name
+  fiTel.value = student.tel
+  fiSchoolName.value = student.schoolName
+  if (student.working) {
+    fiWorking.setAttribute('checked', '')
+  }
+
 }
 xhr.open('get', 'http://localhost:8080/webapp/student/detail.json?memberNo=' + no, true)
 xhr.send()
