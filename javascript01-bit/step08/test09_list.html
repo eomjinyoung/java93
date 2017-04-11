@@ -30,13 +30,16 @@
 <tbody>
 </tbody>
 </table>
+
+<button type="button" class="btn btn-primary" id="add-btn">추가</button>
 </div>
 <script>
 "use strict"
 /* AJAX 응용 II
 => 학생 목록 출력
 */
-var tbody = document.querySelector('#student-tbl > tbody')
+var tbody = document.querySelector('#student-tbl > tbody'),
+    addBtn = document.querySelector('#add-btn');
 
 var xhr = new XMLHttpRequest()
 xhr.onreadystatechange = function() {
@@ -78,6 +81,9 @@ function onClickViewLink(event) {
   event.preventDefault()
 }
 
+addBtn.onclick = function() {
+  location.href = 'test09_view.html'
+}
 
 </script>
 </body>
