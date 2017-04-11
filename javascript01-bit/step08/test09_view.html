@@ -20,6 +20,12 @@
 <h1>학생 정보</h1>
 <form class="form-horizontal">
   <div class="form-group">
+    <label class="col-sm-2 control-label">번호</label>
+    <div class="col-sm-10">
+      <p class="form-control-static" id="fi-no"></p>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="fi-email" class="col-sm-2 control-label">이메일</label>
     <div class="col-sm-10">
       <input type="email" class="form-control" id="fi-email" placeholder="이메일">
@@ -52,6 +58,12 @@
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-primary" id="upd-btn">변경</button>
+      <button type="button" class="btn btn-primary" id="del-btn">삭제</button>
+    </div>
+  </div>
 </form>
 </div>
 <script>
@@ -60,11 +72,14 @@
 => 학생 상세 정보 출력
 */
 
-var fiEmail = document.querySelector('#fi-email'),
+var fiNo = document.querySelector('#fi-no'),
+    fiEmail = document.querySelector('#fi-email'),
     fiName = document.querySelector('#fi-name'),
     fiTel = document.querySelector('#fi-tel'),
     fiSchoolName = document.querySelector('#fi-school-name'),
-    fiWorking = document.querySelector('#fi-working');
+    fiWorking = document.querySelector('#fi-working'),
+    updBtn = document.querySelector('#upd-btn'),
+    delBtn = document.querySelector('#del-btn');
 
 // URL에서 학생 번호(no)를 추출한다.
 var no = location.search.substring(1).split('=')[1]
@@ -82,6 +97,7 @@ xhr.onreadystatechange = function() {
   }
 
   var student = result.data
+  fiNo.textContent = student.memberNo
   fiEmail.value = student.email
   fiName.value = student.name
   fiTel.value = student.tel
@@ -93,6 +109,14 @@ xhr.onreadystatechange = function() {
 }
 xhr.open('get', 'http://localhost:8080/webapp/student/detail.json?memberNo=' + no, true)
 xhr.send()
+
+updBtn.onclick = function() {
+  alert('변경')
+}
+
+delBtn.onclick = function() {
+  alert('삭제')
+}
 
 </script>
 </body>

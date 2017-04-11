@@ -54,7 +54,7 @@ xhr.onreadystatechange = function() {
     // 객체를 가지고 tr 태그를 생성한다.
     var tr = document.createElement("tr")
     tr.innerHTML = "<td>" + s.memberNo +
-              "</td><td><a data-no='" + s.memberNo + "' class='view-link'>" + s.name +
+              "</td><td><a href='#' data-no='" + s.memberNo + "' class='view-link'>" + s.name +
               "</a></td><td>" + s.tel +
               "</td><td>" + s.email +
               "</td><td>" + (s.working ? "재직중" : "실업") + "</td>"
