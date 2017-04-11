@@ -62,6 +62,7 @@
     <div class="col-sm-offset-2 col-sm-10">
       <button type="button" class="btn btn-primary" id="upd-btn">변경</button>
       <button type="button" class="btn btn-primary" id="del-btn">삭제</button>
+      <button type="button" class="btn btn-primary" id="lst-btn">목록</button>
     </div>
   </div>
 </form>
@@ -79,7 +80,8 @@ var fiNo = document.querySelector('#fi-no'),
     fiSchoolName = document.querySelector('#fi-school-name'),
     fiWorking = document.querySelector('#fi-working'),
     updBtn = document.querySelector('#upd-btn'),
-    delBtn = document.querySelector('#del-btn');
+    delBtn = document.querySelector('#del-btn'),
+    lstBtn = document.querySelector('#lst-btn');
 
 // URL에서 학생 번호(no)를 추출한다.
 var no = location.search.substring(1).split('=')[1]
@@ -102,22 +104,42 @@ xhr.onreadystatechange = function() {
   fiName.value = student.name
   fiTel.value = student.tel
   fiSchoolName.value = student.schoolName
-  if (student.working) {
-    fiWorking.setAttribute('checked', '')
-  }
-
+  fiWorking.checked = student.working
 }
 xhr.open('get', 'http://localhost:8080/webapp/student/detail.json?memberNo=' + no, true)
 xhr.send()
 
 updBtn.onclick = function() {
-  alert('변경')
+  var xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState < 4)
+      return
+    var result = JSON.parse(xhr.responseText)
+
+    if (result.status != 'success') {
+      alert('데이터를 가져오는데 실패했습니다.')
+      return
+    }
+
+    alert('변경했습니다!')
+  }
+  xhr.open('post', 'http://localhost:8080/webapp/student/update.json', true)
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+  xhr.send('memberNo=' + no +
+          '&name=' + fiName.value +
+          '&email=' + fiEmail.value +
+          '&tel=' + fiTel.value +
+          '&schoolName=' + fiSchoolName.value +
+          '&working=' + fiWorking.checked)
 }
 
 delBtn.onclick = function() {
   alert('삭제')
 }
 
+lstBtn.onclick = function() {
+  location.href = "test09_list.html"
+}
 </script>
 </body>
 </html>
