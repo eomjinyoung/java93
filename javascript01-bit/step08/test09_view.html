@@ -117,7 +117,7 @@ updBtn.onclick = function() {
     var result = JSON.parse(xhr.responseText)
 
     if (result.status != 'success') {
-      alert('데이터를 가져오는데 실패했습니다.')
+      alert('변경하는데 실패했습니다.')
       return
     }
 
@@ -141,7 +141,7 @@ delBtn.onclick = function() {
     var result = JSON.parse(xhr.responseText)
 
     if (result.status != 'success') {
-      alert('데이터를 가져오는데 실패했습니다.')
+      alert('삭제하는데 실패했습니다.')
       return
     }
 
