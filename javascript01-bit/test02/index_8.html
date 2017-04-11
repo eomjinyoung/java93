@@ -115,9 +115,22 @@ function onClickOperator() {
 equal.onclick = function() {
   if (op != "") {
     // 연산을 수행하라
+    var currValue = parseInt(display.textContent)
+    switch (op) {
+      case "+": prevValue += currValue; break;
+      case "-": prevValue -= currValue; break;
+      case "*": prevValue *= currValue; break;
+      case "/": prevValue /= currValue; break;
+    }
+    // 결과 값을 출력하라.
+    display.textContent = prevValue;
+    // 연산자 초기화시켜라.
+    op = ""
   } else { // 연산자가 없다면,
     // 현재 입력한 값을 보관하라.
+    prevValue = display.textContent;
   }
+  isClear = false;
 }
 
 
