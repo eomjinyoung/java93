@@ -39,7 +39,7 @@
 </head>
 <body>
 <div class='container'>
-  <div id='display'>0</div>
+  <div id='display'></div>
   <div class='btn'>AC</div
   ><div class='btn'>&nbsp;</div
   ><div class='btn'>&nbsp;</div
@@ -58,17 +58,17 @@
   ><div class='btn operator'>+</div
   ><div class='btn number' id='btn0'>0</div
   ><div class='btn'>.</div
-  ><div class='btn equal'>=</div>
+  ><div class='btn operator'>=</div>
 </div>
 <script>
-var prevValue = 0,
+var v1 = 0,
+    v2 = 0,
     op = "",
     isClear = false;
 
 var display = document.querySelector('#display'),
     btnList = document.querySelectorAll('.number'),
-    opList = document.querySelectorAll('.operator'),
-    equal = document.querySelector('.equal');
+    opList = document.querySelectorAll('.operator');
 
 for (var i = 0; i < btnList.length; i++) {
   btnList[i].onclick = onClickNumber;
@@ -85,40 +85,12 @@ for (var e of opList) {
   e.onclick = onClickOperator;
 }
 function onClickOperator() {
-  if (op == "") { // 기존에 선택한 연산자가 없다면,
-    // 현재 입력한 값을 보관하라.
-    prevValue = parseInt(display.textContent)
-
-    // 선택한 연산자를 저장하라.
-    op = this.textContent;
-
-  } else { // 기존에 선택한 연산자가 있다면, 계산하라!
-    // 현재 입력한 값을 가져와서 계산하고, 보관한다.
-    var currValue = parseInt(display.textContent)
-    switch (op) {
-      case "+": prevValue += currValue; break;
-      case "-": prevValue -= currValue; break;
-      case "*": prevValue *= currValue; break;
-      case "/": prevValue /= currValue; break;
-    }
-
-    // 계산을 완료했으니, 지금 선택한 연산자를 저장하라.
-    op = this.textContent;
-
-    // 계산 결과를 출력하라!
-    display.textContent = prevValue;
-  }
-  // 다음에 입력하는 숫자를 위해 화면을 지우라고 지정한다.
+  v1 = parseInt(display.textContent)
+  op = this.textContent;
   isClear = false;
 }
 
-equal.onclick = function() {
-  if (op != "") {
-    // 연산을 수행하라
-  } else { // 연산자가 없다면,
-    // 현재 입력한 값을 보관하라.
-  }
-}
+
 
 
 </script>
