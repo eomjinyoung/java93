@@ -134,7 +134,21 @@ updBtn.onclick = function() {
 }
 
 delBtn.onclick = function() {
-  alert('삭제')
+  var xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState < 4)
+      return
+    var result = JSON.parse(xhr.responseText)
+
+    if (result.status != 'success') {
+      alert('데이터를 가져오는데 실패했습니다.')
+      return
+    }
+
+    location.href = 'test09_list.html'
+  }
+  xhr.open('get', 'http://localhost:8080/webapp/student/delete.json?memberNo=' + no, true)
+  xhr.send()
 }
 
 lstBtn.onclick = function() {
