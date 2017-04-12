@@ -180,6 +180,14 @@ bit.getJSON = function(url, success) {
   })
 }
 
+bit.post = function(url, data, success, dataType) {
+  bit.ajax(url, {
+    method: 'POST',
+    dataType: dataType,
+    data: data,
+    success: success
+  })
+}
 
 
 

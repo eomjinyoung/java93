@@ -27,7 +27,7 @@
   </div>
   <div class="form-group">
     <label for="fi-email" class="col-sm-2 control-label">이메일</label>
-    <div class="col-sm-10">
+    <div class="col-sm-7">
       <input type="email" class="form-control" id="fi-email" placeholder="이메일">
     </div>
   </div>
@@ -93,27 +93,24 @@ if (location.search == "") {
 
   // 추가 버튼에 click 이벤트 핸들러(리스너)를 등록한다.
   $('#add-btn').click(function() {
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState < 4)
-        return
-      var result = JSON.parse(xhr.responseText)
-
-      if (result.status != 'success') {
-        alert('추가하는데 실패했습니다.')
-        return
-      }
-
-      location.href = 'test09_list.html'
-    }
-    xhr.open('post', 'http://localhost:8080/webapp/student/add.json', true)
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    xhr.send('name=' + fiName.value +
-            '&email=' + fiEmail.value +
-            '&tel=' + fiTel.value +
-            '&schoolName=' + fiSchoolName.value +
-            '&working=' + fiWorking.checked)
-  })
+    $.post('http://localhost:8080/webapp/student/add.json',
+      { // 서버에 줄 값을 자바스크립트 객체에 담아서 넘긴다.
+        name: fiName.val(),
+        tel: fiTel.val(),
+        email: fiEmail.val(),
+        schoolName: fiSchoolName.val(),
+        working: fiWorking.prop('checked')
+      },
+      function(result) {
+        if (result.status != 'success') {
+          alert('추가하는데 실패했습니다.')
+          return
+        }
+        location.href = 'test10_list.html'
+      },
+      'json'
+    )// post()
+  }) // click()
 
 } else { // 기존 사용자 정보를 가져온다.
   // 새 사용자 등록과 관련된 태그는 감춘다.
@@ -161,22 +158,16 @@ if (location.search == "") {
   }) // click()
 
   $('#del-btn').click(function() {
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState < 4)
-        return
-      var result = JSON.parse(xhr.responseText)
-
-      if (result.status != 'success') {
-        alert('삭제하는데 실패했습니다.')
-        return
+    $.getJSON('http://localhost:8080/webapp/student/delete.json?memberNo=' + no,
+      function(result) {
+        if (result.status != 'success') {
+          alert('삭제하는데 실패했습니다.')
+          return
+        }
+        location.href = 'test10_list.html'
       }
-
-      location.href = 'test10_list.html'
-    }
-    xhr.open('get', 'http://localhost:8080/webapp/student/delete.json?memberNo=' + no, true)
-    xhr.send()
-  })
+    ) // getJSON()
+  }) // click()
 } // else
 
 $('#lst-btn').click(function() {
