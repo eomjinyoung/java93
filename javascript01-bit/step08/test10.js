@@ -23,31 +23,46 @@ function bit(value) {
       return;
     }
 
-    for (var e of el) {
+    for (var e of this) {
       for (var child of children) {
         e.appendChild(child)
       }
     }
+
+    return this
   }
 
   // 2) 배열 안에 있는 태그의 콘텐츠를 설정하는 함수
   el.html = function(content) {
-    for (var e of el) {
+    for (var e of this) {
       e.innerHTML = content
     }
+
+    return this
   }
 
   // 3) 배열 안에 있는 태그에 클릭 이벤트 핸들러를 추가하는 함수
   el.click = function(listener) {
-    for (var e of el) {
+    for (var e of this) {
       e.addEventListener('click', listener)
     }
+    return this
   }
 
   // 4) 배열 안에 있는 태그의 속성 값을 다루는 함수
   el.attr = function(name) {
     // 값을 꺼낼 때는 배열에서 0번 방에 들어 있는 태그의 속성 값만 꺼내자!
-    return el[0].getAttribute(name)
+    return this[0].getAttribute(name)
+  }
+
+  // 5) 배열 안에 있는 태그를 부모 태그에 추가시키는 함수
+  el.appendTo = function(parents) {
+    for (var p of parents) {
+      for (var e of this) {
+        p.appendChild(e)
+      }
+    }
+    return this;
   }
 
 

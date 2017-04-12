@@ -44,33 +44,25 @@
 var tbody = $('#student-tbl > tbody'),
     addBtn = $('#add-btn');
 
-var xhr = new XMLHttpRequest()
-xhr.onreadystatechange = function() {
-  if (xhr.readyState < 4)
-    return
-  var result = JSON.parse(xhr.responseText)
-
-  if (result.status != 'success') {
-    alert('데이터를 가져오는데 실패했습니다.')
-    return
+$.ajax('http://localhost:8080/webapp/student/list.json?pageNo=1&pageSize=8', {
+  dataType: 'json',
+  success: function(result) {
+    if (result.status != 'success') {
+      alert('데이터를 가져오는데 실패했습니다.')
+      return
+    }
+    var list = result.data.list
+    for (var s of list) {
+      $("<tr>").html("<td>" + s.memberNo +
+                "</td><td><a href='#' data-no='" + s.memberNo + "' class='view-link'>" + s.name +
+                "</a></td><td>" + s.tel +
+                "</td><td>" + s.email +
+                "</td><td>" + (s.working ? "재직중" : "실업") + "</td>")
+               .appendTo(tbody)
+    }
+    $('table .view-link').click(onClickViewLink)
   }
-
-  var list = result.data.list
-  for (var s of list) {
-    // 객체를 가지고 tr 태그를 생성한다.
-    var tr = $("<tr>")
-    tr.html("<td>" + s.memberNo +
-              "</td><td><a href='#' data-no='" + s.memberNo + "' class='view-link'>" + s.name +
-              "</a></td><td>" + s.tel +
-              "</td><td>" + s.email +
-              "</td><td>" + (s.working ? "재직중" : "실업") + "</td>")
-    tbody.append(tr)
-  }
-
-  $('table .view-link').click(onClickViewLink)
-}
-xhr.open('get', 'http://localhost:8080/webapp/student/list.json?pageNo=1&pageSize=8', true)
-xhr.send()
+})
 
 function onClickViewLink(event) {
   location.href = 'test10_view.html?no=' + $(this).attr('data-no')
