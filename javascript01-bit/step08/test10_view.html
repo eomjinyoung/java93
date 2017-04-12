@@ -68,39 +68,31 @@
   </div>
 </form>
 </div>
+
+<script src="test10.js"></script>
 <script>
 "use strict"
 /* AJAX 응용 II
 => 학생 상세 정보 출력
 */
 
-var fiNo = document.querySelector('#fi-no'),
-    fiEmail = document.querySelector('#fi-email'),
-    fiName = document.querySelector('#fi-name'),
-    fiTel = document.querySelector('#fi-tel'),
-    fiSchoolName = document.querySelector('#fi-school-name'),
-    fiWorking = document.querySelector('#fi-working'),
-    updBtn = document.querySelector('#upd-btn'),
-    delBtn = document.querySelector('#del-btn'),
-    addBtn = document.querySelector('#add-btn'),
-    lstBtn = document.querySelector('#lst-btn');
+var fiNo = $('#fi-no'),
+    fiEmail = $('#fi-email'),
+    fiName = $('#fi-name'),
+    fiTel = $('#fi-tel'),
+    fiSchoolName = $('#fi-school-name'),
+    fiWorking = $('#fi-working');
 
 if (location.search == "") {
   // 새 사용자 등록을 처리한다.
   // 상세보기와 관련된 태그는 감춘다.
-  var viewTags = document.querySelectorAll('.bit-view')
-  for (var e of viewTags) {
-    e.style.display = 'none'
-  }
+  $('.bit-view').css('display', 'none')
 
   // 새 사용자 등록과 관련된 태그는 보이게 한다.
-  var newTags = document.querySelectorAll('.bit-new')
-  for (var e of newTags) {
-    e.style.display = ''
-  }
+  $('.bit-new').css('display', '')
 
   // 추가 버튼에 click 이벤트 핸들러(리스너)를 등록한다.
-  addBtn.onclick = function() {
+  $('#add-btn').click(function() {
     var xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function() {
       if (xhr.readyState < 4)
@@ -121,42 +113,35 @@ if (location.search == "") {
             '&tel=' + fiTel.value +
             '&schoolName=' + fiSchoolName.value +
             '&working=' + fiWorking.checked)
-  }
+  })
 
 } else { // 기존 사용자 정보를 가져온다.
   // 새 사용자 등록과 관련된 태그는 감춘다.
-  var newTags = document.querySelectorAll('.bit-new')
-  for (var e of newTags) {
-    e.style.display = 'none'
-  }
+  $('.bit-new').css('display', 'none')
 
   // URL에서 학생 번호(no)를 추출한다.
   var no = location.search.substring(1).split('=')[1]
 
   // 학생 번호를 사용하여 서버에 상세 정보를 요청한다.
-  var xhr = new XMLHttpRequest()
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState < 4)
-      return
-    var result = JSON.parse(xhr.responseText)
-
+  $.getJSON('http://localhost:8080/webapp/student/detail.json?memberNo=' + no, function(result) {
     if (result.status != 'success') {
       alert('데이터를 가져오는데 실패했습니다.')
       return
     }
 
     var student = result.data
-    fiNo.textContent = student.memberNo
-    fiEmail.value = student.email
-    fiName.value = student.name
-    fiTel.value = student.tel
-    fiSchoolName.value = student.schoolName
-    fiWorking.checked = student.working
-  }
-  xhr.open('get', 'http://localhost:8080/webapp/student/detail.json?memberNo=' + no, true)
-  xhr.send()
+    fiNo.text(student.memberNo)
+    fiEmail.val(student.email)
+    fiName.val(student.name)
+    fiTel.val(student.tel)
+    fiSchoolName.val(student.schoolName)
+    fiWorking.prop('checked', student.working)
+  })
 
-  updBtn.onclick = function() {
+
+
+
+  $('#upd-btn').click(function() {
     var xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function() {
       if (xhr.readyState < 4)
@@ -178,9 +163,9 @@ if (location.search == "") {
             '&tel=' + fiTel.value +
             '&schoolName=' + fiSchoolName.value +
             '&working=' + fiWorking.checked)
-  }
+  })
 
-  delBtn.onclick = function() {
+  $('#del-btn').click(function() {
     var xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function() {
       if (xhr.readyState < 4)
@@ -196,12 +181,12 @@ if (location.search == "") {
     }
     xhr.open('get', 'http://localhost:8080/webapp/student/delete.json?memberNo=' + no, true)
     xhr.send()
-  }
+  })
 } // else
 
-lstBtn.onclick = function() {
+$('#lst-btn').click(function() {
   location.href = "test09_list.html"
-}
+})
 </script>
 </body>
 </html>
