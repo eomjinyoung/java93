@@ -138,32 +138,27 @@ if (location.search == "") {
     fiWorking.prop('checked', student.working)
   })
 
-
-
-
   $('#upd-btn').click(function() {
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState < 4)
-        return
-      var result = JSON.parse(xhr.responseText)
-
-      if (result.status != 'success') {
-        alert('변경하는데 실패했습니다.')
-        return
+    $.ajax('http://localhost:8080/webapp/student/update.json', {
+      method: 'POST',
+      dataType: 'json',
+      data: { // 서버에 줄 값을 자바스크립트 객체에 담아서 넘긴다.
+        memberNo: no,
+        name: fiName.val(),
+        tel: fiTel.val(),
+        email: fiEmail.val(),
+        schoolName: fiSchoolName.val(),
+        working: fiWorking.prop('checked')
+      },
+      success: function(result) {
+        if (result.status != 'success') {
+          alert('변경하는데 실패했습니다.')
+          return
+        }
+        alert('변경했습니다!')
       }
-
-      alert('변경했습니다!')
-    }
-    xhr.open('post', 'http://localhost:8080/webapp/student/update.json', true)
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    xhr.send('memberNo=' + no +
-            '&name=' + fiName.value +
-            '&email=' + fiEmail.value +
-            '&tel=' + fiTel.value +
-            '&schoolName=' + fiSchoolName.value +
-            '&working=' + fiWorking.checked)
-  })
+    }) // ajax()
+  }) // click()
 
   $('#del-btn').click(function() {
     var xhr = new XMLHttpRequest()

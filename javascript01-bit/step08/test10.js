@@ -95,6 +95,10 @@ function bit(value) {
 
   // 8) 배열 안에 있는 폼 항목 태그의 콘텐츠를 설정하는 함수(value 속성)
   el.val = function(value) {
+    if (arguments.length == 0) { // value 파라미터 값이 없으면, 현재 value 꺼낸다.
+      return this[0].value
+    }
+
     for (var e of this) {
       e.value = value
     }
@@ -151,7 +155,22 @@ bit.ajax = function(url, settings) {
     }
   }
   xhr.open(settings.method, url, true)
-  xhr.send()
+  if (settings.method == 'POST') { // POST 요청
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    var queryString = ""
+    if (settings.data) {
+      for (var propName in settings.data) {
+        if (queryString.length > 0) {
+          queryString += "&"
+        }
+        queryString += propName + '=' + settings.data[propName]
+      }
+    }
+    xhr.send(queryString)
+
+  } else { // GET 요청
+    xhr.send()
+  }
 }
 
 bit.getJSON = function(url, success) {
