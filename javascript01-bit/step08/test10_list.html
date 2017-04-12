@@ -42,7 +42,7 @@
 => 학생 목록 출력
 */
 var tbody = $('#student-tbl > tbody'),
-    addBtn = $('#add-btn')[0];
+    addBtn = $('#add-btn');
 
 var xhr = new XMLHttpRequest()
 xhr.onreadystatechange = function() {
@@ -58,35 +58,28 @@ xhr.onreadystatechange = function() {
   var list = result.data.list
   for (var s of list) {
     // 객체를 가지고 tr 태그를 생성한다.
-    var tr = $("<tr>")[0]
-    tr.innerHTML = "<td>" + s.memberNo +
+    var tr = $("<tr>")
+    tr.html("<td>" + s.memberNo +
               "</td><td><a href='#' data-no='" + s.memberNo + "' class='view-link'>" + s.name +
               "</a></td><td>" + s.tel +
               "</td><td>" + s.email +
-              "</td><td>" + (s.working ? "재직중" : "실업") + "</td>"
+              "</td><td>" + (s.working ? "재직중" : "실업") + "</td>")
     tbody.append(tr)
   }
 
-  // a 태그에 click 이벤트 핸들러를 추가한다.
-  var viewLinks = $('table .view-link')
-  for (var e of viewLinks) {
-    e.onclick = onClickViewLink;
-  }
+  $('table .view-link').click(onClickViewLink)
 }
 xhr.open('get', 'http://localhost:8080/webapp/student/list.json?pageNo=1&pageSize=8', true)
 xhr.send()
 
 function onClickViewLink(event) {
-  //console.log(this["data-no"]) // 태그의 원래 있던 속성이 아닌 경우, 이런 식으로 값을 꺼낼 수 없다.
-  //console.log(this.getAttribute("data-no")) // getAttribute()를 호출해야 한다.
-
-  location.href = 'test09_view.html?no=' + this.getAttribute('data-no')
+  location.href = 'test10_view.html?no=' + $(this).attr('data-no')
   event.preventDefault()
 }
 
-addBtn.onclick = function() {
-  location.href = 'test09_view.html'
-}
+addBtn.click(function() {
+  location.href = 'test10_view.html'
+})
 
 </script>
 </body>
