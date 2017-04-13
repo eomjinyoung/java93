@@ -7,3 +7,4 @@
 /build/
 /temp/
 /upload/
+**/node_modules
