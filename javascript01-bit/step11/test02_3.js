@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
-connection.query('update memb set tel="2222-2222" where name="aaa"', function(error, results) {
+connection.query('update memb set tel="2222-2222" where name="오호라"', function(error, results) {
   console.log('결과를 가져왔음!')
   if (error) throw error;
 
