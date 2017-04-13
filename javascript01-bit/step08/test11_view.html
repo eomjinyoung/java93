@@ -69,7 +69,7 @@
 </form>
 </div>
 
-<script src="test10.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 "use strict"
 /* AJAX 응용 II
@@ -106,7 +106,7 @@ if (location.search == "") {
           alert('추가하는데 실패했습니다.')
           return
         }
-        location.href = 'test10_list.html'
+        location.href = 'test11_list.html'
       },
       'json'
     )// post()
@@ -164,14 +164,14 @@ if (location.search == "") {
           alert('삭제하는데 실패했습니다.')
           return
         }
-        location.href = 'test10_list.html'
+        location.href = 'test11_list.html'
       }
     ) // getJSON()
   }) // click()
 } // else
 
 $('#lst-btn').click(function() {
-  location.href = "test10_list.html"
+  location.href = "test11_list.html"
 })
 </script>
 </body>

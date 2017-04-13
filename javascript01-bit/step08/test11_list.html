@@ -35,7 +35,7 @@
 <button type="button" class="btn btn-primary" id="add-btn">추가</button>
 </div>
 
-<script src="test10.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 "use strict"
 /* AJAX 응용 II
@@ -65,12 +65,12 @@ $.ajax('http://localhost:8080/webapp/student/list.json?pageNo=1&pageSize=8', {
 })
 
 function onClickViewLink(event) {
-  location.href = 'test10_view.html?no=' + $(this).attr('data-no')
+  location.href = 'test11_view.html?no=' + $(this).attr('data-no')
   event.preventDefault()
 }
 
 addBtn.click(function() {
-  location.href = 'test10_view.html'
+  location.href = 'test11_view.html'
 })
 
 </script>
