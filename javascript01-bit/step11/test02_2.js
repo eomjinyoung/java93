@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 connection.connect()
 
 connection.query('insert into memb(name, email, tel, pwd)' +
-  ' values("aaa2", "aaa2@test.com", "111-1111", password("1111"))', function(error, results) {
+  ' values("오호라", "ohora@test.com", "111-1111", password("1111"))', function(error, results) {
   console.log('결과를 가져왔음!')
   if (error) throw error;
 

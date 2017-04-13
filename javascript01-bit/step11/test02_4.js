@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
-connection.query('delete from memb where name="aaa2"', function(error, results) {
+connection.query('delete from memb where name="오호라"', function(error, results) {
   console.log('결과를 가져왔음!')
   if (error) throw error;
 
