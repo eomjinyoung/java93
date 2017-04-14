@@ -149,12 +149,47 @@ from lect l left outer join croom c on l.crmno = c.crmno;
 */
 
 /*=> 수강신청번호, 강의제목 */
+select la.lano, l.titl
+from lect_appy la inner join lect l on la.lno = l.lno;
 
+/*=> 수강신청번호, 강의제목, 교실이름 */
+select la.lano, l.titl, cr.name
+from lect_appy la
+  inner join lect l on la.lno = l.lno
+  left outer join croom cr on l.crmno = cr.crmno;
 
+/*=> 수강신청번호, 강의제목, 교실이름, 매니저이름 */
+select la.lano, l.titl, cr.name, m.name
+from lect_appy la
+  inner join lect l on la.lno = l.lno
+  left outer join croom cr on l.crmno = cr.crmno
+  left outer join memb m on l.mrno = m.mno;
 
+/*=> 수강신청번호, 강의제목, 교실이름, 매니저이름, 매니저직급 */
+select la.lano, l.titl, cr.name, m.name, mr.posi
+from lect_appy la
+  inner join lect l on la.lno = l.lno
+  left outer join croom cr on l.crmno = cr.crmno
+  left outer join memb m on l.mrno = m.mno
+  left outer join mgr mr on m.mno = mr.mrno;
 
+/*=> 수강신청번호, 강의제목, 교실이름, 매니저이름, 매니저직급, 수강생이름 */
+select la.lano, l.titl, cr.name, m.name, mr.posi, m2.name
+from lect_appy la
+  inner join lect l on la.lno = l.lno
+  left outer join croom cr on l.crmno = cr.crmno
+  left outer join memb m on l.mrno = m.mno
+  left outer join mgr mr on m.mno = mr.mrno
+  left outer join memb m2 on la.sno = m2.mno;
 
-
-
+/*=> 수강신청번호, 강의제목, 교실이름, 매니저이름, 매니저직급, 수강생이름, 재직여부 */
+select la.lano, l.titl, cr.name, m.name, mr.posi, m2.name, s.work
+from lect_appy la
+  inner join lect l on la.lno = l.lno
+  left outer join croom cr on l.crmno = cr.crmno
+  left outer join memb m on l.mrno = m.mno
+  left outer join mgr mr on m.mno = mr.mrno
+  left outer join memb m2 on la.sno = m2.mno
+  left outer join stud s on la.sno = s.sno;
 
 /* */
