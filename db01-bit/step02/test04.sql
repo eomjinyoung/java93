@@ -1,29 +1,5 @@
-/* 테이블에 컬럼 추가하기*/
+/* 테이블에 컬럼 추가 및 삭제하기*/
 
-/* 방법1) 컬럼을 선언할 때 PK 여부를 지정하기 */
-create table t2 (
-  no int primary key,
-  name varchar(10),
-  gender char(1),
-  height numeric(4,1),
-  intro text,
-  birthday date,
-  regdate datetime
-);
-
-/* 방법2) 컬럼들을 선언한 후 PK 여부를 지정하기 */
-create table t2 (
-  no int,
-  name varchar(10),
-  gender char(1),
-  height numeric(4,1),
-  intro text,
-  birthday date,
-  regdate datetime,
-  constraint primary key (no)
-);
-
-/* 방법3) 테이블을 정의한 후 PK 여부를 지정하기 */
 create table t2 (
   no int,
   name varchar(10),
@@ -34,21 +10,28 @@ create table t2 (
   regdate datetime
 );
 
-/* 테이블을 생성한 후 제약조건을 추가한다. */
 alter table t2
   add constraint primary key (no);
 
-/* 테이블에 값 입력 */
-insert into t2(no, name, gender, height, intro, birthday, regdate)
-values(1, '홍길순', 'W', 160.5, '길순이..', '1993-5-5', '2017-4-17 15:23:11');
+/* 테이블에 컬럼을 추가하기*/
+alter table t2
+  add column tel varchar(10);
 
-/* PK 컬럼은 중복 값을 가질 수 없다*/
-insert into t2(no, name, gender, height, intro, birthday, regdate)
-values(1, '홍길순', 'W', 160.5, '길순이..', '1993-5-5', '2017-4-17 15:23:11');
+/* 테이블에 여러 개의 컬럼을 추가하기 */
+alter table t2
+  add column fax varchar(10),
+  add column email varchar(50),
+  add column mobile varchar(10);
 
-/* PK 컬럼은 기본이 NOT NULL이다. 즉 반드시 값을 입력해야 한다.*/
-insert into t2(name, gender, height, intro, birthday, regdate)
-values('홍길순', 'W', 160.5, '길순이..', '1993-5-5', '2017-4-17 15:23:11');
+/* 테이블에 있는 컬럼 제거하기 */
+alter table t2
+  drop column email;
+
+/* column 은 생략할 수 있다.*/
+alter table t2
+  drop fax;
+
+
 
 drop table t2;
 
