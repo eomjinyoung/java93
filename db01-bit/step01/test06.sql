@@ -34,6 +34,55 @@ select
 from lect_appy la
   inner join lect l on la.lno = l.lno;
 
+/*
+2) from 절(clause)에 서브쿼리 사용하기
+*/
+/*=> 매니저 번호와 이름 데이터 뽑기 */
+select mr.mrno, m.name
+from mgr mr inner join memb m on mr.mrno = m.mno ;
+
+/*=> 강의 번호와 강의명, 매니저번호 데이터 뽑기 */
+select lno, titl, mrno
+from lect;
+
+/*=> 강의 번호와 강의명, 매니저이름 데이터 뽑기*/
+/*====> 일반 조인으로 해결하기 */
+select l.lno, l.titl, m.name
+from lect l
+  left outer join memb m on l.mrno = m.mno;
+
+/*====> 서브 쿼리를 사용하여 조인하기 */
+select l.lno, l.titl, t1.name
+from lect l
+  inner join (
+    select mr.mrno, m.name
+    from mgr mr inner join memb m on mr.mrno = m.mno
+    where m.name = '매니저1') t1
+    on l.mrno = t1.mrno;
+
+
+/*3) where 절에 서브쿼리 사용하기 */
+/*=> 강남 강의실이 배정된 강의 정보를 출력하라
+     출력데이터:  강의번호, 강의명*/
+
+/*====> 일단 강의 정보를 추출한다. */
+select lno, titl, crmno
+from lect;
+
+/*====> 강남 강의실 정보를 추출한다.*/
+select crmno, name
+from croom
+where name like '강남%';
+
+/*====> where 절에 서브쿼리를 넣어 강남 강의실이 배정된 강의 정보를 추출한다.*/
+select lno, titl, crmno
+from lect l
+where l.crmno in (select crmno from croom where name like '강남%');
+
+
+
+
+
 
 
 

@@ -1,3 +1,11 @@
+/* SQL(Stuctured Query Language)
+=> DML(Data Manipulation Language)
+  => select, insert, update, delete
+  => 오라클에서는 select를 따로 DQL(Data Query Language)이라 부르기도 한다.
+=> DDL(Data Definition Language)
+  => 데이터베이스/테이블/뷰/함수/프로시저 등을 생성, 변경, 삭제하는 명령
+*/
+
 /* 데이터 조회 명령
 select 가져올 컬럼
 from 데이터가 저장된 테이블
