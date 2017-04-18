@@ -1,0 +1,535 @@
+-- 강의
+DROP TABLE IF EXISTS LECT RESTRICT;
+
+-- 학생
+DROP TABLE IF EXISTS STUD RESTRICT;
+
+-- 강사
+DROP TABLE IF EXISTS TCHR RESTRICT;
+
+-- 매니저
+DROP TABLE IF EXISTS MGR RESTRICT;
+
+-- 과목
+DROP TABLE IF EXISTS SUBJ RESTRICT;
+
+-- 교실
+DROP TABLE IF EXISTS CROOM RESTRICT;
+
+-- 게시판
+DROP TABLE IF EXISTS BOARD RESTRICT;
+
+-- 자료실
+DROP TABLE IF EXISTS FBOARD RESTRICT;
+
+-- QnA
+DROP TABLE IF EXISTS QNA RESTRICT;
+
+-- 교육과정
+DROP TABLE IF EXISTS CURR RESTRICT;
+
+-- 교실사진
+DROP TABLE IF EXISTS CR_PIC RESTRICT;
+
+-- 주소
+DROP TABLE IF EXISTS ADDR RESTRICT;
+
+-- 교육과정과목
+DROP TABLE IF EXISTS CURR_SUBJ RESTRICT;
+
+-- 강의수강생
+DROP TABLE IF EXISTS LECT_STUD RESTRICT;
+
+-- 강의배정
+DROP TABLE IF EXISTS LECT_TCHR RESTRICT;
+
+-- 회원
+DROP TABLE IF EXISTS MEMB RESTRICT;
+
+-- 강의
+CREATE TABLE LECT (
+	LNO      INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+	SDT      DATE    NOT NULL COMMENT '시작일', -- 시작일
+	EDT      DATE    NOT NULL COMMENT '종료일', -- 종료일
+	QTY      INTEGER NOT NULL COMMENT '모집인원', -- 모집인원
+	TOTL_HRS INTEGER NOT NULL COMMENT '총강의시간', -- 총강의시간
+	DAY_HRS  INTEGER NOT NULL COMMENT '일강의시간', -- 일강의시간
+	PAY      INTEGER NULL     COMMENT '강의료', -- 강의료
+	GOV_SUPP CHAR(1) NOT NULL COMMENT '정부지원유무', -- 정부지원유무
+	EDNO     INTEGER NOT NULL COMMENT '교육과정번호', -- 교육과정번호
+	CRNO     INTEGER NULL     COMMENT '교실번호', -- 교실번호
+	MNO      INTEGER NULL     COMMENT '매니저번호' -- 매니저번호
+)
+COMMENT '강의';
+
+-- 강의
+ALTER TABLE LECT
+	ADD CONSTRAINT PK_LECT -- 강의 Primary key
+		PRIMARY KEY (
+			LNO -- 강의번호
+		);
+
+ALTER TABLE LECT
+	MODIFY COLUMN LNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의번호';
+
+-- 학생
+CREATE TABLE STUD (
+	MNO     INTEGER NOT NULL COMMENT '학생번호', -- 학생번호
+	BRTH_DT DATE    NULL     COMMENT '생년월일', -- 생년월일
+	WORK    CHAR(1) NOT NULL COMMENT '재직여부' -- 재직여부
+)
+COMMENT '학생';
+
+-- 학생
+ALTER TABLE STUD
+	ADD CONSTRAINT PK_STUD -- 학생 Primary key
+		PRIMARY KEY (
+			MNO -- 학생번호
+		);
+
+-- 강사
+CREATE TABLE TCHR (
+	MNO    INTEGER      NOT NULL COMMENT '강사번호', -- 강사번호
+	PAY_HR INTEGER      NULL     COMMENT '시강료', -- 시강료
+	RESM   VARCHAR(255) NULL     COMMENT '이력서' -- 이력서
+)
+COMMENT '강사';
+
+-- 강사
+ALTER TABLE TCHR
+	ADD CONSTRAINT PK_TCHR -- 강사 Primary key
+		PRIMARY KEY (
+			MNO -- 강사번호
+		);
+
+-- 매니저
+CREATE TABLE MGR (
+	MNO  INTEGER     NOT NULL COMMENT '매니저번호', -- 매니저번호
+	POSI VARCHAR(30) NULL     COMMENT '직급' -- 직급
+)
+COMMENT '매니저';
+
+-- 매니저
+ALTER TABLE MGR
+	ADD CONSTRAINT PK_MGR -- 매니저 Primary key
+		PRIMARY KEY (
+			MNO -- 매니저번호
+		);
+
+-- 과목
+CREATE TABLE SUBJ (
+	SBNO     INTEGER      NOT NULL COMMENT '과목번호', -- 과목번호
+	TITL     VARCHAR(255) NOT NULL COMMENT '과목명', -- 과목명
+	PRO_LANG VARCHAR(30)  NULL     COMMENT '언어', -- 언어
+	INTRO    TEXT         NULL     COMMENT '설명' -- 설명
+)
+COMMENT '과목';
+
+-- 과목
+ALTER TABLE SUBJ
+	ADD CONSTRAINT PK_SUBJ -- 과목 Primary key
+		PRIMARY KEY (
+			SBNO -- 과목번호
+		);
+
+-- 과목 Unique Index
+CREATE UNIQUE INDEX UIX_SUBJ
+	ON SUBJ ( -- 과목
+		TITL ASC -- 과목명
+	);
+
+ALTER TABLE SUBJ
+	MODIFY COLUMN SBNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '과목번호';
+
+-- 교실
+CREATE TABLE CROOM (
+	CRNO INTEGER     NOT NULL COMMENT '교실번호', -- 교실번호
+	NAME VARCHAR(30) NOT NULL COMMENT '교실명', -- 교실명
+	LOC  VARCHAR(30) NOT NULL COMMENT '지점' -- 지점
+)
+COMMENT '교실';
+
+-- 교실
+ALTER TABLE CROOM
+	ADD CONSTRAINT PK_CROOM -- 교실 Primary key
+		PRIMARY KEY (
+			CRNO -- 교실번호
+		);
+
+ALTER TABLE CROOM
+	MODIFY COLUMN CRNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '교실번호';
+
+-- 게시판
+CREATE TABLE BOARD (
+	BNO  INTEGER      NOT NULL COMMENT '게시물번호', -- 게시물번호
+	TITL VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+	CONT MEDIUMTEXT   NOT NULL COMMENT '내용', -- 내용
+	VWS  INTEGER      NULL     COMMENT '조회수', -- 조회수
+	CDT  DATETIME     NOT NULL COMMENT '등록일', -- 등록일
+	MNO  INTEGER      NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '게시판';
+
+-- 게시판
+ALTER TABLE BOARD
+	ADD CONSTRAINT PK_BOARD -- 게시판 Primary key
+		PRIMARY KEY (
+			BNO -- 게시물번호
+		);
+
+ALTER TABLE BOARD
+	MODIFY COLUMN BNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시물번호';
+
+-- 자료실
+CREATE TABLE FBOARD (
+	FNO     INTEGER      NOT NULL COMMENT '자료번호', -- 자료번호
+	TITL    VARCHAR(255) NOT NULL COMMENT '파일명', -- 파일명
+	FL_PATH VARCHAR(255) NOT NULL COMMENT '파일경로', -- 파일경로
+	CONT    TEXT         NULL     COMMENT '설명', -- 설명
+	DLS     INTEGER      NULL     COMMENT '다운로드수', -- 다운로드수
+	CDT     DATETIME     NOT NULL COMMENT '등록일', -- 등록일
+	MNO     INTEGER      NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '자료실';
+
+-- 자료실
+ALTER TABLE FBOARD
+	ADD CONSTRAINT PK_FBOARD -- 자료실 Primary key
+		PRIMARY KEY (
+			FNO -- 자료번호
+		);
+
+ALTER TABLE FBOARD
+	MODIFY COLUMN FNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '자료번호';
+
+-- QnA
+CREATE TABLE QNA (
+	QANO INTEGER  NOT NULL COMMENT '질문번호', -- 질문번호
+	QST  TEXT     NOT NULL COMMENT '질문', -- 질문
+	CDT  DATETIME NOT NULL COMMENT '등록일', -- 등록일
+	ANR  TEXT     NULL     COMMENT '답변', -- 답변
+	ADT  DATETIME NULL     COMMENT '답변일', -- 답변일
+	MNO  INTEGER  NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT 'QnA';
+
+-- QnA
+ALTER TABLE QNA
+	ADD CONSTRAINT PK_QNA -- QnA Primary key
+		PRIMARY KEY (
+			QANO -- 질문번호
+		);
+
+ALTER TABLE QNA
+	MODIFY COLUMN QANO INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문번호';
+
+-- 교육과정
+CREATE TABLE CURR (
+	EDNO INTEGER      NOT NULL COMMENT '교육과정번호', -- 교육과정번호
+	TITL VARCHAR(255) NOT NULL COMMENT '과정명', -- 과정명
+	CONT MEDIUMTEXT   NOT NULL COMMENT '내용' -- 내용
+)
+COMMENT '교육과정';
+
+-- 교육과정
+ALTER TABLE CURR
+	ADD CONSTRAINT PK_CURR -- 교육과정 Primary key
+		PRIMARY KEY (
+			EDNO -- 교육과정번호
+		);
+
+-- 교육과정 Unique Index
+CREATE UNIQUE INDEX UIX_CURR
+	ON CURR ( -- 교육과정
+		TITL ASC -- 과정명
+	);
+
+ALTER TABLE CURR
+	MODIFY COLUMN EDNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '교육과정번호';
+
+-- 교실사진
+CREATE TABLE CR_PIC (
+	CRPNO    INTEGER      NOT NULL COMMENT '교실사진번호', -- 교실사진번호
+	PIC_PATH VARCHAR(255) NOT NULL COMMENT '사진', -- 사진
+	CRNO     INTEGER      NOT NULL COMMENT '교실번호' -- 교실번호
+)
+COMMENT '교실사진';
+
+-- 교실사진
+ALTER TABLE CR_PIC
+	ADD CONSTRAINT PK_CR_PIC -- 교실사진 Primary key
+		PRIMARY KEY (
+			CRPNO -- 교실사진번호
+		);
+
+ALTER TABLE CR_PIC
+	MODIFY COLUMN CRPNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '교실사진번호';
+
+-- 주소
+CREATE TABLE ADDR (
+	ARNO     INTEGER      NOT NULL COMMENT '주소번호', -- 주소번호
+	PST_NO   VARCHAR(10)  NOT NULL COMMENT '우편번호', -- 우편번호
+	BAS_ADDR VARCHAR(255) NOT NULL COMMENT '기본주소' -- 기본주소
+)
+COMMENT '주소';
+
+-- 주소
+ALTER TABLE ADDR
+	ADD CONSTRAINT PK_ADDR -- 주소 Primary key
+		PRIMARY KEY (
+			ARNO -- 주소번호
+		);
+
+ALTER TABLE ADDR
+	MODIFY COLUMN ARNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '주소번호';
+
+-- 교육과정과목
+CREATE TABLE CURR_SUBJ (
+	EDNO INTEGER NOT NULL COMMENT '교육과정번호', -- 교육과정번호
+	SBNO INTEGER NOT NULL COMMENT '과목번호' -- 과목번호
+)
+COMMENT '교육과정과목';
+
+-- 교육과정과목
+ALTER TABLE CURR_SUBJ
+	ADD CONSTRAINT PK_CURR_SUBJ -- 교육과정과목 Primary key
+		PRIMARY KEY (
+			EDNO, -- 교육과정번호
+			SBNO  -- 과목번호
+		);
+
+-- 강의수강생
+CREATE TABLE LECT_STUD (
+	LNO INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+	MNO INTEGER NOT NULL COMMENT '학생번호' -- 학생번호
+)
+COMMENT '강의수강생';
+
+-- 강의수강생
+ALTER TABLE LECT_STUD
+	ADD CONSTRAINT PK_LECT_STUD -- 강의수강생 Primary key
+		PRIMARY KEY (
+			LNO, -- 강의번호
+			MNO  -- 학생번호
+		);
+
+-- 강의배정
+CREATE TABLE LECT_TCHR (
+	LNO INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+	MNO INTEGER NOT NULL COMMENT '강사번호' -- 강사번호
+)
+COMMENT '강의배정';
+
+-- 강의배정
+ALTER TABLE LECT_TCHR
+	ADD CONSTRAINT PK_LECT_TCHR -- 강의배정 Primary key
+		PRIMARY KEY (
+			LNO, -- 강의번호
+			MNO  -- 강사번호
+		);
+
+-- 회원
+CREATE TABLE MEMB (
+	MNO      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+	NAME     VARCHAR(30)  NOT NULL COMMENT '이름', -- 이름
+	TEL      VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
+	EMAIL    VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+	DET_ADDR VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
+	PIC_PATH VARCHAR(255) NULL     COMMENT '사진', -- 사진
+	LST_SCHL VARCHAR(10)  NULL     COMMENT '최종학력', -- 최종학력
+	SCHL_NM  VARCHAR(30)  NULL     COMMENT '학교명', -- 학교명
+	ARNO     INTEGER      NULL     COMMENT '주소번호' -- 주소번호
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE MEMB
+	ADD CONSTRAINT PK_MEMB -- 회원 Primary key
+		PRIMARY KEY (
+			MNO -- 회원번호
+		);
+
+-- 회원 Unique Index
+CREATE UNIQUE INDEX UIX_MEMB
+	ON MEMB ( -- 회원
+		EMAIL ASC -- 이메일
+	);
+
+-- 회원 Index
+CREATE INDEX IX_MEMB
+	ON MEMB( -- 회원
+		NAME ASC -- 이름
+	);
+
+ALTER TABLE MEMB
+	MODIFY COLUMN MNO INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+
+-- 강의
+ALTER TABLE LECT
+	ADD CONSTRAINT FK_CURR_TO_LECT -- 교육과정 -> 강의
+		FOREIGN KEY (
+			EDNO -- 교육과정번호
+		)
+		REFERENCES CURR ( -- 교육과정
+			EDNO -- 교육과정번호
+		);
+
+-- 강의
+ALTER TABLE LECT
+	ADD CONSTRAINT FK_CROOM_TO_LECT -- 교실 -> 강의
+		FOREIGN KEY (
+			CRNO -- 교실번호
+		)
+		REFERENCES CROOM ( -- 교실
+			CRNO -- 교실번호
+		);
+
+-- 강의
+ALTER TABLE LECT
+	ADD CONSTRAINT FK_MGR_TO_LECT -- 매니저 -> 강의
+		FOREIGN KEY (
+			MNO -- 매니저번호
+		)
+		REFERENCES MGR ( -- 매니저
+			MNO -- 매니저번호
+		);
+
+-- 학생
+ALTER TABLE STUD
+	ADD CONSTRAINT FK_MEMB_TO_STUD -- 회원 -> 학생
+		FOREIGN KEY (
+			MNO -- 학생번호
+		)
+		REFERENCES MEMB ( -- 회원
+			MNO -- 회원번호
+		);
+
+-- 강사
+ALTER TABLE TCHR
+	ADD CONSTRAINT FK_MEMB_TO_TCHR -- 회원 -> 강사
+		FOREIGN KEY (
+			MNO -- 강사번호
+		)
+		REFERENCES MEMB ( -- 회원
+			MNO -- 회원번호
+		);
+
+-- 매니저
+ALTER TABLE MGR
+	ADD CONSTRAINT FK_MEMB_TO_MGR -- 회원 -> 매니저
+		FOREIGN KEY (
+			MNO -- 매니저번호
+		)
+		REFERENCES MEMB ( -- 회원
+			MNO -- 회원번호
+		);
+
+-- 게시판
+ALTER TABLE BOARD
+	ADD CONSTRAINT FK_MEMB_TO_BOARD -- 회원 -> 게시판
+		FOREIGN KEY (
+			MNO -- 회원번호
+		)
+		REFERENCES MEMB ( -- 회원
+			MNO -- 회원번호
+		);
+
+-- 자료실
+ALTER TABLE FBOARD
+	ADD CONSTRAINT FK_MEMB_TO_FBOARD -- 회원 -> 자료실
+		FOREIGN KEY (
+			MNO -- 회원번호
+		)
+		REFERENCES MEMB ( -- 회원
+			MNO -- 회원번호
+		);
+
+-- QnA
+ALTER TABLE QNA
+	ADD CONSTRAINT FK_MEMB_TO_QNA -- 회원 -> QnA
+		FOREIGN KEY (
+			MNO -- 회원번호
+		)
+		REFERENCES MEMB ( -- 회원
+			MNO -- 회원번호
+		);
+
+-- 교실사진
+ALTER TABLE CR_PIC
+	ADD CONSTRAINT FK_CROOM_TO_CR_PIC -- 교실 -> 교실사진
+		FOREIGN KEY (
+			CRNO -- 교실번호
+		)
+		REFERENCES CROOM ( -- 교실
+			CRNO -- 교실번호
+		);
+
+-- 교육과정과목
+ALTER TABLE CURR_SUBJ
+	ADD CONSTRAINT FK_CURR_TO_CURR_SUBJ -- 교육과정 -> 교육과정과목
+		FOREIGN KEY (
+			EDNO -- 교육과정번호
+		)
+		REFERENCES CURR ( -- 교육과정
+			EDNO -- 교육과정번호
+		);
+
+-- 교육과정과목
+ALTER TABLE CURR_SUBJ
+	ADD CONSTRAINT FK_SUBJ_TO_CURR_SUBJ -- 과목 -> 교육과정과목
+		FOREIGN KEY (
+			SBNO -- 과목번호
+		)
+		REFERENCES SUBJ ( -- 과목
+			SBNO -- 과목번호
+		);
+
+-- 강의수강생
+ALTER TABLE LECT_STUD
+	ADD CONSTRAINT FK_LECT_TO_LECT_STUD -- 강의 -> 강의수강생
+		FOREIGN KEY (
+			LNO -- 강의번호
+		)
+		REFERENCES LECT ( -- 강의
+			LNO -- 강의번호
+		);
+
+-- 강의수강생
+ALTER TABLE LECT_STUD
+	ADD CONSTRAINT FK_STUD_TO_LECT_STUD -- 학생 -> 강의수강생
+		FOREIGN KEY (
+			MNO -- 학생번호
+		)
+		REFERENCES STUD ( -- 학생
+			MNO -- 학생번호
+		);
+
+-- 강의배정
+ALTER TABLE LECT_TCHR
+	ADD CONSTRAINT FK_TCHR_TO_LECT_TCHR -- 강사 -> 강의배정
+		FOREIGN KEY (
+			MNO -- 강사번호
+		)
+		REFERENCES TCHR ( -- 강사
+			MNO -- 강사번호
+		);
+
+-- 강의배정
+ALTER TABLE LECT_TCHR
+	ADD CONSTRAINT FK_LECT_TO_LECT_TCHR -- 강의 -> 강의배정
+		FOREIGN KEY (
+			LNO -- 강의번호
+		)
+		REFERENCES LECT ( -- 강의
+			LNO -- 강의번호
+		);
+
+-- 회원
+ALTER TABLE MEMB
+	ADD CONSTRAINT FK_ADDR_TO_MEMB -- 주소 -> 회원
+		FOREIGN KEY (
+			ARNO -- 주소번호
+		)
+		REFERENCES ADDR ( -- 주소
+			ARNO -- 주소번호
+		);
