@@ -29,6 +29,9 @@
 </tbody>
 </table>
 
+<button type="button" class="btn btn-primary" id="prev-btn">이전</button>
+<span id="page-no">1</span>
+<button type="button" class="btn btn-primary" id="next-btn">다음</button>
 <button type="button" class="btn btn-primary" id="add-btn">추가</button>
 </div>
 
@@ -47,46 +50,56 @@ connection.connect()
 /* AJAX 응용 II
 => 학생 목록 출력
 */
-var tbody = $('#student-tbl > tbody'),
-    addBtn = $('#add-btn');
+var tbody = $('#student-tbl > tbody')
 
-/*
-select m.mno, m.name, m.tel, m.email, s.work
-from stud s inner join memb m on s.sno=m.mno
-order by m.mno asc
-limit 0, 5
-*/
-
-connection.query(
-  'select m.mno, m.name, m.tel, m.email, s.work \
-  from stud s inner join memb m on s.sno=m.mno  \
-  order by m.mno asc \
-  limit 0, 3',
-  function(error, results) {
-    if (error) {
-      alert('데이터 조회 중 발생!')
-      throw error;
-    }
-
-    for (var s of results) {
-      $("<tr>").html("<td>" + s.mno +
-      "</td><td><a href='#' data-no='" + s.mno + "' class='view-link'>" + s.name +
-      "</a></td><td>" + s.tel +
-      "</td><td>" + s.email +
-      "</td><td>" + (s.work == "Y" ? "재직중" : "실업") + "</td>")
-      .appendTo(tbody)
-    }
-    $('table .view-link').click(onClickViewLink)
-})
+listStudent(1)
 
 function onClickViewLink(event) {
   location.href = 'view.html?no=' + $(this).attr('data-no')
   event.preventDefault()
 }
 
-addBtn.click(function() {
+$('#add-btn').click(function() {
   location.href = 'view.html'
 })
+
+$('#prev-btn').click(function() {
+  var currPageNo = parseInt($('#page-no').text())
+  listStudent(currPageNo - 1)
+})
+
+$('#next-btn').click(function() {
+  var currPageNo = parseInt($('#page-no').text())
+  listStudent(currPageNo + 1)
+})
+
+function listStudent(pageNo) {
+  connection.query(
+    'select m.mno, m.name, m.tel, m.email, s.work \
+    from stud s inner join memb m on s.sno=m.mno  \
+    order by m.mno asc \
+    limit ' + (pageNo - 1) * 3 + ', 3',
+    function(error, results) {
+      if (error) {
+        alert('데이터 조회 중 발생!')
+        throw error;
+      }
+
+      // 기존에 있던 tr 태그 삭제
+      tbody.html('');
+
+      for (var s of results) {
+        $("<tr>").html("<td>" + s.mno +
+        "</td><td><a href='#' data-no='" + s.mno + "' class='view-link'>" + s.name +
+        "</a></td><td>" + s.tel +
+        "</td><td>" + s.email +
+        "</td><td>" + (s.work == "Y" ? "재직중" : "실업") + "</td>")
+        .appendTo(tbody)
+      }
+      $('table .view-link').click(onClickViewLink)
+      $('#page-no').text(pageNo)
+    })
+}
 
 </script>
 </body>
