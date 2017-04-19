@@ -93,7 +93,7 @@ function listStudent(pageNo) {
           "</td><td>" + (s.work == "Y" ? "재직중" : "실업") + "</td>")
           .appendTo(tbody)
         } else {
-          $("<tr><td colspan='5'>&nbsp;</td></td>").appendTo(tbody)
+          $("<tr><td colspan='5'>&nbsp;</td></tr>").appendTo(tbody)
         }
       }
 
