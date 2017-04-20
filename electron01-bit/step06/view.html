@@ -91,34 +91,40 @@ if (location.search == "") {
   $('.bit-new').css('display', '')
 
   $('#add-btn').click(function() {
-    $.post(serverUrl + '/webapp/student/add.json',
-      {
-        name: fiName.val(),
-        tel: fiTel.val(),
-        email: fiEmail.val(),
-        schoolName: fiSchoolName.val(),
-        working: fiWorking.prop('checked')
-      },
-      function(result) {
-        if (result.status != 'success') {
-          alert('추가하는데 실패했습니다.')
-          return
+    connection.query(
+      'insert into memb(name,tel,email,pwd) values(?,?,?,password(?))',
+      [
+        fiName.val(),
+        fiTel.val(),
+        fiEmail.val(),
+        '1111'
+      ],
+      function(error, result) {
+        if (error) {
+          alert('회원 기본 데이터 등록 중 오류 발생!')
+          throw error;
         }
-        location.href = 'index.html'
-      },
-      'json'
-    )// post()
+
+        connection.query(
+          'insert into stud(sno,work,schl_nm) values(?,?,?)',
+          [
+            result.insertId,
+            (fiWorking.prop('checked') ? 'Y' : 'N'),
+            fiSchoolName.val()
+          ],
+          function(error, result) {
+            if (error) {
+              alert('학생 데이터 등록 중 오류 발생!')
+              throw error;
+            }
+            location.href = 'index.html'
+        }) //connection.query()
+    }) //connection.query()
   }) // click()
 
 } else { // 기존 사용자 정보를 가져온다.
   $('.bit-new').css('display', 'none')
   var no = location.search.substring(1).split('=')[1]
-
-/*
-select m.mno, m.name, m.tel, m.email, s.work, s.schl_nm
-from stud s inner join memb m on s.sno=m.mno
-where s.sno=1
-*/
 
   connection.query(
     'select m.mno, m.name, m.tel, m.email, s.work, s.schl_nm \
@@ -168,15 +174,26 @@ where s.sno=1
   }) // click()
 
   $('#del-btn').click(function() {
-    $.getJSON('/webapp/student/delete.json?memberNo=' + no,
-      function(result) {
-        if (result.status != 'success') {
-          alert('삭제하는데 실패했습니다.')
-          return
+    connection.query(
+      'delete from stud where sno=?',
+      [no],
+      function(error, result) {
+        if (error) {
+          alert('학생 데이터 삭제 중 오류 발생!')
+          throw error;
         }
-        location.href = 'index.html'
-      }
-    ) // getJSON()
+
+        connection.query(
+          'delete from memb where mno=?',
+          [no],
+          function(error, result) {
+            if (error) {
+              alert('기본 회원 데이터 삭제 중 오류 발생!')
+              throw error;
+            }
+            location.href = 'index.html'
+        }) //connection.query()
+    }) //connection.query()
   }) // click()
 } // else
 
