@@ -136,6 +136,30 @@ where s.sno=1
   }) // connection.query()
 
   $('#upd-btn').click(function() {
+    connection.query(
+      'update memb set name=?, tel=?, email=? where mno=?',
+      [
+        fiName.val(),
+        fiTel.val(),
+        fiEmail.val(),
+        no
+      ],
+      function(error, result) {
+        console.log(result)
+    })
+
+    connection.query(
+      'update stud set work=?, schl_nm=? where sno=?',
+      [
+        (fiWorking.prop('checked') ? 'Y' : 'N'),
+        fiSchoolName.val(),
+        no
+      ],
+      function(error, result) {
+        console.log(result)
+    })
+
+
     $.ajax('/webapp/student/update.json', {
       method: 'POST',
       dataType: 'json',
