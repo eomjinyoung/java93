@@ -1,3 +1,5 @@
+// 데이터 처리를 담당하는 자바스크립트
+// => DAO(Data Access Object)
 "use strict"
 const mysql = require('mysql')
 const connection = mysql.createConnection({
@@ -7,7 +9,7 @@ const connection = mysql.createConnection({
 })
 connection.connect()
 
-function listStudent(pageNo, successFn, errorFn) {
+function selectListStudent(pageNo, successFn, errorFn) {
   connection.query(
     'select m.mno, m.name, m.tel, m.email, s.work \
     from stud s inner join memb m on s.sno=m.mno  \

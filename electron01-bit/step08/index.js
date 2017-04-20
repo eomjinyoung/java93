@@ -19,7 +19,7 @@ $('#next-btn').click(function() {
 })
 
 function displayList(pageNo) {
-  listStudent(
+  selectListStudent(
     pageNo, // pageNo
     function(results) { // successFn
       // 기존에 있던 tr 태그 삭제
