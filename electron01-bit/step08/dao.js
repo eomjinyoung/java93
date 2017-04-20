@@ -36,3 +36,44 @@ function countAllStudent(successFn, errorFn) {
       }
   }) //connection.query()
 }
+
+function selectOneStudent(no, successFn, errorFn) {
+  connection.query(
+    'select m.mno, m.name, m.tel, m.email, s.work, s.schl_nm \
+    from stud s inner join memb m on s.sno=m.mno \
+    where s.sno=?',
+    [no],
+    function(error, results) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(results[0])
+      }
+  }) // connection.query()
+} //selectOneStudent()
+
+function insertStudent(student, successFn, errorFn) {
+  connection.query(
+    'insert into stud(sno,work,schl_nm) values(?,?,?)',
+    [ student.memberNo, student.working, student.schoolName],
+    function(error, result) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(result)
+      }
+  }) //connection.query()
+} //insertStudent()
+
+function insertMember(member, successFn, errorFn) {
+  connection.query(
+    'insert into memb(name,tel,email,pwd) values(?,?,?,password(?))',
+    [ member.name, member.tel, member.email, member.password],
+    function(error, result) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(result)
+      }
+  }) //connection.query()
+} //insertStudent()
