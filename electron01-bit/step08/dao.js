@@ -55,7 +55,7 @@ function selectOneStudent(no, successFn, errorFn) {
 function insertStudent(student, successFn, errorFn) {
   connection.query(
     'insert into stud(sno,work,schl_nm) values(?,?,?)',
-    [ student.memberNo, student.working, student.schoolName],
+    [ student.no, student.working, student.schoolName],
     function(error, result) {
       if (error) {
         errorFn(error)
@@ -77,3 +77,29 @@ function insertMember(member, successFn, errorFn) {
       }
   }) //connection.query()
 } //insertStudent()
+
+function updateStudent(student, successFn, errorFn) {
+  connection.query(
+    'update stud set work=?, schl_nm=? where sno=?',
+    [student.working, student.schoolName, student.no],
+    function(error, result) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(result)
+      }
+  }) //connection.query()
+} //updateStudent()
+
+function updateMember(member, successFn, errorFn) {
+  connection.query(
+    'update memb set name=?, tel=?, email=? where mno=?',
+    [member.name, member.tel, member.email, member.no],
+    function(error, result) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(result)
+      }
+  })
+} // updateMember()

@@ -24,7 +24,7 @@ if (location.search == "") {
       function(result) {
         insertStudent(
           {
-            memberNo: result.insertId,
+            no: result.insertId,
             working: (fiWorking.prop('checked') ? 'Y' : 'N'),
             schoolName: fiSchoolName.val()
           },
@@ -62,35 +62,32 @@ if (location.search == "") {
   })
 
   $('#upd-btn').click(function() {
-    connection.query(
-      'update memb set name=?, tel=?, email=? where mno=?',
-      [
-        fiName.val(),
-        fiTel.val(),
-        fiEmail.val(),
-        no
-      ],
-      function(error, result) {
-        if (error) {
-          alert('회원 기본 데이터 변경 중 오류 발생!')
-          throw error;
-        }
-
-        connection.query(
-          'update stud set work=?, schl_nm=? where sno=?',
-          [
-            (fiWorking.prop('checked') ? 'Y' : 'N'),
-            fiSchoolName.val(),
-            no
-          ],
-          function(error, result) {
-            if (error) {
-              alert('학생 데이터 변경 중 오류 발생!')
-              throw error;
-            }
+    updateMember(
+      {
+        "no": no,
+        "name": fiName.val(),
+        "tel": fiTel.val(),
+        "email": fiEmail.val()
+      },
+      function(result) {
+        updateStudent(
+          {
+            "no": no,
+            "working": (fiWorking.prop('checked') ? 'Y' : 'N'),
+            "schoolName": fiSchoolName.val()
+          },
+          function(result) {
             alert('변경하였습니다.')
-        }) //connection.query()
-    }) //connection.query()
+          },
+          function(error) {
+            alert('학생 데이터 변경 중 오류 발생!')
+            throw error;
+          })
+      },
+      function(error) {
+        alert('회원 기본 데이터 변경 중 오류 발생!')
+        throw error;
+    })
   }) // click()
 
   $('#del-btn').click(function() {
