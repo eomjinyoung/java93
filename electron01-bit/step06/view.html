@@ -145,40 +145,26 @@ where s.sno=1
         no
       ],
       function(error, result) {
-        console.log(result)
-    })
-
-    connection.query(
-      'update stud set work=?, schl_nm=? where sno=?',
-      [
-        (fiWorking.prop('checked') ? 'Y' : 'N'),
-        fiSchoolName.val(),
-        no
-      ],
-      function(error, result) {
-        console.log(result)
-    })
-
-
-    $.ajax('/webapp/student/update.json', {
-      method: 'POST',
-      dataType: 'json',
-      data: {
-        memberNo: no,
-        name: fiName.val(),
-        tel: fiTel.val(),
-        email: fiEmail.val(),
-        schoolName: fiSchoolName.val(),
-        working: fiWorking.prop('checked')
-      },
-      success: function(result) {
-        if (result.status != 'success') {
-          alert('변경하는데 실패했습니다.')
-          return
+        if (error) {
+          alert('회원 기본 데이터 변경 중 오류 발생!')
+          throw error;
         }
-        alert('변경했습니다!')
-      }
-    }) // ajax()
+
+        connection.query(
+          'update stud set work=?, schl_nm=? where sno=?',
+          [
+            (fiWorking.prop('checked') ? 'Y' : 'N'),
+            fiSchoolName.val(),
+            no
+          ],
+          function(error, result) {
+            if (error) {
+              alert('학생 데이터 변경 중 오류 발생!')
+              throw error;
+            }
+            alert('변경하였습니다.')
+        }) //connection.query()
+    }) //connection.query()
   }) // click()
 
   $('#del-btn').click(function() {
