@@ -1,0 +1,92 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  .student {
+    border: 2px solid gray;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 80px;
+    height: 40px;
+    margin: 5px;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 20px;
+  }
+  .selected {
+    border-color: red;
+    background-color: red;
+    /*font-weight: bold;*/
+    color: white;
+  }
+  #timeout {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+<div id="student-list"></div>
+<div>
+  <button type="button" class="btn btn-primary" id="select-btn">선택</button>
+  <span id='timeout'></span>
+</div>
+</div><!-- div.container -->
+
+<script>
+"use strict"
+window.$ = window.jQuery = require('jquery')
+
+var students = ["김승민","정성룡","조성규","이윤민","김미연","이수은","김승원",
+                "임의수","우인재","박규호","양승렬","노완진","김대연","이유운",
+                "김민섭","신용주","서흥원","고진서","송수정","신선아","권봉수",
+                "박은비","홍순민","김정준","홍효선"]
+var selectList = $('#student-list')
+
+for (var i = 0; i < students.length; i++) {
+  selectList.append($('<div>').text(students[i])
+                              .addClass('student')
+                              .attr('id','s' + i))
+}
+
+var currNo = 0
+
+
+
+$('#select-btn').click(function() {
+  var interval = setInterval(function() {
+    var no = parseInt(Math.random() * 25)
+    $('#s' + currNo).removeClass('selected')
+    $('#s' + no).addClass('selected')
+    currNo = no
+  }, 200)
+
+  var count = 10
+
+  var interval2 = setInterval(function() {
+    if (count == 0) {
+      clearInterval(interval2)
+    }
+    $('#timeout').text(count--)
+  }, 1000)
+
+  setTimeout(function() {
+    clearInterval(interval)
+  }, 11000)
+})
+
+</script>
+</body>
+</html>
+
+
+<!-- -->
