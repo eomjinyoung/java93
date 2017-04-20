@@ -91,26 +91,21 @@ if (location.search == "") {
   }) // click()
 
   $('#del-btn').click(function() {
-    connection.query(
-      'delete from stud where sno=?',
-      [no],
-      function(error, result) {
-        if (error) {
-          alert('학생 데이터 삭제 중 오류 발생!')
-          throw error;
-        }
-
-        connection.query(
-          'delete from memb where mno=?',
-          [no],
-          function(error, result) {
-            if (error) {
-              alert('기본 회원 데이터 삭제 중 오류 발생!')
-              throw error;
-            }
+    deleteStudent(no,
+      function(result) {
+        deleteMember(no,
+          function(result) {
             location.href = 'index.html'
-        }) //connection.query()
-    }) //connection.query()
+          },
+          function(error) {
+            alert('학생 데이터 삭제 중 오류 발생!')
+            throw error;
+        })
+      },
+      function(error) {
+        alert('학생 기본 데이터 삭제 중 오류 발생!')
+        throw error;
+    })
   }) // click()
 } // else
 

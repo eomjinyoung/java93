@@ -103,3 +103,29 @@ function updateMember(member, successFn, errorFn) {
       }
   })
 } // updateMember()
+
+function deleteMember(no, successFn, errorFn) {
+  connection.query(
+    'delete from memb where mno=?',
+    [no],
+    function(error, result) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(result)
+      }
+  }) //connection.query()
+}//deleteMember()
+
+function deleteStudent(no, successFn, errorFn) {
+  connection.query(
+    'delete from stud where sno=?',
+    [no],
+    function(error, result) {
+      if (error) {
+        errorFn(error)
+      } else {
+        successFn(result)
+      }
+  })
+}//deleteStudent()
