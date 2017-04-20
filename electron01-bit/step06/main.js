@@ -1,5 +1,5 @@
-/* 주제: 응용 II
-=> MySQL DBMS에 직접 접속하기
+/* 주제: MySQL DBMS에 직접 접속하기
+=> HTML 안에 자바스크립트 코드 삽입
  */
 const {app, BrowserWindow} = require('electron')
 const path = require('path')

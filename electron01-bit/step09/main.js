@@ -1,5 +1,5 @@
-/* 주제: MySQL DBMS에 직접 접속하기 III
-=> 자바스크립트 파일에서 데이터 처리 코드 분리하기
+/* 주제: MySQL DBMS에 직접 접속하기 IV
+=> dao.js를 테이블 단위로 분리하기
  */
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
