@@ -24,12 +24,8 @@ $('#next-btn').click(function() {
 function displayList(pageNo) {
   studentService.list(
     pageNo,
-    function(students, totalCount) {
-      console.log(students)
-      console.log(totalCount)
-      /*
+    function(results, totalCount) {
       tbody.html('');
-
       for (var i = 0; i < 3; i++) {
         if (i < results.length) {
           let s = results[i]
@@ -45,9 +41,8 @@ function displayList(pageNo) {
       }
 
       $('table .view-link').click(onClickViewLink)
+      preparePagingBar(pageNo, totalCount)
 
-      preparePagingBar(pageNo)
-      */
     },
     function(error) {
       alert('데이터 조회 중 오류 발생!')
@@ -55,7 +50,7 @@ function displayList(pageNo) {
   }) //list()
 } // displayList()
 
-function preparePagingBar(pageNo) {
+function preparePagingBar(pageNo, totalCount) {
   $('#page-no').text(pageNo)
 
   if (pageNo == 1) {
@@ -64,19 +59,13 @@ function preparePagingBar(pageNo) {
     $('#prev-btn').attr('disabled', false)
   }
 
-  studentDao.countAll(function(results) {
-      var totalCount = results[0].cnt;
-      var totalPage = parseInt(totalCount / 3) + (totalCount % 3 > 0 ? 1 : 0);
+  var totalPage = parseInt(totalCount / 3) + (totalCount % 3 > 0 ? 1 : 0);
 
-      if (pageNo == totalPage) {
-        $('#next-btn').attr('disabled', true)
-      } else {
-        $('#next-btn').attr('disabled', false)
-      }
-    }, function(error) {
-      alert('데이터 조회 중 발생!')
-      throw error;
-  }) //countAllStudent()
+  if (pageNo == totalPage) {
+    $('#next-btn').attr('disabled', true)
+  } else {
+    $('#next-btn').attr('disabled', false)
+  }
 } //preparePagingBar()
 
 function onClickViewLink(event) {
