@@ -1,14 +1,6 @@
 "use strict"
 
 module.exports = {
-  setMessage(str) {
-    this.message = str
-  },
-
-  getMessage() {
-    return this.message
-  },
-  
   setStudentDao(dao) {
     this.studentDao = dao
   },

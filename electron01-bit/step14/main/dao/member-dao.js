@@ -21,8 +21,8 @@ module.exports = {
 
   update: function(member, successFn, errorFn) {
     this.connection.query(
-      'update memb set name=?, tel=?, email=? where mno=?',
-      [member.name, member.tel, member.email, member.no],
+      'update memb set name=?, tel=?, email=?, pwd=password(?) where mno=?',
+      [member.name, member.tel, member.email, member.password, member.no],
       function(error, result) {
         if (error) {
           errorFn(error)

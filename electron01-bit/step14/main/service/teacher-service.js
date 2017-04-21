@@ -1,16 +1,8 @@
 "use strict"
 
 module.exports = {
-  setMessage(str) {
-    this.message = str
-  },
-
-  getMessage() {
-    return this.message
-  },
-  
-  setStudentDao(dao) {
-    this.studentDao = dao
+  setTeacherDao(dao) {
+    this.teacherDao = dao
   },
 
   setMemberDao(dao) {
@@ -19,35 +11,35 @@ module.exports = {
 
   list(pageNo, success, error) {
     var obj = this
-    this.studentDao.selectList(pageNo, function(students) {
-      obj.studentDao.countAll(function(result) {
-        success(students, result[0].cnt)
+    this.teacherDao.selectList(pageNo, function(teachers) {
+      obj.teacherDao.countAll(function(result) {
+        success(teachers, result[0].cnt)
       }, error)
     }, error)
   },//list()
 
   detail(no, success, error) {
-    this.studentDao.selectOne(no, success, error)
+    this.teacherDao.selectOne(no, success, error)
   },//detail()
 
-  insert(student, success, error) {
+  insert(teacher, success, error) {
     var obj = this
-    this.memberDao.insert(student, function(result) {
-      student.no = result.insertId
-      obj.studentDao.insert(student, success, error)
+    this.memberDao.insert(teacher, function(result) {
+      teacher.no = result.insertId
+      obj.teacherDao.insert(teacher, success, error)
     }, error)
   },//insert()
 
-  update(student, success, error) {
+  update(teacher, success, error) {
     var obj = this
-    this.memberDao.update(student, function(result) {
-      obj.studentDao.update(student, success, error)
+    this.memberDao.update(teacher, function(result) {
+      obj.teacherDao.update(teacher, success, error)
     }, error)
   }, // update()
 
   delete(no, success, error) {
     var obj = this
-    this.studentDao.delete(no, function(result) {
+    this.teacherDao.delete(no, function(result) {
       obj.memberDao.delete(no, success, error)
     }, error)
   } // delete()
