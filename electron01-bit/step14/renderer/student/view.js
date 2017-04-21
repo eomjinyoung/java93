@@ -2,6 +2,7 @@
 window.$ = window.jQuery = require('jquery')
 var studentService = require('electron').remote.getGlobal('studentService')
 
+
 var fiNo = $('#fi-no'),
     fiEmail = $('#fi-email'),
     fiName = $('#fi-name'),
