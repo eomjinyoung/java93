@@ -7,7 +7,7 @@ function createStudentService(memberDao, studentDao) {
     => success: 데이터 가져오는데 성공했을 때 호출될 함수
         success(학생데이터배열, 전체개수)
     => error: 데이터 가져오는데 실패했을 때 호출될 함수
-        error(오류객체)            
+        error(오류객체)
     */
     list(pageNo, success, error) {
       studentDao.selectList(pageNo, function(students) {
@@ -17,7 +17,14 @@ function createStudentService(memberDao, studentDao) {
       }, error)
     },
     detail(no, success, error) {},
-    insert(student, success, error) {},
+    insert(student, success, error) {
+      memberDao.insert(student, function(result) {
+        student.no = result.insertId
+        studentDao.insert(student, function(result2) {
+          success(result2)
+        }, error)
+      }, error)
+    },
     update(student, success, error) {},
     delete(student, success, error) {}
   }

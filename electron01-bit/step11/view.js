@@ -2,6 +2,7 @@
 window.$ = window.jQuery = require('jquery')
 var studentDao = createStudentDao(con)
 var memberDao = createMemberDao(con)
+var studentService = createStudentService(memberDao, studentDao)
 
 var fiNo = $('#fi-no'),
     fiEmail = $('#fi-email'),
@@ -15,30 +16,20 @@ if (location.search == "") {
   $('.bit-new').css('display', '')
 
   $('#add-btn').click(function() {
-    memberDao.insert(
+    studentService.insert(
       {
         name: fiName.val(),
         tel: fiTel.val(),
         email: fiEmail.val(),
-        password: '1111'
+        password: '1111',
+        working: (fiWorking.prop('checked') ? 'Y' : 'N'),
+        schoolName: fiSchoolName.val()
       },
-      function(result) {
-        studentDao.insert(
-          {
-            no: result.insertId,
-            working: (fiWorking.prop('checked') ? 'Y' : 'N'),
-            schoolName: fiSchoolName.val()
-          },
-          function(result) {
-            location.href = 'index.html'
-          },
-          function(error) {
-            alert('학생 데이터 등록 중 오류 발생!')
-            throw error;
-        })
+      function() {
+        location.href = 'index.html'
       },
       function(error) {
-        alert('회원 기본 데이터 등록 중 오류 발생!')
+        alert('회원 등록 중 오류 발생!')
         throw error;
     }) //insertMember()
   }) // click()
