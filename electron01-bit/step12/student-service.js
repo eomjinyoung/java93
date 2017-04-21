@@ -16,16 +16,24 @@ function createStudentService(memberDao, studentDao) {
         }, error)
       }, error)
     },
-    detail(no, success, error) {},
+    detail(no, success, error) {
+      studentDao.selectOne(no, success, error)
+    },
     insert(student, success, error) {
       memberDao.insert(student, function(result) {
         student.no = result.insertId
-        studentDao.insert(student, function(result2) {
-          success(result2)
-        }, error)
+        studentDao.insert(student, success, error)
       }, error)
     },
-    update(student, success, error) {},
-    delete(student, success, error) {}
+    update(student, success, error) {
+      memberDao.update(student, function(result) {
+        studentDao.update(student, success, error)
+      }, error)
+    },
+    delete(no, success, error) {
+      studentDao.delete(no, function(result) {
+        memberDao.delete(no, success, error)
+      }, error)
+    }
   }
 }

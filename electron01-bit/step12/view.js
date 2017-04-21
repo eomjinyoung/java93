@@ -2,6 +2,7 @@
 window.$ = window.jQuery = require('jquery')
 var studentDao = createStudentDao(con)
 var memberDao = createMemberDao(con)
+var studentService = createStudentService(memberDao, studentDao)
 
 var fiNo = $('#fi-no'),
     fiEmail = $('#fi-email'),
@@ -15,30 +16,20 @@ if (location.search == "") {
   $('.bit-new').css('display', '')
 
   $('#add-btn').click(function() {
-    memberDao.insert(
+    studentService.insert(
       {
         name: fiName.val(),
         tel: fiTel.val(),
         email: fiEmail.val(),
-        password: '1111'
+        password: '1111',
+        working: (fiWorking.prop('checked') ? 'Y' : 'N'),
+        schoolName: fiSchoolName.val()
       },
-      function(result) {
-        studentDao.insert(
-          {
-            no: result.insertId,
-            working: (fiWorking.prop('checked') ? 'Y' : 'N'),
-            schoolName: fiSchoolName.val()
-          },
-          function(result) {
-            location.href = 'index.html'
-          },
-          function(error) {
-            alert('학생 데이터 등록 중 오류 발생!')
-            throw error;
-        })
+      function() {
+        location.href = 'index.html'
       },
       function(error) {
-        alert('회원 기본 데이터 등록 중 오류 발생!')
+        alert('회원 등록 중 오류 발생!')
         throw error;
     }) //insertMember()
   }) // click()
@@ -47,7 +38,7 @@ if (location.search == "") {
   $('.bit-new').css('display', 'none')
   var no = location.search.substring(1).split('=')[1]
 
-  studentDao.selectOne(no,
+  studentService.detail(no,
     function(result) {
       var student = result
       fiNo.text(student.mno)
@@ -63,45 +54,28 @@ if (location.search == "") {
   })
 
   $('#upd-btn').click(function() {
-    memberDao.update(
+    studentService.update(
       {
         "no": no,
         "name": fiName.val(),
         "tel": fiTel.val(),
-        "email": fiEmail.val()
+        "email": fiEmail.val(),
+        "working": (fiWorking.prop('checked') ? 'Y' : 'N'),
+        "schoolName": fiSchoolName.val()
       },
       function(result) {
-        studentDao.update(
-          {
-            "no": no,
-            "working": (fiWorking.prop('checked') ? 'Y' : 'N'),
-            "schoolName": fiSchoolName.val()
-          },
-          function(result) {
-            alert('변경하였습니다.')
-          },
-          function(error) {
-            alert('학생 데이터 변경 중 오류 발생!')
-            throw error;
-          })
+        alert('변경하였습니다.')
       },
       function(error) {
         alert('회원 기본 데이터 변경 중 오류 발생!')
         throw error;
-    })
-  }) // click()
+    })//update()
+  }) //click()
 
   $('#del-btn').click(function() {
-    studentDao.delete(no,
+    studentService.delete(no,
       function(result) {
-        memberDao.delete(no,
-          function(result) {
-            location.href = 'index.html'
-          },
-          function(error) {
-            alert('학생 데이터 삭제 중 오류 발생!')
-            throw error;
-        })
+        location.href = 'index.html'
       },
       function(error) {
         alert('학생 기본 데이터 삭제 중 오류 발생!')
