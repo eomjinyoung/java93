@@ -1,0 +1,48 @@
+<!-- HTML에서 JavaScript 분리 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>학생 목록</h1>
+<table id="student-tbl" class="table table-hover">
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>이름</th>
+    <th>전화</th>
+    <th>이메일</th>
+    <th>재직여부</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<button type="button" class="btn btn-primary" id="prev-btn">이전</button>
+<span id="page-no">1</span>
+<button type="button" class="btn btn-primary" id="next-btn">다음</button>
+<button type="button" class="btn btn-primary" id="add-btn">추가</button>
+</div>
+
+<script src="../../main/util/datasource.js"></script>
+<script src="../../main/dao/member-dao.js"></script>
+<script src="../../main/dao/student-dao.js"></script>
+<script src="../../main/service/student-service.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
+
+
+<!-- -->
