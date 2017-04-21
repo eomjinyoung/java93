@@ -1,5 +1,5 @@
-/* 주제: MySQL DBMS에 직접 접속하기 VI
-=> xxx-dao.js 의 함수들을 객체에 묶어 리턴하는 createXxxDao() 함수 추가
+/* 주제: MySQL DBMS에 직접 접속하기 VII
+=> UI 자바스크립트 파일에서 비즈니스 로직을 분리하여 xxx-service.js 파일에 담는다. 
  */
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
