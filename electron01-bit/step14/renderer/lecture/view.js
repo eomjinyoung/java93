@@ -40,6 +40,15 @@ if (location.search == "") {
   $('.bit-new').css('display', '')
 
   $('#add-btn').click(function() {
+    if (fiTitle.val() == '' ||
+        fiContent.val() == '' ||
+        fiStartDate.val() == '' ||
+        fiEndDate.val() == '' ||
+        fiQuantity.val() == '' ||
+        fiHours.val() == '') {
+      alert('필수 항목의 값이 없습니다!')
+      return;
+    }
     lectureService.insert(
       {
         title: fiTitle.val(),
@@ -49,8 +58,8 @@ if (location.search == "") {
         quantity: fiQuantity.val(),
         hours: fiHours.val(),
         price: fiPrice.val(),
-        classroom: fiClassroom.val(),
-        manager: fiManager.val()
+        classroom: (fiClassroom.val() == '0' ? null : fiClassroom.val()),
+        manager: (fiManager.val() == '0' ? null : fiManager.val())
       },
       function() {
         location.href = 'index.html'
@@ -65,19 +74,21 @@ if (location.search == "") {
   $('.bit-new').css('display', 'none')
   var no = location.search.substring(1).split('=')[1]
 
-  teacherService.detail(no,
-    function(result) {
-      var teacher = result
-      fiNo.text(teacher.mno)
-      fiEmail.val(teacher.email)
-      fiName.val(teacher.name)
-      fiTel.val(teacher.tel)
-      fiHomepage.val(teacher.hmpg)
-      fiFacebook.val(teacher.fcbk)
-      fiTwitter.val(teacher.twit)
+  lectureService.detail(no,
+    function(lecture) {
+      fiNo.text(lecture.lno)
+      fiTitle.val(lecture.titl)
+      fiContent.val(lecture.dscp)
+      fiStartDate.val(lecture.sdt2)
+      fiEndDate.val(lecture.edt2)
+      fiQuantity.val(lecture.qty)
+      fiPrice.val(lecture.pric)
+      fiHours.val(lecture.thrs)
+      fiClassroom.val(lecture.crmno)
+      fiManager.val(lecture.mrno)
     },
     function(error) {
-      alert('강사 데이터 가져오는 중 오류 발생!')
+      alert('강의 데이터 가져오는 중 오류 발생!')
       throw error
   })
 

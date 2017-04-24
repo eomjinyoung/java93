@@ -34,14 +34,6 @@ module.exports = {
       }) //connection.query()
   },//countAll()
 
-/*
-select lno, titl, dscp,
-  date_format(sdt,'%Y-%m-%d') sdt2,
-  date_format(edt,'%Y-%m-%d') edt2,
-  qty, pric, thrs, crmno, mrno
-from lect
-where lno=13
-*/
   selectOne(no, successFn, errorFn) {
     this.connection.query(
       "select lno, titl, dscp, \
