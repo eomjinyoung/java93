@@ -1,9 +1,11 @@
-/* 요청 정보 다루기 - Quiz!
-=> 계산기 서비스를 구현하라!
-요청 예) http://localhost:8888/calculator?a=100&b=200&op=-
-출력 결과 예)
-100 - 200 = -100
-=> op에 들어갈 연산자: +, -, *, /, %
+/* 요청 정보 다루기 - Quiz 3
+=> 사용자로부터 기본 회원 데이터를 입력 받아 DBMS에 저장하라!
+=> 요청 예)
+  http://localhost:8888/student/add.do?name=홍길동&tel=1111&email=hong@test.com&password=1111
+=> 출력 예)
+  입력 성공입니다!
+
+* 입력되었는지 여부는 test04_1.js 통해 확인하라!
 */
 
 const http = require('http')

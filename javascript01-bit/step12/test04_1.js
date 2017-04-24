@@ -1,9 +1,10 @@
-/* 요청 정보 다루기 - Quiz!
-=> 계산기 서비스를 구현하라!
-요청 예) http://localhost:8888/calculator?a=100&b=200&op=-
-출력 결과 예)
-100 - 200 = -100
-=> op에 들어갈 연산자: +, -, *, /, %
+/* 요청 정보 다루기 - Quiz 2
+=> 사용자로부터 페이지 번호와 개수를 입력 받아
+  학생 목록을 HTML 페이지로 출력하시오.
+=> 요청 예)
+  http://localhost:8888/student/list.do?pageNo=2&pageSize=3
+=> 출력 예)
+  간단히 테이블로 출력하라!
 */
 
 const http = require('http')
