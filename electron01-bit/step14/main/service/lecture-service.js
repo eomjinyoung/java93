@@ -27,9 +27,6 @@ module.exports = {
   }, // update()
 
   delete(no, success, error) {
-    var obj = this
-    this.studentDao.delete(no, function(result) {
-      obj.memberDao.delete(no, success, error)
-    }, error)
+    this.lectureDao.delete(no, success, error)
   } // delete()
 } // exports

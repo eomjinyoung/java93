@@ -72,7 +72,7 @@ module.exports = {
     this.connection.query(
       'update lect set titl=?, dscp=?, sdt=?, edt=?, qty=?, pric=?, thrs=?, crmno=?, mrno=? \
       where lno=?',
-      [l.title, l.content, l.startDate, l.endDate, l.quantity, 
+      [l.title, l.content, l.startDate, l.endDate, l.quantity,
       l.price, l.hours, l.classroom, l.manager, l.no],
       function(error, result) {
         if (error) {
@@ -85,7 +85,7 @@ module.exports = {
 
   delete(no, successFn, errorFn) {
     this.connection.query(
-      'delete from stud where sno=?',
+      'delete from lect where lno=?',
       [no],
       function(error, result) {
         if (error) {

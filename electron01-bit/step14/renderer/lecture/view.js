@@ -115,12 +115,12 @@ if (location.search == "") {
   }) //click()
 
   $('#del-btn').click(function() {
-    teacherService.delete(no,
+    lectureService.delete(no,
       function(result) {
         location.href = 'index.html'
       },
       function(error) {
-        alert('강사 기본 데이터 삭제 중 오류 발생!')
+        alert('강의 데이터 삭제 중 오류 발생!')
         throw error;
     })
   }) // click()
