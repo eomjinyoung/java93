@@ -7,10 +7,11 @@ module.exports = {
 
   selectList(pageNo, successFn, errorFn) {
     this.connection.query(
-      'select m.mno, m.name, m.tel, m.email, s.work \
-      from stud s inner join memb m on s.sno=m.mno  \
-      order by m.name asc \
-      limit ?, ?',
+      "select lno, titl, date_format(sdt,'%Y-%m-%d') sdt2 , \
+      date_format(edt,'%Y-%m-%d') edt2, thrs, pric \
+      from lect \
+      order by sdt desc \
+      limit ?, ?",
       [(pageNo - 1) * 3, 3],
       function(error, results) {
         if (error) {
@@ -23,7 +24,7 @@ module.exports = {
 
   countAll(successFn, errorFn) {
     this.connection.query(
-      'select count(*) cnt from stud',
+      'select count(*) cnt from lect',
       function(error, results) {
         if (error) {
           errorFn(error)

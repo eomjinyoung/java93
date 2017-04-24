@@ -1,27 +1,15 @@
 "use strict"
 
 module.exports = {
-  setMessage(str) {
-    this.message = str
-  },
-
-  getMessage() {
-    return this.message
-  },
-  
-  setStudentDao(dao) {
-    this.studentDao = dao
-  },
-
-  setMemberDao(dao) {
-    this.memberDao = dao
+  setLectureDao(dao) {
+    this.lectureDao = dao
   },
 
   list(pageNo, success, error) {
     var obj = this
-    this.studentDao.selectList(pageNo, function(students) {
-      obj.studentDao.countAll(function(result) {
-        success(students, result[0].cnt)
+    this.lectureDao.selectList(pageNo, function(lectures) {
+      obj.lectureDao.countAll(function(result) {
+        success(lectures, result[0].cnt)
       }, error)
     }, error)
   },//list()
