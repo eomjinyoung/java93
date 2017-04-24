@@ -5,6 +5,19 @@ module.exports = {
     this.connection = con
   },
 
+  selectNameList(successFn, errorFn) {
+    this.connection.query(
+      'select mr.mrno, m.name \
+      from mgr mr inner join memb m on mr.mrno=m.mno',
+      function(error, results) {
+        if (error) {
+          errorFn(error)
+        } else {
+          successFn(results)
+        }
+      }) // connection.query()
+  },//selectNameList()
+
   selectList(pageNo, successFn, errorFn) {
     this.connection.query(
       'select m.mno, m.name, m.tel, m.email, s.work \

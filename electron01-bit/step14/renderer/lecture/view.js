@@ -1,7 +1,16 @@
 "use strict"
 window.$ = window.jQuery = require('jquery')
-var teacherService = require('electron').remote.getGlobal('teacherService')
+var managerService = require('electron').remote.getGlobal('managerService')
 
+managerService.listName(function(results) {
+    var fiManager = $('#fi-manager')
+    for (var r of results) {
+      $('<option>').val(r.mrno).text(r.name).appendTo(fiManager)
+    }
+  }, function(error) {
+    alert('매니저 이름 로딩 중 오류 발생!')
+    throw error;
+})
 
 var fiNo = $('#fi-no'),
     fiEmail = $('#fi-email'),

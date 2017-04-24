@@ -17,6 +17,9 @@ memberDao.setConnection(connection)
 const teacherDao = require('./dao/teacher-dao')
 teacherDao.setConnection(connection)
 
+const managerDao = require('./dao/manager-dao')
+managerDao.setConnection(connection)
+
 const lectureDao = require('./dao/lecture-dao')
 lectureDao.setConnection(connection)
 
@@ -28,6 +31,9 @@ const teacherService = require('./service/teacher-service')
 teacherService.setMemberDao(memberDao)
 teacherService.setTeacherDao(teacherDao)
 
+const managerService = require('./service/manager-service')
+managerService.setManagerDao(managerDao)
+
 const lectureService = require('./service/lecture-service')
 lectureService.setLectureDao(lectureDao)
 
@@ -36,6 +42,7 @@ lectureService.setLectureDao(lectureDao)
 global.studentService = studentService
 global.teacherService = teacherService
 global.lectureService = lectureService
+global.managerService = managerService
 
 let win
 

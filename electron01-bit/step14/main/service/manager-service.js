@@ -1,13 +1,17 @@
 "use strict"
 
 module.exports = {
-  setStudentDao(dao) {
-    this.studentDao = dao
+  setManagerDao(dao) {
+    this.managerDao = dao
   },
 
   setMemberDao(dao) {
     this.memberDao = dao
   },
+
+  listName(success, error) {
+    this.managerDao.selectNameList(success, error)
+  },//listName()
 
   list(pageNo, success, error) {
     var obj = this
