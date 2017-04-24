@@ -15,7 +15,7 @@ module.exports = {
   },//list()
 
   detail(no, success, error) {
-    this.studentDao.selectOne(no, success, error)
+    this.lectureDao.selectOne(no, success, error)
   },//detail()
 
   insert(lecture, success, error) {
