@@ -68,10 +68,12 @@ module.exports = {
       }) //connection.query()
   }, //insert
 
-  update(student, successFn, errorFn) {
+  update(l, successFn, errorFn) {
     this.connection.query(
-      'update stud set work=?, schl_nm=? where sno=?',
-      [student.working, student.schoolName, student.no],
+      'update lect set titl=?, dscp=?, sdt=?, edt=?, qty=?, pric=?, thrs=?, crmno=?, mrno=? \
+      where lno=?',
+      [l.title, l.content, l.startDate, l.endDate, l.quantity, 
+      l.price, l.hours, l.classroom, l.manager, l.no],
       function(error, result) {
         if (error) {
           errorFn(error)

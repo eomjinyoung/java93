@@ -40,13 +40,8 @@ if (location.search == "") {
   $('.bit-new').css('display', '')
 
   $('#add-btn').click(function() {
-    if (fiTitle.val() == '' ||
-        fiContent.val() == '' ||
-        fiStartDate.val() == '' ||
-        fiEndDate.val() == '' ||
-        fiQuantity.val() == '' ||
-        fiHours.val() == '') {
-      alert('필수 항목의 값이 없습니다!')
+    if (!validateForm()) {
+      alert('필수 항목의 값이 비어있습니다!')
       return;
     }
     lectureService.insert(
@@ -93,22 +88,28 @@ if (location.search == "") {
   })
 
   $('#upd-btn').click(function() {
-    teacherService.update(
+    if (!validateForm()) {
+      alert('필수 항목의 값이 비어있습니다!')
+      return;
+    }
+    lectureService.update(
       {
-        "no": no,
-        "name": fiName.val(),
-        "tel": fiTel.val(),
-        "email": fiEmail.val(),
-        "password": fiPassword.val(),
-        "homepage": fiHomepage.val(),
-        "facebook": fiFacebook.val(),
-        "twitter": fiTwitter.val()
+        no: fiNo.text(),
+        title: fiTitle.val(),
+        content: fiContent.val(),
+        startDate: fiStartDate.val(),
+        endDate: fiEndDate.val(),
+        quantity: fiQuantity.val(),
+        hours: fiHours.val(),
+        price: fiPrice.val(),
+        classroom: (fiClassroom.val() == '0' ? null : fiClassroom.val()),
+        manager: (fiManager.val() == '0' ? null : fiManager.val())
       },
       function(result) {
         alert('변경하였습니다.')
       },
       function(error) {
-        alert('강사 기본 데이터 변경 중 오류 발생!')
+        alert('강의 데이터 변경 중 오류 발생!')
         throw error;
     })//update()
   }) //click()
@@ -128,3 +129,15 @@ if (location.search == "") {
 $('#lst-btn').click(function() {
   location.href = "index.html"
 })
+
+function validateForm() {
+  if (fiTitle.val() == '' ||
+      fiContent.val() == '' ||
+      fiStartDate.val() == '' ||
+      fiEndDate.val() == '' ||
+      fiQuantity.val() == '' ||
+      fiHours.val() == '') {
+    return false;
+  }
+  return true;
+}

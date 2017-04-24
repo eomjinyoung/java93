@@ -22,11 +22,8 @@ module.exports = {
     this.lectureDao.insert(lecture, success, error)
   },//insert()
 
-  update(student, success, error) {
-    var obj = this
-    this.memberDao.update(student, function(result) {
-      obj.studentDao.update(student, success, error)
-    }, error)
+  update(lecture, success, error) {
+    this.lectureDao.update(lecture, success, error)
   }, // update()
 
   delete(no, success, error) {
