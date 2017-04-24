@@ -49,10 +49,13 @@ module.exports = {
       }) // connection.query()
   },//selectOne()
 
-  insert(student, successFn, errorFn) {
+  insert(lecture, successFn, errorFn) {
     this.connection.query(
-      'insert into stud(sno,work,schl_nm) values(?,?,?)',
-      [ student.no, student.working, student.schoolName],
+      'insert into lect(titl,dscp,sdt,edt,qty,pric,thrs,crmno,mrno) \
+       values(?,?,?,?,?,?,?,?,?)',
+      [lecture.title, lecture.content, lecture.startDate,
+       lecture.endDate, lecture.quantity, lecture.price,
+       lecture.hours, lecture.classroom, lecture.manager],
       function(error, result) {
         if (error) {
           errorFn(error)

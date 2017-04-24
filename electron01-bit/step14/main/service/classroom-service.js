@@ -1,15 +1,19 @@
 "use strict"
 
 module.exports = {
-  setLectureDao(dao) {
-    this.lectureDao = dao
+  setClassroomDao(dao) {
+    this.classroomDao = dao
   },
+
+  listName(success, error) {
+    this.classroomDao.selectNameList(success, error)
+  },//listName()
 
   list(pageNo, success, error) {
     var obj = this
-    this.lectureDao.selectList(pageNo, function(lectures) {
-      obj.lectureDao.countAll(function(result) {
-        success(lectures, result[0].cnt)
+    this.studentDao.selectList(pageNo, function(students) {
+      obj.studentDao.countAll(function(result) {
+        success(students, result[0].cnt)
       }, error)
     }, error)
   },//list()
@@ -18,8 +22,12 @@ module.exports = {
     this.studentDao.selectOne(no, success, error)
   },//detail()
 
-  insert(lecture, success, error) {
-    this.lectureDao.insert(lecture, success, error)
+  insert(student, success, error) {
+    var obj = this
+    this.memberDao.insert(student, function(result) {
+      student.no = result.insertId
+      obj.studentDao.insert(student, success, error)
+    }, error)
   },//insert()
 
   update(student, success, error) {

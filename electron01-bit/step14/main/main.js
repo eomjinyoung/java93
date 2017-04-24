@@ -23,6 +23,9 @@ managerDao.setConnection(connection)
 const lectureDao = require('./dao/lecture-dao')
 lectureDao.setConnection(connection)
 
+const classroomDao = require('./dao/classroom-dao')
+classroomDao.setConnection(connection)
+
 const studentService = require('./service/student-service')
 studentService.setMemberDao(memberDao)
 studentService.setStudentDao(studentDao)
@@ -37,12 +40,16 @@ managerService.setManagerDao(managerDao)
 const lectureService = require('./service/lecture-service')
 lectureService.setLectureDao(lectureDao)
 
+const classroomService = require('./service/classroom-service')
+classroomService.setClassroomDao(classroomDao)
+
 // global 빌트인 객체에 값을 보관하면,
 // renderer 프로세스(웹 화면쪽)에서 꺼내 쓸 수 있다.
 global.studentService = studentService
 global.teacherService = teacherService
 global.lectureService = lectureService
 global.managerService = managerService
+global.classroomService = classroomService
 
 let win
 

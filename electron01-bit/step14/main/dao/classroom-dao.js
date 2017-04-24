@@ -5,6 +5,18 @@ module.exports = {
     this.connection = con
   },
 
+  selectNameList(successFn, errorFn) {
+    this.connection.query(
+      'select crmno, name from croom order by name asc',
+      function(error, results) {
+        if (error) {
+          errorFn(error)
+        } else {
+          successFn(results)
+        }
+      }) // connection.query()
+  },//selectNameList()
+
   selectList(pageNo, successFn, errorFn) {
     this.connection.query(
       'select m.mno, m.name, m.tel, m.email, s.work \

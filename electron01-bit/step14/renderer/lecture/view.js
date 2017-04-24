@@ -1,6 +1,8 @@
 "use strict"
 window.$ = window.jQuery = require('jquery')
 var managerService = require('electron').remote.getGlobal('managerService')
+var classroomService = require('electron').remote.getGlobal('classroomService')
+var lectureService = require('electron').remote.getGlobal('lectureService')
 
 managerService.listName(function(results) {
     var fiManager = $('#fi-manager')
@@ -12,37 +14,51 @@ managerService.listName(function(results) {
     throw error;
 })
 
+classroomService.listName(function(results) {
+    var fiClassroom = $('#fi-classroom')
+    for (var r of results) {
+      $('<option>').val(r.crmno).text(r.name).appendTo(fiClassroom)
+    }
+  }, function(error) {
+    alert('강의실 이름 로딩 중 오류 발생!')
+    throw error;
+})
+
 var fiNo = $('#fi-no'),
-    fiEmail = $('#fi-email'),
-    fiName = $('#fi-name'),
-    fiTel = $('#fi-tel'),
-    fiPassword = $('#fi-password'),
-    fiHomepage = $('#fi-homepage'),
-    fiFacebook = $('#fi-facebook'),
-    fiTwitter = $('#fi-twitter');
+    fiTitle = $('#fi-title'),
+    fiContent = $('#fi-content'),
+    fiStartDate = $('#fi-start-date'),
+    fiEndDate = $('#fi-end-date'),
+    fiQuantity = $('#fi-quantity'),
+    fiHours = $('#fi-hours'),
+    fiPrice = $('#fi-price'),
+    fiClassroom = $('#fi-classroom'),
+    fiManager = $('#fi-manager');
 
 if (location.search == "") {
   $('.bit-view').css('display', 'none')
   $('.bit-new').css('display', '')
 
   $('#add-btn').click(function() {
-    teacherService.insert(
+    lectureService.insert(
       {
-        name: fiName.val(),
-        tel: fiTel.val(),
-        email: fiEmail.val(),
-        password: fiPassword.val(),
-        homepage: fiHomepage.val(),
-        facebook: fiFacebook.val(),
-        twitter: fiTwitter.val()
+        title: fiTitle.val(),
+        content: fiContent.val(),
+        startDate: fiStartDate.val(),
+        endDate: fiEndDate.val(),
+        quantity: fiQuantity.val(),
+        hours: fiHours.val(),
+        price: fiPrice.val(),
+        classroom: fiClassroom.val(),
+        manager: fiManager.val()
       },
       function() {
         location.href = 'index.html'
       },
       function(error) {
-        alert('강사 등록 중 오류 발생!')
+        alert('강의 등록 중 오류 발생!')
         throw error;
-    }) //insertMember()
+    }) //insert()
   }) // click()
 
 } else { // 기존 사용자 정보를 가져온다.
