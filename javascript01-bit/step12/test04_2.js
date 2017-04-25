@@ -1,7 +1,7 @@
 /* 요청 정보 다루기 - Quiz 3
 => 사용자로부터 기본 회원 데이터를 입력 받아 DBMS에 저장하라!
 => 요청 예)
-  http://localhost:8888/student/add.do?name=홍길동&tel=1111&email=hong@test.com&password=1111
+  http://localhost:8889/student/add.do?name=홍길동&tel=1111&email=hong@test.com&password=1111&working=Y&schoolName=비트대학교
 => 출력 예)
   입력 성공입니다!
 
@@ -41,7 +41,9 @@ const server = http.createServer(function(request, response) {
     name: urlInfo.query.name,
     tel: urlInfo.query.tel,
     email: urlInfo.query.email,
-    password: urlInfo.query.password
+    password: urlInfo.query.password,
+    working: urlInfo.query.working,
+    schoolName: urlInfo.query.schoolName
   }
 
   response.writeHead(200, {
@@ -55,21 +57,9 @@ const server = http.createServer(function(request, response) {
     <body>')
   response.write('<h1>학생 등록 결과</h1>')
 
-  studentDao.insert(pageNo, pageSize, function(results) {
-    response.write('<table border="1">\
-    <thead>\
-      <tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>직장인</th></tr>\
-    </thead>\
-    <tbody>')
-    for (var r of results) {
-      response.write('<tr><td>' + r.mno + '</td>')
-      response.write('<td>' + r.name + '</td>')
-      response.write('<td>' + r.email + '</td>')
-      response.write('<td>' + r.tel + '</td>')
-      response.write('<td>' + r.work + '</td></tr>')
-    }
-    response.write('</tbody></table>\
-    </body></html>')
+  studentService.insert(student, function(results) {
+    response.write('입력 성공입니다!')
+    response.write('</body></html>')
     response.end();
 
   }, function(error) {
@@ -81,6 +71,6 @@ const server = http.createServer(function(request, response) {
 
 })
 
-server.listen(8888)
+server.listen(8889)
 
 console.log("서버 실행 중...")
