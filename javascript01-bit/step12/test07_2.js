@@ -1,10 +1,12 @@
-/* 여러 URL 처리
-=> 조건문을 사용하여 URL을 구분한다.
-=> 테스트 방법
-1) test07_1.js를 실행하여 웹서버를 구동하라!
-2) test07_1.html을 웹브라우저로 로딩하라!
-3) 화면에서 GET 요청 또는 POST 요청 버튼을 눌러봐라!
-4) 서버의 응답 결과를 확인하라!
+/* 기존 코드에 새 서비스 추가
+=> 'hello.do' 서비스를 추가하자!
+  즉 else if 문을 추가해야 한다.
+=> 문제점
+  서비스를 추가할 때 마다 else if 문을 추가해야 한다.
+  서비스가 추가 될 수록 소스 코드를 읽기 어려워진다.
+=> 해결책?
+  함수로 묶어 놓으면 읽기 쉽다.
+  test07_3.js를 보라!
 */
 
 const http = require('http')
@@ -41,6 +43,10 @@ const server = http.createServer(function(request, response) {
       response.write('tel=' + params.tel + '\n')
       response.end()
     })
+
+  } else if (urlInfo.pathname == '/hello.do') {
+    response.write('안녕하세요!')
+    response.end()
 
   } else {
     response.write('해당 URL을 지원하지 않습니다.')
