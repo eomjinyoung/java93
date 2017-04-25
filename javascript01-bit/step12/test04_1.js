@@ -31,6 +31,9 @@ const server = http.createServer(function(request, response) {
     return
   }
 
+  var pageNo = parseInt(urlInfo.query.pageNo),
+      pageSize = parseInt(urlInfo.query.pageSize)
+
   response.writeHead(200, {
     'Content-Type' : 'text/html;charset=UTF-8'
   })
@@ -41,20 +44,29 @@ const server = http.createServer(function(request, response) {
     </head> \
     <body>')
   response.write('<h1>학생 목록</h1>')
-  response.write('pageNo=' + urlInfo.query.pageNo + '<br>')
-  response.write('pageSize=' + urlInfo.query.pageSize + '<br>')
 
-  studentDao.selectList(1, function(results) {
+  studentDao.selectList(pageNo, pageSize, function(results) {
+    response.write('<table border="1">\
+    <thead>\
+      <tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>직장인</th></tr>\
+    </thead>\
+    <tbody>')
     for (var r of results) {
-      response.write(r.mno + ',' + r.email + ',' + r.tel + ',' + r.work + '<br>')
+      response.write('<tr><td>' + r.mno + '</td>')
+      response.write('<td>' + r.name + '</td>')
+      response.write('<td>' + r.email + '</td>')
+      response.write('<td>' + r.tel + '</td>')
+      response.write('<td>' + r.work + '</td></tr>')
     }
-    response.write('</body></html>')
+    response.write('</tbody></table>\
+    </body></html>')
     response.end();
-    
+
   }, function(error) {
     response.write('DB 오류!')
     response.write('</body></html>')
     response.end();
+    throw error;
   })
 
 })
