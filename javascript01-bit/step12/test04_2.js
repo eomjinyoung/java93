@@ -10,6 +10,16 @@
 
 const http = require('http')
 const url = require('url')
+const datasource = require('./datasource')
+const studentDao = require('./student-dao')
+const memberDao = require('./member-dao')
+const studentService = require('./student-service')
+
+const connection = datasource.getConnection()
+studentDao.setConnection(connection)
+memberDao.setConnection(connection)
+studentService.setStudentDao(studentDao)
+studentService.setMemberDao(memberDao)
 
 const server = http.createServer(function(request, response) {
   if (request.url == '/favicon.ico') {
@@ -19,39 +29,58 @@ const server = http.createServer(function(request, response) {
 
   var urlInfo = url.parse(request.url, true)
 
-  response.writeHead(200, {
-    'Content-Type' : 'text/plain;charset=UTF-8'
-  })
-
-
-  // URL에서 '?' 앞에 나오는 경로(http://localhost:8888 은 제외)
-  if (urlInfo.pathname != '/calculator') {
+  if (urlInfo.pathname != '/student/add.do') {
+    response.writeHead(404, {
+      'Content-Type' : 'text/plain;charset=UTF-8'
+    })
     response.end('잘못된 URL 입니다.')
     return
   }
 
-  var a = parseInt(urlInfo.query.a)
-  var b = parseInt(urlInfo.query.b)
-  var op = urlInfo.query.op
-  /* URL은 항상 ASCII 코드 값으로 표현해야 한다.
-    다른 데이터는 URL 인코딩, 즉 아스키 문자화시켜 표현한다.
-    그래서 '+' 문자는 '%2B' 라는 문자로 URL 인코딩하여 전달해야 한다.
-    또한 '%'도 URL 인코딩하는데 특별한 기호로 사용되기 때문에,
-    '+' 문자와 마찬가지로 URL 인코딩한 '%25' 문자로 바꿔 전달해야 한다.
-  */
-
-  var result = 0
-  switch(op) {
-    case '+': result = a + b; break
-    case '-': result = a - b; break
-    case '*': result = a * b; break
-    case '/': result = a / b; break
-    case '%': result = a % b; break
+  var student = {
+    name: urlInfo.query.name,
+    tel: urlInfo.query.tel,
+    email: urlInfo.query.email,
+    password: urlInfo.query.password
   }
 
-  response.write(a + ' ' + op + ' ' + b + ' = ' + result)
-  response.end();
+  response.writeHead(200, {
+    'Content-Type' : 'text/html;charset=UTF-8'
+  })
+
+  response.write('<html> \
+    <head> \
+      <title>학생등록</title> \
+    </head> \
+    <body>')
+  response.write('<h1>학생 등록 결과</h1>')
+
+  studentDao.insert(pageNo, pageSize, function(results) {
+    response.write('<table border="1">\
+    <thead>\
+      <tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>직장인</th></tr>\
+    </thead>\
+    <tbody>')
+    for (var r of results) {
+      response.write('<tr><td>' + r.mno + '</td>')
+      response.write('<td>' + r.name + '</td>')
+      response.write('<td>' + r.email + '</td>')
+      response.write('<td>' + r.tel + '</td>')
+      response.write('<td>' + r.work + '</td></tr>')
+    }
+    response.write('</tbody></table>\
+    </body></html>')
+    response.end();
+
+  }, function(error) {
+    response.write('DB 오류!')
+    response.write('</body></html>')
+    response.end();
+    throw error;
+  })
+
 })
+
 server.listen(8888)
 
 console.log("서버 실행 중...")

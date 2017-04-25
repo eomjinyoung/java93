@@ -11,9 +11,11 @@ const http = require('http')
 const url = require('url')
 const datasource = require('./datasource')
 const studentDao = require('./student-dao')
+const studentService = require('./student-service')
 
 const connection = datasource.getConnection()
 studentDao.setConnection(connection)
+studentService.setStudentDao(studentDao)
 
 const server = http.createServer(function(request, response) {
   if (request.url == '/favicon.ico') {
@@ -45,7 +47,7 @@ const server = http.createServer(function(request, response) {
     <body>')
   response.write('<h1>학생 목록</h1>')
 
-  studentDao.selectList(pageNo, pageSize, function(results) {
+  studentService.list(pageNo, pageSize, function(results) {
     response.write('<table border="1">\
     <thead>\
       <tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>직장인</th></tr>\

@@ -11,7 +11,7 @@ module.exports = {
       from stud s inner join memb m on s.sno=m.mno  \
       order by m.name asc \
       limit ?, ?',
-      [(pageNo - 1) * 3, pageSize],
+      [(pageNo - 1) * pageSize, pageSize],
       function(error, results) {
         if (error) {
           errorFn(error)
