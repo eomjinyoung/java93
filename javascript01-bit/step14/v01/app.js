@@ -10,8 +10,11 @@ var app = express()
 // 정적 자원이 저장된 폴더를 지정한다.
 app.use(express.static('public'))
 
-// POST 요청 파라미터를 처리할 body-parser 모듈을 express에 등록하기
-app.use(bodyParser.urlencoded({extended: false}))
+// POST 요청 파라미터를 처리할 분석기를 준비한다.
+const postParameterParser = bodyParser.urlencoded({extended: false})
+
+// POST 요청 파라미터 분석기를 express에 등록하기
+app.use(postParameterParser)
 
 app.get('/get_test.do', function(request, response) {
   response.writeHead(200, {'Content-Type': 'text/plain;charset=UTF-8'})
