@@ -1,9 +1,10 @@
-/* 미니 Express 만들기 - GET, POST 요청을 다루는 함수를 관리하는 기능 추가
+/* 미니 Express 만들기 - POST 요청 시 파라미터 데이터를 처리하는 코드 추가
 */
 var http = require('http')
 var url = require('url')
 var path = require('path')
 var fs = require('fs')
+var qs = require('querystring')
 
 var getHandler = {}
 var postHandler = {}
@@ -19,20 +20,35 @@ function notFound(request, response) {
   })
 }
 
+function findHandler(method, servicePath) {
+  if (method == 'GET') {
+    return getHandler[servicePath]
+  } else if (method == 'POST') {
+    return postHandler[servicePath]
+  }
+  return null
+}
+
 var server = http.createServer(function(request, response) {
   var urlInfo = url.parse(request.url, true)
 
-  var handler = null;
-  if (request.method == 'GET') {
-    handler = getHandler[urlInfo.pathname]
-    request.query = urlInfo.query
-
-  } else if (request.method == 'POST') {
-    handler = postHandler[urlInfo.pathname]
-  }
+  var handler = findHandler(request.method, urlInfo.pathname);
 
   if (handler) {
-    handler(request, response)
+    if (request.method == 'GET') {
+      request.query = urlInfo.query
+      handler(request, response)
+
+    } else if (request.method == 'POST') {
+      var queryString = ''
+      request.on('data', function(data) {
+        queryString += data
+      })
+      request.on('end', function() {
+        request.query = qs.parse(queryString)
+        handler(request, response)
+      })
+    }
   } else {
     notFound(request, response)
   }
