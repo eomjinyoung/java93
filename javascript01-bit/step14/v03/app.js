@@ -1,4 +1,4 @@
-/* Express 프레임워크 적용 - 템플릿 엔진 사용
+/* Express 프레임워크 적용 - 여러 개의 모듈로 서비스 핸들러를 분산하기
 */
 var express = require('express')
 var bodyParser = require('body-parser')
@@ -11,11 +11,14 @@ var app = express()
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 
-// 노드 모듈에서 handlebars를 찾아 템플릿 엔진으로 등록한다.
-// => 즉 노드 모듈에 handlebars가 있어야 한다.
+// 외부에 등록된 서비스 핸들러 가져오기 => 서비스 라우터 등록
+// 라우터(router)? 경로 담당자
+var router = require('./aa')
+app.use('/aa', router) // /aa 경로에 대한 요청을 처리할 담당자를 설정한다.
+
 app.engine('html', cons.handlebars)
-app.set('view engine', 'html') // 등록된 템플릿 엔진 중에서 Express에서 사용할 엔진 지정한다.
-app.set('views', path.join(__dirname, '/templates')) // 템플릿 파일이 있는 경로 지정한다.
+app.set('view engine', 'html')
+app.set('views', path.join(__dirname, '/templates'))
 
 app.get('/test.do', function(request, response) {
   response.render('test', {name: '홍길동'})
