@@ -1,10 +1,9 @@
-<!-- HTML에서 JavaScript 분리 -->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>HTML</title>
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <style>
   .container {
     width: 600px;
@@ -26,6 +25,15 @@
   </tr>
 </thead>
 <tbody>
+{{#each data}}
+  <tr>
+    <td>{{mno}}</td>
+    <td>{{name}}</td>
+    <td>{{tel}}</td>
+    <td>{{email}}</td>
+    <td>{{work}}</td>
+  </tr>
+{{/each}}
 </tbody>
 </table>
 
