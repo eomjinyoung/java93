@@ -5,13 +5,13 @@ module.exports = {
     this.connection = con
   },
 
-  selectList(pageNo, successFn, errorFn) {
+  selectList(pageNo, pageSize, successFn, errorFn) {
     this.connection.query(
       'select m.mno, m.name, m.tel, m.email, s.work \
       from stud s inner join memb m on s.sno=m.mno  \
       order by m.name asc \
       limit ?, ?',
-      [(pageNo - 1) * 3, 3],
+      [(pageNo - 1) * pageSize, pageSize],
       function(error, results) {
         if (error) {
           errorFn(error)

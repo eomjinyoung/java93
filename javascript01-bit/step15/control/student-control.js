@@ -14,7 +14,15 @@ studentService.setMemberDao(memberDao)
 const router = express.Router()
 
 router.get('/list.do', (request, response) => {
-  studentService.list(1, function(results, totalCount) {
+  var pageNo = 1,
+      pageSize = 3;
+  if (request.query.pageNo) {
+    pageNo = parseInt(request.query.pageNo)
+  }
+  if (request.query.pageSize) {
+    pageSize = parseInt(request.query.pageSize)
+  }
+  studentService.list(pageNo, pageSize, function(results, totalCount) {
     response.render('student/index', {data: results})
   }, function(error) {
     response.end('오류!')

@@ -28,7 +28,7 @@
 {{#each data}}
   <tr>
     <td>{{mno}}</td>
-    <td>{{name}}</td>
+    <td><a href="#" data-no="{{mno}}" class="my-name-link">{{name}}</a></td>
     <td>{{tel}}</td>
     <td>{{email}}</td>
     <td>{{work}}</td>
@@ -43,6 +43,7 @@
 <button type="button" class="btn btn-primary" id="add-btn">추가</button>
 </div>
 
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="index.js"></script>
 
 </body>
