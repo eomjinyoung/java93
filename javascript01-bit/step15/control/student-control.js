@@ -23,7 +23,7 @@ router.get('/list.do', (request, response) => {
     pageSize = parseInt(request.query.pageSize)
   }
   studentService.list(pageNo, pageSize, function(results, totalCount) {
-    var lastPageNo = parseInt(totalCount / pageSize) + (((totalCount % pageSize) > 0) ? 1 : 0)
+    var lastPageNo = parseInt(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)
 
     response.render('student/index', {
       'data': results,
@@ -31,10 +31,11 @@ router.get('/list.do', (request, response) => {
       'nextPageNo': pageNo + 1,
       'prevPageNo': pageNo - 1,
       'disabledPrevBtn': (pageNo == 1) ? 'disabled' : '',
-      'disabledNextBtn': (pageNo == lastPageNo) ? 'disabled' : ''
+      'disabledNextBtn': (pageNo == lastPageNo ? 'disabled' : '')
     })
   }, function(error) {
-    response.end('오류!')
+    response.render('error', {
+      'message': '학생 목록 데이터를 가져오는 중 오류가 발생했습니다.'})
     throw error
   })
 })
@@ -47,10 +48,49 @@ router.get('/detail.do', function(request, response) {
       'checkedWorking': (result.work == 'Y' ? 'checked' : '')
     })
   }, function(error) {
-    response.end('오류!')
+    response.render('error', {
+      'message': '학생 데이터를 가져오는 중 오류가 발생했습니다.'})
     throw error
   })
 })
+
+router.post('/update.do', function(request, response) {
+  studentService.update({
+    no: request.body.no,
+    working: (request.body.working == undefined ? 'N' : 'Y'),
+    schoolName: request.body.schoolName,
+    name: request.body.name,
+    tel: request.body.tel,
+    email: request.body.email,
+    password: '1111'
+  }, function(result) {
+    // 웹브라우저에게 응답 내용은 보내지 않고,
+    // 대신 list.do로 다시 요청하라고 응답한다.
+    // 그러면 웹브라우저는 list.do로 다시 요청한다.
+    response.redirect('list.do')
+
+  }, function(error) {
+    response.render('error', {
+      'message': '학생 데이터를 변경하는 중 오류가 발생했습니다.'})
+    throw error
+  })
+})
+
+router.get('/delete.do', function(request, response) {
+  var no = parseInt(request.query.no)
+  studentService.delete(no, function(result) {
+    response.redirect('list.do')
+  }, function(error) {
+    response.render('error', {
+      'message': '학생 데이터를 삭제하는 중 오류가 발생했습니다.'})
+    throw error
+  })
+})
+
+
+
+
+
 
 
 

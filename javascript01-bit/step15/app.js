@@ -12,7 +12,7 @@ app.use(express.static('public'))
 
 // POST 요청 데이터 분석기를 등록한다.
 // => 이 분석기를 등록해야만 POST 요청으로 들어온 데이터를 꺼낼 수 있다.
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.engine('hbs', cons.handlebars) // 사용할 템플릿 엔진을 등록한다.
