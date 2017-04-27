@@ -22,6 +22,8 @@ app.set('views', path.join(__dirname, '/views')) // 템플릿 파일이 있는 �
 // 서비스 라우터를 등록한다.
 // => http://localhost:8888/student/.... 요청을 처리할 라우터를 등록한다.
 app.use('/student', require('./control/student-control'))
+// => http://localhost:8888/lecture/.... 요청을 처리할 라우터를 등록한다.
+app.use('/lecture', require('./control/lecture-control'))
 
 app.get('/', function(request, response) {
   response.render('index')

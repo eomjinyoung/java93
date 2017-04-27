@@ -5,9 +5,9 @@ module.exports = {
     this.lectureDao = dao
   },
 
-  list(pageNo, success, error) {
+  list(pageNo, pageSize, success, error) {
     var obj = this
-    this.lectureDao.selectList(pageNo, function(lectures) {
+    this.lectureDao.selectList(pageNo, pageSize, function(lectures) {
       obj.lectureDao.countAll(function(result) {
         success(lectures, result[0].cnt)
       }, error)

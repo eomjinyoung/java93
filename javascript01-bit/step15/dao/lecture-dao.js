@@ -5,14 +5,14 @@ module.exports = {
     this.connection = con
   },
 
-  selectList(pageNo, successFn, errorFn) {
+  selectList(pageNo, pageSize, successFn, errorFn) {
     this.connection.query(
       "select lno, titl, date_format(sdt,'%Y-%m-%d') sdt2 , \
       date_format(edt,'%Y-%m-%d') edt2, thrs, pric \
       from lect \
       order by sdt desc \
       limit ?, ?",
-      [(pageNo - 1) * 3, 3],
+      [(pageNo - 1) * pageSize, pageSize],
       function(error, results) {
         if (error) {
           errorFn(error)
