@@ -31,7 +31,7 @@
 {{#each data}}
   <tr>
     <td>{{mno}}</td>
-    <td><a href="#" data-no="{{mno}}" class="my-name-link">{{name}}</a></td>
+    <td><a href="detail.do?no={{mno}}">{{name}}</a></td>
     <td>{{tel}}</td>
     <td>{{email}}</td>
     <td>{{work}}</td>
@@ -42,12 +42,9 @@
 
 <a href="list.do?pageNo={{prevPageNo}}" class="btn btn-primary" {{disabledPrevBtn}}>이전</a>
 <span id="page-no">{{pageNo}}</span>
-<a href="list.do?pageNo={{nextPageNo}}" class="btn btn-primary">다음</a>
-<a href="view.do" class="btn btn-primary">추가</a>
+<a href="list.do?pageNo={{nextPageNo}}" class="btn btn-primary" {{disabledNextBtn}}>다음</a>
+<a href="form.do" class="btn btn-primary">추가</a>
 </div>
-
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="index.js"></script>
 
 </body>
 </html>

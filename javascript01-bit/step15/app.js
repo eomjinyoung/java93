@@ -15,8 +15,8 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 
 
-app.engine('html', cons.handlebars) // 사용할 템플릿 엔진을 등록한다.
-app.set('view engine', 'html') // 기본 템플릿 엔진으로 어떤 것을 사용할 지 지정한다.
+app.engine('hbs', cons.handlebars) // 사용할 템플릿 엔진을 등록한다.
+app.set('view engine', 'hbs') // 기본 템플릿 엔진으로 어떤 것을 사용할 지 지정한다.
 app.set('views', path.join(__dirname, '/views')) // 템플릿 파일이 있는 위치를 지정한다.
 
 // 서비스 라우터를 등록한다.
