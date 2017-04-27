@@ -23,7 +23,13 @@ router.get('/list.do', (request, response) => {
     pageSize = parseInt(request.query.pageSize)
   }
   studentService.list(pageNo, pageSize, function(results, totalCount) {
-    response.render('student/index', {data: results})
+    response.render('student/index', {
+      'data': results,
+      'pageNo': pageNo,
+      'nextPageNo': pageNo + 1,
+      'prevPageNo': pageNo - 1,
+      'disabledPrevBtn': (pageNo == 1) ? 'disabled' : ''
+    })
   }, function(error) {
     response.end('오류!')
     throw error

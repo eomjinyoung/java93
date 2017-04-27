@@ -9,6 +9,9 @@
     width: 600px;
     margin: 0px auto;
   }
+  a[disabled] {
+    pointer-events: none;
+  }
   </style>
 </head>
 <body>
@@ -37,10 +40,10 @@
 </tbody>
 </table>
 
-<button type="button" class="btn btn-primary" id="prev-btn">이전</button>
-<span id="page-no">1</span>
-<button type="button" class="btn btn-primary" id="next-btn">다음</button>
-<button type="button" class="btn btn-primary" id="add-btn">추가</button>
+<a href="list.do?pageNo={{prevPageNo}}" class="btn btn-primary" {{disabledPrevBtn}}>이전</a>
+<span id="page-no">{{pageNo}}</span>
+<a href="list.do?pageNo={{nextPageNo}}" class="btn btn-primary">다음</a>
+<a href="view.do" class="btn btn-primary">추가</a>
 </div>
 
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>

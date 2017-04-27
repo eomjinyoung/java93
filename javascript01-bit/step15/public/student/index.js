@@ -1,6 +1,13 @@
 "use strict"
 
 var tbody = $('#student-tbl > tbody')
+var prevBtn = $('#prev-btn')
+var nextBtn = $('#next-btn')
+var currPageNo = parseInt($('#page-no').text())
+
+if (currPageNo == 1) {
+  prevBtn.prop('disabled', true)
+}
 
 $('#add-btn').click(function() {
   location.href = 'view.html'
@@ -8,12 +15,11 @@ $('#add-btn').click(function() {
 
 $('#prev-btn').click(function() {
   var currPageNo = parseInt($('#page-no').text())
-  displayList(currPageNo - 1)
+  (currPageNo - 1)
 })
 
 $('#next-btn').click(function() {
-  var currPageNo = parseInt($('#page-no').text())
-  displayList(currPageNo + 1)
+  location.href = 'list.do?pageNo=' + (currPageNo + 1)
 })
 
 $('.my-name-link').click(function(event) {
