@@ -2,7 +2,6 @@
 const express = require('express')
 const datasource = require('../util/datasource')
 const lectureDao = require('../dao/lecture-dao')
-const memberDao = require('../dao/member-dao')
 const managerDao = require('../dao/manager-dao')
 const classroomDao = require('../dao/classroom-dao')
 const lectureService = require('../service/lecture-service')
@@ -109,7 +108,23 @@ router.get('/delete.do', function(request, response) {
 })
 
 router.get('/form.do', function(request, response) {
-  response.render('lecture/view')
+  classroomService.listName(function(classrooms) {
+    managerService.listName(function(managers) {
+      response.render('lecture/view', {
+        'classrooms': classrooms,
+        'managers': managers
+      })
+
+    }, function(error) {
+      response.render('error', {
+        'message': '매니저 데이터를 가져오는 중 오류가 발생했습니다.'})
+      console.log(error)
+    })
+  }, function(error) {
+    response.render('error', {
+      'message': '강의실 데이터를 가져오는 중 오류가 발생했습니다.'})
+    console.log(error)
+  })
 })
 
 router.post('/add.do', function(request, response) {
