@@ -45,10 +45,10 @@ router.get('/detail.json', function(request, response) {
   })
 })
 
-router.post('/update.do', function(request, response) {
+router.post('/update.json', function(request, response) {
   studentService.update({
     no: request.body.no,
-    working: (request.body.working == undefined ? 'N' : 'Y'),
+    working: request.body.working,
     schoolName: request.body.schoolName,
     name: request.body.name,
     tel: request.body.tel,

@@ -22,10 +22,8 @@ if (no == 0) { // 새 학생 등록
       'tel': fiTel.val(),
       'schoolName': fiSchoolName.val(),
       'working': (fiWorking.prop('checked') ? 'Y' : 'N')
-
     }, function(result) {
       location.href = 'index.html'
-
     }, 'json')
   })
 } else { // 학생 정보 조회
@@ -38,6 +36,19 @@ if (no == 0) { // 새 학생 등록
     fiTel.val(result.tel)
     fiSchoolName.val(result.schl_nm)
     fiWorking.prop('checked', (result.work == 'Y' ? true : false))
+  })
+
+  $('#upd-btn').click(function() {
+    $.post('update.json', {
+      'no': fiNo.text(),
+      'email': fiEmail.val(),
+      'name': fiName.val(),
+      'tel': fiTel.val(),
+      'schoolName': fiSchoolName.val(),
+      'working': (fiWorking.prop('checked') ? 'Y' : 'N')
+    }, function(result) {
+      location.href = 'index.html'
+    }, 'json')
   })
 }
 
