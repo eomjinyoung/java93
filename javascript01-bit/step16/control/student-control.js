@@ -13,7 +13,7 @@ studentService.setMemberDao(memberDao)
 
 const router = express.Router()
 
-router.get('/list.do', (request, response) => {
+router.get('/list.json', (request, response) => {
   var pageNo = 1,
       pageSize = 3;
   if (request.query.pageNo) {
@@ -23,19 +23,11 @@ router.get('/list.do', (request, response) => {
     pageSize = parseInt(request.query.pageSize)
   }
   studentService.list(pageNo, pageSize, function(results, totalCount) {
-    var lastPageNo = parseInt(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)
-
-    response.render('student/index', {
-      'data': results,
-      'pageNo': pageNo,
-      'nextPageNo': pageNo + 1,
-      'prevPageNo': pageNo - 1,
-      'disabledPrevBtn': (pageNo == 1) ? 'disabled' : '',
-      'disabledNextBtn': (pageNo == lastPageNo ? 'disabled' : '')
-    })
+    response.json(results)
   }, function(error) {
-    response.render('error', {
-      'message': '학생 목록 데이터를 가져오는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
