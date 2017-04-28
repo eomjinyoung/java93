@@ -23,7 +23,7 @@ router.get('/list.json', (request, response) => {
     pageSize = parseInt(request.query.pageSize)
   }
   studentService.list(pageNo, pageSize, function(results, totalCount) {
-    response.json(results)
+    response.json({'list': results, 'totalCount': totalCount})
   }, function(error) {
     response.status(200)
             .set('Content-Type', 'text/plain;charset=UTF-8')
@@ -57,14 +57,12 @@ router.post('/update.do', function(request, response) {
     email: request.body.email,
     password: '1111'
   }, function(result) {
-    // 웹브라우저에게 응답 내용은 보내지 않고,
-    // 대신 list.do로 다시 요청하라고 응답한다.
-    // 그러면 웹브라우저는 list.do로 다시 요청한다.
-    response.redirect('list.do')
+    response.json({'result': 'yes'})
 
   }, function(error) {
-    response.render('error', {
-      'message': '학생 데이터를 변경하는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
@@ -84,20 +82,21 @@ router.get('/form.do', function(request, response) {
   response.render('student/view')
 })
 
-router.post('/add.do', function(request, response) {
+router.post('/add.json', function(request, response) {
   studentService.insert({
-    working: (request.body.working == undefined ? 'N' : 'Y'),
+    working: request.body.working,
     schoolName: request.body.schoolName,
     name: request.body.name,
     tel: request.body.tel,
     email: request.body.email,
     password: '1111'
   }, function(result) {
-    response.redirect('list.do')
+    response.json({'result': 'yes'})
 
   }, function(error) {
-    response.render('error', {
-      'message': '학생 데이터를 등록하는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
