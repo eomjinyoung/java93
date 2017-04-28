@@ -18,7 +18,9 @@ function displayList(pageNo) {
     tbody.text('')
     for (var s of list) {
       $('<tr>').append($('<td>').text(s.mno))
-               .append($('<td>').text(s.name == '' ? '(이름 없음)' : s.name))
+               .append($('<td>').append(
+                 $('<a>').attr('href', 'view.html?no=' + s.mno)
+                         .text(s.name == '' ? '(이름 없음)' : s.name)))
                .append($('<td>').text(s.tel))
                .append($('<td>').text(s.email))
                .append($('<td>').text(s.work))

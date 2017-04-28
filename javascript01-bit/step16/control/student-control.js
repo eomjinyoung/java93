@@ -32,17 +32,15 @@ router.get('/list.json', (request, response) => {
   })
 })
 
-router.get('/detail.do', function(request, response) {
+router.get('/detail.json', function(request, response) {
   var no = parseInt(request.query.no)
   studentService.detail(no, function(result) {
-    response.render('student/view', {
-      'detail': true,
-      'data': result,
-      'checkedWorking': (result.work == 'Y' ? 'checked' : '')
-    })
+    response.json(result)
+
   }, function(error) {
-    response.render('error', {
-      'message': '학생 데이터를 가져오는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
