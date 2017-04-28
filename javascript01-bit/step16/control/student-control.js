@@ -65,19 +65,17 @@ router.post('/update.json', function(request, response) {
   })
 })
 
-router.get('/delete.do', function(request, response) {
+router.get('/delete.json', function(request, response) {
   var no = parseInt(request.query.no)
   studentService.delete(no, function(result) {
-    response.redirect('list.do')
+    response.json({'result': 'yes'})
+
   }, function(error) {
-    response.render('error', {
-      'message': '학생 데이터를 삭제하는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
-})
-
-router.get('/form.do', function(request, response) {
-  response.render('student/view')
 })
 
 router.post('/add.json', function(request, response) {

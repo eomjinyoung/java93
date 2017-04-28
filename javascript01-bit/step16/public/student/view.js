@@ -50,6 +50,12 @@ if (no == 0) { // 새 학생 등록
       location.href = 'index.html'
     }, 'json')
   })
+
+  $('#del-btn').click(function() {
+    $.getJSON('delete.json', {'no': no}, function(result) {
+      location.href = 'index.html'
+    })
+  })
 }
 
 
