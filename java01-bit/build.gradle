@@ -1,0 +1,2 @@
+apply plugin: 'java' // 자바 프로젝트를 다룰 도구 가져오기
+apply plugin: 'eclipse' // 이클립스 설정파일을 다룰 도구 가져오기
