@@ -1,2 +1,39 @@
 apply plugin: 'java' // 자바 프로젝트를 다룰 도구 가져오기
 apply plugin: 'eclipse' // 이클립스 설정파일을 다룰 도구 가져오기
+
+/*
+[gradle 빌드 도구의 기본 소스 폴더 구조]
+- 이 파일, 즉 그래들 설정 파일에서 소스 폴더의 구조를 지정하지 않으면,
+  다음의 구조로 되어 있을 것이라 판단한다.
+- 임의의 폴더 구조로 바꾸려면 설정을 추가해야 한다.
+
+프로젝트폴더/
+  src/
+    main/
+      java/           <-- .java 소스 파일을 두는 폴더
+      resources/      <-- .properties, .txt, .xml 등 설정 파일을 두는 폴더
+    test/
+      java/           <-- 테스트 관련 .java 소스 파일을 두는 폴더
+      resources/      <-- 테스트와 관련된 설정 파일을 두는 폴더
+
+[이클립스 도구의 기본 소스 폴더 구조]
+프로젝트폴더/
+  src/      <-- .java, .properties, .txt, .xml 등 자바 소스 파일과 설정파일을 모두 둔다.
+*/
+
+/* 이클립스의 기본 소스 폴더 구조로 설정하기*/
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+}
+
+compileJava {
+  options.encoding = 'UTF-8'  // 소스 파일의 인코딩을 알려준다.
+  sourceCompatibility = '1.8' // 어떤 자바 버전의 문법을 사용했는 지 알려준다.
+}
