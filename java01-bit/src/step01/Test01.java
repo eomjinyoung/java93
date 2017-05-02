@@ -1,4 +1,4 @@
-/* 주제: 이클립스에서 소스를 작성하고 컴파일하고 실행해보기!
+/* 주제: 패키지에 소속된 클래스 만들고 컴파일하고 실행하기
 => 패키지에 소속된 클래스 실행하기
     java -cp bin 패키지명.패키지명.패키지명.클래스명
   java01> java -cp bin step01.Test01
@@ -13,7 +13,6 @@ public class Test01 {
 
   public static void main(String[] args) {
     System.out.println("Hello, world!");
-    // 하
   }
 
 }
