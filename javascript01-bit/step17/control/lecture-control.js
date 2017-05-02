@@ -40,26 +40,7 @@ router.get('/list.json', (request, response) => {
 router.get('/detail.json', function(request, response) {
   var no = parseInt(request.query.no)
   lectureService.detail(no, function(result) {
-    classroomService.listName(function(classrooms) {
-      managerService.listName(function(managers) {
-    	  response.json({
-              'lecture': result,
-              'classrooms': classrooms,
-              'managers': managers
-          })
-
-      }, function(error) {
-        response.status(200)
-                .set('Content-Type', 'text/plain;charset=UTF-8')
-                .end('error')
-        console.log(error)
-      })
-    }, function(error) {
-      response.status(200)
-        .set('Content-Type', 'text/plain;charset=UTF-8')
-        .end('error')
-      console.log(error)
-    })
+    response.json(result)
   }, function(error) {
     response.status(200)
       .set('Content-Type', 'text/plain;charset=UTF-8')

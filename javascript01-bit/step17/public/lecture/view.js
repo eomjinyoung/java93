@@ -43,21 +43,23 @@ if (no == 0) { // 새 강의 등록
 } else { // 강의 정보 조회
   newTags.css('display', 'none')
 
-  $.getJSON('detail.json', {'no': no}, function(result) {
+  $.getJSON('form.json', function(result) {
 	loadClassroomAndManagerOptions(result)
-	  
-	var lecture = result.lecture
-    fiNo.text(lecture.lno)
-    fiTitle.val(lecture.titl)
-    fiContent.val(lecture.dscp)
-    fiStartDate.val(lecture.sdt2)
-    fiEndDate.val(lecture.edt2)
-    fiQuantity.val(lecture.qty)
-    fiHours.val(lecture.thrs)
-    fiPrice.val(lecture.pric)
-    fiClassroom.val(lecture.crmno)
-    fiManager.val(lecture.mrno)
+	
+	$.getJSON('detail.json', {'no': no}, function(result) {
+		fiNo.text(result.lno)
+		fiTitle.val(result.titl)
+		fiContent.val(result.dscp)
+		fiStartDate.val(result.sdt2)
+		fiEndDate.val(result.edt2)
+		fiQuantity.val(result.qty)
+		fiHours.val(result.thrs)
+		fiPrice.val(result.pric)
+		fiClassroom.val(result.crmno)
+		fiManager.val(result.mrno)
+	})
   })
+  
 
   $('#upd-btn').click(function() {
     $.post('update.json', {
