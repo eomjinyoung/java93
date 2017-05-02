@@ -18,7 +18,7 @@ classroomService.setClassroomDao(classroomDao)
 
 const router = express.Router()
 
-router.get('/list.do', (request, response) => {
+router.get('/list.json', (request, response) => {
   var pageNo = 1,
       pageSize = 3;
   if (request.query.pageNo) {
@@ -28,53 +28,47 @@ router.get('/list.do', (request, response) => {
     pageSize = parseInt(request.query.pageSize)
   }
   lectureService.list(pageNo, pageSize, function(results, totalCount) {
-    var lastPageNo = parseInt(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)
-
-    response.render('lecture/index', {
-      'data': results,
-      'pageNo': pageNo,
-      'nextPageNo': pageNo + 1,
-      'prevPageNo': pageNo - 1,
-      'disabledPrevBtn': (pageNo == 1) ? 'disabled' : '',
-      'disabledNextBtn': (pageNo == lastPageNo ? 'disabled' : '')
-    })
+	  response.json({'list': results, 'totalCount': totalCount})
   }, function(error) {
-    response.render('error', {
-      'message': '강의 목록 데이터를 가져오는 중 오류가 발생했습니다.'})
-    console.log(error)
+      response.status(200)
+              .set('Content-Type', 'text/plain;charset=UTF-8')
+              .end('error')
+      console.log(error)
   })
 })
 
-router.get('/detail.do', function(request, response) {
+router.get('/detail.json', function(request, response) {
   var no = parseInt(request.query.no)
   lectureService.detail(no, function(result) {
     classroomService.listName(function(classrooms) {
       managerService.listName(function(managers) {
-        response.render('lecture/view', {
-          'detail': true,
-          'data': result,
-          'classrooms': classrooms,
-          'managers': managers
-        })
+    	  response.json({
+              'lecture': result,
+              'classrooms': classrooms,
+              'managers': managers
+          })
 
       }, function(error) {
-        response.render('error', {
-          'message': '강의실 데이터를 가져오는 중 오류가 발생했습니다.'})
+        response.status(200)
+                .set('Content-Type', 'text/plain;charset=UTF-8')
+                .end('error')
         console.log(error)
       })
     }, function(error) {
-      response.render('error', {
-        'message': '강의실 데이터를 가져오는 중 오류가 발생했습니다.'})
+      response.status(200)
+        .set('Content-Type', 'text/plain;charset=UTF-8')
+        .end('error')
       console.log(error)
     })
   }, function(error) {
-    response.render('error', {
-      'message': '강의 데이터를 가져오는 중 오류가 발생했습니다.'})
+    response.status(200)
+      .set('Content-Type', 'text/plain;charset=UTF-8')
+      .end('error')
     console.log(error)
   })
 })
 
-router.post('/update.do', function(request, response) {
+router.post('/update.json', function(request, response) {
   lectureService.update({
     no: request.body.no,
     title: request.body.title,
@@ -87,47 +81,51 @@ router.post('/update.do', function(request, response) {
     classroom: (request.body.classroom == 0 ? null : request.body.classroom),
     manager: (request.body.manager == 0 ? null : request.body.manager)
   }, function(result) {
-    response.redirect('list.do')
+    response.json({'result': 'yes'})
 
   }, function(error) {
-    response.render('error', {
-      'message': '강의 데이터를 변경하는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
 
-router.get('/delete.do', function(request, response) {
+router.get('/delete.json', function(request, response) {
   var no = parseInt(request.query.no)
   lectureService.delete(no, function(result) {
-    response.redirect('list.do')
+    response.json({'result': 'yes'})
   }, function(error) {
-    response.render('error', {
-      'message': '강의 데이터를 삭제하는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
 
-router.get('/form.do', function(request, response) {
+router.get('/form.json', function(request, response) {
   classroomService.listName(function(classrooms) {
     managerService.listName(function(managers) {
-      response.render('lecture/view', {
+      response.json({
         'classrooms': classrooms,
         'managers': managers
       })
 
     }, function(error) {
-      response.render('error', {
-        'message': '매니저 데이터를 가져오는 중 오류가 발생했습니다.'})
+      response.status(200)
+              .set('Content-Type', 'text/plain;charset=UTF-8')
+              .end('error')
       console.log(error)
     })
   }, function(error) {
-    response.render('error', {
-      'message': '강의실 데이터를 가져오는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })
 
-router.post('/add.do', function(request, response) {
+router.post('/add.json', function(request, response) {
   lectureService.insert({
     title: request.body.title,
     content: request.body.content,
@@ -139,11 +137,12 @@ router.post('/add.do', function(request, response) {
     classroom: (request.body.classroom == 0 ? null : request.body.classroom),
     manager: (request.body.manager == 0 ? null : request.body.manager)
   }, function(result) {
-    response.redirect('list.do')
+    response.json({'result': 'yes'})
 
   }, function(error) {
-    response.render('error', {
-      'message': '강의 데이터를 등록하는 중 오류가 발생했습니다.'})
+    response.status(200)
+            .set('Content-Type', 'text/plain;charset=UTF-8')
+            .end('error')
     console.log(error)
   })
 })

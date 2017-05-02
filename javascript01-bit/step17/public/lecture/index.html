@@ -28,26 +28,33 @@
     <th>수업료</th>
   </tr>
 </thead>
-{{#each data}}
-  <tr>
-    <td>{{lno}}</td>
-    <td><a href="detail.do?no={{lno}}">{{titl}}</a></td>
-    <td>{{sdt}}</td>
-    <td>{{edt}}</td>
-    <td>{{thrs}}</td>
-    <td>{{pric}}</td>
-  </tr>
-{{/each}}
+
 <tbody>
 </tbody>
 </table>
 
-<a href="list.do?pageNo={{prevPageNo}}" class="btn btn-primary" {{disabledPrevBtn}}>이전</a>
-<span id="page-no">{{pageNo}}</span>
-<a href="list.do?pageNo={{nextPageNo}}" class="btn btn-primary" {{disabledNextBtn}}>다음</a>
-<a href="form.do" class="btn btn-primary">추가</a>
+<button id="prev-btn" class="btn btn-primary">이전</button>
+<span id="page-no">1</span>
+<button id="next-btn" class="btn btn-primary">다음</button>
+<a href="view.html" class="btn btn-primary">추가</a>
 </div>
 
+<script id="tbody-template" type="text/x-handlebars-template">
+{{#each list}}
+  <tr>
+    <td>{{lno}}</td>
+    <td><a href="view.html?no={{lno}}">{{titl}}</a></td>
+    <td>{{sdt2}}</td>
+    <td>{{edt2}}</td>
+    <td>{{thrs}}</td>
+    <td>{{pric}}</td>
+  </tr>
+{{/each}}
+</script>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="index.js"></script>
 
 </body>
 </html>
