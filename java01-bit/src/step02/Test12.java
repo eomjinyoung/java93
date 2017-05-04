@@ -1,4 +1,4 @@
-/* 변수 선언: 사용자(개발자) 정의 데이터 타입(custom data type) 만들기 */
+/* 사용자 정의 데이터 타입: 정의하기 */
 package step02;
 
 public class Test12 {
