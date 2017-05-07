@@ -1,0 +1,141 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  #puzzle {
+    position: relative;
+    /*border: 1px solid red;*/
+    width: 250px;
+    height: 250px;
+  }
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  .puz-btn {
+    position: absolute;
+    display: inline-block;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    margin: 0px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 3px;
+  }
+  .puz-num-btn {
+    cursor: pointer;
+    background-color: white;
+  }
+  .puz-empty-btn {
+    background-color: gray;
+  }
+  .selected {
+    border-color: red;
+    background-color: red;
+    /*font-weight: bold;*/
+    color: white;
+  }
+  #timeout {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+<div id="puzzle"></div>
+<div>
+  <button type="button" class="btn btn-primary" id="mix-btn">선택</button>
+  <span id='timeout'></span>
+</div>
+</div><!-- div.container -->
+
+<script>
+"use strict"
+window.$ = window.jQuery = require('jquery')
+var emptyBtnNo = 0,
+    moveBtnNums = null,
+    puzzle = $('#puzzle')
+
+for (var i = 0; i < 16; i++) {
+  puzzle.append($('<div>').text('.')
+                    .addClass('puz-btn')
+                    .attr('id','btn' + i)
+                    .css('left', getLeftPosition(i))
+                    .css('top', getTopPosition(i)))
+}
+
+$(document.body).on('click', '.puz-num-btn', function() {
+  var no = parseInt($(this).attr('id').substring(3))
+  for (var moveBtnNo of moveBtnNums) {
+    if (moveBtnNo == no) {
+      changeButtonPosition(no)
+      break
+    }
+  }
+})
+
+$('#mix-btn').click(function() {
+  $('.puz-btn').text('.').removeClass('puz-num-btn puz-empty-btn')
+  mixNumbers()
+})
+
+function getLeftPosition(x) {
+  return ((i % 4) * 60) + 'px'
+}
+
+function getTopPosition(y) {
+  return (Math.floor(i / 4) * 60) + 'px'
+}
+
+function mixNumbers() {
+  var nums = []
+  for (var i = 0; i < 16; i++)
+    nums.push(i + 1)
+
+  for (var i = 0; i < 16; i++) {
+    var selectedNo = Math.floor(Math.random() * nums.length)
+    var value = nums.splice(selectedNo, 1)
+    if (value < 16) {
+      $('#btn' + i).text(value).addClass('puz-num-btn')
+    } else {
+      $('#btn' + i).addClass('puz-empty-btn')
+      emptyBtnNo = i
+      computeMoveableButtonNumbers(emptyBtnNo)
+    }
+  }
+}
+
+function computeMoveableButtonNumbers(emptyBtnNo) {
+  moveBtnNums = []
+  if (emptyBtnNo > 3) moveBtnNums.push(emptyBtnNo - 4)
+  if (emptyBtnNo < 12 ) moveBtnNums.push(emptyBtnNo + 4)
+  if (emptyBtnNo % 4 > 0) moveBtnNums.push(emptyBtnNo - 1)
+  if (emptyBtnNo % 4 < 3) moveBtnNums.push(emptyBtnNo + 1)
+}
+
+function changeButtonPosition(no) {
+  var btn = $('#btn' + no)
+  var value = btn.text()
+  btn.text('.')
+  btn.removeClass('puz-num-btn').addClass('puz-empty-btn')
+  $('#btn' + emptyBtnNo).text(value).removeClass('puz-empty-btn').addClass('puz-num-btn')
+  emptyBtnNo = no
+  computeMoveableButtonNumbers(emptyBtnNo)
+}
+
+mixNumbers()
+
+</script>
+</body>
+</html>
+
+
+<!-- -->
