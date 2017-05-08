@@ -6,13 +6,17 @@
   <title>HTML</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <style>
-  #puzzle {
+  #puzzle-box {
     position: relative;
-    /*border: 1px solid red;*/
-    width: 250px;
-    height: 250px;
+    /* border: 1px solid red; */
+    /* width: 450px;
+    height: 450px; */ 
+  }
+  #tool-box {
+    padding: 5px 0px;
   }
   .container {
+    /* border: 1px solid blue; */
     width: 600px;
     margin: 0px auto;
   }
@@ -42,19 +46,22 @@
     /*font-weight: bold;*/
     color: white;
   }
-  #timeout {
-    font-size: 30px;
-    font-weight: bold;
-  }
   </style>
 </head>
 <body>
 <div class="container">
-<div id="puzzle"></div>
-<div>
-  <button type="button" class="btn btn-primary" id="mix-btn">선택</button>
-  <span id='timeout'></span>
+<div id='tool-box'>
+<select id="puz-size-selector" class="form-control" style="width: 80px; display: inline-block">
+  <option value="3">3 x 3</option>
+  <option value="4" selected>4 x 4</option>
+  <option value="5">5 x 5</option>
+  <option value="6">6 x 6</option>
+</select>
+<button type="button" class="btn btn-primary" id="mix-btn">선택</button>
 </div>
+
+<div id="puzzle-box"></div>
+
 </div><!-- div.container -->
 
 <script>
@@ -62,24 +69,24 @@
 window.$ = window.jQuery = require('jquery')
 var emptyBtnNo = 0,
     moveBtnNums = null,
-    puzzle = $('#puzzle')
-
-for (var i = 0; i < 16; i++) {
-  puzzle.append($('<div>').text('.')
-                    .addClass('puz-btn')
-                    .attr('id','btn' + i)
-                    .css('left', getLeftPosition(i))
-                    .css('top', getTopPosition(i)))
-}
-
+    puzzleBox = $('#puzzle-box'),
+    puzzleSizeSelector = $('#puz-size-selector')
+    
+createButtons()
+    
 $(document.body).on('click', '.puz-num-btn', function() {
   var no = parseInt($(this).attr('id').substring(3))
   for (var moveBtnNo of moveBtnNums) {
     if (moveBtnNo == no) {
-      changeButtonPosition(no)
+      changeButtonValue(no)
       break
     }
   }
+})
+
+$('#puz-size-selector').change(function() {
+	createButtons()
+	mixNumbers()
 })
 
 $('#mix-btn').click(function() {
@@ -88,22 +95,25 @@ $('#mix-btn').click(function() {
 })
 
 function getLeftPosition(x) {
-  return ((i % 4) * 60) + 'px'
+	var puzzleSize = parseInt(puzzleSizeSelector.val())
+  return ((x % puzzleSize) * 60) + 'px'
 }
 
 function getTopPosition(y) {
-  return (Math.floor(i / 4) * 60) + 'px'
+	var puzzleSize = parseInt(puzzleSizeSelector.val())
+  return (Math.floor(y / puzzleSize) * 60) + 'px'
 }
 
 function mixNumbers() {
+	var puzzleLength = getPuzzleLength() 
   var nums = []
-  for (var i = 0; i < 16; i++)
+  for (var i = 0; i < puzzleLength; i++)
     nums.push(i + 1)
 
-  for (var i = 0; i < 16; i++) {
-    var selectedNo = Math.floor(Math.random() * nums.length)
+  for (var i = 0; i < puzzleLength; i++) {
+    var selectedNo = Math.floor(Math.random() * nums.length) // 0 <= x < 16
     var value = nums.splice(selectedNo, 1)
-    if (value < 16) {
+    if (value < puzzleLength) {
       $('#btn' + i).text(value).addClass('puz-num-btn')
     } else {
       $('#btn' + i).addClass('puz-empty-btn')
@@ -114,14 +124,15 @@ function mixNumbers() {
 }
 
 function computeMoveableButtonNumbers(emptyBtnNo) {
+	var size = parseInt(puzzleSizeSelector.val())
   moveBtnNums = []
-  if (emptyBtnNo > 3) moveBtnNums.push(emptyBtnNo - 4)
-  if (emptyBtnNo < 12 ) moveBtnNums.push(emptyBtnNo + 4)
-  if (emptyBtnNo % 4 > 0) moveBtnNums.push(emptyBtnNo - 1)
-  if (emptyBtnNo % 4 < 3) moveBtnNums.push(emptyBtnNo + 1)
+  if (emptyBtnNo >= size) moveBtnNums.push(emptyBtnNo - size)
+  if (emptyBtnNo < (size * (size - 1)) ) moveBtnNums.push(emptyBtnNo + size)
+  if (emptyBtnNo % size > 0) moveBtnNums.push(emptyBtnNo - 1)
+  if (emptyBtnNo % size < (size - 1)) moveBtnNums.push(emptyBtnNo + 1)
 }
 
-function changeButtonPosition(no) {
+function changeButtonValue(no) {
   var btn = $('#btn' + no)
   var value = btn.text()
   btn.text('.')
@@ -129,6 +140,23 @@ function changeButtonPosition(no) {
   $('#btn' + emptyBtnNo).text(value).removeClass('puz-empty-btn').addClass('puz-num-btn')
   emptyBtnNo = no
   computeMoveableButtonNumbers(emptyBtnNo)
+}
+
+function createButtons() {
+	var puzzleLength = getPuzzleLength();
+	puzzleBox.html('')
+	for (var i = 0; i < puzzleLength; i++) {
+	  puzzleBox.append($('<div>').text('.')
+	                    .addClass('puz-btn')
+	                    .attr('id','btn' + i)
+	                    .css('left', getLeftPosition(i))
+	                    .css('top', getTopPosition(i)))
+	}
+}
+
+function getPuzzleLength() {
+	var size = parseInt(puzzleSizeSelector.val())
+	return size * size
 }
 
 mixNumbers()
