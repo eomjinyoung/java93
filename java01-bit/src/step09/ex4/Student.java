@@ -1,11 +1,8 @@
 package step09.ex4;
 
-public class Student {
-  String name;
-  int age;
-   
-  void print() {
-    System.out.printf("> 이름: %s\n", name);
-    System.out.printf("> 나이: %d\n", age);
-  }
+public class Student extends Member {
+  String schoolName;
+  int grade;
+  
+  
 }
