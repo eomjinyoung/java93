@@ -1,4 +1,4 @@
-package step09.ex3;
+package step10.ex1;
 
 public class BitStudent extends Student {
   String school;

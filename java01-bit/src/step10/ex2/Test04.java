@@ -2,7 +2,7 @@
  * => instanceof 연산자는 레퍼런스에 들어 있는 인스턴스가 
  *    해당 클래스의 인스턴스 또는 그 자손의 인스턴스가 맞는지 검사한다.
  */
-package step09.ex4;
+package step10.ex2;
 
 public class Test04 {
 

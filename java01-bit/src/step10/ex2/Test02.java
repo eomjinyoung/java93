@@ -1,7 +1,7 @@
 /* 다형성 - 다형적 변수 II 
  * => 왜 수퍼 클래스의 인스턴스를 저장할 수 없는가?
  */
-package step09.ex4;
+package step10.ex2;
 
 public class Test02 {
 

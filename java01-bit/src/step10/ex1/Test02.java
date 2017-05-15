@@ -2,7 +2,7 @@
  * => 서브 클래스의 조건에 따라 수퍼 클래스의 메서드를 그냥 쓸 수 없다면,
  *    서브 클래스에서 재정의해야 한다.
  */
-package step09.ex3;
+package step10.ex1;
 
 public class Test02 {
 

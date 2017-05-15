@@ -2,7 +2,7 @@
  * => 같은 기능을 수행하는 메서드에 대해 같은 이름을 부여함으로써
  *    프로그래밍의 일관성을 확보하는 문법!
  */
-package step09.ex5;
+package step10.ex3;
 
 public class Test01 {
 

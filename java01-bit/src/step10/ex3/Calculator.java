@@ -1,4 +1,4 @@
-package step09.ex5;
+package step10.ex3;
 
 public class Calculator {
   int result;

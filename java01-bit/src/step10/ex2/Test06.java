@@ -1,26 +1,19 @@
-/* 다형성 - 다형적 변수와 형변환 
- * => 인스턴스 주소를 원래의 타입으로 변환할 수 있다.
+/* 다형성 - 형변환의 희대의 사기꾼! 
+ * => 실제 그 타입의 인스턴스가 아님에도 
+ *    타입 캐스팅(형변환)을 이용하여 그 인스턴스라고 속이는 방법.
+ * => 컴파일은 가능하지만 결국 실행할 때 오류가 발생한다.   
  */
-package step09.ex4;
+package step10.ex2;
 
-public class Test05 {
+public class Test06 {
 
   public static void main(String[] args) {
-    Member m = new FreeStudent();
+    Member m = new Member();
     m.name = "홍길동";
     m.id = "hong";
     m.password = "1111";
     m.email = "hong@test.com";
     m.tel = "1111";
-    
-    /* 아래 필드는 Member 클래스에 선언된 것이 아니기 때문에 컴파일 오류가 난다.
-    m.schoolName = "비트대학교";
-    m.grade = 4;
-    m.account = "111-11-1111-111";
-    m.bank = "비트은행";
-    m.working = true;
-    */
-    
     
     FreeStudent s = (FreeStudent)m;
     s.schoolName = "비트대학교";

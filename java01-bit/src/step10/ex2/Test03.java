@@ -1,7 +1,7 @@
 /* 다형성 - 다형적 변수의 응용 
  * => Student, Teacher, Manager, FreeStudent 객체를 담을 수 있는 배열을 선언하라!
  */
-package step09.ex4;
+package step10.ex2;
 
 public class Test03 {
 

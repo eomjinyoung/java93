@@ -1,23 +1,17 @@
-/* 다형성 - 다형적 변수 
- * => 어떤 레퍼런스 변수는 그 타입의 인스턴스 뿐만 아니라,
- *    그 타입의 서브 클래스의 인스턴스까지 저장할 수 있다.
+/* 상속: 생성자 호출 II
+ * => 서브 클래스 생성자 안에 
+ *    수퍼 클래스의 기본 생성자를 호출하는 코드를 두지 않으면,
+ *    컴파일러가 자동으로 수퍼 클래스의 기본 생성자를 호출하는 코드를 둔다.
+ * => 증명!
+ *    수퍼 클래스에 기본 생성자를 없애고 파라미터가 있는 생성자를 둔다.
+ *
  */
 package step09.ex4;
 
 public class Test01 {
 
   public static void main(String[] args) {
-    Member m = new Member();
-    Student s1 = new Student();
-    FreeStudent f1 = new FreeStudent();
-
-    // "다형적 변수(polymorphic variable)" - 다형성(polymorphism)
-    // => 한 개의 레퍼런스 변수가 다양한 종류이 객체 주소를 담을 수 있다.
-    // => 물론 서브 클래스의 객체 주소만 담을 수 있다.
-    Member m2 = new Student();
-    Member m3 = new Teacher();
-    Member m4 = new FreeStudent();
-    Student s2 = new FreeStudent();
+    new C();
   }
 
 }
