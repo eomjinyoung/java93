@@ -17,6 +17,8 @@ public class Test06_2 {
     dateList.add(Date.valueOf("2017-5-9"));
     dateList.add(Date.valueOf("2017-6-6"));
     
+    dateList.add(2, Date.valueOf("2017-2-22"));
+    
     for (int i = 0; i < dateList.size(); i++) {
       System.out.println(dateList.get(i));
     }

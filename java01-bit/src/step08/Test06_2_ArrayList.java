@@ -33,12 +33,33 @@ class Test06_2_ArrayList {
     }
   }
   
+  // 맨 끝 빈 방에 값을 넣는다.
   public void add(Object obj) {
     list[length++] = obj;
     
     if (length  == list.length) {
       increaseList();
     }
+  }
+  
+  // 값을 들어 있는 중간 방에 새 값을 끼워 넣는다.
+  public void add(int index, Object obj) {
+    if (length == list.length) {
+      increaseList();
+    }
+    
+    if (index < 0 || index > length) {
+      throw new RuntimeException("인덱스 번호가 범위를 넘어갑니다.");
+    }
+    
+    if (index < length) { // 값들 사이에 새 값을 꼽는다면,
+      // 맨 마지막 값부터 index가 가리키는 방의 값까지 반복하면서 뒤로 한 칸씩 미룬다.
+      for (int i = length; i > index; i--) {
+        list[i] = list[i - 1];
+      }
+    }
+    list[index] = obj;
+    length++;
   }
 
   // ArrayList 클래스 내부에서만 사용할 메서드라면 굳이 공개하지 말라!
