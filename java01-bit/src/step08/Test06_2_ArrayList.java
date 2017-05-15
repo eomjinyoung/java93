@@ -49,7 +49,7 @@ class Test06_2_ArrayList {
     }
     
     if (index < 0 || index > length) {
-      throw new RuntimeException("인덱스 번호가 범위를 넘어갑니다.");
+      throw new RuntimeException("배열 인덱스의 범위를 벗어났습니다.");
     }
     
     if (index < length) { // 값들 사이에 새 값을 꼽는다면,
@@ -82,6 +82,32 @@ class Test06_2_ArrayList {
     }
     
     return list[index];
+  }
+  
+  public Object remove(int index) {
+    if (index < 0 || index >= length) {
+      throw new RuntimeException("배열 인덱스의 범위를 벗어났습니다.");
+    }
+    
+    Object removedObj = list[index];
+    
+    if (index < (length - 1)) {
+      for (int i = index; i < (length - 1); i++) {
+        list[i] = list[i+1];
+      }
+    }
+    length--;
+    return removedObj;
+  }
+  
+  public Object set(int index, Object obj) {
+    if (index < 0 || index >= length) {
+      throw new RuntimeException("배열 인덱스의 범위를 벗어났습니다.");
+    }
+    
+    Object oldObj = list[index];
+    list[index] = obj;
+    return oldObj;
   }
 }
 
