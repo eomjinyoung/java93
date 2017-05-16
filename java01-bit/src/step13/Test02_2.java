@@ -16,7 +16,7 @@ public class Test02_2 {
   }
   
   public static void main(String[] args) {
-    // 일반 클래스로 만든 상수 값을 사용해 보자!
+    // static nested 클래스 대신 일반 클래스로 만든 상수 값을 사용해 보자!
     Member m = new Member();
     m.name = "홍길동";
     m.tel = "111-1111";
