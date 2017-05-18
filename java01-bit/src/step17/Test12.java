@@ -7,26 +7,28 @@
  */
 package step17;
 
-public class Test11 {
+public class Test12 {
 
-  static void m1(int v) throws Exception {
+  static void m1(int v) {
     m2(v);
   }
   
-  static void m2(int v) throws Exception {
+  static void m2(int v) {
     m3(v);
   }
   
-  // 예외를 발생시키는 메서드를 사용한다면 반드시 둘 중 한 작업은 해야 한다.
-  // 1) try ~ catch ~ 로 예외를 정확히 처리하거나,
-  // 2) 이 메서드 안에서 예외가 발생한다고 메서드 선언부에 적시하거나
-  static void m3(int v) throws Exception {
+  static void m3(int v) {
     m4(v);
   }
   
-  static void m4(int v) throws Exception {
+  // m4()에서 발생시킨 예외를 main() 메서드처럼 스택의 상위 메서드에서 처리하도록 만들고 싶다면,
+  // 스텔스 모드로 예외를 발생시켜라!
+  // 즉 중간에 개입한 메서드들은 예외처리를 하지 않아도 문법적으로 오류가 아니다.
+  // 예외 처리 문법을 작성하지 않는다고 해서 예외를 안 던지는 것은 아니다.
+  // 단지 조용히 던질 뿐이다.
+  static void m4(int v) {
     if (v < 0)
-      throw new Exception("음수는 허용하지 않습니다.");
+      throw new RuntimeException("음수는 허용하지 않습니다.");
     System.out.println(v);
   }
   
