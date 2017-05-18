@@ -20,7 +20,7 @@ public class Test01_1 {
     //    예외를 던진다.
     // => 그래서 이 메서드를 호출할 때는 예외를 던졌을 때 받을 수 있도록 
     //    예외처리 문장을 작성해야 한다.
-    System.out.printf("getCanonicalPath() = %s\n", f.getCanonicalPath());
+    //System.out.printf("getCanonicalPath() = %s\n", f.getCanonicalPath());
   }
 
 }
