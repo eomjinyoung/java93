@@ -2,6 +2,7 @@
 package step16;
 
 import java.io.File;
+import java.util.Calendar;
 
 public class Test01_1 {
 
@@ -58,8 +59,32 @@ public class Test01_1 {
     // length()
     // => 파일의 크기를 바이트 단위로 리턴한다.
     System.out.printf("length() = %d\n", f.length());
-    
+
+    // lastModified()
+    // => 파일의 마지막 변경일을 밀리초로 리턴한다.
     System.out.printf("lastModified() = %d\n", f.lastModified());
+    
+    Calendar cal = Calendar.getInstance();
+    cal.setTimeInMillis(f.lastModified());
+    System.out.printf("%d-%d-%d %s %d:%d:%d\n", 
+        cal.get(Calendar.YEAR),
+        cal.get(Calendar.MONTH) + 1,
+        cal.get(Calendar.DAY_OF_MONTH),
+        (cal.get(Calendar.AM_PM) == Calendar.AM) ? "AM" : "PM",
+        cal.get(Calendar.HOUR),
+        cal.get(Calendar.MINUTE),
+        cal.get(Calendar.SECOND));
+    
+    
   }
 
 }
+
+
+
+
+
+
+
+
+
