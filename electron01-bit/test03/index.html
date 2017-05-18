@@ -13,36 +13,83 @@
     height: 600px;
     margin: 0px auto;
   }
+  div {
+    margin: 0px;
+    padding: 0px;
+  }
   #sun {
     position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: RED;
     left: 300px;
     top: 300px;
-    font-size: 20px;
-    font-weight: bold;
-    color: red;
   }
   #earth {
     position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: green;
     left: 150px;
     top: 300px;
-    font-size: 20px;
-    font-weight: bold;
-    color: green;
   }
-  
+  #moon {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: gray;
+    left: 100px;
+    top: 300px;
+  }
   </style>
 </head>
 <body>
 <div class="container">
-<span id="sun">S</span>
-<span id="earth">E</span>
+<div id="sun"></div>
+<div id="earth"></div>
+<div id="moon"></div>
 </div><!-- div.container -->
 
 <script>
 "use strict"
 window.$ = window.jQuery = require('jquery')
+var earth = $('#earth'),
+    moon = $('#moon');
 
+var degree = 0,
+    y = 0,
+    x = 0;
 
+setInterval(function() {
+	if (degree > 360) {
+		degree = 0
+	}
+	var r = radian(degree)
+	degree += 5
+	y = Math.floor(Math.sin(r) * 150) + 300;
+	x = Math.floor(Math.cos(r) * 150) + 300;
+	earth.css('top', y + 'px').css('left', x + 'px')
+}, 50)
+
+var moondegree = 0;
+setInterval(function() {
+	if (moondegree > 360) {
+		moondegree = 0
+  }
+  var r = radian(moondegree)
+  moondegree += 10
+	  
+	var my = Math.floor(Math.sin(r) * 50) + y;
+	var mx = Math.floor(Math.cos(r) * 50) + x;
+	moon.css('top', my + 'px').css('left', mx + 'px')
+}, 30)
+
+function  radian(degree) {
+	return degree / 180 * Math.PI
+}
 
 </script>
 </body>
