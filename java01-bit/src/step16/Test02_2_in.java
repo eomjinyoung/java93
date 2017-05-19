@@ -5,29 +5,23 @@
 package step16;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class Test02_2_in {
 
   public static void main(String[] args) throws Exception {
-    //1) FileInputStream 객체 생성
-    FileInputStream in = new FileInputStream("test02_1.data");
+    FileInputStream in = new FileInputStream("test02_2.data");
     
-    // read():int 
-    // => 무조건 1 바이트만 읽는다.
-    // => 하지만 리턴 타입이 int이기 때문에 int 타입 변수로 값을 받아야 한다.
-    int b = in.read();
-    System.out.printf("%x ", b);
+    // 바이트 배열을 저장할 메모리를 준비한다.
+    byte[] bytes = new byte[1024];
+    int len = 0;
     
-    b = in.read();
-    System.out.printf("%x ", b);
+    len = in.read(bytes); // 바이트 배열의 값을 저장할 수 있는 메모리 주소를 준다.
+                          // 리턴 값은 파일에서 실제로 읽은 바이트 개수이다.
+
+    for (int i = 0; i < len; i++) {
+      System.out.printf("%x ", bytes[i]);
+    }
     
-    b = in.read();
-    System.out.printf("%x ", b);
-    
-    // 입력 스트림을 다 사용했으면 파일을 닫아라.
-    // => 파일을 다루기 위해 준비했던 메모리를 해제시킨다.
-    // => OS 파일 시스템과의 연결도 끊는다.
     in.close();
   }
 

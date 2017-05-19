@@ -26,7 +26,6 @@
 package step16;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class Test02_1_in {
 
