@@ -5,7 +5,7 @@ package step16;
 
 import java.io.FileOutputStream;
 
-public class Test02_4_out {
+public class Test02_5_out {
 
   public static void main(String[] args) throws Exception {
     FileOutputStream out = new FileOutputStream("test02_4.data");
