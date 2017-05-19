@@ -4,8 +4,6 @@
  */
 package step16;
 
-import java.io.FileOutputStream;
-
 public class Test02_5_out {
 
   public static void main(String[] args) throws Exception {

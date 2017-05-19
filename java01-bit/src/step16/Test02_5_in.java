@@ -5,19 +5,14 @@
  */
 package step16;
 
-import java.io.FileInputStream;
-
 public class Test02_5_in {
 
   public static void main(String[] args) throws Exception {
     MyDataInputStream in = new MyDataInputStream("test02_5.data");
     
     byte b = in.readByte();
-    
     short s = in.readShort();
-    
     int i = in.readInt();
-    
     String str = in.readUTF();
     
     System.out.printf("%x, %x, %x, %s\n", b, s, i, str);

@@ -1,12 +1,11 @@
 package step16;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class MyDataInputStream extends FileInputStream {
-  public MyDataInputStream(String name) throws FileNotFoundException {
-    super(name);
+public class MyArrayInputStream extends ByteArrayInputStream {
+  public MyArrayInputStream(byte[] buf) {
+    super(buf);
   }
   
   public byte readByte() throws IOException {
