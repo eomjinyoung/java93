@@ -30,16 +30,11 @@ public class Test04_1_in {
     
     int b = 0;
     int count = 0;
-    int countPoint = 0;
-    
     long start = System.currentTimeMillis();
     
     while ((b = in.read()) != -1) {
-      if (++count == 10000) {
-        count = 0;
-        System.out.print(".");
-        if ((++countPoint % 50) == 0) System.out.println();
-      }
+      if ((++count % 10000) == 0) System.out.print("."); 
+      if ((count % 500000) == 0) System.out.println();
     }
     
     long end = System.currentTimeMillis();

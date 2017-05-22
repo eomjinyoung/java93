@@ -21,31 +21,25 @@
  */
 package step16;
 
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class Test04_1_out {
 
   public static void main(String[] args) throws Exception {
-    FileInputStream in = new FileInputStream("temp/jls8.pdf");
-    
-    int b = 0;
-    int count = 0;
-    int countPoint = 0;
+    FileOutputStream out = new FileOutputStream("temp/test04_1.data");
     
     long start = System.currentTimeMillis();
     
-    while ((b = in.read()) != -1) {
-      if (++count == 10000) {
-        count = 0;
-        System.out.print(".");
-        if ((++countPoint % 50) == 0) System.out.println();
-      }
+    for (int i = 1; i <= 4000000; i++) {
+      out.write(i);
+      if ((i % 10000) == 0) System.out.print(".");
+      if ((i % 500000) == 0) System.out.println();
     }
     
     long end = System.currentTimeMillis();
     System.out.printf("\n걸린 시간 = %d", end - start);
     
-    in.close();
+    out.close();
   }
 
 }
