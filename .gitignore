@@ -5,6 +5,7 @@
 **/.settings
 **/.gradle/
 **/.vscode/
+**/temp/
 **/.class
 **/bin/
 **/.classpath
