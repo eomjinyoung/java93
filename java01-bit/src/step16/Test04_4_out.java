@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 public class Test04_4_out {
   
   public static void main(String[] args) throws Exception {
-    FileOutputStream out0 = new FileOutputStream("temp/test04_1.data");
+    FileOutputStream out0 = new FileOutputStream("temp/test04_4.data");
     BufferedOutputStream out = new BufferedOutputStream(out0);
     
     long start = System.currentTimeMillis();
