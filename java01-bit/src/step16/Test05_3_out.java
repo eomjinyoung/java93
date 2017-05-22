@@ -13,7 +13,7 @@ package step16;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-public class Test05_2_out {
+public class Test05_3_out {
   
   public static void main(String[] args) throws Exception {
     // Student 클래스는 직렬화 하는 것을 허락하지 않았기 때문에
