@@ -1,4 +1,24 @@
-/* character stream 클래스: FileReader vs FileInputStream        
+/* character stream 클래스: FileReader vs FileInputStream
+ * => character stream 클래스   
+ *    - 문자 단위로 데이터의 입출력을 다루는 클래스
+ * => Reader(데이터를 읽는 스트림)
+ *    1) Data Sink Stream
+ *       FileReader
+ *       CharArrayReader
+ *       PipedReader
+ *       StringReader
+ *    2) Data Processing Stream
+ *       BufferedReader
+ *       LineNumberReader
+ * => Writer(데이터를 쓰는 스트림)
+ *    1) Data Sink Stream
+ *       FileWriter
+ *       CharArrayWriter
+ *       PipedWriter
+ *       StringWriter
+ *    2) Data Processing Stream
+ *       BufferedWriter
+ *       PrintWriter
  */
 package step16;
 
