@@ -34,11 +34,16 @@ public class Test07_1 {
                               new InputStreamReader(socket.getInputStream()));
         PrintStream out = new PrintStream(socket.getOutputStream());
       ) {
-        String json = in.readLine();
-        System.out.println(json);
-        
-        out.println(json);
-        
+        // 연결되어 있는 동안 계속 클라이언트와 통신하기 - connectionful
+        while (true) {
+          String json = in.readLine();
+          if (json == null)
+            break;
+          System.out.println(json);
+          
+          out.println(json);
+        }
+        System.out.println("=> 클라이언와 연결 끊김!");
       } catch (Exception e) {
         e.printStackTrace();
       }

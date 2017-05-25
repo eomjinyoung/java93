@@ -7,7 +7,8 @@ var host = $('#host'),
     closeBtn = $('#closeBtn'),
     v1 = $('#v1'),
     v2 = $('#v2'),
-    op = $('#op');
+    op = $('#op'),
+    result = $('#result');
 
 closeBtn.css('display', 'none') // 화면이 뜨면 "끊기" 버튼을 감춘다.
 
@@ -19,7 +20,8 @@ socket.on('connect', () => {
 })
 
 socket.on('data', (data) => {
-  $('#response').val(data.toString())
+  //result.val(data.toString())
+  console.log('=>' + data.toString())
 })
   
 socket.on('error', (error) => {
@@ -32,6 +34,7 @@ socket.on('timeout', () => {
 })
 
 socket.on('close', () => {
+  alert('끊었습니다.')
   //connectBtn.css('display', '')
   //closeBtn.css('display', 'none')
 })
@@ -42,7 +45,8 @@ connectBtn.click(() => {
 })
 
 closeBtn.click(() => {
-  socket.destroy();
+  socket.destroy()
+  socket.end()
   connectBtn.css('display', '')
   closeBtn.css('display', 'none')
 })
@@ -55,7 +59,7 @@ $('#send').click(() => {
     'op': op.val()
   }
   socket.write(JSON.stringify(obj) + '\n')
-  socket.end();
+  
 })
 
 
