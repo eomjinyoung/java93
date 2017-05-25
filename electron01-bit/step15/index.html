@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>에코 클라이언트</h1>
+<form>
+서버: <input id="host">, 포트: <input id="port"><br>
+메시지: <input id="message"><button id="send" type="button">보내기</button><br>
+응답: <textarea id="response" cols="50" rows="3"></textarea>
+</form>
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>
+
+
