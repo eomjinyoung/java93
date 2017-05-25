@@ -7,7 +7,10 @@
  * => 단점
  *    계속 연결된 상태로 있기 때문에,
  *      - 사용 중이지 않을 때도 연결을 유지한다. 메모리 낭비!
- *      - 많은 클라이언트의 요청을 처리할 수 없다.  
+ *      - 많은 클라이언트의 요청을 처리할 수 없다.
+ *      
+ * => 대표적인 프로토콜: Telnet, FTP, 채팅 등
+ *      
  */
 package step18;
 
@@ -35,6 +38,7 @@ public class Test07_1 {
     }
     
     public void run() {
+      int count = 0;
       try (
         Socket socket = this.socket;
         BufferedReader in = new BufferedReader(
@@ -65,7 +69,21 @@ public class Test07_1 {
           case "%": result = (float)value.v1 % value.v2; break;
           }
           
-          out.println(result);
+          /* connectionful
+           * => 커넥션풀 방식에서는 클라이언트와 연결된 후 
+           *    count 변수처럼 그 클라이언트의 상태를 관리할 수 있다.
+           * => 단점: 
+           *    1) 클라이언트가 연결을 끊을 때까지 그 상태 값을 유지해야 하기 때문에
+           *       메모리 낭비가 발생
+           *    2) 보다 많은 클라이언트의 요청을 처리할 수 없다.
+           *    3) 클라이언트가 서버를 사용하지 않더라도,
+           *       연결을 끊지 않는 한 계속 클라이언트의 정보를 유지해야 한다.
+           */
+          if (++count > 5) { // 무료 사용 횟수를 넘으면 계산을 안해준다. 
+            out.println("무료 사용 끝!");
+          } else { 
+            out.println(result);
+          }
           out.flush();
         }
         System.out.println("=> 클라이언와 연결 끊김!");
