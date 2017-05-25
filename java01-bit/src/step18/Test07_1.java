@@ -11,8 +11,9 @@
  */
 package step18;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,15 +24,24 @@ public class Test07_1 {
     
     public CalculatorJob(Socket socket) {
       this.socket = socket;
+      System.out.println("=> 클라이언트와 연결되었음!");
     }
     
     public void run() {
       try (
-        InputStream in = socket.getInputStream();
-        OutputStream out = socket.getOutputStream();
+        Socket socket = this.socket;
+        BufferedReader in = new BufferedReader(
+                              new InputStreamReader(socket.getInputStream()));
+        PrintStream out = new PrintStream(socket.getOutputStream());
       ) {
+        String json = in.readLine();
+        System.out.println(json);
         
-      } catch (Exception e) {}
+        out.println(json);
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
   
