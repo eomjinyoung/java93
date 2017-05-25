@@ -18,6 +18,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Test07_1 {
+  class Value {
+    int v1;
+    int v2;
+    String op;
+  }
 
   class CalculatorJob implements Runnable {
     Socket socket ;
@@ -41,7 +46,11 @@ public class Test07_1 {
             break;
           System.out.println(json);
           
+          // Gson 객체를 이용해 JSON 문자열을 Value 객체로 만든다.
+          Gson gson = new Gson();
+          
           out.println(json);
+          out.flush();
         }
         System.out.println("=> 클라이언와 연결 끊김!");
       } catch (Exception e) {
