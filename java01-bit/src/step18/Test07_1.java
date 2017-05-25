@@ -17,6 +17,8 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.google.gson.Gson;
+
 public class Test07_1 {
   class Value {
     int v1;
@@ -44,12 +46,26 @@ public class Test07_1 {
           String json = in.readLine();
           if (json == null)
             break;
-          System.out.println(json);
           
           // Gson 객체를 이용해 JSON 문자열을 Value 객체로 만든다.
+          // => Gson 라이브러리 추가
+          //    1) build.gradle 에 repositories {}, dependencies {} 블록 추가
+          //    2) 명령창에서 "gradle eclipse"를 실행하여 이클립스 설정 파일 갱신
+          //    3) 이클립스에서 프로젝트 "refresh" 할 것.
           Gson gson = new Gson();
+          Value value = gson.fromJson(json, Value.class);
           
-          out.println(json);
+          float result = 0f;
+          
+          switch (value.op) {
+          case "+": result = (float)value.v1 + value.v2; break;
+          case "-": result = (float)value.v1 - value.v2; break;
+          case "*": result = (float)value.v1 * value.v2; break;
+          case "/": result = (float)value.v1 / value.v2; break;
+          case "%": result = (float)value.v1 % value.v2; break;
+          }
+          
+          out.println(result);
           out.flush();
         }
         System.out.println("=> 클라이언와 연결 끊김!");

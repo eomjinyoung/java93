@@ -41,7 +41,7 @@ socket.on('data', (data) => {
 	  break;
   }
   
-  console.log('=> ' + value)
+  result.val(value)
 })
   
 socket.on('error', (error) => {
