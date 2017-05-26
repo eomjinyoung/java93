@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  div {
+    margin: 5px 0px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 180%;
+    margin: 0 0 10px 0;
+  }
+
+  .container {
+    border: 1px solid gray;
+    width: 400px;
+    margin: 10px auto;
+    padding: 10px 15px;
+  }
+
+  #messageBox {
+    width: 368px;
+    height: 300px;
+  }
+  
+  #message {
+    width: 310px;
+  }
+  
+  #host {
+    width: 160px;
+  }
+  
+  #port {
+    width: 50px
+  }
+  
+  #alias {
+    width: 100px;
+  }
+  
+  </style>
+</head>
+<body>
+<div class="container">
+
+<h1>비트 메신저</h1>
+
+<textarea id="messageBox"></textarea>
+
+<div>
+<input id="message" type="text">
+<button id="sendBtn" type="button">보내기</button>
+</div>
+
+<div>
+<input id="host" type="text" placeholder="서버" value="localhost">
+<input id="port" type="text" placeholder="포트" value="8888">
+<input id="alias" type="text" placeholder="별명" value="오호라">
+<button id="connectBtn" type="button">연결</button>
+</div>
+
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>
+
+
