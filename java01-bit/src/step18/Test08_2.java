@@ -8,6 +8,7 @@ package step18;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -42,10 +43,12 @@ public class Test08_2 {
   
   class ChatJob implements Runnable {
     Socket socket ;
+    String address;
     PrintStream out;
     
     public ChatJob(Socket socket) {
       this.socket = socket;
+      this.address = ((InetSocketAddress)socket.getRemoteSocketAddress()).getHostString();
       chatJobs.add(this);
     }
     
@@ -58,14 +61,14 @@ public class Test08_2 {
       ) {
         this.out = out; // 다른 스레드가 메시지를 보낼 때 사용한다.
         String alias = in.readLine();
-        sendAll(String.format("[%s]님이 입장하였습니다.\n", alias));
+        sendAll(String.format("[%s:%s]님이 입장하였습니다.", alias, address));
         
         while (true) {
           String message = in.readLine();
           if (message == null) // 클라이언트에서 종료 신호를 보낸다면 
             break; // 입출력을 끝낸다.
           
-          sendAll(message + '\n');
+          sendAll(String.format("[%s:%s] %s", alias, address, message));
         }
       } catch (Exception e) {
         e.printStackTrace();

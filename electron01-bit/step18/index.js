@@ -28,6 +28,7 @@ socket.on('data', (data) => {
   }
   
   messageBox.val(messageBox.val() + value + '\n')
+  messageBox.scrollTop(messageBox.prop('scrollHeight'));
 })
   
 socket.on('error', (error) => {
@@ -41,8 +42,7 @@ $('#connectBtn').click(() => {
 })
   
 $('#sendBtn').click(() => {
-  socket.write(JSON.stringify(obj) + '\n')
-  socket.end()
+  socket.write(message.val() + '\n')
 })
 
 
