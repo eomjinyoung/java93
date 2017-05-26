@@ -13,6 +13,20 @@ import com.google.gson.Gson;
 
 public class Test08_1 {
 
+  public void listen(int port) throws Exception {
+    ServerSocket serverSocket = new ServerSocket(port);
+    System.out.println("서버 실행 중...");
+    
+    while (true) {
+      new Thread(new ChatJob(serverSocket.accept())).start();
+    }
+  }
+  
+  public static void main(String[] args) throws Exception {
+    Test08_1 server = new Test08_1();
+    server.listen(8888);
+  }
+  
   class ChatJob implements Runnable {
     Socket socket ;
     
@@ -42,20 +56,6 @@ public class Test08_1 {
         e.printStackTrace();
       }
     }
-  }
-  
-  public void listen(int port) throws Exception {
-    ServerSocket serverSocket = new ServerSocket(port);
-    System.out.println("서버 실행 중...");
-    
-    while (true) {
-      new Thread(new ChatJob(serverSocket.accept())).start();
-    }
-  }
-  
-  public static void main(String[] args) throws Exception {
-    Test08_1 server = new Test08_1();
-    server.listen(8888);
   }
 }
 

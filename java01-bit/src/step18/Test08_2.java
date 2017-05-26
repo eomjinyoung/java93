@@ -15,6 +15,31 @@ import java.util.ArrayList;
 public class Test08_2 {
   ArrayList<ChatJob> chatJobs = new ArrayList<>();
   
+  public void listen(int port) throws Exception {
+    ServerSocket serverSocket = new ServerSocket(port);
+    System.out.println("서버 실행 중...");
+    
+    while (true) {
+      new Thread(new ChatJob(serverSocket.accept())).start();
+    }
+  }
+  
+  // 먼저 요청한 스레드 순서대로 작업을 실행시킨다. 뮤텍스 적용.
+  synchronized public void sendAll(String message) {
+    for (int i = chatJobs.size() - 1; i >= 0; i--) {
+      try {
+        chatJobs.get(i).send(message);
+      } catch (Exception e) {
+        chatJobs.remove(i);
+      }
+    }
+  }
+  
+  public static void main(String[] args) throws Exception {
+    Test08_2 server = new Test08_2();
+    server.listen(8888);
+  }
+  
   class ChatJob implements Runnable {
     Socket socket ;
     PrintStream out;
@@ -51,30 +76,6 @@ public class Test08_2 {
       out.println(message);
       out.flush();
     }
-  }
-  
-  public void listen(int port) throws Exception {
-    ServerSocket serverSocket = new ServerSocket(port);
-    System.out.println("서버 실행 중...");
-    
-    while (true) {
-      new Thread(new ChatJob(serverSocket.accept())).start();
-    }
-  }
-  
-  public void sendAll(String message) {
-    for (int i = chatJobs.size() - 1; i >= 0; i--) {
-      try {
-        chatJobs.get(i).send(message);
-      } catch (Exception e) {
-        chatJobs.remove(i);
-      }
-    }
-  }
-  
-  public static void main(String[] args) throws Exception {
-    Test08_2 server = new Test08_2();
-    server.listen(8888);
   }
 }
 
