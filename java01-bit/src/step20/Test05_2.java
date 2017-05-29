@@ -1,6 +1,8 @@
 /* JDBC 프로그래밍: PreparedStatement 객체 사용 후
  * => 더하기 연산자를 사용하여 SQL문을 만드는 대신,
  *    in-parameter '?'를 사용하여 SQL문을 만든다.
+ *    
+ *    
  */
 package step20;
 
@@ -60,6 +62,9 @@ public class Test05_2 {
   }
 
 }
+
+
+
 
 
 

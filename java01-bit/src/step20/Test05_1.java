@@ -17,8 +17,8 @@ public class Test05_1 {
     String jdbcUsername = "webapp";
     String jdbcPassword = "1111";
     
-    String name = "홍길동101";
-    String email = "hong101@test.com";
+    String name = "홍길동103";
+    String email = "hong103@test.com";
     String tel = "1111-1111";
     String password = "1111";
   
