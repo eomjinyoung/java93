@@ -1,7 +1,41 @@
-/* JDBC 프로그래밍: Statement 객체 
+/* JDBC 프로그래밍: Statement 객체 - SELECT 문 실행
  * => Connection 객체로부터 얻는다.
  * => SQL문을 DBMS에 전달하는 일을 한다.
  * => SELECT 문을 실행한 경우, 그 결과를 다루는 객체를 리턴한다.
+ * 
+ * java.sql 패키지의 주요 인터페이스(규칙)
+ * 1) java.sql.Driver (=> com.mysql.jdbc.Driver 클래스)
+ *    => JDBC Driver 정보를 제공하는 기능
+ *    => DBMS와의 연결을 관리하는 객체를 리턴하는 기능
+ * 2) java.sql.Connection (=> com.mysql.jdbc.ConnectionImpl 클래스)
+ *    => DBMS와 연결을 수행하는 기능
+ *    => DBMS에 SQL을 전달할 객체를 리턴하는 기능
+ * 3) java.sql.Statement (=> com.mysql.jdbc.StatementImpl 클래스)
+ *    => SQL을 MySQL 형식에 맞춰서 변환한 다음 서버에 보내는 기능.
+ *    => 서버가 보낸 결과를 다룰 객체를 리턴하는 기능.  
+ *    => executeQuery() : SELECT 문 실행
+ *    => executeUpdate() : INSERT, UPDATE, DELETE 등 DML, DDL 명령문 실행
+ *    => executeBatch() : 여러 개의 SQL문을 실행할 때 사용.
+ *                        SELECT, INSERT, UPDATE, DELETE 등 모든 SQL 명령문 실행가능.  
+ * 4) java.sql.ResultSet (=> com.mysql.jdbc.ResultSetImpl 클래스)
+ *    => DBMS 서버에서 SELECT를 실행한 후 생성된 결과를 가져오는 기능.
+ *    => next() : 
+ *          서버에서 한 개의 레코드를 가져온다.
+ *          정상적을 가져왔으면 true를 리턴,
+ *          가져올 레코드가 없으면 false를 리턴한다.
+ *    => getXxx(컬럼 번호 또는 컬럼명) : 
+ *          서버에서 가져온 레코드의 컬럼 값을 꺼내는 메서드.
+ *          컬럼의 타입에 따라 호출하는 메서드가 다른다.
+ *          숫자 -> getInt()
+ *          문자열 -> getString()
+ *          날짜 -> getDate() 
+ *          등...
+ *  
+ * 자원의 해제
+ *   => 파일 I/O(HDD)나 소켓(랜카드)이나 DBMS(랜카드와 연결된 서버) API 처럼 
+ *      컴퓨터에 붙어 있는 장비를 다룰 때는
+ *      항상 사용한 다음에는 다른 프로그램이 사용할 수 있도록 자원을 해제해야 한다.
+ *   => 해제할 때 순서는 의존 객체 순으로 해제한다. 
  */
 package step20;
 
