@@ -34,11 +34,23 @@ public class Test04_1 {
       // JVM 아규먼트로 java.sql.Driver 구현체의 이름을 받는다.
       String driverClassName = System.getProperty("jdbc.driver");
       
-      // java.sql.Driver 클래스를 메모리에 로딩한다.
-      // => 객체를 만들어서 DriverManager에 등록하지 않아도 자동으로 인식한다.
+      // 아규먼트로 넘겨준 문자열로 지정된 클래스를 찾아 로딩한다.
+      // => Class.forName("com.mysql.jdbc.Driver")라면,
+      //    com.mysql.jdbc.Driver 클래스를 찾아서 로딩한다.
+      // => java.sql.Driver 구현 클래스(=com.mysql.jdbc.Driver)를 메모리(Method Area)에 로딩한다.
+      // => 이렇게 로딩해 두면, 
+      //    DriverManager를 사용할 때 알아서 처리할 것이다.
       Class.forName(driverClassName);
+      /* 참고! 
+       * 클래스가 로딩되는 경우, (조건: 클래스가 로딩되어 있지 않을 때)
+       * 1) 인스턴스를 만들 때 
+       * 2) 스태틱 멤버(변수나 메서드)를 사용할 때
+       * 3) Class.forName()을 호출할 때
+       */
       
-      
+      // mysql Driver 객체가 등록되어 있지 않으면,
+      // => Method Area 영역에 로딩된 클래스 중에서 java.sql.Driver 구현체를 찾는다.
+      // => 그 클래스의 인스턴스를 생성하여 자동 등록시킨다.
       con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/webappdb", 
         "webapp",
