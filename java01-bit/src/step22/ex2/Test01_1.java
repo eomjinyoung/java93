@@ -12,7 +12,7 @@
  *    2) MemberDao 클래스에 등록, 조회, 변경, 삭제를 수행하는 메서드를 정의한다.
  *    3) Test06_x 에서 MemberDao를 사용하여 멤버 데이터를 다룬다.
  */
-package step22.ex1;
+package step22.ex2;
 
 public class Test01_1 {
 

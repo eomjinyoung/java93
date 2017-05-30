@@ -1,7 +1,7 @@
 /* 역할:
  * => memb 테이블의 데이터를 다루는 메서드를 모아둔 클래스이다.
  */
-package step22.ex1;
+package step22.ex2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
