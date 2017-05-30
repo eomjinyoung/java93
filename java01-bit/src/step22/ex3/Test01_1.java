@@ -1,11 +1,26 @@
-/* JDBC 프로그래밍 II: DAO에서 출력 기능 제거, 데이터 처리만 하도록 변경
- * => memb 테이블의 값을 저장할 새로운 데이터 타입을 정의한다.
+/* JDBC 프로그래밍 II: DAO + Connection Pooling 
+ * => Pooling 기법?
+ *    - 객체를 효율적으로 생성하고 관리하기 위해,
+ *      한 번 생성된 객체는 내부 컬렉션에 담아 두었다가
+ *      필요할 때 마다 빌려주고,
+ *      다 쓴 다음에는 다시 돌려 받아서 보관해두는 방식.
+ *      이런 방식으로 객체를 관리하면,
+ *      같은 객체를 여러 개 생성할 필요가 없어 메모리가 절약된다.
+ *      생성된 객체를 보관해 두었다가 다시 꺼내 쓰기 때문에
+ *      객체 생성시간도 줄어드는 이점이 있다.
+ *    - 이점?
+ *      1) 생성된 객체 재사용으로 "메모리가 절약된다." 
+ *      2) 생성된 객체 재상용으로 "객체를 준비하는 시간이 줄어든다."
+ * 
+ * => Pooling 기법을 DB 커넥션 관리하는데 적용한 것을 
+ *    "DB Connection Pool"이라 부른다.
+ *    
  * => 작업
- *    1) Member 클래스 정의
- *    2) MemberDao 클래스를 변경
- *    3) MemberDao 사용
+ *    1) DBConnectionPool 클래스 작성
+ *    2) MemberDao에 DBConnectionPool 적용
+ *    3) 테스트
  */
-package step22.ex2;
+package step22.ex3;
 
 import java.util.List;
 
@@ -17,7 +32,13 @@ public class Test01_1 {
     String jdbcUsername = "webapp";
     String jdbcPassword = "1111";
     
-    MemberDao memberDao = new MemberDao(jdbcDriver, jdbcUrl, jdbcUsername, jdbcPassword);
+    // DB 커넥션을 관리할 객체를 만든다.
+    DBConnectionPool conPool = new DBConnectionPool(
+        jdbcDriver, jdbcUrl, jdbcUsername, jdbcPassword);
+    
+    // DAO에 DB 커넥션 풀을 전달한다.
+    MemberDao memberDao = new MemberDao(conPool);
+    
     List<Member> list = memberDao.selectList();
     for (Member m : list) {
       System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getTel(), m.getEmail());
