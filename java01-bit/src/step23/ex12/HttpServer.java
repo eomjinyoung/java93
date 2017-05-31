@@ -33,14 +33,14 @@ public class HttpServer {
   //클라이언트 요청을 처리할 객체를 담는다.
   HashMap<String,Command> servletMap = new HashMap<>();
   
-  //현재 파일 경로
+  //bin 디렉토리 경로
   String currBinDirPath;
   
   public HttpServer(int port) throws Exception {
     this.port = port;
     
-    currBinDirPath = new File("./bin/").getCanonicalPath();
-    System.out.println(currBinDirPath);
+    // 클래스 파일이 있는 bin 디렉토리 경로를 계산하여 저장해 둔다.
+    currBinDirPath = new File("./bin").getCanonicalPath().replaceAll("\\\\", "/") + "/";
     
     findClassFile(new File("./bin/"));
   }
@@ -65,10 +65,14 @@ public class HttpServer {
       });
     
     for (File file : files) {
-      if (file.isDirectory())
+      if (file.isDirectory()) {
         findClassFile(file);
-      else 
-        System.out.println(file.getCanonicalPath());
+      } else { 
+        String classpath = file.getCanonicalPath()
+                               .replaceAll("\\\\", "/")
+                               .replaceAll(this.currBinDirPath, "");
+        System.out.println(classpath);
+      }
     }
   }
   
