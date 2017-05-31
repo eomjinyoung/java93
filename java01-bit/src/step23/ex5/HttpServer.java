@@ -2,6 +2,7 @@
  * 1) 기본 클래스 골격 준비
  * 2) 클라이언트 연결을 받기
  * 3) 소켓을 통해 입출력을 할 수 있게 스트림 객체를 준비
+ * 4) HTTP 요청과 응답을 처리한다.
  */
 package step23.ex5;
 
@@ -28,8 +29,31 @@ public class HttpServer {
         Socket socket = serverSocket.accept();
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintStream out = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));) {
-        System.out.println("클라이언트가 연결되었습니다.");
+        System.out.println("------------------------------------");
         
+        String line = null;
+        while (true) {
+          line = in.readLine();
+          if (line.isEmpty()) 
+            break;
+          System.out.println(line);
+        }
+        
+        out.println("HTTP/1.1 200 OK");
+        out.println("Server: BIT Server");
+        out.println();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("  <meta charset='UTF-8'>");
+        out.println("  <title>hello</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("  <h1>안녕하세요</h1>");
+        out.println("</body>");
+        out.println("</html>");
+        out.flush();
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
       }
     }
   }
