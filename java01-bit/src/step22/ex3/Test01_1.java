@@ -46,7 +46,7 @@ public class Test01_1 {
     System.out.println("-----------------------------------------");
     
     /*
-    System.out.println(memberDao.delete(59));
+    System.out.println(memberDao.delete(60));
     System.out.println("-----------------------------------------");
     
     Member member = new Member();
@@ -58,7 +58,7 @@ public class Test01_1 {
     System.out.println(memberDao.insert(member));
     System.out.println("-----------------------------------------");
     */
-    
+    /*
     Member member = new Member();
     member.setNo(60); // 변경하려는 데이터의 mno이어야 한다.
     member.setName("홍길동 변경");
@@ -68,7 +68,7 @@ public class Test01_1 {
     
     memberDao.update(member);
     System.out.println("-----------------------------------------");
-    
+    */
     list = memberDao.selectList();
     for (Member m : list) {
       System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getTel(), m.getEmail());
