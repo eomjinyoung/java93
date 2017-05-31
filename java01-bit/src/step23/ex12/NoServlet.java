@@ -2,8 +2,8 @@ package step23.ex12;
 
 import java.io.PrintStream;
 
-@WebServlet(url="/ok")
-public class OkServlet implements Command {
+//@WebServlet(url="/nono")
+public class NoServlet implements Command {
   public void service(PrintStream out) throws Exception {
     out.println("HTTP/1.1 200 OK");
     out.println("Server: BIT Server");
@@ -14,7 +14,7 @@ public class OkServlet implements Command {
     out.println("  <title>hello</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("  <h1>/ok를 요청하셨네요. ㅋㅋ</h1>");
+    out.println("  <h1>nono... 안돼요....</h1>");
     out.println("</body>");
     out.println("</html>");
   }

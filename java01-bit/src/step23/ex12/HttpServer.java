@@ -20,12 +20,9 @@
 package step23.ex12;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FileReader;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Properties;
-import java.util.Set;
 
 public class HttpServer {
   int port;
@@ -36,13 +33,24 @@ public class HttpServer {
   //bin 디렉토리 경로
   String currBinDirPath;
   
+  //클래스 도구를 저장할 목록
+  ArrayList<Class> classes = new ArrayList<>();
+  
   public HttpServer(int port) throws Exception {
     this.port = port;
     
     // 클래스 파일이 있는 bin 디렉토리 경로를 계산하여 저장해 둔다.
     currBinDirPath = new File("./bin").getCanonicalPath().replaceAll("\\\\", "/") + "/";
     
-    findClassFile(new File("./bin/"));
+    // 지정된 경로의 지정된 패키지 소속 클래스를 찾아 로딩한다.
+    findClassFile(new File("./bin/"), "step23.ex12");
+    
+    // ArrayList에 저장된 Class 도구를 확인해 보자!
+    for (Class clazz : classes) {
+      WebServlet anno = (WebServlet)clazz.getAnnotation(WebServlet.class);
+      if (anno == null) continue;
+      servletMap.put(anno.url(), (Command)clazz.newInstance());
+    }
   }
   
   public void listen() throws Exception {
@@ -54,7 +62,7 @@ public class HttpServer {
     }
   }
   
-  private void findClassFile(File path) throws Exception {
+  private void findClassFile(File path, String packageName) throws Exception {
     File[] files = path.listFiles((File pathname) -> {
         if (pathname.isDirectory())
           return true;
@@ -66,12 +74,17 @@ public class HttpServer {
     
     for (File file : files) {
       if (file.isDirectory()) {
-        findClassFile(file);
+        findClassFile(file, packageName);
+        
       } else { 
-        String classpath = file.getCanonicalPath()
+        String classFullName = file.getCanonicalPath()
                                .replaceAll("\\\\", "/")
-                               .replaceAll(this.currBinDirPath, "");
-        System.out.println(classpath);
+                               .replaceAll(this.currBinDirPath, "")
+                               .replaceAll("/", ".")
+                               .replaceAll(".class", "");
+        if (classFullName.startsWith(packageName)) {
+          classes.add(Class.forName(classFullName));
+        }
       }
     }
   }
