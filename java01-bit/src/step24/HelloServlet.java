@@ -45,10 +45,16 @@
   </servlet-mapping>
 </web-app>       
 ----------------------------------------------------------------------------------------
+
+ * 서블릿 실행
+ * 1) 톰캣 서버를 실행한다.
+ * 2) 웹브라우저로 다음 URL을 요청한다.
+ *    http://localhost:8080/test/hi
  */
 package step24;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -78,6 +84,9 @@ public class HelloServlet implements Servlet {
   public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
     System.out.println("service()");
     
+    res.setContentType("text/plain;charset=UTF-8");
+    PrintWriter out = res.getWriter();
+    out.println("Hello, world!");
   }
 
   @Override
