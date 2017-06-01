@@ -1,0 +1,69 @@
+apply plugin: 'java' // 자바 프로젝트를 다룰 도구 가져오기
+apply plugin: 'eclipse-wtp' // 이클립스 웹 프로젝트 관련 설정 파일을 다룰 도구 가져오기
+apply plugin: 'war' // 웹 애플리케이션 배치 관련 도구를 가져온다.
+
+/* 웹 자원이 있는 폴더 지정하기 
+ * => 지정하지 않으면 src/main/webapp 폴더가 된다.
+ */
+webAppDirName='WebContent'
+
+/*
+[gradle 빌드 도구의 기본 소스 폴더 구조]
+- 이 파일, 즉 그래들 설정 파일에서 소스 폴더의 구조를 지정하지 않으면,
+  다음의 구조로 되어 있을 것이라 판단한다.
+- 임의의 폴더 구조로 바꾸려면 설정을 추가해야 한다.
+
+프로젝트폴더/
+  src/
+    main/
+      java/           <-- .java 소스 파일을 두는 폴더
+      resources/      <-- .properties, .txt, .xml 등 설정 파일을 두는 폴더
+    test/
+      java/           <-- 테스트 관련 .java 소스 파일을 두는 폴더
+      resources/      <-- 테스트와 관련된 설정 파일을 두는 폴더
+
+[이클립스 도구의 기본 소스 폴더 구조]
+프로젝트폴더/
+  src/      <-- .java, .properties, .txt, .xml 등 자바 소스 파일과 설정파일을 모두 둔다.
+*/
+
+/* 이클립스의 기본 소스 폴더 구조로 설정하기*/
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+}
+
+compileJava {
+  options.encoding = 'UTF-8'  // 소스 파일의 인코딩을 알려준다.
+  sourceCompatibility = '1.8' // 어떤 자바 버전의 문법을 사용했는 지 알려준다.
+}
+
+// 외부 라이브러리가 보관된 서버
+// => 이 서버에서 dependencies{} 에 지정된 라이브러리를 다운로드 한다.
+repositories {
+  mavenCentral()  // <-- https://repo1.maven.org/maven2/
+}
+
+
+// 프로젝트에서 참조하는 외부 라이브러리들 정보
+// 다음 명령을 실행하면 이 라이브러리들을 자동으로 다운로드 받는다.
+// 또한 프로젝트를 빌드하거나 실행할 때 자동으로 참조한다.
+// > gradle eclipse 
+dependencies {
+  compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+  compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
+  compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+  
+}
+
+
+
+
+
+
