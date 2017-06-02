@@ -30,7 +30,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/step01/Servlet01")
+@WebServlet(urlPatterns="/servlets/step01/Servlet01")
 public class Servlet01  implements Servlet {
   public Servlet01() {
     System.out.println("Servlet01()");
