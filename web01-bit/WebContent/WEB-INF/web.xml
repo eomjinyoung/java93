@@ -5,4 +5,31 @@
   id="WebApp_ID" 
   version="3.1">
   <display-name>web01</display-name>
+  
+  <!-- 서블릿 클래스를 등록한다. -->
+  <servlet>
+    <!-- 유지보수 편하라고 별명을 클래스 이름으로 한다. -->
+    <servlet-name>HelloServlet</servlet-name> <!-- 서블릿 클래스의 별명을 지정한다. -->
+    <servlet-class>HelloServlet</servlet-class> <!-- 서블릿 클래스의 전체 이름을 적는다. -->
+  </servlet>
+  
+  <!-- 서블릿에 URL을 연결(매핑)한다. -->
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name> <!-- 위에서 지정한 서블릿 클래스의 별명 -->
+    <url-pattern>/hello</url-pattern> <!-- 웹브라우저가 요청할 때 사용할 URL 경로 -->
+    <!-- 요청 URL
+      문법) http://서버주소:포트번호/웹애플리케이션이름/서블릿URL
+      예)   http://localhost:8080/web01/hello
+     -->
+  </servlet-mapping>
 </web-app>
+
+
+
+
+
+
+
+
+
+

@@ -32,8 +32,45 @@
 - Servers > 실행환경 > 컨텍스트 메뉴 > Add and Remove... 클릭
 - 왼쪽 목록에 나열되어 있는 웹 프로젝트를 선택하여 오른쪽 목록에 추가한다. 
 
+## 톰캣의 디렉토리 구조
+- bin/ 
+  - 톰캣 서버 실행과 관련된 쉘 스크립트 파일(.sh, bat 등)을 모아둔 곳
+- conf/
+  - 톰캣 서버를 실행할 때 참조할 설정 파일을 모아둔 곳
+- lib/
+  - 톰캣 서버를 구성하는 자바 클래스 라이브러리들을 모아둔 곳
+- logs/
+  - 톰캣 서버가 실행하는 동안 실행 또는 오류 정보를 기록한 파일을 모아둔 곳
+- temp/
+  - 톰캣 서버가 실행하는 동안 임시 데이터를 보관하는 디렉토리
+- work/
+  - 톰캣 서버가 JSP를 실행할 때 그 중간 파일을 보관하는 곳
+- webapps/
+  - 웹 애플리케이션을 모아둔 곳
 
-
+## 개발용 웹 애플리케이션 실행 환경
+- $workspace/Servers/localhost.../*.xml
+  - 톰캣 서버의 설정 파일을 복사해 온다.
+  
+## 이클립스 웹 애플리케이션 프로젝트 폴더 구조
+- 이클립스에서 웹 프로젝트를 다룰 때 폴더 구조이다.
+- IntelliJ 나 NetBeans 등 다른 IDE를 사용할 때는 폴더 구조가 다를 수 있다.
+ 
+$workspace/web01
+- src : 자바 소스 파일을 두는 곳
+- WebContent : HTML, CSS, JavaScript, GIF 등 정적 웹 자원을 두는 곳. JSP 파일도 둔다.
+  - /WEB-INF : 웹 애플리케이션 정보 파일을 두는 곳
+  - /WEB-INF/classes : 자바 클래스 파일(.class)을 두는 곳
+  - /WEB-INF/lib : 자바 라이브러리 파일(.jar)을 두는 곳
+  - web.xml : 웹 애플리케이션 설정 파일
+      
+## 웹 애플리케이션 배치 폴더 구조
+- $deployment_dir/
+  - HTML, CSS, JavaScript, GIF 등 정적 웹 자원 및 JSP 파일도 둔다.
+  - WEB-INF/web.xml
+  - WEB-INF/classes : 자바 클래스 파일을 둔다.
+  - WEB-INF/lib : 자바 라이브러리 파일을 둔다.
+  
 
 
 
