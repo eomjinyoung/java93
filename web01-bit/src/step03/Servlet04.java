@@ -54,11 +54,11 @@ public class Servlet04  extends GenericServlet {
       out.printf("이름:<input type='text' name='name' value='%s'><br>\n", member.getName());
       out.printf("전화:<input type='text' name='tel' value='%s'><br>\n", member.getTel());
       out.printf("이메일:<input type='text' name='email' value='%s'><br>\n", member.getEmail());
-      out.printf("암호:<input type='password' name='password'><br>\n");
-      out.printf("<button>변경</button>");
-      out.printf("<button type='button'>삭제</button>");
-      out.printf("<button type='button'>목록</button>");
-      out.printf("</form>");
+      out.println("암호:<input type='password' name='password'><br>");
+      out.println("<button>변경</button>");
+      out.println("<button type='button' onclick='doDelete()'>삭제</button>");
+      out.println("<button type='button' onclick='doList()'>목록</button>");
+      out.println("</form>");
       
       
     } catch (Exception e) {
@@ -68,6 +68,15 @@ public class Servlet04  extends GenericServlet {
       out.println("</pre>");
       out.println("<a href='Servlet02'>목록</a>");
     }
+   
+    out.println("<script>");
+    out.println("function doDelete() {");
+    out.printf("  location.href = 'Servlet06?no=%s'\n", req.getParameter("no"));
+    out.println("}");
+    out.println("function doList() {");
+    out.println("  location.href = 'Servlet02'\n");
+    out.println("}");
+    out.println("</script>");
     
     out.println("</body>");
     out.println("</html>");
