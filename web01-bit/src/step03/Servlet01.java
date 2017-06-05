@@ -42,6 +42,7 @@ public class Servlet01  extends GenericServlet {
       
     } catch (Exception e) {
       out.println("오류 발생!");
+      e.printStackTrace(out);
     }
   }
 }
