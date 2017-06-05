@@ -44,7 +44,21 @@ public class Servlet04  extends GenericServlet {
       
       int no = Integer.parseInt(req.getParameter("no"));
       
-      //memberDao.select
+      Member member = memberDao.selectOne(no);
+      if (member == null) {
+        throw new Exception(no + "번 회원이 없습니다.");
+      }
+      
+      out.printf("<form action='Servlet05' method='POST'>\n");
+      out.printf("번호:<input type='text' name='no' value='%d'><br>\n", member.getNo());
+      out.printf("이름:<input type='text' name='name' value='%s'><br>\n", member.getName());
+      out.printf("전화:<input type='text' name='tel' value='%s'><br>\n", member.getTel());
+      out.printf("이메일:<input type='text' name='email' value='%s'><br>\n", member.getEmail());
+      out.printf("암호:<input type='password' name='password'><br>\n");
+      out.printf("<button>변경</button>");
+      out.printf("<button type='button'>삭제</button>");
+      out.printf("<button type='button'>목록</button>");
+      out.printf("</form>");
       
       
     } catch (Exception e) {
@@ -52,9 +66,8 @@ public class Servlet04  extends GenericServlet {
       out.println("<pre>");
       e.printStackTrace(out);
       out.println("</pre>");
+      out.println("<a href='Servlet02'>목록</a>");
     }
-    
-    out.println("<a href='Servlet02'>목록</a>");
     
     out.println("</body>");
     out.println("</html>");
