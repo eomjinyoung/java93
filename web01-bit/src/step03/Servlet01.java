@@ -1,7 +1,7 @@
 /* 회원 관리 만들기 : 회원 목록 출력하기
  * => MemberDao, Member, DBConnectionPool 클래스 준비
  * => MemberDao를 이용하여 회원 목록을 가져온 다음, 
- *    HTML 문을 생성하여 출력한다.
+ *    텍스트를 출력한다.
  */
 package step03;
 
