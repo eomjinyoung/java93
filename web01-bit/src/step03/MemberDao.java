@@ -52,6 +52,33 @@ public class MemberDao {
     }
   }
   
+  public Member selectOne(int no) throws Exception {
+    Connection con = conPool.getConnection();
+
+    try ( 
+      PreparedStatement stmt = con.prepareStatement(
+          "select mno, name, tel, email from memb where mno=?");) {
+      
+      stmt.setInt(1, no);
+      
+      try (ResultSet rs = stmt.executeQuery();) {
+        if (!rs.next()) { 
+          return null;
+        }
+        
+        Member member = new Member();
+        member.setNo(rs.getInt("mno"));
+        member.setName(rs.getString("name"));
+        member.setTel(rs.getString("tel"));
+        member.setEmail(rs.getString("email"));
+        return member;
+      }
+      
+    } finally { 
+      conPool.returnConnection(con);
+    }
+  }
+  
   public int insert(Member member) throws Exception {
     Connection con = conPool.getConnection();
     try (

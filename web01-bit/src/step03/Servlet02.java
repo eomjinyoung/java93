@@ -56,6 +56,8 @@ public class Servlet02  extends GenericServlet {
       
       List<Member> list = memberDao.selectList(pageNo, pageSize);
       
+      out.println("<a href='form.html'>새회원</a>");
+      
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("  <tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th></tr>");
@@ -64,10 +66,10 @@ public class Servlet02  extends GenericServlet {
       
       for (Member m : list) {
         out.println("<tr>");
-        out.println("  <td>" + m.getNo() + "</td>");
-        out.println("  <td>" + m.getName() + "</td>");
-        out.println("  <td>" + m.getTel() + "</td>");
-        out.println("  <td>" + m.getEmail() + "</td>");
+        out.printf("  <td>%d</td>\n", m.getNo());
+        out.printf("  <td><a href='Servlet04?no=%d'>%s</a></td>\n", m.getNo(), m.getName());
+        out.printf("  <td>%s</td>\n", m.getTel());
+        out.printf("  <td>%s</td>\n", m.getEmail());
         out.println("</tr>");
       }
       
@@ -76,7 +78,9 @@ public class Servlet02  extends GenericServlet {
       
     } catch (Exception e) {
       out.println("오류 발생!");
+      out.println("<pre>");
       e.printStackTrace(out);
+      out.println("</pre>");
     }
     
     out.println("</body>");
