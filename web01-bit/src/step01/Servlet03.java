@@ -20,9 +20,9 @@
  *       
  * 
  * doGet(), doPost() 호출 테스트
- * => /WebContent/servlets/step01/Servlet03.html 로 GET 요청과 POST 요청을 실행한다.
+ * => /WebContent/step01/Servlet03.html 로 GET 요청과 POST 요청을 실행한다.
  */
-package servlets.step01;
+package step01;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/servlets/step01/Servlet03")
+@WebServlet(urlPatterns="/step01/Servlet03")
 public class Servlet03  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

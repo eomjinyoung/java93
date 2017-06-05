@@ -12,7 +12,7 @@
  *      이유? service()는 서브 클래스에서 구현해야 할 문제다. 
  *   
  */
-package servlets.step01;
+package step01;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/servlets/step01/Servlet02")
+@WebServlet(urlPatterns="/step01/Servlet02")
 public class Servlet02  extends GenericServlet {
   private static final long serialVersionUID = 1L;
 

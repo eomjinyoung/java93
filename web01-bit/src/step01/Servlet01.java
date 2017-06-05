@@ -19,7 +19,7 @@
  * 2) @WebServlet 애노테이션을 붙여 서블릿 정보를 등록 
  *    예) Servlet01 클래스 
  */
-package servlets.step01;
+package step01;
 
 import java.io.IOException;
 
@@ -30,8 +30,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/servlets/step01/Servlet01")
-public class Servlet01  implements Servlet {
+@WebServlet(urlPatterns="/step01/Servlet01")
+public class Servlet01 implements Servlet {
   public Servlet01() {
     System.out.println("Servlet01()");
   }
