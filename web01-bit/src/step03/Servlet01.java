@@ -21,6 +21,18 @@ public class Servlet01  extends GenericServlet {
 
   @Override
   public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    /* 페이지 번호와 페이지당 출력 개수 파라미터 받기 */
+    int pageNo = 1;
+    int pageSize = 5;
+    
+    try { // pageNo 파라미터 값이 있다면 그 값으로 설정한다.
+      pageNo = Integer.parseInt(req.getParameter("pageNo"));
+    } catch (Exception e) {}
+    
+    try { // pageSize 파리미터 값이 있다면 그 값으로 설정한다.
+      pageSize = Integer.parseInt(req.getParameter("pageSize"));
+    } catch (Exception e) {}
+    
     res.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = res.getWriter();
     
@@ -35,7 +47,7 @@ public class Servlet01  extends GenericServlet {
       
       MemberDao memberDao = new MemberDao(conPool);
       
-      List<Member> list = memberDao.selectList();
+      List<Member> list = memberDao.selectList(pageNo, pageSize);
       for (Member m : list) {
         out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getTel(), m.getEmail());
       }
