@@ -1,5 +1,6 @@
 /* 회원 관리 만들기 : 회원 목록 출력
- * => 포워드 적용
+ * => 포워드 적용: 오류 처리 부분
+ * => 인클루딩 적용: 웹페이지의 꼬리말 출력 부분
  */
 package step05.ex1;
 
@@ -40,6 +41,11 @@ public class MemberListServlet  extends GenericServlet {
     out.println("<head>");
     out.println("  <meta charset='UTF-8'>");
     out.println("  <title>회원관리</title>");
+    
+    // including 기법을 사용하여 각 페이지에 기본 CSS 스타일 코드를 출력한다.
+    RequestDispatcher rd = req.getRequestDispatcher("/step05/style/core");
+    rd.include(req, res);
+    
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>회원 목록</h1>");
@@ -78,10 +84,14 @@ public class MemberListServlet  extends GenericServlet {
       out.println("</table>");
       
     } catch (Exception e) {
-      RequestDispatcher rd = req.getRequestDispatcher("/step05/error");
+      rd = req.getRequestDispatcher("/step05/error");
       rd.forward(req, res);
       return;
     }
+    
+    // including 기법을 사용하여 각 페이지마다 꼬리말을 붙인다.
+    rd = req.getRequestDispatcher("/step05/footer");
+    rd.include(req, res);
     
     out.println("</body>");
     out.println("</html>");

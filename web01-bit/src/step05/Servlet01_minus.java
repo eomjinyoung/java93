@@ -29,7 +29,7 @@ public class Servlet01_minus extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("  <meta charset='UTF-8'>");
-    out.println("  <title>리프래시</title>");
+    out.println("  <title>포워딩</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>빼기 결과</h1>");
