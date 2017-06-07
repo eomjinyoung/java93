@@ -1,23 +1,22 @@
-/* 회원 관리 만들기 : 회원 변경하기 
- * => MemberDao를 이용하여 클라이언트로부터 받은 회원 정보를 변경한다.
+/* 회원 관리 만들기 : 회원 변경하기
  */
-package step03;
+package step04.ex1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/step03/Servlet05") 
-public class Servlet05  extends GenericServlet {
+@WebServlet(urlPatterns="/step04/update") 
+public class MemberUpdateServlet  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
-  public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+  public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     req.setCharacterEncoding("UTF-8");
     
     Member m = new Member();
@@ -56,14 +55,17 @@ public class Servlet05  extends GenericServlet {
       }
       out.println("<p>변경 성공입니다.</p>");
       
+      // 버퍼의 내용물이 클라이언트에게 전달되기 전이라면
+      // 언제든지 다음과 같이 헤더를 추가하거나 변경할 수 있다.
+      res.setHeader("Refresh", "1;url=list");
+      
     } catch (Exception e) {
       out.println("오류 발생!");
       out.println("<pre>");
       e.printStackTrace(out);
       out.println("</pre>");
+      out.println("<a href='list'>목록</a>");
     }
-    
-    out.println("<a href='Servlet02'>목록</a>");
     
     out.println("</body>");
     out.println("</html>");
