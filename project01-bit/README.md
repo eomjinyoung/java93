@@ -40,9 +40,16 @@ build.gradle 등의 파일이 생성된다.
 - 회원 변경이나 삭제 후 목록으로 리프래시 
 - 서블릿 클래스 명을 역할에 맞게 변경
 
+## 05 포워드, 인클루드 적용
+- 서블릿 실행 중 오류가 발생하면 ErrorServlet으로 포워딩 시킨다.
+- 각 서블릿의 출력 화면에 꼬리말(FooterServlet)과 
+  기본 스타일을 출력하는 서블릿(StyleServlet)을 인클루딩 시킨다.
+- 꼬리말을 출력할 FootServlet 추가
+- 기본 스타일을 출력할 StyleServlet 추가 
 
-
-
+## 06 ServletRequest 보관소 적용
+- 서블릿에서 발생한 예외 정보를 ServletRequest 보관소에 저장하여 
+  ErrorServlet에 전달한다.
 
 
 

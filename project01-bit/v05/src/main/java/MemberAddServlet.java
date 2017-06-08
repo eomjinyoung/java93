@@ -1,5 +1,5 @@
 /* 회원 관리 만들기 : 회원 등록하기 
- * => ServletRequest 보관소를 활용하여 예외 정보를 ErrorServlet과 공유하기
+ * => 포워드 적용
  */
 
 
@@ -45,7 +45,6 @@ public class MemberAddServlet extends HttpServlet {
       res.sendRedirect("list");
       
     } catch (Exception e) {
-      req.setAttribute("error", e); // ServletRequest 보관소에 오류 정보를 보관한다.
       RequestDispatcher rd = req.getRequestDispatcher("/error");
       rd.forward(req, res);
       return;

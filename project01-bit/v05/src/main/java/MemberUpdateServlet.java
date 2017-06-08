@@ -1,5 +1,6 @@
-/* 회원 관리 만들기 : 회원 삭제하기
- * => ServletRequest 보관소를 활용하여 예외 정보를 ErrorServlet과 공유하기
+/* 회원 관리 만들기 : 회원 변경하기
+ * => 포워드 적용: 오류 처리 부분
+ * => 인클루딩 적용: 웹페이지의 꼬리말 출력 부분
  */
 
 
@@ -13,12 +14,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/member/delete") 
-public class MemberDeleteServlet  extends HttpServlet {
+@WebServlet(urlPatterns="/member/update") 
+public class MemberUpdateServlet  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
   public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    req.setCharacterEncoding("UTF-8");
+    
+    Member m = new Member();
+    m.setNo(Integer.parseInt(req.getParameter("no")));
+    m.setName(req.getParameter("name"));
+    m.setTel(req.getParameter("tel"));
+    m.setEmail(req.getParameter("email"));
+    m.setPassword(req.getParameter("password"));
+    
     res.setContentType("text/html;charset=UTF-8");
     PrintWriter out = res.getWriter();
     
@@ -34,7 +44,7 @@ public class MemberDeleteServlet  extends HttpServlet {
         
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 삭제</h1>");
+    out.println("<h1>회원 변경</h1>");
     
     String jdbcDriver = "com.mysql.jdbc.Driver";
     String jdbcUrl = "jdbc:mysql://localhost:3306/webappdb";
@@ -47,17 +57,17 @@ public class MemberDeleteServlet  extends HttpServlet {
       
       MemberDao memberDao = new MemberDao(conPool);
       
-      int no = Integer.parseInt(req.getParameter("no"));
-      
-      int count = memberDao.delete(no);
+      int count = memberDao.update(m);
       if (count < 1) {
-        throw new Exception(no + "번 회원을 찾을 수 없습니다.");
+        throw new Exception(m.getNo() + "번 회원을 찾을 수 없습니다.");
       }
-      out.println("<p>삭제 성공입니다.</p>");
+      out.println("<p>변경 성공입니다.</p>");
+      
+      // 버퍼의 내용물이 클라이언트에게 전달되기 전이라면
+      // 언제든지 다음과 같이 헤더를 추가하거나 변경할 수 있다.
       res.setHeader("Refresh", "1;url=list");
       
     } catch (Exception e) {
-      req.setAttribute("error", e); // ServletRequest 보관소에 오류 정보를 보관한다.
       rd = req.getRequestDispatcher("/error");
       rd.forward(req, res);
       return;
