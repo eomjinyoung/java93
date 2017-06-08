@@ -1,5 +1,4 @@
-/* 회원 관리 만들기 : 회원 목록 출력하기 II
- * => 회원 목록을 HTML로 만들어 출력한다.
+/* 회원 관리 만들기 : 회원 목록 출력
  */
 
 
@@ -13,8 +12,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/member/Servlet02")
-public class Servlet02  extends GenericServlet {
+@WebServlet(urlPatterns="/member/list")
+public class MemberListServlet  extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -67,7 +66,7 @@ public class Servlet02  extends GenericServlet {
       for (Member m : list) {
         out.println("<tr>");
         out.printf("  <td>%d</td>\n", m.getNo());
-        out.printf("  <td><a href='Servlet04?no=%d'>%s</a></td>\n", m.getNo(), m.getName());
+        out.printf("  <td><a href='detail?no=%d'>%s</a></td>\n", m.getNo(), m.getName());
         out.printf("  <td>%s</td>\n", m.getTel());
         out.printf("  <td>%s</td>\n", m.getEmail());
         out.println("</tr>");

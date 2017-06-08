@@ -1,7 +1,4 @@
-/* 회원 관리 만들기 : 회원 목록 출력하기
- * => MemberDao, Member, DBConnectionPool 클래스 준비
- * => MemberDao를 이용하여 회원 목록을 가져온 다음, 
- *    텍스트를 출력한다.
+/* 회원 관리 만들기 : 회원 목록 출력
  */
 
 
@@ -15,8 +12,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/member/Servlet01")
-public class Servlet01  extends GenericServlet {
+@WebServlet(urlPatterns="/member/list")
+public class MemberListServlet  extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -33,8 +30,17 @@ public class Servlet01  extends GenericServlet {
       pageSize = Integer.parseInt(req.getParameter("pageSize"));
     } catch (Exception e) {}
     
-    res.setContentType("text/plain;charset=UTF-8");
+    res.setContentType("text/html;charset=UTF-8");
     PrintWriter out = res.getWriter();
+    
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("  <meta charset='UTF-8'>");
+    out.println("  <title>회원관리</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>회원 목록</h1>");
     
     String jdbcDriver = "com.mysql.jdbc.Driver";
     String jdbcUrl = "jdbc:mysql://localhost:3306/webappdb";
@@ -48,14 +54,36 @@ public class Servlet01  extends GenericServlet {
       MemberDao memberDao = new MemberDao(conPool);
       
       List<Member> list = memberDao.selectList(pageNo, pageSize);
+      
+      out.println("<a href='form.html'>새회원</a>");
+      
+      out.println("<table border='1'>");
+      out.println("<thead>");
+      out.println("  <tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th></tr>");
+      out.println("</thead>");
+      out.println("<tbody>");
+      
       for (Member m : list) {
-        out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getTel(), m.getEmail());
+        out.println("<tr>");
+        out.printf("  <td>%d</td>\n", m.getNo());
+        out.printf("  <td><a href='detail?no=%d'>%s</a></td>\n", m.getNo(), m.getName());
+        out.printf("  <td>%s</td>\n", m.getTel());
+        out.printf("  <td>%s</td>\n", m.getEmail());
+        out.println("</tr>");
       }
+      
+      out.println("</tbody>");
+      out.println("</table>");
       
     } catch (Exception e) {
       out.println("오류 발생!");
+      out.println("<pre>");
       e.printStackTrace(out);
+      out.println("</pre>");
     }
+    
+    out.println("</body>");
+    out.println("</html>");
   }
 }
 

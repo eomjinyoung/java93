@@ -1,6 +1,4 @@
-/* 회원 관리 만들기 : 회원 조회하기 
- * => MemberDao를 이용하여 클라이언트가 보낸 번호에 해당하는 회원 정보 찾아
- *    HTML로 만들어 출력한다. 
+/* 회원 관리 만들기 : 회원 조회하기
  */
 
 
@@ -13,8 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/member/Servlet04")
-public class Servlet04  extends GenericServlet {
+@WebServlet(urlPatterns="/member/detail")
+public class MemberDetailServlet  extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -49,7 +47,7 @@ public class Servlet04  extends GenericServlet {
         throw new Exception(no + "번 회원이 없습니다.");
       }
       
-      out.printf("<form action='Servlet05' method='POST'>\n");
+      out.printf("<form action='update' method='POST'>\n");
       out.printf("번호:<input type='text' name='no' value='%d' readonly><br>\n", member.getNo());
       out.printf("이름:<input type='text' name='name' value='%s'><br>\n", member.getName());
       out.printf("전화:<input type='text' name='tel' value='%s'><br>\n", member.getTel());
@@ -60,23 +58,22 @@ public class Servlet04  extends GenericServlet {
       out.println("<button type='button' onclick='doList()'>목록</button>");
       out.println("</form>");
       
+      out.println("<script>");
+      out.println("function doDelete() {");
+      out.printf("  location.href = 'delete?no=%s'\n", req.getParameter("no"));
+      out.println("}");
+      out.println("function doList() {");
+      out.println("  location.href = 'list'\n");
+      out.println("}");
+      out.println("</script>");
       
     } catch (Exception e) {
       out.println("오류 발생!");
       out.println("<pre>");
       e.printStackTrace(out);
       out.println("</pre>");
-      out.println("<a href='Servlet02'>목록</a>");
+      out.println("<a href='list'>목록</a>");
     }
-   
-    out.println("<script>");
-    out.println("function doDelete() {");
-    out.printf("  location.href = 'Servlet06?no=%s'\n", req.getParameter("no"));
-    out.println("}");
-    out.println("function doList() {");
-    out.println("  location.href = 'Servlet02'\n");
-    out.println("}");
-    out.println("</script>");
     
     out.println("</body>");
     out.println("</html>");
