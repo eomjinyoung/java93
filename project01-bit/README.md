@@ -26,7 +26,14 @@ project/
 build.gradle 등의 파일이 생성된다.
 ```
 2) build.gradle 설정 파일을 편집한다.
+3) .gitignore 파일을 편집한다.
+4) gradle 명령을 실행하여 이클립스 설정 파일을 만든다.
+```
+> gradle eclipse
+```
 
+## 03 회원관리 서블릿 작성
+- GenericServlet 추상 클래스를 상속 받아서 서블릿을 만든다. 
 
 
 
