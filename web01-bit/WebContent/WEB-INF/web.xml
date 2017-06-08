@@ -11,14 +11,23 @@
     <!-- 유지보수 편하라고 별명을 클래스 이름으로 한다. -->
     <servlet-name>HelloServlet</servlet-name> <!-- 서블릿 클래스의 별명을 지정한다. -->
     <servlet-class>HelloServlet</servlet-class> <!-- 서블릿 클래스의 전체 이름을 적는다. -->
+    <!-- <load-on-startup>1</load-on-startup> -->
   </servlet>
   
 <!-- 
   <servlet>
-    <servlet-name>servlets.step01.Servlet01</servlet-name> 
-    <servlet-class>servlets.step01.Servlet01</servlet-class> 
+    <servlet-name>step01.Servlet01</servlet-name> 
+    <servlet-class>step01.Servlet01</servlet-class> 
   </servlet>
 -->
+
+<!-- 
+  <servlet>
+    <servlet-name>step08.Servlet02</servlet-name> 
+    <servlet-class>step08.Servlet02</servlet-class> 
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+ -->
    
   <!-- 서블릿에 URL을 연결(매핑)한다. -->
   <servlet-mapping>
