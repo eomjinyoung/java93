@@ -51,6 +51,11 @@ build.gradle 등의 파일이 생성된다.
 - 서블릿에서 발생한 예외 정보를 ServletRequest 보관소에 저장하여 
   ErrorServlet에 전달한다.
 
+## 07 SerlvetContext 보관소와 서블릿 객체 자동 생성 적용
+- InitServlet 추가
+  - 웹 애플리케이션에서 사용할 객체를 준비하는 서블릿
+  - DAO와 DBConnectionPool 객체를 생성하여 ServletContext 보관소에 저장한다.
+  - 다른 서블릿들은 이 보관소에 저장된 DAO를 꺼내 사용한다. 
 
 
 
