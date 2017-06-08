@@ -18,3 +18,22 @@ project/
       resources/      <-- 단위 테스트할 때 사용할 설정 파일을 두는 폴더.
                           예) .properties, .xml, .txt 등
 ```
+
+## 02 gradle 설정 파일을 준비
+1) gradle 빌드 도구를 실행할 때 필요한 설정 파일을 준비한다.
+```
+프로젝트 폴더> gradle init
+build.gradle 등의 파일이 생성된다.
+```
+2) build.gradle 설정 파일을 편집한다.
+
+
+
+
+
+
+
+
+
+
+
