@@ -57,6 +57,12 @@ build.gradle 등의 파일이 생성된다.
   - DAO와 DBConnectionPool 객체를 생성하여 ServletContext 보관소에 저장한다.
   - 다른 서블릿들은 이 보관소에 저장된 DAO를 꺼내 사용한다. 
 
+## 08 클래스들을 역할에 따라 패키지로 분리시킨다.
+- 소스 코드의 유지보수를 좋게 하기 위해서이다.
+  - domain: Member 클래스처럼 사용자 정의 데이터 타입을 다루는 클래스를 둔다.
+  - dao: DB 테이블의 데이터를 다루는 클래스를 둔다.
+  - util: DBConnectionPool 처럼 기타 유틸리티 클래스를 둔다.
+  - servlet: 서블릿 클래스들을 둔다.
 
 
 

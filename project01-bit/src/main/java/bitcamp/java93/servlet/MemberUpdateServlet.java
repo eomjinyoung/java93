@@ -1,6 +1,6 @@
+package bitcamp.java93.servlet;
 /* ServletContext 보관소에 저장된 MemberDao 이용하기 
  */
-
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,12 +12,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/member/delete") 
-public class MemberDeleteServlet  extends HttpServlet {
+import bitcamp.java93.dao.MemberDao;
+import bitcamp.java93.domain.Member;
+
+@WebServlet(urlPatterns="/member/update") 
+public class MemberUpdateServlet  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
   public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    req.setCharacterEncoding("UTF-8");
+    
+    Member m = new Member();
+    m.setNo(Integer.parseInt(req.getParameter("no")));
+    m.setName(req.getParameter("name"));
+    m.setTel(req.getParameter("tel"));
+    m.setEmail(req.getParameter("email"));
+    m.setPassword(req.getParameter("password"));
+    
     res.setContentType("text/html;charset=UTF-8");
     PrintWriter out = res.getWriter();
     
@@ -33,17 +45,18 @@ public class MemberDeleteServlet  extends HttpServlet {
         
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 삭제</h1>");
+    out.println("<h1>회원 변경</h1>");
     
     try {
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");      
-      int no = Integer.parseInt(req.getParameter("no"));
-      
-      int count = memberDao.delete(no);
+      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
+      int count = memberDao.update(m);
       if (count < 1) {
-        throw new Exception(no + "번 회원을 찾을 수 없습니다.");
+        throw new Exception(m.getNo() + "번 회원을 찾을 수 없습니다.");
       }
-      out.println("<p>삭제 성공입니다.</p>");
+      out.println("<p>변경 성공입니다.</p>");
+      
+      // 버퍼의 내용물이 클라이언트에게 전달되기 전이라면
+      // 언제든지 다음과 같이 헤더를 추가하거나 변경할 수 있다.
       res.setHeader("Refresh", "1;url=list");
       
     } catch (Exception e) {

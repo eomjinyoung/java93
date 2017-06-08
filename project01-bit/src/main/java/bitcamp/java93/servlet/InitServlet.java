@@ -1,3 +1,4 @@
+package bitcamp.java93.servlet;
 /* 웹 애플리케이션 공통 자원을 준비하는 서블릿
  * => DBConnectionPool과 DAO를 준비한다.
  * => ServletContext 보관소에 저장한다.
@@ -8,6 +9,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+
+import bitcamp.java93.dao.MemberDao;
+import bitcamp.java93.util.DBConnectionPool;
 
 // 웹 애플리케이션이 시작될 때 이 서블릿 객체를 자동 생성해야 하기 때문에,
 // WebServlet 애노테이션에 loadOnStartup 속성을 추가한다.

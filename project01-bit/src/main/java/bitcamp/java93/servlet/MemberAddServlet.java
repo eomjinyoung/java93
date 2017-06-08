@@ -1,3 +1,4 @@
+package bitcamp.java93.servlet;
 /* ServletContext 보관소에 저장된 MemberDao 이용하기 
  */
 
@@ -10,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bitcamp.java93.dao.MemberDao;
+import bitcamp.java93.domain.Member;
 
 @WebServlet(urlPatterns="/member/add")
 public class MemberAddServlet extends HttpServlet {

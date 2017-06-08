@@ -1,3 +1,4 @@
+package bitcamp.java93.servlet;
 /* 예외 처리 서블릿
  * => ServletRequest 보관소를 활용하여 예외 정보를 ErrorServlet과 공유하기
  */
