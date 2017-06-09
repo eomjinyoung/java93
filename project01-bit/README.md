@@ -80,3 +80,13 @@ build.gradle 등의 파일이 생성된다.
 - MemberListServlet, MemberDetailServlet, MemberDeleteServlet 은 GET 요청만 처리하기
 - MemberAddServlet, MemberUpdateServlet 은 POST 요청만 처리하기
 
+## 12 로그인 기능 추가하기
+- 로그인 폼 추가
+  - /webapp/auth/login.html
+- 로그인 처리 서블릿 추가
+  - servlet.LoginServlet
+- 이메일과 암호로 사용자 정보를 조회하는 메서드 추가
+  - MemberDao.selectOneByEmailPassword(String email, String password)
+
+
+
