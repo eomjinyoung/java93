@@ -5,8 +5,16 @@
   id="WebApp_ID" 
   version="3.1">
   <display-name>web01</display-name>
+
+<!-- 리스너 등록한다. -->
+<!--  
+  <listener>
+    <listener-class>step09.Listener01</listener-class>
+  </listener>  
+-->  
   
-  <!-- 서블릿 클래스를 등록한다. -->
+  
+<!-- 서블릿 클래스를 등록한다. -->
   <servlet>
     <!-- 유지보수 편하라고 별명을 클래스 이름으로 한다. -->
     <servlet-name>HelloServlet</servlet-name> <!-- 서블릿 클래스의 별명을 지정한다. -->

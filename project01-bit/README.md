@@ -63,7 +63,11 @@ build.gradle 등의 파일이 생성된다.
   - dao: DB 테이블의 데이터를 다루는 클래스를 둔다.
   - util: DBConnectionPool 처럼 기타 유틸리티 클래스를 둔다.
   - servlet: 서블릿 클래스들을 둔다.
-
+  
+## 09 ServletContextListener 리스너 적용
+- InitServlet 에서 준비하던 DAO 객체를 ServletContextListener 옮긴다.
+- 즉 웹 애플리케이션이 시작될 때 공통 객체들을 준비시킨다.
+- 예) ContextLoaderListener
 
 
 
