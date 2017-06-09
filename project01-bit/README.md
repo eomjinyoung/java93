@@ -76,4 +76,7 @@ build.gradle 등의 파일이 생성된다.
   호출할 필요가 없다.
 - 예) CharacterEncodingFilter 
 
+## 11 GET/POST 구분하기
+- MemberListServlet, MemberDetailServlet, MemberDeleteServlet 은 GET 요청만 처리하기
+- MemberAddServlet, MemberUpdateServlet 은 POST 요청만 처리하기
 
