@@ -30,7 +30,24 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(urlPatterns="/step01/Servlet01")
+// 1) URL 패턴을 지정하기
+//@WebServlet(urlPatterns="/step01/Servlet01")
+
+// 2) urlPatterns는 배열이기 때문에 정확하게 배열의 형태로 값 지정하기
+//@WebServlet(urlPatterns={"/step01/Servlet01"})
+
+// 3) 여러 개의 URL을 지정하기
+//@WebServlet(urlPatterns={"/step01/Servlet01", "/step01/Servlet01_a", "/step01/Servlet01_b"})
+
+// 4) urlPatterns 대신 value 속성에 지정해도 된다. 두 개의 속성은 같은 역할을 한다.
+//@WebServlet(value="/step01/Servlet01")
+
+// 5) value 속성으로 URL을 지정할 경우, value 이름을 생략할 수 있다.
+//@WebServlet("/step01/Servlet01")
+
+// 물론 두 개 이상의 속성 값을 지정하는 경우 value를 생략할 수 없다는 것 알지요?
+//@WebServlet("/step01/Servlet01", loadOnStartup=1)// 컴파일 오류!
+@WebServlet(value="/step01/Servlet01", loadOnStartup=1)
 public class Servlet01 implements Servlet {
   public Servlet01() {
     System.out.println("Servlet01()");
