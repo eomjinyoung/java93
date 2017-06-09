@@ -69,5 +69,11 @@ build.gradle 등의 파일이 생성된다.
 - 즉 웹 애플리케이션이 시작될 때 공통 객체들을 준비시킨다.
 - 예) ContextLoaderListener
 
+## 10 Filter 적용 
+- POST 방식으로 서버에 전달되는 데이터의 문자 집합을 지정하는 작업을 
+  필터에서 처리한다.
+- 필터를 사용하면 각 서블릿 마다 req.setCharacterEncoding("UTF-8")을 
+  호출할 필요가 없다.
+- 예) CharacterEncodingFilter 
 
 

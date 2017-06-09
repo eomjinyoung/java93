@@ -6,8 +6,8 @@
  * 3) 리스너 (= event handler)
  *    - 특정 상태(event)에 놓일 때 작업 수행
  *    
- * ServletRequestListener?
- * - 요청이 들어오거나 응답을 완료하는 상태일 때 작업 수행    
+ * ServletRequestAttributeListener?
+ * - ServletRequest 보관소에 값을 추가하거나 변경, 삭제할 때 작업 수행    
  *    
  * 리스너 배치하기
  * 1) web.xml에 등록하기
@@ -27,7 +27,7 @@ import javax.servlet.ServletRequestAttributeEvent;
 import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.annotation.WebListener;
 
-@WebListener
+//@WebListener
 public class Listener03 implements ServletRequestAttributeListener {
   
   @Override

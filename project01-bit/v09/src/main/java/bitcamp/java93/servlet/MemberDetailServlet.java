@@ -2,6 +2,7 @@ package bitcamp.java93.servlet;
 /* ServletContext 보관소에 저장된 MemberDao 이용하기 
  */
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -15,19 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.domain.Member;
 
-@WebServlet(urlPatterns="/member/update") 
-public class MemberUpdateServlet  extends HttpServlet {
+@WebServlet(urlPatterns="/member/detail")
+public class MemberDetailServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
   public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    Member m = new Member();
-    m.setNo(Integer.parseInt(req.getParameter("no")));
-    m.setName(req.getParameter("name"));
-    m.setTel(req.getParameter("tel"));
-    m.setEmail(req.getParameter("email"));
-    m.setPassword(req.getParameter("password"));
-    
     res.setContentType("text/html;charset=UTF-8");
     PrintWriter out = res.getWriter();
     
@@ -40,22 +34,39 @@ public class MemberUpdateServlet  extends HttpServlet {
     // including 기법을 사용하여 각 페이지에 기본 CSS 스타일 코드를 출력한다.
     RequestDispatcher rd = req.getRequestDispatcher("/style/core");
     rd.include(req, res);
-        
+    
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 변경</h1>");
+    out.println("<h1>회원 조회</h1>");
     
     try {
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
-      int count = memberDao.update(m);
-      if (count < 1) {
-        throw new Exception(m.getNo() + "번 회원을 찾을 수 없습니다.");
-      }
-      out.println("<p>변경 성공입니다.</p>");
+      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");      
+      int no = Integer.parseInt(req.getParameter("no"));
       
-      // 버퍼의 내용물이 클라이언트에게 전달되기 전이라면
-      // 언제든지 다음과 같이 헤더를 추가하거나 변경할 수 있다.
-      res.setHeader("Refresh", "1;url=list");
+      Member member = memberDao.selectOne(no);
+      if (member == null) {
+        throw new Exception(no + "번 회원이 없습니다.");
+      }
+      
+      out.printf("<form action='update' method='POST'>\n");
+      out.printf("번호:<input type='text' name='no' value='%d' readonly><br>\n", member.getNo());
+      out.printf("이름:<input type='text' name='name' value='%s'><br>\n", member.getName());
+      out.printf("전화:<input type='text' name='tel' value='%s'><br>\n", member.getTel());
+      out.printf("이메일:<input type='text' name='email' value='%s'><br>\n", member.getEmail());
+      out.println("암호:<input type='password' name='password'><br>");
+      out.println("<button>변경</button>");
+      out.println("<button type='button' onclick='doDelete()'>삭제</button>");
+      out.println("<button type='button' onclick='doList()'>목록</button>");
+      out.println("</form>");
+      
+      out.println("<script>");
+      out.println("function doDelete() {");
+      out.printf("  location.href = 'delete?no=%s'\n", req.getParameter("no"));
+      out.println("}");
+      out.println("function doList() {");
+      out.println("  location.href = 'list'\n");
+      out.println("}");
+      out.println("</script>");
       
     } catch (Exception e) {
       req.setAttribute("error", e); // ServletRequest 보관소에 오류 정보를 보관한다.

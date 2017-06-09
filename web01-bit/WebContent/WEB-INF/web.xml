@@ -13,6 +13,23 @@
   </listener>  
 -->  
   
+<!-- 필터를 등록한다. -->
+<!-- 1) 필터 클래스 등록 -->
+<!--  
+  <filter>
+    <filter-name>step10.Filter01</filter-name>
+    <filter-class>step10.Filter01</filter-class>
+  </filter>
+-->
+<!-- 2) 필터 클래스에 URL 적용 -->
+<!--    
+  <filter-mapping>
+    <filter-name>step10.Filter01</filter-name>
+    <url-pattern>/step10/*</url-pattern>
+  </filter-mapping>
+-->
+
+
   
 <!-- 서블릿 클래스를 등록한다. -->
   <servlet>
