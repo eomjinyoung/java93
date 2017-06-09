@@ -22,19 +22,6 @@ public class MemberDetailServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
- // 로그인 여부 검사
-    String sessionId = req.getParameter("sessionId");
-    if (sessionId == null) { // 파라미터에 세션 아이디가 없으면 로그인 화면으로 보낸다.
-      res.sendRedirect("../auth/login.html");
-      return;
-    }
-    
-    Member loginMember = (Member)this.getServletContext().getAttribute("id_" + sessionId);
-    if (loginMember == null) { // 로그인 하지 않았다면 로그인 화면으로 보낸다.
-      res.sendRedirect("../auth/login.html");
-      return;
-    }
-    
     res.setContentType("text/html;charset=UTF-8");
     PrintWriter out = res.getWriter();
     
@@ -50,7 +37,6 @@ public class MemberDetailServlet extends HttpServlet {
     
     out.println("</head>");
     out.println("<body>");
-    out.printf("<p>%s(%s)</p>\n", loginMember.getName(), loginMember.getEmail());
     out.println("<h1>회원 조회</h1>");
     
     try {
