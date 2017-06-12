@@ -135,7 +135,8 @@ build.gradle 등의 파일이 생성된다.
   - 입력폼을 출력하는 HTML이 변경될 수 있다. 따라서 정적 HTML 파일 대신
     서블릿을 이용하여 동적으로 로그인폼을 위한 HTML 을 생성해야 한다.    
     => LoginServlet에서 doGet()을 오버라이딩하여 로그인 폼을 출력하게 만든다.
-   
+  - /webapp/auth/login.html 파일을 제거한다.
+  - HeaderServlet과 LogoutServlet, AuthCheckFilter 변경 
    
    
    
