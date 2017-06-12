@@ -49,8 +49,10 @@ public class MemberListServlet  extends HttpServlet {
     
     out.println("</head>");
     out.println("<body>");
-    Member loginMember = (Member)req.getAttribute("loginMember");
-    out.printf("<p>%s(%s)</p>\n", loginMember.getName(), loginMember.getEmail());
+    
+    rd = req.getRequestDispatcher("/header");
+    rd.include(req, res);
+    
     out.println("<h1>회원 목록</h1>");
     
     try {
