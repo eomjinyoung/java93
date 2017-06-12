@@ -138,6 +138,33 @@ build.gradle 등의 파일이 생성된다.
   - /webapp/auth/login.html 파일을 제거한다.
   - HeaderServlet과 LogoutServlet, AuthCheckFilter 변경 
    
+## 17 HttpSession 보관소 적용
+- 문제 
+  - 세션 관리를 개발자가 직접 해야 하기 때문에 코딩이 번거롭다.
+  - 즉 세션 아이디를 발급하고 쿠키에 보관하는 코드를 작성해야 한다.
+  - 세션 아디를 이용하여 저장된 값을 꺼내는 일을 직접해야 한다.
+- 해결
+  - Servlet 기술에서 제공하는 HttpSession을 사용하는 것이다.
+  - 서블릿 컨테이너는 세션아이디가 없으면 새로운 HttpSession 객체를 생성한다.
+  - 세션 아이디를 중복되지 않게 쿠키를 이용하여 발급한다.
+  - 웹브라우저가 요청할 때 마다 쿠키에서 세션아이디를 찾아 
+    그 아이디로 저장된 HttpSession 저장소를 리턴해준다.
+- 방법
+  - 단순히 로그인 한 회원 정보를 HttpSession 에 보관하라!
+  - 로그인 회원의 정보를 알고 싶다면 HttpSession 보관소에서 꺼내라!
+  - LoginServlet, LogoutServlet, AuthCheckFilter, HeaderServlet 변경
+
+
+
+
+
+
+
+
+
+
+
+
    
    
    

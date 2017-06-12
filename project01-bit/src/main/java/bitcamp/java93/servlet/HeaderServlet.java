@@ -1,5 +1,5 @@
 package bitcamp.java93.servlet;
-/* 페이지 상단의 정보를 출력하는 서블릿*/
+/* 페이지 상단에 HttpSession 보관소에서 꺼낸 로그인 회원 정보를 출력한다.*/
 
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class HeaderServlet  extends HttpServlet {
     out.println("  <div id='logo'>비트캠프</div>");
     out.println("  <div id='login'>");
     //out.println("  <a href='/project01/auth/login.html'>로그인</a>");
-    Member loginMember = (Member)req.getAttribute("loginMember");
+    Member loginMember = (Member)req.getSession().getAttribute("loginMember");
     if (loginMember != null) {
       out.printf("%s(%s)\n", loginMember.getName(), loginMember.getEmail());
       out.printf("  <a href='%s/auth/logout'>로그아웃</a>\n", req.getContextPath());
