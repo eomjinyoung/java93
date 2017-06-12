@@ -1,4 +1,4 @@
-/* 로그인 서블릿 */
+/* 로그인 서블릿 : 세션 ID를 쿠키에 담에 클라이언트로 보낸다.*/
 package bitcamp.java93.servlet;
 
 
@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,41 +26,44 @@ public class LoginServlet extends HttpServlet {
     String password = req.getParameter("password");
     
     try {
-      res.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = res.getWriter();
-      
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("  <meta charset='UTF-8'>");
-      out.println("  <title>로그인</title>");
-      RequestDispatcher rd = req.getRequestDispatcher("/style/core");
-      rd.include(req, res);
-      out.println("</head>");
-      out.println("<body>");
-      
       MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");      
       Member member = memberDao.selectOneByEmailPassword(email, password);
       if (member != null) { // 로그인 성공!
-        long sessionId = System.currentTimeMillis();
-        this.getServletContext().setAttribute("id_" + sessionId, member);
+        String sessionId = "id_" + System.currentTimeMillis();
+        this.getServletContext().setAttribute(sessionId, member);
         
-        out.println("<h1>로그인 성공!</h1>");
-        out.println("<p>다음 번호를 잘 보관해두었다가 서버에 요청할 때마다"); 
-        out.println("   sessionId 라는 이름으로 파라미터를 추가해 보내기 바랍니다.</p>");
-        out.printf("<p>%d</p>\n", sessionId);
-        out.println("<p>이제 마음껏 돌아다니세요!</p>");
+        // 쿠키 생성
+        Cookie cookie = new Cookie("sessionId", sessionId);
+        
+        // 쿠키 사용처의 범위를 지정
+        cookie.setPath(req.getContextPath()); // ==> /project01
+        
+        // 쿠키를 클라이언트로 보내는 방법? 응답 헤더에 추가한다.
+        res.addCookie(cookie);
+        
+        res.sendRedirect("../member/list");
         
       } else {
+        res.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = res.getWriter();
+        
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("  <meta charset='UTF-8'>");
+        out.println("  <title>로그인</title>");
+        RequestDispatcher rd = req.getRequestDispatcher("/style/core");
+        rd.include(req, res);
+        out.println("</head>");
+        out.println("<body>");
         res.setHeader("Refresh", "2;url=login.html");
         out.println("<h1>로그인 오류!</h1>");
         out.println("<p>이메일 또는 암호가 맞지 않습니다.</p>");
+        rd = req.getRequestDispatcher("/footer");
+        rd.include(req, res);
+        out.println("</body>");
+        out.println("</html>");
       }
-      rd = req.getRequestDispatcher("/footer");
-      rd.include(req, res);
-      
-      out.println("</body>");
-      out.println("</html>");
       
     } catch (Exception e) {
       req.setAttribute("error", e);

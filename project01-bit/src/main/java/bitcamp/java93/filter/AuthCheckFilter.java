@@ -1,6 +1,6 @@
 package bitcamp.java93.filter;
 
-/* 역할: 로그인 여부를 검사하는 필터 */
+/* 역할: 쿠키로 들어온 세션 ID를 가지고 로그인 여부를 검사한다. */
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,15 +29,18 @@ public class AuthCheckFilter implements Filter {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     HttpServletResponse httpResponse = (HttpServletResponse) response;
     
-    // 로그인 여부 검사
-    String sessionId = httpRequest.getParameter("sessionId");
-    if (sessionId == null) { // 파라미터에 세션 아이디가 없으면 로그인 화면으로 보낸다.
-      httpResponse.sendRedirect("../auth/login.html");
-      return;
+    // 클라이언트가 보낸 쿠기를 꺼낸다.
+    Member loginMember = null;
+    Cookie[] cookies = httpRequest.getCookies();
+    for (Cookie cookie : cookies) {
+      if (cookie.getName().equals("sessionId")) {
+        loginMember = (Member)request.getServletContext().getAttribute(cookie.getValue());
+        httpRequest.setAttribute("loginMember", loginMember);
+        break;
+      }
     }
     
-    Member loginMember = (Member)request.getServletContext().getAttribute("id_" + sessionId);
-    if (loginMember == null) { // 로그인 하지 않았다면 로그인 화면으로 보낸다.
+    if (loginMember == null) { // 쿠키에 세션ID가 없다면 로그인 화면으로 보낸다.
       httpResponse.sendRedirect("../auth/login.html");
       return;
     }
