@@ -25,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
       }
     }
     
-    res.sendRedirect("../auth/login.html");
+    res.sendRedirect("../auth/login");
   }
 }
 

@@ -26,8 +26,10 @@ public class HeaderServlet  extends HttpServlet {
     out.println("  <div id='login'>");
     //out.println("  <a href='/project01/auth/login.html'>로그인</a>");
     Member loginMember = (Member)req.getAttribute("loginMember");
-    out.printf("%s(%s)\n", loginMember.getName(), loginMember.getEmail());
-    out.printf("  <a href='%s/auth/logout'>로그아웃</a>\n", req.getContextPath());
+    if (loginMember != null) {
+      out.printf("%s(%s)\n", loginMember.getName(), loginMember.getEmail());
+      out.printf("  <a href='%s/auth/logout'>로그아웃</a>\n", req.getContextPath());
+    }
     out.println("  </div> ");
     out.println("</div>");
   }

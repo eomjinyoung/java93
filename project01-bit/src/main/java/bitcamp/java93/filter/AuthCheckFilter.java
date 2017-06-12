@@ -32,16 +32,18 @@ public class AuthCheckFilter implements Filter {
     // 클라이언트가 보낸 쿠기를 꺼낸다.
     Member loginMember = null;
     Cookie[] cookies = httpRequest.getCookies();
-    for (Cookie cookie : cookies) {
-      if (cookie.getName().equals("sessionId")) {
-        loginMember = (Member)request.getServletContext().getAttribute(cookie.getValue());
-        httpRequest.setAttribute("loginMember", loginMember);
-        break;
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("sessionId")) {
+          loginMember = (Member)request.getServletContext().getAttribute(cookie.getValue());
+          httpRequest.setAttribute("loginMember", loginMember);
+          break;
+        }
       }
     }
     
     if (loginMember == null) { // 쿠키에 세션ID가 없다면 로그인 화면으로 보낸다.
-      httpResponse.sendRedirect("../auth/login.html");
+      httpResponse.sendRedirect("../auth/login");
       return;
     }
     
