@@ -172,8 +172,15 @@ build.gradle 등의 파일이 생성된다.
 - 강사 삭제 서블릿 추가
   - TeacherDeleteServlet.java
 
-
-
+## 19 서비스 컴포넌트 추가
+- 업무로직과 트랜잭션을 담당할 서비스 컴포넌트 추가
+  - TeacherService.java 
+- TeacherXxxServlet 서블릿 클래스에서 비즈니스로직을 분리하여 서비스 컴포넌트에 둔다.
+  - 비즈니스 로직을 화면처리 코드에서 분리하게 되면, 재사용성이 높아진다.
+- ContextLoaderListener에서 TeacherService 객체를 준비한다.
+  - ContextLoaderListener.java 변경
+- TeacherXxxServlet에서 DAO 대신 Service 컴포넌트를 사용하도록 변경한다.
+  - TeacherXxxServlet.java 변경
 
 
 

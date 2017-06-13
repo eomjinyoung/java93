@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
+import bitcamp.java93.service.TeacherService;
 
 @WebServlet(urlPatterns="/teacher/list")
 public class TeacherListServlet  extends HttpServlet {
@@ -52,8 +52,9 @@ public class TeacherListServlet  extends HttpServlet {
     out.println("<h1>강사 목록</h1>");
     
     try {
-      TeacherDao teacherDao = (TeacherDao)this.getServletContext().getAttribute("teacherDao");      
-      List<Teacher> list = teacherDao.selectList(pageNo, pageSize);
+      TeacherService teacherService = 
+          (TeacherService)this.getServletContext().getAttribute("teacherService");      
+      List<Teacher> list = teacherService.list(pageNo, pageSize);
       
       out.println("<a href='form.html'>새강사</a>");
       

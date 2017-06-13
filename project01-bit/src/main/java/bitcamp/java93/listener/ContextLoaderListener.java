@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebListener;
 
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
+import bitcamp.java93.service.TeacherService;
 import bitcamp.java93.util.DBConnectionPool;
 
 @WebListener
@@ -26,9 +27,12 @@ public class ContextLoaderListener implements ServletContextListener {
       MemberDao memberDao = new MemberDao(conPool);
       TeacherDao teacherDao = new TeacherDao(conPool);
       
+      TeacherService teacherService = new TeacherService();
+      teacherService.setMemberDao(memberDao);
+      teacherService.setTeacherDao(teacherDao);
+      
       ServletContext sc = sce.getServletContext();
-      sc.setAttribute("memberDao", memberDao);
-      sc.setAttribute("teacherDao", teacherDao);
+      sc.setAttribute("teacherService", teacherService);
       
     } catch (Exception e) {
       e.printStackTrace();
