@@ -1,3 +1,22 @@
+/* HttpSession 보관소 : HttpSession 객체 준비하기
+ * => 클라이언트 당 한 개의 HttpSession 보관소를 가진다.
+ * => HttpServletRequest.getSession() 메서드를 호출하여 얻는다.
+ * => HttpSession 객체 준비 절차!
+ *    1) getSession() 호출
+ *    2) 클라이언트 요청 헤더에 세션ID가 있는지 조사한다.
+ *    3) 없다면, 
+ *       - HttpSession 객체를 생성하여 리턴한다.
+ *    4) 있다면,
+ *       - 세션ID에 해당하는 HttpSession 객체를 찾는다.
+ *       => 무효한 객체라면,
+ *         - HttpSession 객체를 생성하여 리턴한다.
+ *       => 타임아웃된 객체라면,
+ *         - HttpSession 객체를 생성하여 리턴한다.
+ *       => 정상적이라면,
+ *         - 찾은 객체를 리턴한다.
+ * => 서블릿 컨테이너에서는 세션ID를 이용하여 클라이언트를 구분한다.
+ *    세션ID는 쿠키를 이용하여 웹서버와 웹브라우저가 주고 받는다.
+ */
 package step13;
 
 import java.io.IOException;
