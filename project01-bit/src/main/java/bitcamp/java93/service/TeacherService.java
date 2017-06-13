@@ -24,6 +24,34 @@ public class TeacherService {
   public Teacher get(int no) throws Exception {
     return teacherDao.selectOne(no);
   }
+  
+  public void add(Teacher teacher) throws Exception {
+    memberDao.insert(teacher);
+    teacherDao.insert(teacher);
+  }
+  
+  public void update(Teacher teacher) throws Exception {
+    int count = memberDao.update(teacher);
+    if (count < 1) {
+      throw new Exception(teacher.getNo() + "번 강사를 찾을 수 없습니다.");
+    }
+    
+    count = teacherDao.update(teacher);
+    if (count < 1) {
+      throw new Exception(teacher.getNo() + "번 강사를 찾을 수 없습니다.");
+    }
+  }
+  
+  public void remove(int no) throws Exception {
+    int count = teacherDao.delete(no);
+    if (count < 1) {
+      throw new Exception(no + "번 강사를 찾을 수 없습니다.");
+    }
+    
+    try {
+      count = memberDao.delete(no);
+    } catch (Exception e) {}
+  }
 }
 
 

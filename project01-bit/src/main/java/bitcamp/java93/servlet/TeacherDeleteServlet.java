@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.dao.MemberDao;
-import bitcamp.java93.dao.TeacherDao;
+import bitcamp.java93.service.TeacherService;
 
 @WebServlet(urlPatterns="/teacher/delete") 
 public class TeacherDeleteServlet  extends HttpServlet {
@@ -38,16 +37,9 @@ public class TeacherDeleteServlet  extends HttpServlet {
     try {
       int no = Integer.parseInt(req.getParameter("no"));
 
-      TeacherDao teacherDao = (TeacherDao)this.getServletContext().getAttribute("teacherDao");
-      int count = teacherDao.delete(no);
-      if (count < 1) {
-        throw new Exception(no + "번 강사를 찾을 수 없습니다.");
-      }
-      
-      try {
-        MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");      
-        count = memberDao.delete(no);
-      } catch (Exception e) {}
+      TeacherService teacherService = 
+          (TeacherService)this.getServletContext().getAttribute("teacherService");      
+      teacherService.remove(no);
       
       out.println("<p>삭제 성공입니다.</p>");
       

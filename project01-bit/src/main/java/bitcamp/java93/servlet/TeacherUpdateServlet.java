@@ -1,6 +1,4 @@
 package bitcamp.java93.servlet;
-/* ServletContext 보관소에 저장된 MemberDao 이용하기 
- */
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.dao.MemberDao;
-import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
+import bitcamp.java93.service.TeacherService;
 
 @WebServlet(urlPatterns="/teacher/update") 
 public class TeacherUpdateServlet  extends HttpServlet {
@@ -49,17 +46,9 @@ public class TeacherUpdateServlet  extends HttpServlet {
     out.println("<h1>강사 변경</h1>");
     
     try {
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
-      int count = memberDao.update(t);
-      if (count < 1) {
-        throw new Exception(t.getNo() + "번 강사를 찾을 수 없습니다.");
-      }
-      
-      TeacherDao teacherDao = (TeacherDao)this.getServletContext().getAttribute("teacherDao");
-      count = teacherDao.update(t);
-      if (count < 1) {
-        throw new Exception(t.getNo() + "번 강사를 찾을 수 없습니다.");
-      }
+      TeacherService teacherService = 
+          (TeacherService)this.getServletContext().getAttribute("teacherService");
+      teacherService.update(t);
       
       out.println("<p>변경 성공입니다.</p>");
       
