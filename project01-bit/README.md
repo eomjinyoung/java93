@@ -163,7 +163,14 @@ build.gradle 등의 파일이 생성된다.
   - ContextLoaderListener.java 변경  
 - 강사 목록조회 서블릿 추가
   - TeacherListServlet.java
-      
+- 강사 상세조회 서블릿 추가
+  - TeacherDetailServlet.java
+- 강사 등록 서블릿 추가
+  - TeacherAddServlet.java
+- 강사 변경 서블릿 추가
+  - TeacherUpdateServlet.java
+- 강사 삭제 서블릿 추가
+  - TeacherDeleteServlet.java
 
 
 
