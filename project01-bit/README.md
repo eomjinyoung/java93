@@ -159,7 +159,11 @@ build.gradle 등의 파일이 생성된다.
   - Teacher.java
 - 강사 데이터를 DB에 저장하거나 조회할 DAO 추가
   - TeacherDao.java
-    
+- ContextLoaderListener에서 TeacherDao 객체를 준비한다.
+  - ContextLoaderListener.java 변경  
+- 강사 목록조회 서블릿 추가
+  - TeacherListServlet.java
+      
 
 
 

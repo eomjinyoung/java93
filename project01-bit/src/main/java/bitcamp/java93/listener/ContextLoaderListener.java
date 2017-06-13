@@ -6,6 +6,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import bitcamp.java93.dao.MemberDao;
+import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.util.DBConnectionPool;
 
 @WebListener
@@ -23,9 +24,11 @@ public class ContextLoaderListener implements ServletContextListener {
       DBConnectionPool conPool = new DBConnectionPool(
           jdbcDriver, jdbcUrl, jdbcUsername, jdbcPassword);
       MemberDao memberDao = new MemberDao(conPool);
+      TeacherDao teacherDao = new TeacherDao(conPool);
       
       ServletContext sc = sce.getServletContext();
       sc.setAttribute("memberDao", memberDao);
+      sc.setAttribute("teacherDao", teacherDao);
       
     } catch (Exception e) {
       e.printStackTrace();

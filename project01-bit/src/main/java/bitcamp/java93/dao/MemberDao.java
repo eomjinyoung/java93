@@ -12,6 +12,7 @@ package bitcamp.java93.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,13 +116,22 @@ public class MemberDao {
     Connection con = conPool.getConnection();
     try (
       PreparedStatement stmt = con.prepareStatement(
-          "insert into memb(name,tel,email,pwd) values(?,?,?,password(?))");) {
+          "insert into memb(name,tel,email,pwd) values(?,?,?,password(?))",
+          Statement.RETURN_GENERATED_KEYS);) {
       
       stmt.setString(1, member.getName());
       stmt.setString(2, member.getTel());
       stmt.setString(3, member.getEmail());
       stmt.setString(4, member.getPassword());
-      return stmt.executeUpdate();
+      int count = stmt.executeUpdate();
+      
+      // 자동 생성된 PK 값을 꺼내기 
+      try (ResultSet rs = stmt.getGeneratedKeys();) {
+        rs.next();
+        member.setNo(rs.getInt(1));
+      }
+      
+      return count;
     
     } finally { 
       conPool.returnConnection(con);
