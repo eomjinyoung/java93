@@ -154,7 +154,12 @@ build.gradle 등의 파일이 생성된다.
   - 로그인 회원의 정보를 알고 싶다면 HttpSession 보관소에서 꺼내라!
   - LoginServlet, LogoutServlet, AuthCheckFilter, HeaderServlet 변경
 
-
+## 18 강사 관리 기능 추가 
+- 강사 데이터를 다룰 Value Object 추가
+  - Teacher.java
+- 강사 데이터를 DB에 저장하거나 조회할 DAO 추가
+  - TeacherDao.java
+    
 
 
 
