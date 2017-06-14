@@ -181,5 +181,40 @@ public class TeacherDao {
     }
   }
   
+  public List<String> selectPhotoList(int teacherNo) throws Exception {
+    Connection con = conPool.getConnection();
+
+    try ( 
+      PreparedStatement stmt = con.prepareStatement(
+          "select path from tch_phot where tno=?");) {
+      
+      stmt.setInt(1, teacherNo);
+      
+      ArrayList<String> list = new ArrayList<>();
+      
+      try (ResultSet rs = stmt.executeQuery();) {
+        while (rs.next()) { 
+          list.add(rs.getString("path"));
+        }
+      }
+      return list;
+      
+    } finally { 
+      conPool.returnConnection(con);
+    }
+  }
+  
+  public void deletePhoto(int teacherNo) throws Exception {
+    Connection con = conPool.getConnection();
+    try (
+      PreparedStatement stmt = con.prepareStatement(
+          "delete from tch_phot where tno=?");) {
+      stmt.setInt(1, teacherNo);
+      stmt.executeUpdate();
+    
+    } finally { 
+      conPool.returnConnection(con);
+    }
+  }
   
 }

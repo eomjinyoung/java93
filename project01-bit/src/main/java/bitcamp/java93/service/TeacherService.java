@@ -22,12 +22,15 @@ public class TeacherService {
   }
   
   public Teacher get(int no) throws Exception {
-    return teacherDao.selectOne(no);
+    Teacher teacher = teacherDao.selectOne(no);
+    teacher.setPhotoList(teacherDao.selectPhotoList(no));
+    return teacher;
   }
   
   public void add(Teacher teacher) throws Exception {
     memberDao.insert(teacher);
     teacherDao.insert(teacher);
+    teacherDao.insertPhoto(teacher.getNo(), teacher.getPhotoList());
   }
   
   public void update(Teacher teacher) throws Exception {
@@ -40,6 +43,10 @@ public class TeacherService {
     if (count < 1) {
       throw new Exception(teacher.getNo() + "번 강사를 찾을 수 없습니다.");
     }
+    
+    // 강사 사진 갱신
+    teacherDao.deletePhoto(teacher.getNo()); // 강사의 모든 사진을 지운다.
+    teacherDao.insertPhoto(teacher.getNo(), teacher.getPhotoList()); // 강사의 사진을 추가한다.
   }
   
   public void remove(int no) throws Exception {

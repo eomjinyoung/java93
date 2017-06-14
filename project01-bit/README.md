@@ -193,11 +193,13 @@ build.gradle 등의 파일이 생성된다.
   - Teacher.java 변경 
 - 강사 정보 등록 폼에 사진 파일을 3개 입력 받는 항목을 추가한다.
   - /webapp/teacher/form.html 변경
-- 업로드 사진 파일을 저장한다. 
+- 업로드 사진 파일을 저장하고 조회한다. 
   - /webapp/teacher/photo/ 디렉토리에 사진 파일 저장한다.
-  - TeacherAddServlet, TeacherUpdateServlet 변경한다.  
+  - TeacherAddServlet, TeacherDetailServlet, TeacherUpdateServlet 변경한다.  
+- 강사 정보를 등록하는 서비스 객체 변경
+  - TeacherService.java 변경
 - 강사 정보를 등록할 때 사진 파일명을 TCH_PHOT 테이블에 입력한다.
-  - TeacherDao 변경 
+  - TeacherDao.java 변경 
 
    
 

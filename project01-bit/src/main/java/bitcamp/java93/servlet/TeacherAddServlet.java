@@ -52,18 +52,9 @@ public class TeacherAddServlet extends HttpServlet {
       t.setPhotoList(photoList);
       
       
-    } catch (Exception e) {
-      req.setAttribute("error", e); 
-      RequestDispatcher rd = req.getRequestDispatcher("/error");
-      rd.forward(req, res);
-      return;
-    }
-    
-    
-    try {
       TeacherService teacherService = 
           (TeacherService)this.getServletContext().getAttribute("teacherService");   
-      //teacherService.add(t);
+      teacherService.add(t);
       
       res.sendRedirect("list");
       
@@ -73,7 +64,6 @@ public class TeacherAddServlet extends HttpServlet {
       rd.forward(req, res);
       return;
     }
-    
   }
 }
 
