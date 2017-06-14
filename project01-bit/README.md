@@ -189,6 +189,8 @@ build.gradle 등의 파일이 생성된다.
   - 프로젝트 리프래시
 - Multipart 폼 데이터를 처리하는 유틸리티 클래스 추가하기
   - MultipartFormDataProcessor.java
+- Teacher 클래스에 사진 경로를 저장할 필드를 추가한다.
+  - Teacher.java 변경 
 - 강사 정보 등록 폼에 사진 파일을 3개 입력 받는 항목을 추가한다.
   - /webapp/teacher/form.html 변경
 - 업로드 사진 파일을 저장한다. 
