@@ -29,7 +29,7 @@ public class TeacherUpdateServlet  extends HttpServlet {
       Map<String,FileItem> partMap = MultipartFormDataProcessor.parse(req);
       
       Teacher t = new Teacher();
-      t.setNo(Integer.parseInt(req.getParameter("no")));
+      t.setNo(Integer.parseInt(partMap.get("no").getString()));
       t.setName(partMap.get("name").getString("UTF-8"));
       t.setTel(partMap.get("tel").getString("UTF-8"));
       t.setEmail(partMap.get("email").getString("UTF-8"));
