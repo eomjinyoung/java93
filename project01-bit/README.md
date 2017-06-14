@@ -193,14 +193,26 @@ build.gradle 등의 파일이 생성된다.
   - Teacher.java 변경 
 - 강사 정보 등록 폼에 사진 파일을 3개 입력 받는 항목을 추가한다.
   - /webapp/teacher/form.html 변경
-- 업로드 사진 파일을 저장하고 조회한다. 
+- 업로드 사진 파일을 저장하고 조회, 삭제한다. 
   - /webapp/teacher/photo/ 디렉토리에 사진 파일 저장한다.
-  - TeacherAddServlet, TeacherDetailServlet, TeacherUpdateServlet 변경한다.  
+  - TeacherAddServlet, TeacherDetailServlet, TeacherUpdateServlet, TeacherDeleteServlet 변경한다.  
 - 강사 정보를 등록하는 서비스 객체 변경
   - TeacherService.java 변경
 - 강사 정보를 등록할 때 사진 파일명을 TCH_PHOT 테이블에 입력한다.
   - TeacherDao.java 변경 
 
+## 21 JSP 도입
+- JSP 기술과 JSTL 태그 라이브러리를 도입하여 화면 생성을 쉽게 한다.
+  - JSTL 라이브러리 검색(mvnrepository.com)
+  - build.gradle 파일에 라이브러리 정보 추가
+  - "gradle eclipse" 실행
+  - 프로젝트 리프래시
+- TeacherListServlet 클래스에서 출력 부분을 JSP로 이관한다.
+  - 서블릿 클래스에서는 JSP를 include 하면서 DAO에서 가져온 목록 데이터를 넘긴다.
+  - /webapp/teacher/list.jsp 추가하여 서블릿에서 받은 목록 데이터로 화면을 출력한다.
+- TeacherDetailServlet 클래스에서 출력 부분을 JSP로 이관한다.
+  - 서블릿 클래스에서는 JSP를 include 하면서 DAO에서 가져온 목록 데이터를 넘긴다.
+  - /webapp/teacher/detail.jsp 추가하여 서블릿에서 받은 목록 데이터로 화면을 출력한다.  
    
 
 

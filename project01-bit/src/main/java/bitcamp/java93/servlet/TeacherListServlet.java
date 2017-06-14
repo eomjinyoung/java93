@@ -1,7 +1,6 @@
 package bitcamp.java93.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,63 +31,23 @@ public class TeacherListServlet  extends HttpServlet {
     } catch (Exception e) {}
     
     res.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = res.getWriter();
-    
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("  <meta charset='UTF-8'>");
-    out.println("  <title>강사관리</title>");
-    
-    RequestDispatcher rd = req.getRequestDispatcher("/style/core");
-    rd.include(req, res);
-    
-    out.println("</head>");
-    out.println("<body>");
-    
-    rd = req.getRequestDispatcher("/header");
-    rd.include(req, res);
-    
-    out.println("<h1>강사 목록</h1>");
-    
     try {
       TeacherService teacherService = 
           (TeacherService)this.getServletContext().getAttribute("teacherService");      
       List<Teacher> list = teacherService.list(pageNo, pageSize);
+      req.setAttribute("list", list);
       
-      out.println("<a href='form.html'>새강사</a>");
-      
-      out.println("<table border='1'>");
-      out.println("<thead>");
-      out.println("  <tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th><th>홈페이지</th></tr>");
-      out.println("</thead>");
-      out.println("<tbody>");
-      
-      for (Teacher t : list) {
-        out.println("<tr>");
-        out.printf("  <td>%d</td>\n", t.getNo());
-        out.printf("  <td><a href='detail?no=%d'>%s</a></td>\n", t.getNo(), t.getName());
-        out.printf("  <td>%s</td>\n", t.getTel());
-        out.printf("  <td>%s</td>\n", t.getEmail());
-        out.printf("  <td>%s</td>\n", t.getHomepage());
-        out.println("</tr>");
-      }
-      
-      out.println("</tbody>");
-      out.println("</table>");
+      // 강사 목록을 출력할 JSP를 실행한다.
+      RequestDispatcher rd = req.getRequestDispatcher("/teacher/list.jsp");
+      rd.include(req, res);
       
     } catch (Exception e) {
       req.setAttribute("error", e); // ServletRequest 보관소에 오류 정보를 보관한다.
-      rd = req.getRequestDispatcher("/error");
+      RequestDispatcher rd = req.getRequestDispatcher("/error");
       rd.forward(req, res);
       return;
     }
     
-    rd = req.getRequestDispatcher("/footer");
-    rd.include(req, res);
-    
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 
