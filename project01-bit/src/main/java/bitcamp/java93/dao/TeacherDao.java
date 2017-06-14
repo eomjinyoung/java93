@@ -1,7 +1,4 @@
 package bitcamp.java93.dao;
-/* 역할: tcher 테이블의 데이터를 다루는 클래스
- */
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -161,6 +158,23 @@ public class TeacherDao {
       stmt.setString(3, teacher.getTwitter());
       stmt.setInt(4, teacher.getNo());
       return stmt.executeUpdate();
+    
+    } finally { 
+      conPool.returnConnection(con);
+    }
+  }
+  
+  public void insertPhoto(int no, List<String> photoList) throws Exception {
+    Connection con = conPool.getConnection();
+    try (
+      PreparedStatement stmt = con.prepareStatement(
+          "insert into tch_phot(tno,path) values(?,?)");) {
+      
+      for (String path : photoList) {
+        stmt.setInt(1, no);
+        stmt.setString(2, path);
+        stmt.executeUpdate();
+      }
     
     } finally { 
       conPool.returnConnection(con);

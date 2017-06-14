@@ -182,7 +182,22 @@ build.gradle 등의 파일이 생성된다.
 - TeacherXxxServlet에서 DAO 대신 Service 컴포넌트를 사용하도록 변경한다.
   - TeacherXxxServlet.java 변경
 
+## 20 강사의 사진 파일 업로드 기능 추가 
+- 파일 업로드를 처리할 때 사용할 라이브러리 추가하기
+  - build.gradle 파일에 라이브러리 정보 추가
+  - "gradle eclipse" 명령 실행
+  - 프로젝트 리프래시
+- Multipart 폼 데이터를 처리하는 유틸리티 클래스 추가하기
+  - MultipartFormDataProcessor.java
+- 강사 정보 등록 폼에 사진 파일을 3개 입력 받는 항목을 추가한다.
+  - /webapp/teacher/form.html 변경
+- 업로드 사진 파일을 저장한다. 
+  - /webapp/teacher/photo/ 디렉토리에 사진 파일 저장한다.
+  - TeacherAddServlet, TeacherUpdateServlet 변경한다.  
+- 강사 정보를 등록할 때 사진 파일명을 TCH_PHOT 테이블에 입력한다.
+  - TeacherDao 변경 
 
+   
 
 
 
