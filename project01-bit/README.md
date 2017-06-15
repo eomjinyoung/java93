@@ -213,7 +213,12 @@ build.gradle 등의 파일이 생성된다.
 - TeacherDetailServlet 클래스에서 출력 부분을 JSP로 이관한다.
   - 서블릿 클래스에서는 JSP를 include 하면서 DAO에서 가져온 목록 데이터를 넘긴다.
   - /webapp/teacher/detail.jsp 추가하여 서블릿에서 받은 목록 데이터로 화면을 출력한다.  
-   
+- TeacherUpdateServlet, TeacherDeleteServlet의 리프래시 대신 리다이렉트로 변경
+- 인클루드 하는 서블릿 대신 JSP로 변경
+  - StyleServlet => /webapp/corestyle.jsp
+  - HeaderServlet => /webapp/header.jsp
+  - FooterServlet => /webapp/footer.jsp
+  - ErrorServlet => /webapp/error.jsp   
 
 
 
