@@ -20,7 +20,6 @@ package bitcamp.java93.servlet;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,8 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.domain.Member;
+import bitcamp.java93.service.TeacherService;
 
 @WebServlet(urlPatterns="/auth/login")
 public class LoginServlet extends HttpServlet {
@@ -46,12 +45,18 @@ public class LoginServlet extends HttpServlet {
   
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    String userType = req.getParameter("userType");
     String email = req.getParameter("email");
     String password = req.getParameter("password");
     
     try {
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");      
-      Member member = memberDao.selectOneByEmailPassword(email, password);
+      Member member = null;
+      if (userType.equals("teacher")) {
+        TeacherService teacherService = 
+            (TeacherService)this.getServletContext().getAttribute("teacherService");      
+        member = teacherService.getByEmailPassword(email, password);
+      }
+      
       if (member != null) { // 로그인 성공!
         // HttpSession 객체 준비
         HttpSession session = req.getSession(); // 클라이언트를 위한 HttpSession 객체 준비.
@@ -74,19 +79,8 @@ public class LoginServlet extends HttpServlet {
         res.sendRedirect("../teacher/list");
         
       } else {
-        res.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = res.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("  <meta charset='UTF-8'>");
-        out.println("  <title>로그인</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>로그인 오류!</h1>");
-        out.println("<p>이메일 또는 암호가 맞지 않습니다.</p>");
-        out.println("</body>");
-        out.println("</html>");
+        RequestDispatcher rd = req.getRequestDispatcher("/auth/fail.jsp");
+        rd.forward(req, res);
       }
       
     } catch (Exception e) {

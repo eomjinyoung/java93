@@ -219,7 +219,11 @@ build.gradle 등의 파일이 생성된다.
   - HeaderServlet => /webapp/header.jsp
   - FooterServlet => /webapp/footer.jsp
   - ErrorServlet => /webapp/error.jsp
-- TeacherXxxServlet에서 ErrorServlet으로 포워딩 하는 코드를 /webapp/error.jsp로 포워딩 하도록 변경한다.   
+- TeacherXxxServlet에서 ErrorServlet으로 포워딩 하는 코드를 /webapp/error.jsp로 포워딩 하도록 변경한다.
+- 강사, 학생, 관리자를 구분하여 로그인 하도록 처리한다.
+  - /webapp/auth/form.jsp 변경
+  - LoginServlet.java 변경 
+  - /webapp/auth/fail.jsp 추가  
 
 
 
