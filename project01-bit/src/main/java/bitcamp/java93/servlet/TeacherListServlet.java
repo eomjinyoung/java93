@@ -43,7 +43,7 @@ public class TeacherListServlet  extends HttpServlet {
       
     } catch (Exception e) {
       req.setAttribute("error", e); // ServletRequest 보관소에 오류 정보를 보관한다.
-      RequestDispatcher rd = req.getRequestDispatcher("/error");
+      RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
       rd.forward(req, res);
       return;
     }

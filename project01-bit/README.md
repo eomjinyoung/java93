@@ -218,7 +218,8 @@ build.gradle 등의 파일이 생성된다.
   - StyleServlet => /webapp/corestyle.jsp
   - HeaderServlet => /webapp/header.jsp
   - FooterServlet => /webapp/footer.jsp
-  - ErrorServlet => /webapp/error.jsp   
+  - ErrorServlet => /webapp/error.jsp
+- TeacherXxxServlet에서 ErrorServlet으로 포워딩 하는 코드를 /webapp/error.jsp로 포워딩 하도록 변경한다.   
 
 
 
