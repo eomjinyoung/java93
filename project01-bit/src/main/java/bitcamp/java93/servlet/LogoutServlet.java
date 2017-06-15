@@ -19,6 +19,8 @@ public class LogoutServlet extends HttpServlet {
     req.getSession().invalidate(); // 요청한 클라이언트의 전용 HttpSession 객체를 무효화시킨다. 
     
     res.sendRedirect("../auth/login");
+    //RequestDispatcher rd = req.getRequestDispatcher("/auth/login");
+    //rd.forward(req, res);
   }
 }
 
