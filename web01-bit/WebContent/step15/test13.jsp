@@ -14,6 +14,7 @@
 8) EL(Expression Language)
 9) JSP 주석
  --%>
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -27,7 +28,7 @@
 <body>
 <h1>JSP 액션 태그 - jsp:include + jsp:param</h1>
 <jsp:include page="c.jsp" >
-  <jsp:param name="name" value="홍길동"/>
+  <jsp:param name="name" value='<%=URLEncoder.encode("홍길동", "UTF-8")%>'/>
   <jsp:param name="age" value="20"/>
 </jsp:include>
 </body>
