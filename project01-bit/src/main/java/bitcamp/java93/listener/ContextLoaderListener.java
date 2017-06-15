@@ -32,6 +32,7 @@ public class ContextLoaderListener implements ServletContextListener {
       teacherService.setTeacherDao(teacherDao);
       
       ServletContext sc = sce.getServletContext();
+      sc.setAttribute("memberDao", memberDao);
       sc.setAttribute("teacherService", teacherService);
       
     } catch (Exception e) {

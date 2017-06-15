@@ -40,44 +40,8 @@ public class LoginServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    // GET 요청이 들어오면 로그인폼을 출력한다.
-    // 1) "email" 쿠기가 있으면 꺼낸다.
-    Cookie[] cookies = req.getCookies();
-    String email = "";
-    if (cookies != null) {
-      for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("email")) {
-          email = cookie.getValue();
-          break;
-        }
-      }
-    }
-    
-    // 2) 로그인 폼을 출력한다. 그리고 쿠키에 이메일이 있으면 기본 값으로 설정한다.
-    resp.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = resp.getWriter();
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>로그인</title>");
-    RequestDispatcher rd = req.getRequestDispatcher("/style/core");
-    rd.include(req, resp);
-    out.println("</head>");
-    out.println("<body>");
-    rd = req.getRequestDispatcher("/header");
-    rd.include(req, resp);
-    out.println("<h1>회원 로그인</h1>");
-    out.println("<form action='login' method='POST'>");
-    out.printf("<p>이메일: <input type='text' name='email' value='%s'></p>\n", email);
-    out.println("<p>암호: <input type='password' name='password'></p>");
-    out.println("<input type='checkbox' name='saveEmail'> 이메일 저장");
-    out.println("<p><button>로그인</button></p>");
-    out.println("</form>");
-    rd = req.getRequestDispatcher("/footer");
-    rd.include(req, resp);
-    out.println("</body>");
-    out.println("</html>");
+    RequestDispatcher rd = req.getRequestDispatcher("/auth/form.jsp");
+    rd.forward(req, resp);
   }
   
   @Override
@@ -107,33 +71,27 @@ public class LoginServlet extends HttpServlet {
           res.addCookie(cookie2);
         }
         
-        res.sendRedirect("../member/list");
+        res.sendRedirect("../teacher/list");
         
       } else {
         res.setContentType("text/html;charset=UTF-8");
         PrintWriter out = res.getWriter();
-        
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
         out.println("  <meta charset='UTF-8'>");
         out.println("  <title>로그인</title>");
-        RequestDispatcher rd = req.getRequestDispatcher("/style/core");
-        rd.include(req, res);
         out.println("</head>");
         out.println("<body>");
-        res.setHeader("Refresh", "2;url=login.html");
         out.println("<h1>로그인 오류!</h1>");
         out.println("<p>이메일 또는 암호가 맞지 않습니다.</p>");
-        rd = req.getRequestDispatcher("/footer");
-        rd.include(req, res);
         out.println("</body>");
         out.println("</html>");
       }
       
     } catch (Exception e) {
       req.setAttribute("error", e);
-      RequestDispatcher rd = req.getRequestDispatcher("/error");
+      RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
       rd.forward(req, res);
       return;
     }
