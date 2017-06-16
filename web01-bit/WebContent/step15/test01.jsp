@@ -32,6 +32,24 @@ public final class test01_jsp extends org.apache.jasper.runtime.HttpJspBase
    웹브라우저에서 요청  
      => 서블릿 컨테이너가 service() 메서드 호출
      => service() 에서 _jspService() 메서드 호출 
+
+=> JSP 엔진이 JSP 파일을 가지고 서블릿 클래스를 만들 때 반드시 지켜야 하는 규칙?
+   => javax.servlet.jsp.HttpJspPage 인터페이스를 구현해야 한다.
+   => HttpJspPage?
+      javax.servlet.Servlet
+        - void init(ServletConfig)
+        - void service(ServletRequest, ServletResponse)
+        - void destroy()
+        - String getServletInfo()
+        - ServletConfig getServletConfig()
+      javax.servlet.jsp.JspPage extends Servlet
+        - void jspInit()
+        - void jspDestroy()
+      javax.servlet.jsp.HttpJspPage extends JspPage
+        - void _jspService(HttpServletRequest, HttpServletResponse)
+
+   => 결국 javax.servlet.Servlet 인터페이스 뿐만아니라 
+      JspPage, HttpJspPage의 추가된 메서드까지 구현해야 한다는 의미다. 
                  
  --%>
 <%@ page language="java" 
