@@ -40,23 +40,6 @@ ${pageScope.name3}<br>
 </body>
 </html>
 
-<%!
-public class Member {
-  // 필드(field) 선언
-  String name2;
-  int age;
-  boolean working;
-  
-  // 프로퍼티(property) 선언
-  public void setName(String name) {this.name2 = name;}
-  public void setAge(int age) {this.age = age;}
-  public void setWorking(boolean working) {this.working = working;}
-  public String getName() {return this.name2;}
-  public int getAge() {return this.age;}
-  public boolean isWorking() {return this.working;}
-}
-%>
-
 
 
 
