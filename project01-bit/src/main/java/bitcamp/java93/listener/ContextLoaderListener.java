@@ -5,6 +5,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import bitcamp.java93.control.TeacherListControl;
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.dao.mysql.MemberDaoImpl;
@@ -33,8 +34,11 @@ public class ContextLoaderListener implements ServletContextListener {
       teacherService.setMemberDao(memberDao);
       teacherService.setTeacherDao(teacherDao);
       
+      TeacherListControl teacherListControl = new TeacherListControl();
+      teacherListControl.setTeacherService(teacherService);
+      
       ServletContext sc = sce.getServletContext();
-      sc.setAttribute("teacherService", teacherService);
+      sc.setAttribute("/teacher/list", teacherListControl);
       
     } catch (Exception e) {
       e.printStackTrace();

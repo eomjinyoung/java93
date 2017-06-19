@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bitcamp.java93.control.Controller;
+
 @WebServlet(urlPatterns="*.do")
 public class DispatcherServlet  extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -19,21 +21,23 @@ public class DispatcherServlet  extends HttpServlet {
       String controllerPath = req.getServletPath().replace(".do", ""); 
       
       res.setContentType("text/html;charset=UTF-8");
-      RequestDispatcher rd = req.getRequestDispatcher(controllerPath);
-      rd.include(req, res);
       
-      Exception error = (Exception)req.getAttribute("error");
-      if (error != null) {
-        throw error;
+      Controller pageController = 
+          (Controller)this.getServletContext().getAttribute(controllerPath);
+      
+      if (pageController == null) {
+        throw new ServletException("요청한 URL을 처리할 수 없습니다.");
       }
       
-      String viewPath = (String)req.getAttribute("view");
+      // 요청한 URL을 처리할 페이지 컨트롤러가 있다면,
+      String viewPath = pageController.service(req, res);
+      
       if (viewPath.startsWith("redirect:")) {
         res.sendRedirect(viewPath.replaceAll("redirect:", ""));
         return;
       } 
       
-      rd = req.getRequestDispatcher(viewPath);
+      RequestDispatcher rd = req.getRequestDispatcher(viewPath);
       rd.include(req, res);
       
     } catch (Exception e) {
