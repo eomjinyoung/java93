@@ -7,14 +7,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.java93.annotation.Component;
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.domain.Member;
 import bitcamp.java93.util.DBConnectionPool;
 
+@Component
 public class MemberDaoImpl implements MemberDao {
   DBConnectionPool conPool;
   
-  public MemberDaoImpl(DBConnectionPool conPool) {
+  public void setDBConnectionPool(DBConnectionPool conPool) {
     this.conPool = conPool;
   }
   

@@ -279,6 +279,14 @@ DAO나 Service 컴포넌트를 대체하기 쉬운 구조로 만든다.
 - 애노테이션 정의
   - @Component 애노테이션 추가
 - DAO, Service, 페이지 컨트롤러에 @Component 애노테이션을 붙인다.
+  - 페이지 컨트롤러는 value 속성의 값으로 URL을 지정한다.
+  - 다른 클래스들은 value 속성의 값을 지정하지 않는다.
+- ContextLoaderListener 변경
+  - @Componenet가 붙은 클래스를 모두 찾아 객체를 생성한 후 ServletContext 보관소에 저장한다.
+  - /WEB-INF/classess 폴더에서 클래스 목록을 뽑아서 그 클래스 이름를 가지고
+    클래스를 로딩한 후, @Component 애노테이션이 붙은 클래스만 객체를 생성하여 보관할 것이다.
+   
+    
   
 
 

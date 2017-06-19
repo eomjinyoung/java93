@@ -6,14 +6,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.java93.annotation.Component;
 import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.util.DBConnectionPool;
 
+@Component
 public class TeacherDaoImpl implements TeacherDao {
   DBConnectionPool conPool;
   
-  public TeacherDaoImpl(DBConnectionPool conPool) {
+  public void setDBConnectionPool(DBConnectionPool conPool) {
     this.conPool = conPool;
   }
   

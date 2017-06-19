@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
+import bitcamp.java93.annotation.Component;
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.service.TeacherService;
 import bitcamp.java93.util.MultipartFormDataProcessor;
 
+@Component("/teacher/add")
 public class TeacherAddControl implements Controller {
   TeacherService teacherService;
   

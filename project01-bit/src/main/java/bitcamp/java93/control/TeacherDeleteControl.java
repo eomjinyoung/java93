@@ -3,8 +3,10 @@ package bitcamp.java93.control;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bitcamp.java93.annotation.Component;
 import bitcamp.java93.service.TeacherService;
 
+@Component("/teacher/delete")
 public class TeacherDeleteControl implements Controller {
   TeacherService teacherService;
   

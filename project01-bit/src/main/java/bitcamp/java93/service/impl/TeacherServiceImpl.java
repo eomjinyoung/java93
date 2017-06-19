@@ -2,11 +2,13 @@ package bitcamp.java93.service.impl;
 
 import java.util.List;
 
+import bitcamp.java93.annotation.Component;
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.service.TeacherService;
 
+@Component
 public class TeacherServiceImpl implements TeacherService {
   MemberDao memberDao;
   TeacherDao teacherDao;

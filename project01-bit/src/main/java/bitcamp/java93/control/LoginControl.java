@@ -6,9 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bitcamp.java93.annotation.Component;
 import bitcamp.java93.domain.Member;
 import bitcamp.java93.service.TeacherService;
 
+@Component("/auth/login")
 public class LoginControl implements Controller {
   TeacherService teacherService;
   
