@@ -2,7 +2,6 @@ package bitcamp.java93.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,16 +28,11 @@ public class TeacherDetailServlet extends HttpServlet {
         throw new Exception(no + "번 강사가 없습니다.");
       }
       
-      res.setContentType("text/html;charset=UTF-8");
       req.setAttribute("teacher", teacher);
-      RequestDispatcher rd = req.getRequestDispatcher("/teacher/detail.jsp");
-      rd.include(req, res);
+      req.setAttribute("view", "/teacher/detail.jsp");
       
     } catch (Exception e) {
       req.setAttribute("error", e); 
-      RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
-      rd.forward(req, res);
-      return;
     }
     
   }

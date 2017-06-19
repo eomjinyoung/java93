@@ -20,7 +20,7 @@
 <c:forEach items="${list}" var="item">
 <tr>
   <td>${item.no}</td>
-  <td><a href='detail?no=${item.no}'>${item.name}</a></td>
+  <td><a href='detail.do?no=${item.no}'>${item.name}</a></td>
   <td>${item.tel}</td>
   <td>${item.email}</td>
   <td>${item.homepage}</td>

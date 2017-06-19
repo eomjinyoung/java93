@@ -225,7 +225,7 @@ build.gradle 등의 파일이 생성된다.
   - LoginServlet.java 변경 
   - /webapp/auth/fail.jsp 추가  
 
-## 컴포넌트 관계에 인터페이스를 도입
+## 22 컴포넌트 간의 관계에 인터페이스를 도입
 DAO나 Service 컴포넌트를 대체하기 쉬운 구조로 만든다.
 
 - DAO 인터페이스 생성
@@ -240,7 +240,16 @@ DAO나 Service 컴포넌트를 대체하기 쉬운 구조로 만든다.
 - Service 구현체 생성
   - 기존의 TeacherService.java를 TeacherServiceImpl 클래스로 변경한다.
    
-   
+## 23 프론트 컨트롤러 도입
+각각의 컨트롤러가 중복 수행하는 작업을 분리하여 별도의 컨트롤러에 둔다. 
+중복 코드 작성을 최소화시킨다.
+
+- 프론트 컨트롤러 역할을 수행할 서블릿 클래스를 정의한다.
+  - DispatcherServlet.java 클래스 추가
+  - 모든 요청은 이 서블릿이 받아서 위임한다.
+- 기존의 서블릿에서 공통 코드를 제거한다.
+  - 페이지 컨트롤러로서 작업에 집중하도록 코드를 정리한다.
+  - XxxxServlet.java 변경
    
    
     
