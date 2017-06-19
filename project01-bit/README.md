@@ -263,10 +263,31 @@ DAO나 Service 컴포넌트를 대체하기 쉬운 구조로 만든다.
 - 페이지 컨트롤러를 POJO 클래스로 만든다.
   - XxxxServlet 클래스를 control.XxxxControl 클래스로 변경한다.
   - Controller 인터페이스를 구현하도록 변경한다.
+- JSP 페이지의 링크 변경
+  - URL 뒤에 ".do"를 붙인다.
 - ContextLoaderListener에서 페이지 컨트롤러 객체를 준비한다.
   - ContextLoaderListener.java 변경
 - DispatcherServlet 프론트 컨트롤러 변경
   - Controller 인터페이스를 구현한 페이지 컨트롤러를 호출하도록 코드를 변경한다. 
-    
-    
+- AuthCheckFilter 필터 클래스의 리다이렉트 URL 변경
+  - "/auth/login" 대신 "/auth/login.do"로 변경    
+
+## 25 애노테이션을 이용한 객체 생성 자동화
+클래스를 추가할 때 마다 객체 생성하는 코드를 추가한다면 매우 번거롭다.
+애노테이션이 붙은 클래스에 대해 객체 생성을 자동화시킨다.
+
+- 애노테이션 정의
+  - @Component 애노테이션 추가
+- DAO, Service, 페이지 컨트롤러에 @Component 애노테이션을 붙인다.
+  
+
+
+
+
+
+
+
+
+
+
     

@@ -30,7 +30,7 @@ public class AuthCheckFilter implements Filter {
     
     Member loginMember = (Member)httpRequest.getSession().getAttribute("loginMember");
     if (loginMember == null) { // 쿠키에 세션ID가 없다면 로그인 화면으로 보낸다.
-      httpResponse.sendRedirect("../auth/login");
+      httpResponse.sendRedirect("../auth/login.do");
       return;
     }
     

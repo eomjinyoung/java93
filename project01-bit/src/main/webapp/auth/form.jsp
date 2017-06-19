@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="/header.jsp"></jsp:include>
 <h1>회원 로그인</h1>
-<form action='login' method='POST'>
+<form action='login.do' method='POST'>
 <p>
 <input type="radio" name="userType" value="student" checked> 학생
 <input type="radio" name="userType" value="teacher"> 강사

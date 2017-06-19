@@ -5,6 +5,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import bitcamp.java93.control.LoginControl;
+import bitcamp.java93.control.LogoutControl;
 import bitcamp.java93.control.TeacherAddControl;
 import bitcamp.java93.control.TeacherDeleteControl;
 import bitcamp.java93.control.TeacherDetailControl;
@@ -53,12 +55,19 @@ public class ContextLoaderListener implements ServletContextListener {
       TeacherDeleteControl teacherDeleteControl = new TeacherDeleteControl();
       teacherDeleteControl.setTeacherService(teacherService);
       
+      LoginControl loginControl = new LoginControl();
+      loginControl.setTeacherService(teacherService);
+      
+      LogoutControl logoutControl = new LogoutControl();
+      
       ServletContext sc = sce.getServletContext();
       sc.setAttribute("/teacher/list", teacherListControl);
       sc.setAttribute("/teacher/detail", teacherDetailControl);
       sc.setAttribute("/teacher/add", teacherAddControl);
       sc.setAttribute("/teacher/update", teacherUpdateControl);
       sc.setAttribute("/teacher/delete", teacherDeleteControl);
+      sc.setAttribute("/auth/login", loginControl);
+      sc.setAttribute("/auth/logout", logoutControl);
       
     } catch (Exception e) {
       e.printStackTrace();

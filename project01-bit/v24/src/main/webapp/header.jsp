@@ -5,7 +5,7 @@
 <c:if test="${loginMember != null}">
   <div id='login'>
     ${loginMember.name}(${loginMember.email})
-    <a href='${pageContext.request.contextPath}/auth/logout'>로그아웃</a>
+    <a href='${pageContext.request.contextPath}/auth/logout.do'>로그아웃</a>
   </div>
 </c:if>
 </div>

@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset='UTF-8'>
-  <meta http-equiv="Refresh" content="2;url=login">
+  <meta http-equiv="Refresh" content="2;url=login.do">
   <title>로그인</title>
   <jsp:include page="/corestyle.jsp"></jsp:include>
 </head>
