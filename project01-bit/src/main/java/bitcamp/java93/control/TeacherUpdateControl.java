@@ -1,4 +1,4 @@
-package bitcamp.java93.servlet;
+package bitcamp.java93.control;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import bitcamp.java93.service.TeacherService;
 import bitcamp.java93.util.MultipartFormDataProcessor;
 
 @WebServlet(urlPatterns="/teacher/update") 
-public class TeacherUpdateServlet  extends HttpServlet {
+public class TeacherUpdateControl  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override

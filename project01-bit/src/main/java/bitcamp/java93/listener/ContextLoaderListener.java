@@ -5,6 +5,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import bitcamp.java93.control.TeacherAddControl;
+import bitcamp.java93.control.TeacherDetailControl;
 import bitcamp.java93.control.TeacherListControl;
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
@@ -37,8 +39,16 @@ public class ContextLoaderListener implements ServletContextListener {
       TeacherListControl teacherListControl = new TeacherListControl();
       teacherListControl.setTeacherService(teacherService);
       
+      TeacherDetailControl teacherDetailControl = new TeacherDetailControl();
+      teacherDetailControl.setTeacherService(teacherService);
+      
+      TeacherAddControl teacherAddControl = new TeacherAddControl();
+      teacherAddControl.setTeacherService(teacherService);
+      
       ServletContext sc = sce.getServletContext();
       sc.setAttribute("/teacher/list", teacherListControl);
+      sc.setAttribute("/teacher/detail", teacherDetailControl);
+      sc.setAttribute("/teacher/add", teacherAddControl);
       
     } catch (Exception e) {
       e.printStackTrace();

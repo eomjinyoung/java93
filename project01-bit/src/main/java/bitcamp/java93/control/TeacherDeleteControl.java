@@ -1,4 +1,4 @@
-package bitcamp.java93.servlet;
+package bitcamp.java93.control;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import bitcamp.java93.service.TeacherService;
 
 @WebServlet(urlPatterns="/teacher/delete") 
-public class TeacherDeleteServlet  extends HttpServlet {
+public class TeacherDeleteControl  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
