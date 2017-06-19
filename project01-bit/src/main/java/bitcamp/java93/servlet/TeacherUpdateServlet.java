@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,13 +54,10 @@ public class TeacherUpdateServlet  extends HttpServlet {
           (TeacherService)this.getServletContext().getAttribute("teacherService");
       teacherService.update(t);
     
-      res.sendRedirect("list");
+      req.setAttribute("view", "redirect:list.do");
       
     } catch (Exception e) {
       req.setAttribute("error", e);
-      RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
-      rd.forward(req, res);
-      return;
     }
   }
 }

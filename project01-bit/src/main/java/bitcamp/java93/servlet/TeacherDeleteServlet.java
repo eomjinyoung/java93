@@ -2,7 +2,6 @@ package bitcamp.java93.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,13 +23,10 @@ public class TeacherDeleteServlet  extends HttpServlet {
           (TeacherService)this.getServletContext().getAttribute("teacherService");      
       teacherService.remove(no);
       
-      res.sendRedirect("list");
+      req.setAttribute("view", "redirect:list.do");
       
     } catch (Exception e) {
       req.setAttribute("error", e); 
-      RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
-      rd.forward(req, res);
-      return;
     }
   }
 }

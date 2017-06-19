@@ -28,6 +28,11 @@ public class DispatcherServlet  extends HttpServlet {
       }
       
       String viewPath = (String)req.getAttribute("view");
+      if (viewPath.startsWith("redirect:")) {
+        res.sendRedirect(viewPath.replaceAll("redirect:", ""));
+        return;
+      } 
+      
       rd = req.getRequestDispatcher(viewPath);
       rd.include(req, res);
       
