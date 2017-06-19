@@ -2,7 +2,7 @@ apply plugin: 'java' // 자바 빌드 도구가 들어 있는 플러그인
 //apply plugin: 'eclipse' // 이클립스 설정 파일을 다루는 도구가 들어 있는 플러그인
 apply plugin: 'eclipse-wtp' // 이클립스 설정 파일을 다루는 도구 + 
                             // 웹 관련 설정 파일을 다루는 도구가 들어 있는 플러그인
-apply plugin: 'war'         // Web ARchive 배포 파일을 만드는 도구가 들어 있는 플러그인
+apply plugin: 'war'         //  Web ARchive 배포 파일을 만드는 도구가 들어 있는 플러그인
 
 compileJava {
   // 소스 파일의 인코딩을 알려준다.
