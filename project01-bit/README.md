@@ -225,10 +225,20 @@ build.gradle 등의 파일이 생성된다.
   - LoginServlet.java 변경 
   - /webapp/auth/fail.jsp 추가  
 
+## 컴포넌트 관계에 인터페이스를 도입
+DAO나 Service 컴포넌트를 대체하기 쉬운 구조로 만든다.
 
+- DAO 인터페이스 생성
+  - TeacherDao.java 인터페이스 생성
+  - MemberDao.java 인터페이스 생성
+- DAO 구현체 생성  
+  - 기존의 TeacherDao.java는 TeacherDaoImpl 클래스로 변경한다.
+  - 기존의 MemberDao.java는 MemberDaoImpl 클래스로 변경한다. 
 
-
-
+- Service 인터페이스 생성
+  - TeacherService.java 인터페이스 생성
+- Service 구현체 생성
+  - 기존의 TeacherService.java를 TeacherServiceImpl 클래스로 변경한다.
    
    
    
