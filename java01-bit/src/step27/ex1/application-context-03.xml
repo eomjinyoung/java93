@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- scope : 객체 생성 정책이다. 
+    => singleton : 객체를 한 개만 생성한다.
+   -->
+  <bean id="c1" class="step27.ex1.Car" scope="singleton"/>
+  
+  <!-- scope을 생략하면 기본 값이 singletone이다. -->
+  <bean id="c2" class="step27.ex1.Car"/>
+  
+  <!-- prototype : getBean()을 호출할 때마다 생성한다. -->
+  <bean id="c3" class="step27.ex1.Car" scope="prototype"/>
+</beans>
+
+
+
+
+
+

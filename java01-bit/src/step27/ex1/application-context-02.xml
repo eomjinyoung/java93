@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- 객체 생성 
+    => id : 생성된 객체를 저장할 때 사용할 key. 꺼낼 때도 이 값을 사용한다.
+  -->
+  <bean id="c1" class="step27.ex1.Car"/>
+  
+  <!-- 설정 파일에서 같은 id를 갖는 객체를 만들 수 없다. 예외 발생! -->
+  <!--  
+  <bean id="c1" class="step27.ex1.Car"/>
+  -->
+  
+  <!-- 객체에 별명을 부여하기
+    => name : 객체에 별명을 추가할 수 있다. 물론 별명으로 객체를 찾을 수 있다.
+    =>        별명은 공백이나, 콤마(,), 세미콜론(;)으로 구분할 수 있다.
+   -->
+  <!-- <bean id="c2" name="c3 c4 c5" class="step27.ex1.Car"/> -->
+  <!-- <bean id="c2" name="c3,c4,c5" class="step27.ex1.Car"/> -->
+  <bean id="c2" name="c3;c4;c5" class="step27.ex1.Car"/>
+  
+  <!-- 별명만 지정해도 된다. 
+    => 별명만 지정하면 첫번째 이름이 빈의 ID로 사용된다.
+  -->
+  <bean name="c6" class="step27.ex1.Car"/>
+  
+  <!-- 별명만 지정할 대는 첫번째 이름이 ID로 사용되고, 두번째 이름부터 별명이 된다. -->
+  <bean name="c7 c8 c9" class="step27.ex1.Car"/>
+  
+  <!-- ID는 여러 개를 지정할 수 없다. 전체가 하나의 이름이다. -->
+  <bean id="c10 c11 c12" class="step27.ex1.Car"/>
+</beans>
+
+
+
+
+
+

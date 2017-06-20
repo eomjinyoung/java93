@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <bean id="e1" class="step27.ex2.Engine">
+    <constructor-arg value="16"/>
+    <constructor-arg value="8"/>
+  </bean>
+  
+  <bean id="e2" class="step27.ex2.Engine">
+    <constructor-arg value="32"/>
+    <constructor-arg value="16"/>
+  </bean>
+  
+  <!-- 파라미터에 객체를 지정할 때는
+       => c:파라미터명-ref=객체아이디  -->
+  <bean id="c1" class="step27.ex2.Car" 
+        c:model="소나타" 
+        c:cc="2500" 
+        c:engine-ref="e1"/>
+        
+  <bean id="c2" class="step27.ex2.Car" 
+        c:model="에쿠스" 
+        c:cc="4500" 
+        c:engine-ref="e2"/>
+  
+  <!-- 파라미터에 객체를 지정할 때는
+       => <constructor-arg ref="객체아이디"/>  -->
+  <bean id="c3" class="step27.ex2.Car">
+    <constructor-arg value="소나타2"/>
+    <constructor-arg value="3000"/>
+    <constructor-arg ref="e1"/>
+  </bean>
+  
+  <bean id="c4" class="step27.ex2.Car">
+    <constructor-arg value="에쿠스2"/>
+    <constructor-arg value="5000"/>
+    <constructor-arg ref="e2"/>
+  </bean>
+</beans>
+
+
+
+
+
+

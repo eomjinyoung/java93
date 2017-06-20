@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <bean id="c1" class="step27.ex2.Car">
+    <property name="model"><value>티코</value></property>
+    <property name="cc"><value>800</value></property>
+  </bean>
+  
+  <bean id="c2" class="step27.ex2.Car">
+    <property name="model" value="소나타"/>
+    <property name="cc" value="1998"/>
+  </bean>
+        
+</beans>
+
+
+
+
+
+
