@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <bean id="e1" class="step27.ex2.Engine" p:valve="16" p:cylinder="8"/>
+
+  <!-- 프로퍼티에 객체 값을 넣기 -->  
+  <bean id="c1" class="step27.ex2.Car">
+    <property name="model" value="소나타"/>
+    <property name="cc" value="1998"/>
+    <property name="engine" ref="e1"/>
+  </bean>
+  
+  <bean id="c2" class="step27.ex2.Car">
+    <property name="model" value="에쿠스"/>
+    <property name="cc" value="3000"/>
+    <property name="engine" ref="e1"/>
+  </bean>
+  
+  <!-- 프로퍼티에 새 객체를 넣을 수 있다. -->
+  <bean id="c3" class="step27.ex2.Car">
+    <property name="model" value="에쿠스2"/>
+    <property name="cc" value="3000"/>
+    <property name="engine">
+      <!-- 새 Engine 객체를 만들어서 넣는다. -->
+      <bean class="step27.ex2.Engine" p:valve="16" p:cylinder="6"/>
+    </property>
+  </bean>
+  
+  <bean id="c4" class="step27.ex2.Car">
+    <property name="model" value="에쿠스3"/>
+    <property name="cc" value="3000"/>
+    <property name="engine">
+      <!-- 새 Engine 객체를 만들어서 넣는다. -->
+      <bean class="step27.ex2.Engine" p:valve="16" p:cylinder="6"/>
+    </property>
+  </bean>
+        
+</beans>
+
+
+
+
+
+
