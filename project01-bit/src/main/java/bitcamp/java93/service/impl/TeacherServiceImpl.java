@@ -2,7 +2,9 @@ package bitcamp.java93.service.impl;
 
 import java.util.List;
 
-import bitcamp.java93.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
@@ -10,15 +12,11 @@ import bitcamp.java93.service.TeacherService;
 
 @Component
 public class TeacherServiceImpl implements TeacherService {
+  @Autowired
   MemberDao memberDao;
-  TeacherDao teacherDao;
   
-  public void setMemberDao(MemberDao memberDao) {
-    this.memberDao = memberDao;
-  }
-  public void setTeacherDao(TeacherDao teacherDao) {
-    this.teacherDao = teacherDao;
-  }
+  @Autowired
+  TeacherDao teacherDao;
   
   public List<Teacher> list(int pageNo, int pageSize) throws Exception {
     return teacherDao.selectList(pageNo, pageSize);

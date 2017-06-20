@@ -286,10 +286,25 @@ DAO나 Service 컴포넌트를 대체하기 쉬운 구조로 만든다.
   - /WEB-INF/classess 폴더에서 클래스 목록을 뽑아서 그 클래스 이름를 가지고
     클래스를 로딩한 후, @Component 애노테이션이 붙은 클래스만 객체를 생성하여 보관할 것이다.
    
-    
-  
+## 26 Spring IoC 컨테이너 도입
+Spring IoC 컨테이너를 이용하여 객체 생성을 자동화시킨다.
 
-
+- Spring IoC 컨테이너 라이브러리 추가
+  - mvnrepository.com에서 "spring-context" 검색
+  - build.gradle의 의존라이브러리 항목에 추가
+  - "gradle eclipse" 실행하여 이클립스 설정 파일을 갱신
+  - 이클립스에서 프로젝트를 "refresh" 
+- ContextLoaderListener 변경
+  - 직접 DBConnectionPool, DAO, Service, 페이지 컨트롤러를 다루는 대신
+    Spring IoC 컨테이너를 적용한다.
+  - Spring 설정 파일 추가 : src/main/resources/bitcamp/java93/application-context.xml
+- 기존의 DAO, Service, 페이지 컨트롤러 클래스에 @Component 애노테이션을 붙인다.
+  - 우리가 만든 것 대신에 Spring에서 제공하는 @Component 애노테이션이다. 
+- 의존 객체 주입을 위해 필드에 @Autowired를 붙인다.
+  - 셋터 메서드는 더이상 필요없다. 제거한다.
+- 프론트 컨트롤러 변경
+  - Spring IoC 컨테이너에 보관된 페이지 컨트롤러를 사용한다.
+  - DispatcherServlet 클래스 변경
 
 
 

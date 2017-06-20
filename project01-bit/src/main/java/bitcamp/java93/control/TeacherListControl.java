@@ -5,18 +5,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.service.TeacherService;
 
 @Component("/teacher/list")
 public class TeacherListControl implements Controller {
+  @Autowired
   TeacherService teacherService;
   
-  public void setTeacherService(TeacherService teacherService) {
-    this.teacherService = teacherService;
-  }
-
   @Override
   public String service(HttpServletRequest req, HttpServletResponse res) throws Exception {
     int pageNo = 1;

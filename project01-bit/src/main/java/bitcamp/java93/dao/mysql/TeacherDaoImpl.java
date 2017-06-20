@@ -6,18 +6,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import bitcamp.java93.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.util.DBConnectionPool;
 
 @Component
 public class TeacherDaoImpl implements TeacherDao {
+  @Autowired
   DBConnectionPool conPool;
-  
-  public void setDBConnectionPool(DBConnectionPool conPool) {
-    this.conPool = conPool;
-  }
   
   public List<Teacher> selectList(int pageNo, int pageSize) throws Exception {
     Connection con = conPool.getConnection();

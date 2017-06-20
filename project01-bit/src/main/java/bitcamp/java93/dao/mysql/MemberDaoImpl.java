@@ -7,18 +7,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import bitcamp.java93.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.domain.Member;
 import bitcamp.java93.util.DBConnectionPool;
 
 @Component
 public class MemberDaoImpl implements MemberDao {
+  @Autowired
   DBConnectionPool conPool;
-  
-  public void setDBConnectionPool(DBConnectionPool conPool) {
-    this.conPool = conPool;
-  }
   
   public List<Member> selectList(int pageNo, int pageSize) throws Exception {
     Connection con = conPool.getConnection();
