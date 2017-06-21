@@ -10,7 +10,11 @@
   <bean id="t1" class="step27.ex3.Tire">
     <property name="maker" value="비트타이어"/>
     <property name="inch" value="14"/>
-    <property name="createdDate" value="2017-06-21"/>
+    <property name="createdDate">
+      <bean class="java.sql.Date" factory-method="valueOf">
+        <constructor-arg value="2017-06-21"/>
+      </bean>
+    </property>
   </bean>
   <!-- 위의 설정을 자바 코드로 표현하면,
   Tire t1 = new Tire();
