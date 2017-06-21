@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:component-scan base-package="step27"></context:component-scan>
+  
+  <!-- 문자열을 특정 타입의 프로퍼티 값으로 변환시켜주는
+       "프로퍼티 값 변환기"를 스프링에 등록한다. -->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+	    <property name="customEditors">
+	        <map>
+	            <entry key="java.sql.Date" value="step27.ex4.CustomDateEditor"/>
+	        </map>
+	    </property>
+	</bean>
+
+  <bean id="t1" class="step27.ex4.Tire">
+    <property name="maker" value="비트타이어"/>
+    <property name="inch" value="14"/>
+    <property name="createdDate">
+      <bean class="java.sql.Date" factory-method="valueOf">
+        <constructor-arg value="2017-06-21"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="t2" class="step27.ex4.Tire">
+    <property name="maker" value="비트타이어"/>
+    <property name="inch" value="14"/>
+    <property name="createdDate" value="2017-06-21"/>
+  </bean>
+  
+</beans>
+
+
+
+
+
+
