@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <bean id="t1" class="step27.ex3.Tire">
+    <property name="maker" value="비트타이어"/>
+    <property name="inch" value="14"/>
+    <property name="createdDate" value="2017-06-21"/>
+  </bean>
+  <!-- 위의 설정을 자바 코드로 표현하면,
+  Tire t1 = new Tire();
+  t1.setMaker("비트타이어");
+  t1.setInch(14);
+  t1.setCreatedDate(java.sql.Date.valueOf("2017-06-21"));
+  
+  beanContainer.put("t1", t1);
+   -->
+  
+  
+</beans>
+
+
+
+
+
+

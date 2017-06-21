@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- 스프링 규칙에 따라서 팩토리 클래스를 만들 경우,
+       보통 클래스 이름을 XxxFactoryBean으로 짓는다. -->
+  <bean id="c1" class="step27.ex3.CarFactoryBean">
+    <property name="tireMaker" value="한국타이어"/>
+    <property name="name" value="tico"/>
+  </bean>
+  <!-- 위의 설정을 자바 코드로 표현하면,
+  CarFactory3 obj = new CarFactory3();
+  obj.setTireMaker("한국타이어");
+  obj.setName("tico");
+  
+  if (obj instanceof FactoryBean) {
+    beanContainer.put("c1", obj.getObject());
+  } else {
+    beanContainer.put("c1", obj);
+  }
+   -->
+  
+  <bean id="c2" class="step27.ex3.CarFactoryBean">
+    <property name="tireMaker" value="한국타이어"/>
+    <property name="name" value="tico"/>
+  </bean>
+  
+  <bean id="c3" class="step27.ex3.CarFactoryBean">
+    <property name="tireMaker" value="금호타이어"/>
+    <property name="name" value="sonata"/>
+  </bean>
+  
+  
+</beans>
+
+
+
+
+
+

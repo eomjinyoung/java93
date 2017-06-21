@@ -1,8 +1,11 @@
 package step27.ex3;
 
+import java.sql.Date;
+
 public class Tire {
   String maker;
   float inch;
+  Date createdDate;
   
   public Tire() {}
   
@@ -13,7 +16,14 @@ public class Tire {
   
   @Override
   public String toString() {
-    return "Tire [maker=" + maker + ", inch=" + inch + "]";
+    return "Tire [maker=" + maker + ", inch=" + inch + ", createdDate=" + createdDate + "]";
+  }
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
   }
   public String getMaker() {
     return maker;
