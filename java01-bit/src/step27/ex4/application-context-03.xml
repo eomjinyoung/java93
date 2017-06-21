@@ -13,25 +13,17 @@
 	    <property name="customEditors">
 	        <map>
 	            <entry key="java.sql.Date" value="step27.ex4.CustomDateEditor"/>
+	            <entry key="step27.ex4.Engine" value="step27.ex4.CustomEngineEditor"/>
 	        </map>
 	    </property>
 	</bean>
 
-  <bean id="t1" class="step27.ex4.Tire">
-    <property name="maker" value="비트타이어"/>
-    <property name="inch" value="14"/>
-    <property name="createdDate">
-      <bean class="java.sql.Date" factory-method="valueOf">
-        <constructor-arg value="2017-06-21"/>
-      </bean>
-    </property>
+  <bean id="c1" class="step27.ex4.Car">
+    <property name="model" value="티코"/>
+    <property name="cc" value="900"/>
+    <property name="engine" value="12,4"/>
   </bean>
   
-  <bean id="t2" class="step27.ex4.Tire">
-    <property name="maker" value="비트타이어"/>
-    <property name="inch" value="14"/>
-    <property name="createdDate" value="2017-06-21"/>
-  </bean>
   
 </beans>
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- @Autowired를 처리할 객체 등록 -->
+  <!-- 참고! 빈의 id나 name을 설정하지 않으면 클래스 전체이름을 id나 name으로 사용한다. -->
+  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+  <bean id="car" class="step27.ex6.Car">
+    <property name="model" value="티코"/>
+    <property name="cc" value="900"/>
+    <!-- <property name="engine" ref="e1"/> --> <!-- @Autowired 로 자동 주입 -->
+  </bean>
+  
+  <bean id="e1" class="step27.ex6.Engine">
+    <property name="valve" value="16"/>
+    <property name="cylinder" value="8"/>
+  </bean>
+</beans>
+
+
+
+
+
+
