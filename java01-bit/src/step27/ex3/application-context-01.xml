@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- 특별히 호출될 생성자를 지정하지 않으면 기본 생성자가 호출된다. -->
+  <bean id="c1" class="step27.ex2.Car"/>
+  
+  <!-- 파라미터가 있는 생성자 지정하기 -->
+  <bean id="c2" class="step27.ex2.Car">
+    <constructor-arg value="티코"/>
+    <constructor-arg value="800"/>
+  </bean>
+  
+  <!-- 생성자의 파라미터 값을 설정할 때 파라미터 순서를 지정할 수 있다.-->
+  <bean id="c3" class="step27.ex2.Car">
+    <constructor-arg index="1" value="1998"/>
+    <constructor-arg index="0" value="소나타"/>
+  </bean>
+  
+  <!-- 생성자의 파라미터 값을 설정할 때 타입도 지정할 수 있다.
+      => XML에서 값을 지정할 때 문자열이다.
+      => 이 문자열은 파라미터의 타입에 따라 적절히 형변환 된다.
+      => 단 원시타입(byte, short, int, long, float, double, boolean, char)에 대해서만 가능하다.
+  -->
+  <bean id="c4" class="step27.ex2.Car">
+    <constructor-arg index="1" type="int" value="3000"/>
+    <constructor-arg index="0" type="java.lang.String" value="그랜저"/>
+  </bean>
+</beans>
+
+
+
+
+
+
