@@ -1,4 +1,4 @@
-/* 스프링 사용법: 팩토리 메서드 호출하기 
+/* 스프링 사용법: 팩토리 메서드 호출하기 I
  * => 팩토리 메서드(Factory Method)? 
  *    - 객체를 만들어 주는 메서드를 말한다.
  * => new 연산자를 사용해서 만들면 되지 않는가?
@@ -9,11 +9,9 @@
  */
 package step27.ex3;
 
-import java.util.ArrayList;
-
 public class Test01 {
   public static void main(String[] args) {
-    // 1) 일반적인 객체 생성
+    // 1) 일반적인 객체 생성 방법
     Engine e1 = new Engine(8, 4);
     
     Tire[] tireList = {
@@ -43,6 +41,9 @@ public class Test01 {
     c2.setCc(1998);
     c2.setEngine(e2);
     c2.setTires(tireList2);
+    
+    System.out.println(c1);
+    System.out.println(c2);
   }
 }
 

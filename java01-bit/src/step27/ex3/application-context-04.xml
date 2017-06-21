@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- Car를 생성할 공장을 만든다. -->
+  <bean id="f1" class="step27.ex3.CarFactory2">
+    <property name="tireMaker" value="한국타이어"/>
+  </bean>
+  
+  <bean id="f2" class="step27.ex3.CarFactory2">
+    <property name="tireMaker" value="금호타이어"/>
+  </bean>
+  
+  <!-- 인스턴스 팩토리 메서드 호출하여 객체 생성하기 -->
+  <bean id="c1" factory-bean="f1" factory-method="createCar">
+    <constructor-arg value="tico"/>
+  </bean>
+  <!-- 위의 코드를 자바 코드로 표현하면,
+  CarFactory2 f1 = new CarFactory2();
+  f1.setTireMaker("한국타이어");
+  
+  CarFactory2 f2 = new CarFactory2();
+  f2.setTireMaker("금호타이어");
+   
+  Car c1 = f1.createCar("tico");
+  beanContainer.put("c1", c1);
+   -->
+  
+  <bean id="c2" factory-bean="f2" factory-method="createCar">
+    <constructor-arg value="tico"/>
+  </bean>
+  
+  <bean id="c3" factory-bean="f2" factory-method="createCar">
+    <constructor-arg value="sonata"/>
+  </bean>
+  
+  
+</beans>
+
+
+
+
+
+
