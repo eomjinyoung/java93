@@ -6,10 +6,12 @@
  *    셋터 메서드를 안 만들어도 된다.
  *    물론 만들어도 된다.
  */
-package step27.ex7;
+package step27.ex8;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Car {
   String model;
   int cc;

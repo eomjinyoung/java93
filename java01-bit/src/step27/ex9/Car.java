@@ -1,19 +1,17 @@
-/* @Autowired 사용: 필드 선언에 붙이기
- * => Spring IoC 컨테이너가 Car 객체를 만들 때,
- *    @Autowired가 붙은 필드에 
- *    의존 객체를 주입해야 한다는 것을 의미한다. 
- * => @Autowired를 필드 선언에 붙이면,
- *    셋터 메서드를 안 만들어도 된다.
- *    물론 만들어도 된다.
+/* @Autowired 사용: required 속성 
  */
-package step27.ex7;
+package step27.ex9;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Car {
   String model;
   int cc;
-  @Autowired Engine engine;
+  
+  //@Autowired에는 required 속성이 있다. 기본이 true이다.
+  @Autowired(required=false) Engine engine;
   
   @Override
   public String toString() {
