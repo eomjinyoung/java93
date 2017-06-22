@@ -30,6 +30,15 @@
     insert into memb(name,tel,email,pwd) 
     values(#{name},#{tel},#{email},password(#{password}))
   </insert>
+  
+  <update id="update" parameterType="step28.ex2.Member">
+    update memb set 
+      name=#{name}, 
+      tel=#{tel}, 
+      email=#{email}, 
+      pwd=password(#{password}) 
+    where mno=#{no}
+  </update>
 
 </mapper>
 

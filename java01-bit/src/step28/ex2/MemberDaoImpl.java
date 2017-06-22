@@ -101,6 +101,16 @@ public class MemberDaoImpl implements MemberDao {
   }
   
   public int update(Member member) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      int count = sqlSession.update("step28.ex2.MemberDao.update", member);
+      sqlSession.commit();
+      return count;
+      
+    } finally {
+      sqlSession.close();
+    }
     /*
     Connection con = conPool.getConnection();
     try (
@@ -118,7 +128,6 @@ public class MemberDaoImpl implements MemberDao {
       conPool.returnConnection(con);
     }
      */
-    return 0;
   }
   
 }
