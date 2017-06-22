@@ -1,3 +1,4 @@
+/* Mybatis 퍼시스턴스 프레임워크: 사용 전 */
 package step28.ex1;
 
 import java.util.List;
