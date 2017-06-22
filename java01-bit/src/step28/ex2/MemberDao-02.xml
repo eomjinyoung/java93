@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="step28.ex2.MemberDao">
+
+  <select id="selectList" resultType="member" parameterType="map">
+    select mno as no, name, tel, email 
+    from memb 
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+
+  <!-- SQL을 실행할 때 받은 값이 원시 타입의 값이라면,
+       #{아무이름}을 지정해도 된다. -->
+  <select id="selectOne" resultType="member" parameterType="int">
+    select mno as no, name, tel, email 
+    from memb 
+    where mno = #{memberNo}
+  </select>
+  
+  <select id="selectOneByEmailPassword" resultType="member" parameterType="map">
+    select mno as no, name, tel, email 
+    from memb 
+    where email=#{email} and pwd=password(#{password})
+  </select>
+  
+  <!-- select 문이 아니기 때문에 resultType 속성을 추가하지 않는다. -->
+  <insert id="insert" parameterType="member">
+    insert into memb(name,tel,email,pwd) 
+    values(#{name},#{tel},#{email},password(#{password}))
+  </insert>
+  
+  <update id="update" parameterType="member">
+    update memb set 
+      name=#{name}, 
+      tel=#{tel}, 
+      email=#{email}, 
+      pwd=password(#{password}) 
+    where mno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from memb 
+    where mno=#{memberNo}
+  </delete>
+
+</mapper>
+
+
+
+

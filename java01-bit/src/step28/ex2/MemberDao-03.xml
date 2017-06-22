@@ -12,27 +12,24 @@
     <result column="pwd" property="password"/>
   </resultMap>
 
-  <!-- 반복적으로 사용하는 SQL 코드는 별도의 태그에 분리해두고 재사용할 수 있다. -->
-  <sql id="select1">
-    select mno, name, tel, email 
-    from memb
-  </sql>
-
   <!-- resultType 대신 컬럼과 프로퍼티를 미리 연결한 
        resultMap을 사용하면 각각의 컬럼에 별명을 부여할 필요가 없다. -->
   <select id="selectList" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/>
+    select mno, name, tel, email 
+    from memb 
     order by name asc 
     limit #{startIndex}, #{pageSize}
   </select>
 
   <select id="selectOne" resultMap="memberMap" parameterType="int">
-    <include refid="select1"/> 
+    select mno, name, tel, email 
+    from memb 
     where mno = #{memberNo}
   </select>
   
   <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/> 
+    select mno, name, tel, email 
+    from memb 
     where email=#{email} and pwd=password(#{password})
   </select>
   
