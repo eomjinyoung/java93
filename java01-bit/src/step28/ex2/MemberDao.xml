@@ -18,6 +18,18 @@
     from memb 
     where mno = #{memberNo}
   </select>
+  
+  <select id="selectOneByEmailPassword" resultType="step28.ex2.Member" parameterType="map">
+    select mno as no, name, tel, email 
+    from memb 
+    where email=#{email} and pwd=password(#{password})
+  </select>
+  
+  <!-- select 문이 아니기 때문에 resultType 속성을 추가하지 않는다. -->
+  <insert id="insert" parameterType="step28.ex2.Member">
+    insert into memb(name,tel,email,pwd) 
+    values(#{name},#{tel},#{email},password(#{password}))
+  </insert>
 
 </mapper>
 

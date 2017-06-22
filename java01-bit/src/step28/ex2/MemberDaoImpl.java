@@ -42,63 +42,44 @@ public class MemberDaoImpl implements MemberDao {
   }
 
   public Member selectOneByEmailPassword(String email, String password) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-
-    try ( 
-      PreparedStatement stmt = con.prepareStatement(
-          "select mno, name, tel, email from memb where email=? and pwd=password(?)");) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> valueMap = new HashMap<>();
+      valueMap.put("email", email);
+      valueMap.put("password", password);
       
-      stmt.setString(1, email);
-      stmt.setString(2, password);
+      return sqlSession.selectOne("step28.ex2.MemberDao.selectOneByEmailPassword", valueMap);
       
-      try (ResultSet rs = stmt.executeQuery();) {
-        if (!rs.next()) { 
-          return null;
-        }
-        
-        Member member = new Member();
-        member.setNo(rs.getInt("mno"));
-        member.setName(rs.getString("name"));
-        member.setTel(rs.getString("tel"));
-        member.setEmail(rs.getString("email"));
-        return member;
-      }
-      
-    } finally { 
-      conPool.returnConnection(con);
+    } finally {
+      sqlSession.close();
     }
-    */
-    return null;
   }
   
   public int insert(Member member) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-    try (
-      PreparedStatement stmt = con.prepareStatement(
-          "insert into memb(name,tel,email,pwd) values(?,?,?,password(?))",
-          Statement.RETURN_GENERATED_KEYS);) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      // insert 문을 실행할 때는 insert() 메서드를 호출하라!
+      // SqlSession.insert()의 리턴 값은 내부적으론 호출한 executeUpdate()의 리턴 값이다.
+      int count = sqlSession.insert("step28.ex2.MemberDao.insert", member);
       
-      stmt.setString(1, member.getName());
-      stmt.setString(2, member.getTel());
-      stmt.setString(3, member.getEmail());
-      stmt.setString(4, member.getPassword());
-      int count = stmt.executeUpdate();
+      // insert(), update(), delete()을 호출한 후에는 
+      // DBMS에 최종적으로 확정하는 명령을 보내야 실행이 완료된다.
+      sqlSession.commit();
       
-      // 자동 생성된 PK 값을 꺼내기 
-      try (ResultSet rs = stmt.getGeneratedKeys();) {
-        rs.next();
-        member.setNo(rs.getInt(1));
-      }
+      /* insert(), update(), delete()을 호출한 후 
+       * DBMS에 자동으로 최종적으로 확정하는 명령을 보내고 싶다면,
+       * SqlSession을 얻을 때 미리 설정해야 한다. 
+       * 코드:
+       * SqlSession sqlSession = sqlSessionFactory.openSession(true);
+       */
       
       return count;
-    
-    } finally { 
-      conPool.returnConnection(con);
+      
+    } finally {
+      sqlSession.close();
     }
-    */
-    return 0;
   }
   
   public int delete(int no) throws Exception {
