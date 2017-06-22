@@ -29,38 +29,14 @@ public class TeacherDaoImpl implements TeacherDao {
   }
   
   public Teacher selectOne(int no) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-
-    try ( 
-      PreparedStatement stmt = con.prepareStatement(
-          "select m.mno, m.name, m.tel, m.email, t.hmpg, t.fcbk, t.twit " +
-          " from tcher t inner join memb m on t.tno=m.mno " +
-          " where t.tno=?");) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      return sqlSession.selectOne("step28.ex4.TeacherDao.selectOne", no);
       
-      stmt.setInt(1, no);
-      
-      try (ResultSet rs = stmt.executeQuery();) {
-        if (!rs.next()) { 
-          return null;
-        }
-        
-        Teacher teacher = new Teacher();
-        teacher.setNo(rs.getInt("mno"));
-        teacher.setName(rs.getString("name"));
-        teacher.setTel(rs.getString("tel"));
-        teacher.setEmail(rs.getString("email"));
-        teacher.setHomepage(rs.getString("hmpg"));
-        teacher.setFacebook(rs.getString("fcbk"));
-        teacher.setTwitter(rs.getString("twit"));
-        return teacher;
-      }
-      
-    } finally { 
-      conPool.returnConnection(con);
+    } finally {
+      sqlSession.close();
     }
-    */
-    return null;
   }
 
   public int insert(Teacher teacher) throws Exception {

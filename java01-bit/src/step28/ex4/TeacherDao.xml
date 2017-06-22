@@ -6,16 +6,16 @@
 
   <resultMap type="teacher" id="teacherMap">
     <id column="mno" property="no"/>
-    <!-- 컬럼명과 프로퍼티명이 같을 경우 생략할 수 있다. -->
-    <!--  
     <result column="email" property="email"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
-    -->
     <result column="pwd" property="password"/>
     <result column="hmpg" property="homepage"/>
     <result column="fcbk" property="facebook"/>
     <result column="twit" property="twitter"/>
+    <collection property="photoList" ofType="string">
+      <result column="path"/>
+    </collection>
   </resultMap>
 
   <select id="selectList" resultMap="teacherMap" parameterType="map">
@@ -27,6 +27,9 @@
   
   
   <select id="selectOne" resultMap="teacherMap" parameterType="int">
+    select  m.mno, m.name, m.tel, m.email, t.hmpg, t.fcbk, t.twit, tp.path
+    from tcher t inner join memb m on t.tno=m.mno
+                 left outer join tch_phot tp on t.tno=tp.tno
     where mno = #{memberNo}
   </select>
   
