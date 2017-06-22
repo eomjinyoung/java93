@@ -30,6 +30,22 @@ public class MemberDaoImpl implements MemberDao {
     }
   }
   
+  public List<Member> selectListByNames(int pageNo, int pageSize, String[] names) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> valueMap = new HashMap<>();
+      valueMap.put("startIndex", (pageNo - 1) * pageSize);
+      valueMap.put("pageSize", pageSize);
+      valueMap.put("names", names);
+      
+      return sqlSession.selectList("step28.ex3.MemberDao.selectListByNames", valueMap);
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
   public Member selectOne(int no) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     

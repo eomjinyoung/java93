@@ -35,6 +35,20 @@
     limit #{startIndex}, #{pageSize}
   </select>
   
+  <select id="selectListByNames" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="names != null">
+      <where>
+        name in 
+        <foreach collection="names" item="name" open="(" close=")" separator=",">
+          #{name}
+        </foreach>
+      </where> 
+    </if>    
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
   <select id="selectOne" resultMap="memberMap" parameterType="int">
     <include refid="select1"/> 
     where mno = #{memberNo}
