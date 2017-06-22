@@ -2,83 +2,39 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="step28.ex4.MemberDao">
-  <!-- DB 컬럼과 자바 객체의 프로퍼티를 연결하는 정보 -->
-  <resultMap type="member" id="memberMap">
+<mapper namespace="step28.ex4.TeacherDao">
+
+  <resultMap type="teacher" id="teacherMap">
     <id column="mno" property="no"/>
+    <!-- 컬럼명과 프로퍼티명이 같을 경우 생략할 수 있다. -->
+    <!--  
     <result column="email" property="email"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
+    -->
     <result column="pwd" property="password"/>
+    <result column="hmpg" property="homepage"/>
+    <result column="fcbk" property="facebook"/>
+    <result column="twit" property="twitter"/>
   </resultMap>
 
-  <!-- 반복적으로 사용하는 SQL 코드는 별도의 태그에 분리해두고 재사용할 수 있다. -->
-  <sql id="select1">
-    select mno, name, tel, email 
-    from memb
-  </sql>
-
-  <!-- resultType 대신 컬럼과 프로퍼티를 미리 연결한 
-       resultMap을 사용하면 각각의 컬럼에 별명을 부여할 필요가 없다. -->
-  <select id="selectList" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/>
-    <if test="search != null">
-	    <where>
-	      <choose>
-		      <when test="search == 'email'">email = #{value}</when>
-		      <when test="search == 'name'">name like concat('%', #{value}, '%')</when>
-		      <when test="search == 'tel'">tel like concat('%', #{value}, '%')</when>
-	      </choose>
-	    </where>
-    </if>    
-    order by name asc 
+  <select id="selectList" resultMap="teacherMap" parameterType="map">
+    select  m.mno, m.name, m.tel, m.email, t.hmpg
+    from tcher t inner join memb m on t.tno=m.mno
+    order by m.name asc 
     limit #{startIndex}, #{pageSize}
   </select>
   
-  <select id="selectListByNames" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/>
-    <if test="names != null">
-      <where>
-        name in 
-        <foreach collection="names" item="name" open="(" close=")" separator=",">
-          #{name}
-        </foreach>
-      </where> 
-    </if>    
-    order by name asc 
-    limit #{startIndex}, #{pageSize}
-  </select>
   
-  <select id="selectOne" resultMap="memberMap" parameterType="int">
-    <include refid="select1"/> 
+  <select id="selectOne" resultMap="teacherMap" parameterType="int">
     where mno = #{memberNo}
   </select>
   
-  <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/> 
-    where email=#{email} and pwd=password(#{password})
-  </select>
-  
-  <!-- select 문이 아니기 때문에 resultType 속성을 추가하지 않는다. -->
-  <insert id="insert" parameterType="member">
+  <insert id="insert" parameterType="teacher">
     insert into memb(name,tel,email,pwd) 
     values(#{name},#{tel},#{email},password(#{password}))
   </insert>
   
-  <update id="update" parameterType="member">
-    update memb set 
-      name=#{name}, 
-      tel=#{tel}, 
-      email=#{email}, 
-      pwd=password(#{password}) 
-    where mno=#{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from memb 
-    where mno=#{memberNo}
-  </delete>
-
 </mapper>
 
 

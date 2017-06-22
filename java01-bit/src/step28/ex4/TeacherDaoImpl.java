@@ -1,7 +1,9 @@
 package step28.ex4;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 public class TeacherDaoImpl implements TeacherDao {
@@ -12,41 +14,18 @@ public class TeacherDaoImpl implements TeacherDao {
   } 
   
   public List<Teacher> selectList(int pageNo, int pageSize) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-
-    try ( 
-      PreparedStatement stmt = con.prepareStatement(
-          "select m.mno, m.name, m.tel, m.email, t.hmpg " +
-          " from tcher t inner join memb m on t.tno=m.mno " +
-          " order by m.name asc " + 
-          "limit ?, ?");) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> valueMap = new HashMap<>();
+      valueMap.put("startIndex", (pageNo - 1) * pageSize);
+      valueMap.put("pageSize", pageSize);
       
-      stmt.setInt(1, (pageNo - 1) * pageSize );
-      stmt.setInt(2, pageSize );
+      return sqlSession.selectList("step28.ex4.TeacherDao.selectList", valueMap);
       
-      ArrayList<Teacher> list = new ArrayList<>();
-      
-      try (ResultSet rs = stmt.executeQuery();) {
-        Teacher teacher = null;
-        while (rs.next()) { 
-          teacher = new Teacher();
-          teacher.setNo(rs.getInt("mno"));
-          teacher.setName(rs.getString("name"));
-          teacher.setTel(rs.getString("tel"));
-          teacher.setEmail(rs.getString("email"));
-          teacher.setHomepage(rs.getString("hmpg"));
-          
-          list.add(teacher);
-        }
-      }
-      return list;
-      
-    } finally { 
-      conPool.returnConnection(con);
+    } finally {
+      sqlSession.close();
     }
-    */
-    return null;
   }
   
   public Teacher selectOne(int no) throws Exception {
