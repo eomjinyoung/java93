@@ -29,33 +29,16 @@ public class MemberDaoImpl implements MemberDao {
   }
   
   public Member selectOne(int no) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-
-    try ( 
-      PreparedStatement stmt = con.prepareStatement(
-          "select mno, name, tel, email from memb where mno=?");) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      // SqlSession.selectOne()을 실행할 때는 반드시 결과를 한 개만 만드는 select문을 지정해야 한다.
+      // 여러 개의 결과가 생성되는 select문은 실행할 수 없다.
+      return sqlSession.selectOne("step28.ex2.MemberDao.selectOne", no);
       
-      stmt.setInt(1, no);
-      
-      try (ResultSet rs = stmt.executeQuery();) {
-        if (!rs.next()) { 
-          return null;
-        }
-        
-        Member member = new Member();
-        member.setNo(rs.getInt("mno"));
-        member.setName(rs.getString("name"));
-        member.setTel(rs.getString("tel"));
-        member.setEmail(rs.getString("email"));
-        return member;
-      }
-      
-    } finally { 
-      conPool.returnConnection(con);
+    } finally {
+      sqlSession.close();
     }
-    */
-    return null;
   }
 
   public Member selectOneByEmailPassword(String email, String password) throws Exception {
