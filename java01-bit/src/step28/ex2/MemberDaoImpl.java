@@ -28,6 +28,54 @@ public class MemberDaoImpl implements MemberDao {
     }
   }
   
+  public List<Member> selectListByEmail(int pageNo, int pageSize, String email) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> valueMap = new HashMap<>();
+      valueMap.put("startIndex", (pageNo - 1) * pageSize);
+      valueMap.put("pageSize", pageSize);
+      valueMap.put("email", email);
+      
+      return sqlSession.selectList("step28.ex2.MemberDao.selectListByEmail", valueMap);
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
+  public List<Member> selectListByName(int pageNo, int pageSize, String name) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> valueMap = new HashMap<>();
+      valueMap.put("startIndex", (pageNo - 1) * pageSize);
+      valueMap.put("pageSize", pageSize);
+      valueMap.put("name", name);
+      
+      return sqlSession.selectList("step28.ex2.MemberDao.selectListByName", valueMap);
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
+  public List<Member> selectListByTel(int pageNo, int pageSize, String tel) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,Object> valueMap = new HashMap<>();
+      valueMap.put("startIndex", (pageNo - 1) * pageSize);
+      valueMap.put("pageSize", pageSize);
+      valueMap.put("tel", tel);
+      
+      return sqlSession.selectList("step28.ex2.MemberDao.selectListByTel", valueMap);
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
   public Member selectOne(int no) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     

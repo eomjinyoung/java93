@@ -25,27 +25,6 @@
     order by name asc 
     limit #{startIndex}, #{pageSize}
   </select>
-  
-  <select id="selectListByEmail" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/>
-    where email=#{email}
-    order by name asc 
-    limit #{startIndex}, #{pageSize}
-  </select>
-  
-  <select id="selectListByName" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/>
-    where name like concat('%', #{name}, '%')
-    order by name asc 
-    limit #{startIndex}, #{pageSize}
-  </select>
-  
-  <select id="selectListByTel" resultMap="memberMap" parameterType="map">
-    <include refid="select1"/>
-    where tel like concat('%', #{tel}, '%')
-    order by name asc 
-    limit #{startIndex}, #{pageSize}
-  </select>
 
   <select id="selectOne" resultMap="memberMap" parameterType="int">
     <include refid="select1"/> 

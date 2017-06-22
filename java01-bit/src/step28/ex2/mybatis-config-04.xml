@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- SQL 맵 파일에서 사용할 타입의 별명을 설정한다. -->
+  <typeAliases>
+    <typeAlias type="step28.ex2.Member" alias="member"/>
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development"> <!-- DBMS 접속 정보 -->
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/webappdb"/>
+        <property name="username" value="webapp"/>
+        <property name="password" value="1111"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers> <!-- SQL 문이 들어 있는 XML 파일의 정보 -->
+    <mapper resource="step28/ex2/MemberDao.xml"/>
+  </mappers>
+</configuration>
