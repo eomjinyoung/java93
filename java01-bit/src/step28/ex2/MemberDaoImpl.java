@@ -83,21 +83,16 @@ public class MemberDaoImpl implements MemberDao {
   }
   
   public int delete(int no) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-    try (
-      PreparedStatement stmt = con.prepareStatement(
-          "delete from memb where mno=?");) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      int count = sqlSession.delete("step28.ex2.MemberDao.delete", no);
+      sqlSession.commit();
+      return count;
       
-      stmt.setInt(1, no);
-      return stmt.executeUpdate();
-    
-    } finally { 
-      conPool.returnConnection(con);
+    } finally {
+      sqlSession.close();
     }
-    */
-    return 0;
-    
   }
   
   public int update(Member member) throws Exception {
@@ -111,23 +106,6 @@ public class MemberDaoImpl implements MemberDao {
     } finally {
       sqlSession.close();
     }
-    /*
-    Connection con = conPool.getConnection();
-    try (
-      PreparedStatement stmt = con.prepareStatement(
-          "update memb set name=?, tel=?, email=?, pwd=password(?) where mno=?");) {
-      
-      stmt.setString(1, member.getName());
-      stmt.setString(2, member.getTel());
-      stmt.setString(3, member.getEmail());
-      stmt.setString(4, member.getPassword());
-      stmt.setInt(5, member.getNo());
-      return stmt.executeUpdate();
-    
-    } finally { 
-      conPool.returnConnection(con);
-    }
-     */
   }
   
 }

@@ -39,6 +39,11 @@
       pwd=password(#{password}) 
     where mno=#{no}
   </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from memb 
+    where mno=#{memberNo}
+  </delete>
 
 </mapper>
 
