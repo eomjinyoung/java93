@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="step28.ex4.TeacherDao">
+<mapper namespace="step28.ex5.TeacherDao">
 
   <resultMap type="teacher" id="teacherMap">
     <id column="mno" property="no"/>
@@ -19,7 +19,7 @@
   </resultMap>
 
   <select id="selectList" resultMap="teacherMap" parameterType="map">
-    select  m.mno, m.name, m.tel, m.email, t.hmpg
+    select  m.mno, m.name, m.tel, m.email, t.hmpg, null as path
     from tcher t inner join memb m on t.tno=m.mno
     order by m.name asc 
     limit #{startIndex}, #{pageSize}

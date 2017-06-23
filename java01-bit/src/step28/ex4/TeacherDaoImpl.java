@@ -40,23 +40,16 @@ public class TeacherDaoImpl implements TeacherDao {
   }
 
   public int insert(Teacher teacher) throws Exception {
-    /*
-    Connection con = conPool.getConnection();
-    try (
-      PreparedStatement stmt = con.prepareStatement(
-          "insert into tcher(tno,hmpg,fcbk,twit) values(?,?,?,?)");) {
-      
-      stmt.setInt(1, teacher.getNo());
-      stmt.setString(2, teacher.getHomepage());
-      stmt.setString(3, teacher.getFacebook());
-      stmt.setString(4, teacher.getTwitter());
-      return stmt.executeUpdate();
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     
-    } finally { 
-      conPool.returnConnection(con);
+    try {
+      int count = sqlSession.insert("step28.ex4.TeacherDao.insert", teacher);
+      sqlSession.commit();
+      return count;
+      
+    } finally {
+      sqlSession.close();
     }
-    */
-    return 0;
   }
   
   public void insertPhoto(int no, List<String> photoList) throws Exception {

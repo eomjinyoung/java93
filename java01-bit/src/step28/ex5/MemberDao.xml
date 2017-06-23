@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="step28.ex4.MemberDao">
+<mapper namespace="step28.ex5.MemberDao">
   <!-- DB 컬럼과 자바 객체의 프로퍼티를 연결하는 정보 -->
   <resultMap type="member" id="memberMap">
     <id column="mno" property="no"/>

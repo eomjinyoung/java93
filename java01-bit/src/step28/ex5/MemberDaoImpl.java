@@ -1,17 +1,16 @@
-package step28.ex4;
+package step28.ex5;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MemberDaoImpl implements MemberDao {
-  SqlSessionFactory sqlSessionFactory;
-  
-  public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-    this.sqlSessionFactory = sqlSessionFactory;
-  }
+  @Autowired SqlSessionFactory sqlSessionFactory;
 
   public List<Member> selectList(int pageNo, int pageSize, String search, String value) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -23,7 +22,7 @@ public class MemberDaoImpl implements MemberDao {
       valueMap.put("search", search);
       valueMap.put("value", value);
       
-      return sqlSession.selectList("step28.ex4.MemberDao.selectList", valueMap);
+      return sqlSession.selectList("step28.ex5.MemberDao.selectList", valueMap);
       
     } finally {
       sqlSession.close();
@@ -39,7 +38,7 @@ public class MemberDaoImpl implements MemberDao {
       valueMap.put("pageSize", pageSize);
       valueMap.put("names", names);
       
-      return sqlSession.selectList("step28.ex4.MemberDao.selectListByNames", valueMap);
+      return sqlSession.selectList("step28.ex5.MemberDao.selectListByNames", valueMap);
       
     } finally {
       sqlSession.close();
@@ -50,7 +49,7 @@ public class MemberDaoImpl implements MemberDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      return sqlSession.selectOne("step28.ex4.MemberDao.selectOne", no);
+      return sqlSession.selectOne("step28.ex5.MemberDao.selectOne", no);
       
     } finally {
       sqlSession.close();
@@ -65,7 +64,7 @@ public class MemberDaoImpl implements MemberDao {
       valueMap.put("email", email);
       valueMap.put("password", password);
       
-      return sqlSession.selectOne("step28.ex4.MemberDao.selectOneByEmailPassword", valueMap);
+      return sqlSession.selectOne("step28.ex5.MemberDao.selectOneByEmailPassword", valueMap);
       
     } finally {
       sqlSession.close();
@@ -76,7 +75,7 @@ public class MemberDaoImpl implements MemberDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      int count = sqlSession.insert("step28.ex4.MemberDao.insert", member);
+      int count = sqlSession.insert("step28.ex5.MemberDao.insert", member);
       sqlSession.commit();
       return count;
       
@@ -89,7 +88,7 @@ public class MemberDaoImpl implements MemberDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      int count = sqlSession.delete("step28.ex4.MemberDao.delete", no);
+      int count = sqlSession.delete("step28.ex5.MemberDao.delete", no);
       sqlSession.commit();
       return count;
       
@@ -102,7 +101,7 @@ public class MemberDaoImpl implements MemberDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      int count = sqlSession.update("step28.ex4.MemberDao.update", member);
+      int count = sqlSession.update("step28.ex5.MemberDao.update", member);
       sqlSession.commit();
       return count;
       
