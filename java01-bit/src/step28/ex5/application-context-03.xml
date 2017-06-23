@@ -30,13 +30,8 @@
          DB 커넥션 풀(DataSource)의 관리를 스프링에 맡겨야 한다. -->
     <property name="dataSource" ref="dataSource"/>
     
-    <!-- 별명을 등록할 클래스를 지정하기. 
-         패키지 명을 주면 그 패키지에 있는 모든 클래스에 대해 별명을 등록한다. -->
-    <property name="typeAliasesPackage" value="step28.ex5"/>
-    
-    <!-- SQL 맵퍼 파일의 경로를 등록하기  -->
-    <property name="mapperLocations" value="classpath*:step28/ex5/*Dao.xml"/>
-    
+    <!-- DataSource는 Mybatis에서 관리하지 않기 때문에 설정 파일에서 제거한다. -->
+    <property name="configLocation" value="step28/ex5/mybatis-config.xml"/>
   </bean>
   
 </beans>

@@ -3,18 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <!-- SQL 맵 파일에서 사용할 타입의 별명을 설정한다. -->
-  <typeAliases>
-    <typeAlias type="step28.ex5.Member" alias="member"/>
-    <typeAlias type="step28.ex5.Teacher" alias="teacher"/>
-    <typeAlias type="step28.ex5.Project" alias="project"/>
-  </typeAliases>
   
-  <mappers> <!-- SQL 문이 들어 있는 XML 파일의 정보 -->
-    <mapper resource="step28/ex5/MemberDao.xml"/>
-    <mapper resource="step28/ex5/TeacherDao.xml"/>
-    <mapper resource="step28/ex5/ProjectDao.xml"/>
-  </mappers>
 </configuration>
 
 
