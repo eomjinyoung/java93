@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="step28.ex6.ProjectDao">
+
+  <resultMap type="project" id="projectMap">
+    <id column="pjno" property="no"/>
+    <result column="titl" property="title"/>
+    <result column="conts" property="content"/>
+    <result column="sdt" property="startDate"/>
+    <result column="edt" property="endDate"/>
+    <result column="path" property="photoPath"/>
+    <collection property="members" ofType="member">
+      <id column="mno" property="no"/>
+      <result column="name" property="name"/>
+      <result column="email" property="email"/>
+      <result column="tel" property="tel"/>
+    </collection>
+  </resultMap>
+
+  <select id="selectOne" resultMap="projectMap" parameterType="int">
+    select 
+      p.pjno, 
+      p.titl, 
+      p.conts, 
+      p.sdt, 
+      p.edt, 
+      p.path, 
+      pm.mno,
+      m.name,
+      m.email,
+      m.tel
+    from proj p 
+      left outer join proj_memb pm on p.pjno = pm.pjno 
+      left outer join memb m on pm.mno = m.mno
+    where p.pjno = #{projectNo}
+    order by pjno asc
+  </select>
+  
+</mapper>
+
+
+
+

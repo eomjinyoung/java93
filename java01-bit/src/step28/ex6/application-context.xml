@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:component-scan base-package="step28.ex6"/>
+
+  <!-- 설정 파일에서 사용할 정보를 담은 .properties 파일 로딩하기 -->
+  <context:property-placeholder location="step28/ex6/jdbc.properties"/>
+
+  <!-- DB의 커넥션 풀을 관리하는 객체이다.
+       우리가 만든 DBConnectionPool의 기능을 갖고 있다.  -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+  </bean>
+
+  <!-- DB 트랜잭션을 관리하는 객체이다.
+       Mybatis에서 관리하던 것을 스프링으로 옮겼다. -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+    
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- Mybatis를 Spring IoC 컨테이너와 연동해 사용할 때는
+         DB 커넥션 풀(DataSource)의 관리를 스프링에 맡겨야 한다. -->
+    <property name="dataSource" ref="dataSource"/>
+    
+    <!-- 별명을 등록할 클래스를 지정하기. 
+         패키지 명을 주면 그 패키지에 있는 모든 클래스에 대해 별명을 등록한다. -->
+    <property name="typeAliasesPackage" value="step28.ex6"/>
+    
+    <!-- SQL 맵퍼 파일의 경로를 등록하기  -->
+    <property name="mapperLocations" value="classpath*:step28/ex6/*Dao.xml"/>
+    
+  </bean>
+  
+  <!-- DAO 인터페이스의 구현체를 자동으로 생성할 객체 준비 -->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <property name="basePackage" value="step28.ex6"/>
+	</bean>
+  
+</beans>
+
+
+
+
+
+

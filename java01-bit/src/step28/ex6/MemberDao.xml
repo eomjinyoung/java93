@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- Mybatis에서 DAO 구현체를 자동으로 만들 때는,
+     SQL 맵퍼 파일의 namespace 값이 DAO 인터페이스와 같아야 한다. -->
+<mapper namespace="step28.ex6.MemberDao">
+  <!-- DB 컬럼과 자바 객체의 프로퍼티를 연결하는 정보 -->
+  <resultMap type="member" id="memberMap">
+    <id column="mno" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="pwd" property="password"/>
+  </resultMap>
+
+  <!-- 반복적으로 사용하는 SQL 코드는 별도의 태그에 분리해두고 재사용할 수 있다. -->
+  <sql id="select1">
+    select mno, name, tel, email 
+    from memb
+  </sql>
+
+  <!-- Mybatis에서 DAO 구현체를 자동으로 만들 때는,
+       SQL의 id가 메서드 이름과 같아야 한다. -->
+  <select id="selectList" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="search != null">
+	    <where>
+	      <choose>
+		      <when test="search == 'email'">email = #{value}</when>
+		      <when test="search == 'name'">name like concat('%', #{value}, '%')</when>
+		      <when test="search == 'tel'">tel like concat('%', #{value}, '%')</when>
+	      </choose>
+	    </where>
+    </if>    
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectListByNames" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="names != null">
+      <where>
+        name in 
+        <foreach collection="names" item="name" open="(" close=")" separator=",">
+          #{name}
+        </foreach>
+      </where> 
+    </if>    
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectOne" resultMap="memberMap" parameterType="int">
+    <include refid="select1"/> 
+    where mno = #{memberNo}
+  </select>
+  
+  <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/> 
+    where email=#{email} and pwd=password(#{password})
+  </select>
+  
+  <!-- select 문이 아니기 때문에 resultType 속성을 추가하지 않는다. -->
+  <insert id="insert" parameterType="member" 
+          useGeneratedKeys="true" keyColumn="mno" keyProperty="no">
+    insert into memb(name,tel,email,pwd) 
+    values(#{name},#{tel},#{email},password(#{password}))
+  </insert>
+  
+  <update id="update" parameterType="member">
+    update memb set 
+      name=#{name}, 
+      tel=#{tel}, 
+      email=#{email}, 
+      pwd=password(#{password}) 
+    where mno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from memb 
+    where mno=#{memberNo}
+  </delete>
+
+</mapper>
+
+
+
+

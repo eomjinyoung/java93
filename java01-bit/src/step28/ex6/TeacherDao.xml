@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="step28.ex6.TeacherDao">
+
+  <resultMap type="teacher" id="teacherMap">
+    <id column="mno" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="pwd" property="password"/>
+    <result column="hmpg" property="homepage"/>
+    <result column="fcbk" property="facebook"/>
+    <result column="twit" property="twitter"/>
+    <collection property="photoList" ofType="string">
+      <result column="path"/>
+    </collection>
+  </resultMap>
+
+  <select id="selectList" resultMap="teacherMap" parameterType="map">
+    select  m.mno, m.name, m.tel, m.email, t.hmpg, null as path
+    from tcher t inner join memb m on t.tno=m.mno
+    order by m.name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  
+  <select id="selectOne" resultMap="teacherMap" parameterType="int">
+    select  m.mno, m.name, m.tel, m.email, t.hmpg, t.fcbk, t.twit, tp.path
+    from tcher t inner join memb m on t.tno=m.mno
+                 left outer join tch_phot tp on t.tno=tp.tno
+    where mno = #{memberNo}
+  </select>
+  
+  <insert id="insert" parameterType="teacher">
+    insert into tcher(tno, hmpg, fcbk, twit) 
+    values(#{no}, #{homepage}, #{facebook}, #{twitter})
+  </insert>
+  
+</mapper>
+
+
+
+
