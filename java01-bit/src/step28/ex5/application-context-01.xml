@@ -10,10 +10,16 @@
 
   <context:component-scan base-package="step28.ex5"/>
 
-  <bean id="sqlSessionFactory" class="step28.ex5.SqlSessionFactoryFactoryBean">
-    <property name="configLocation" value="step28/ex5/mybatis-config.xml"/>
+  <bean id="inputStream" class="org.apache.ibatis.io.Resources" 
+        factory-method="getResourceAsStream">
+    <constructor-arg type="java.lang.String" value="step28/ex5/mybatis-config.xml"/>
   </bean>
   
+  <bean id="builder" class="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
+  
+  <bean id="sqlSessionFactory" factory-bean="builder" factory-method="build">
+    <constructor-arg type="java.io.InputStream" ref="inputStream"/>
+  </bean>
 </beans>
 
 
