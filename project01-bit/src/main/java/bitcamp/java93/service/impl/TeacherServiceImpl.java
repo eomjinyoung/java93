@@ -1,5 +1,6 @@
 package bitcamp.java93.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,29 @@ public class TeacherServiceImpl implements TeacherService {
   TeacherDao teacherDao;
   
   public List<Teacher> list(int pageNo, int pageSize) throws Exception {
-    return teacherDao.selectList(pageNo, pageSize);
+    HashMap<String,Object> valueMap = new HashMap<>();
+    valueMap.put("startIndex", (pageNo - 1) * pageSize);
+    valueMap.put("pageSize", pageSize);
+    
+    return teacherDao.selectList(valueMap);
   }
   
   public Teacher get(int no) throws Exception {
-    Teacher teacher = teacherDao.selectOne(no);
-    teacher.setPhotoList(teacherDao.selectPhotoList(no));
-    return teacher;
+    return teacherDao.selectOne(no);
   }
   
   public Teacher getByEmailPassword(String email, String password) throws Exception {
-    return teacherDao.selectOneByEmailPassword(email, password);
+    HashMap<String,Object> valueMap = new HashMap<>();
+    valueMap.put("email", email);
+    valueMap.put("password", password);
+    
+    return teacherDao.selectOneByEmailPassword(valueMap);
   }
   
   public void add(Teacher teacher) throws Exception {
     memberDao.insert(teacher);
     teacherDao.insert(teacher);
-    teacherDao.insertPhoto(teacher.getNo(), teacher.getPhotoList());
+    this.insertPhoto(teacher.getNo(), teacher.getPhotoList()); // 강사 사진 추가
   }
   
   public void update(Teacher teacher) throws Exception {
@@ -51,7 +58,17 @@ public class TeacherServiceImpl implements TeacherService {
     
     // 강사 사진 갱신
     teacherDao.deletePhoto(teacher.getNo()); // 강사의 모든 사진을 지운다.
-    teacherDao.insertPhoto(teacher.getNo(), teacher.getPhotoList()); // 강사의 사진을 추가한다.
+    this.insertPhoto(teacher.getNo(), teacher.getPhotoList()); // 강사 사진 추가
+  }
+  
+  private void insertPhoto(int teacherNo, List<String> photoPathList) {
+    HashMap<String,Object> valueMap = new HashMap<>();
+    valueMap.put("teacherNo", teacherNo);
+    
+    for (String photoPath : photoPathList) {
+      valueMap.put("photoPath", photoPath);
+      teacherDao.insertPhoto(valueMap);
+    }
   }
   
   public void remove(int no) throws Exception {

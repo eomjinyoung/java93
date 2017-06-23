@@ -306,10 +306,25 @@ Spring IoC 컨테이너를 이용하여 객체 생성을 자동화시킨다.
   - Spring IoC 컨테이너에 보관된 페이지 컨트롤러를 사용한다.
   - DispatcherServlet 클래스 변경
 
-
-
-
-
+## 27 Mybatis 퍼시스턴스 프레임워크 도입
+개발자가 직접 JDBC 프로그래밍을 하는 대신에 Mybatis를 이용하여 DAO를 구현한다.
+- Mybatis와 Mybatis 스프링 연동 라이브러리 가져오기
+  - 'mybatis', 'mybatis-spring', 'mybatis-jdbc' 라이브러리 검색
+  - build.gradle 에 의존 라이브러리 정보 추가
+  - "gradle eclipse" 실행하여 이클립스 설정 파일 갱신
+  - 프로젝트 "refresh"
+- 스프링 설정 파일(application-context.xml)에 mybatis 관련 객체 추가
+  - properties 파일 로딩 객체 추가
+  - DataSource 추가
+  - TransactionManager 추가
+  - SqlSessionFactoryBean 추가
+  - MapperScannerConfigurer 추가
+- DAO 인터페이스 및 SQL 맵퍼 파일 준비
+  - MemberDao 인터페이스 변경 + MemberDao.xml 파일 추가  
+  - TeacherDao 인터페이스 변경 + TeacherDao.xml 파일 추가
+- Service 구현체를 변경
+  - TeacherServiceImpl 클래스 변경
+- DAO 구현체 제거
 
 
 

@@ -12,13 +12,33 @@
   -->
   <context:component-scan base-package="bitcamp.java93"/>
 
-  <!-- DAO에 주입해야 할 DBConnectionPool 객체는 기본 생성자가 없기 때문에
-       이 설정 파일에서 객체 생성을 따로 지정해야 한다. -->
-  <bean id="dbConnectionPool" class="bitcamp.java93.util.DBConnectionPool">
-    <constructor-arg index="0" value="com.mysql.jdbc.Driver"/>
-    <constructor-arg index="1" value="jdbc:mysql://localhost:3306/webappdb"/>
-    <constructor-arg index="2" value="webapp"/>
-    <constructor-arg index="3" value="1111"/>
+  <!-- 설정 파일에서 사용할 정보를 담은 .properties 파일 로딩하기 -->
+  <context:property-placeholder location="bitcamp/java93/jdbc.properties"/>
+
+  <!-- DB의 커넥션 풀을 관리하는 객체이다.
+       우리가 만든 DBConnectionPool의 기능을 갖고 있다.  -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+  </bean>
+
+  <!-- DB 트랜잭션을 관리하는 객체이다.
+       Mybatis에서 관리하던 것을 스프링으로 옮겼다. -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+    
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="typeAliasesPackage" value="bitcamp.java93.domain"/>
+    <property name="mapperLocations" value="classpath*:bitcamp/java93/dao/*Dao.xml"/>
+  </bean>
+  
+  <!-- DAO 인터페이스의 구현체를 자동으로 생성할 객체 준비 -->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="bitcamp.java93.dao"/>
   </bean>
 </beans>
 
