@@ -7,6 +7,7 @@
   <typeAliases>
     <typeAlias type="step28.ex4.Member" alias="member"/>
     <typeAlias type="step28.ex4.Teacher" alias="teacher"/>
+    <typeAlias type="step28.ex4.Project" alias="project"/>
   </typeAliases>
 
   <environments default="development">
@@ -24,6 +25,7 @@
   <mappers> <!-- SQL 문이 들어 있는 XML 파일의 정보 -->
     <mapper resource="step28/ex4/MemberDao.xml"/>
     <mapper resource="step28/ex4/TeacherDao.xml"/>
+    <mapper resource="step28/ex4/ProjectDao.xml"/>
   </mappers>
 </configuration>
 
