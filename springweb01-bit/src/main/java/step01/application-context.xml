@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+  <!-- Spring IoC 컨테이너를 위한 객체 등록 
+       => 페이지 컨트롤러, Service, DAO 등의 객체를 준비한다.
+  -->
+  <context:component-scan base-package="step01"/>
+  
+  <!-- Spring WebMVC 관련 기능을 처리할 객체 등록 
+       => 프론트 컨트롤러가 작업하는 데 필요한 객체를 준비한다.
+       => @RequestMapping 애노테이션을 처리하는 등.
+  -->
+  <mvc:annotation-driven/>
+
+</beans>
+
+
+
+
+
+
