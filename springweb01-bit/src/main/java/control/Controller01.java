@@ -15,7 +15,7 @@
  *    2) 요청을 처리할 메서드를 표시하기
  *       - @RequestMapping(URL) 애노테이션을 붙인다.
  */
-package step01;
+package control;
 
 import java.io.PrintWriter;
 
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller  // 페이지 컨트롤러 클래스임을 표시
 public class Controller01 {
   
-  @RequestMapping("/step01/controller01") // 어떤 요청을 처리할 지 표시
+  @RequestMapping("/control/controller01") // 어떤 요청을 처리할 지 표시
   public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn1">"aaaa" 헤더 요청</button>
+<button id="btn2">"bbbb", "cccc" 헤더 요청</button>
+<div>
+<textarea id="ta" cols="80" rows="8"></textarea>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$("#btn1").click(function() {
+  $.ajax("control/controller08/ok.do", {
+	    method: "get",
+	    headers: {"aaaa":"hello"},
+	    dataType: "text"})
+	 .done(function(result) {
+		  $("#ta").val(result)
+	  })
+	 .fail(function(xhr, status, error) {
+		  $("#ta").val(xhr.responseText)
+	  })
+})
+
+$("#btn2").click(function() {
+  $.ajax("control/controller08/ok.do", {
+      method: "get",
+      headers: {"bbbb":"hello", "cccc":"hello"},
+      dataType: "text"})
+   .done(function(result) {
+      $("#ta").val(result)
+    })
+   .fail(function(xhr, status, error) {
+      $("#ta").val(xhr.responseText)
+    })
+})
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

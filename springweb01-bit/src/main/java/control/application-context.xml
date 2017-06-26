@@ -13,7 +13,7 @@
   <!-- Spring IoC 컨테이너를 위한 객체 등록 
        => 페이지 컨트롤러, Service, DAO 등의 객체를 준비한다.
   -->
-  <context:component-scan base-package="step01"/>
+  <context:component-scan base-package="control"/>
   
   <!-- Spring WebMVC 관련 기능을 처리할 객체 등록 
        => 프론트 컨트롤러가 작업하는 데 필요한 객체를 준비한다.
