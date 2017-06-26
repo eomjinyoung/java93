@@ -2,18 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context.xsd">
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
   <!-- 자동으로 객체를 생성할 클래스가 있는 패키지를 지정한다. 
        자동으로 객체를 생성하려면 그 클래스에 @Component 애노테이션이 붙어 있어야 한다.
   -->
   <context:component-scan base-package="bitcamp.java93"/>
+  
+  <!-- Spring WebMVC 관련 기능을 처리할 객체를 등록한다. -->
+  <mvc:annotation-driven/>
 
   <!-- 설정 파일에서 사용할 정보를 담은 .properties 파일 로딩하기 -->
-  <context:property-placeholder location="bitcamp/java93/jdbc.properties"/>
+  <context:property-placeholder location="classpath:bitcamp/java93/jdbc.properties"/>
 
   <!-- DB의 커넥션 풀을 관리하는 객체이다.
        우리가 만든 DBConnectionPool의 기능을 갖고 있다.  -->

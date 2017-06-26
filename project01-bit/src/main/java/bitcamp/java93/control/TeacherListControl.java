@@ -6,17 +6,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.service.TeacherService;
 
-@Component("/teacher/list")
-public class TeacherListControl implements Controller {
+@Controller
+public class TeacherListControl {
   @Autowired
   TeacherService teacherService;
   
-  @Override
+  @RequestMapping("/teacher/list")
   public String service(HttpServletRequest req, HttpServletResponse res) throws Exception {
     int pageNo = 1;
     int pageSize = 5;

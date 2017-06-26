@@ -326,6 +326,25 @@ Spring IoC 컨테이너를 이용하여 객체 생성을 자동화시킨다.
   - TeacherServiceImpl 클래스 변경
 - DAO 구현체 제거
 
-
-
+## 28 Spring WebMVC 프레임워크 도입
+페이지 컨트롤러를 관리해주는 프레임워크 도입.
+- Spring WebMVC 라이브러리 추가 
+  - mvnrepository.com에서 "spring-webmvc" 라이브러리 검색
+  - build.gradle 설정파일에 의존 라이브러리 정보 추가
+  - "gradle eclipse" 실행하여 이클립스 관련 파일 갱신
+  - 프로젝트를 "refresh"
+- Spring WebMVC에서 제공하는 프론트 컨트롤러를 사용한다.
+  - 기존에 우리가 만든 DispatcherServlet 대신 스프링에서 제공하는 클래스를 사용한다.
+  - web.xml에 DispatcherServlet 클래스를 등록한다.
+- 페이지 컨트롤러를 Spring WebMVC에 맞춘다.
+  - 기존에 우리가 만든 Controller 인터페이스를 구현하는 대신에
+    스프링에서 제공하는 애노테이션을 사용하여 페이지 컨트롤러를 지정한다.
+  - 각각의 페이지 컨트롤러 앞에 @Controller 애노테이션을 붙인다.
+  - 요청을 처리할 메서드(예: service()) 앞에 @RequestMapping 애노테이션을 붙인다. 
+  - application-context.xml 파일에 Spring WebMVC 관련 기능을 처리할 객체를 등록한다.
+  
+  
+  
+  
+  
     

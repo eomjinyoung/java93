@@ -4,16 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import bitcamp.java93.service.TeacherService;
 
-@Component("/teacher/delete")
-public class TeacherDeleteControl implements Controller {
+@Controller
+public class TeacherDeleteControl {
   @Autowired
   TeacherService teacherService;
   
-  @Override
+  @RequestMapping("/teacher/delete")
   public String service(HttpServletRequest req, HttpServletResponse res) throws Exception {
     int no = Integer.parseInt(req.getParameter("no"));
     teacherService.remove(no);

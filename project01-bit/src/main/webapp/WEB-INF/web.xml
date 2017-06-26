@@ -7,6 +7,21 @@
 
   <display-name>project01-bit</display-name>
   
+<!-- 프론트 컨트롤러 등록 -->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:bitcamp/java93/application-context.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 
