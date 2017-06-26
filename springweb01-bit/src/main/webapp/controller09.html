@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn1">"text/plain" 콘텐트 요청</button>
+<button id="btn2">"application/json" 콘텐트 요청</button>
+<div>
+<textarea id="ta" cols="80" rows="8"></textarea>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$("#btn1").click(function() {
+  $.ajax("control/controller09/ok.do", {
+	    method: "get",
+	    headers: {"Accept": "text/plain"},
+	    dataType: "text"})
+	 .done(function(result) {
+		  $("#ta").val(result)
+	  })
+	 .fail(function(xhr, status, error) {
+		  $("#ta").val(xhr.responseText)
+	  })
+})
+
+$("#btn2").click(function() {
+  $.ajax("control/controller09/ok.do", {
+      method: "get",
+      headers: {"Accept": "application/okok"},
+      dataType: "text"})
+   .done(function(result) {
+      $("#ta").val(result)
+    })
+   .fail(function(xhr, status, error) {
+      $("#ta").val(xhr.responseText)
+    })
+})
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
