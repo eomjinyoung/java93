@@ -21,6 +21,16 @@
   -->
   <mvc:annotation-driven/>
 
+
+  <!-- 방법2) 커스텀 프로퍼티 에디터를 등록하기 -->
+  <!--  
+  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <property name="cacheSeconds" value="0"/>
+    <property name="webBindingInitializer">
+        <bean class="control.MyWebBindingInitializer"/>
+    </property>
+  </bean>
+  -->
 </beans>
 
 
