@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("/control/controller19/") 
@@ -38,7 +40,23 @@ public class Controller19 {
     member.setWorking(working);
     return "controller19_ok4";
   }
-  
+
+  @RequestMapping("reset")
+  @ResponseBody
+  public String reset(HttpSession session, SessionStatus status) throws Exception {
+    // setComplete()
+    // => 현재 페이지 컨트롤러에서 @SessionAttributes 에 설정된 객체만 세션에서 제거한다.
+    // status.setComplete();
+    
+    // HttpSession.setAttribute()로 설정된 객체를 지우려면,
+    // 1) 세션 전체를 무효화시킨다.
+    session.invalidate();
+    
+    // 2) 세션에 보관된 특정 객체만 지운다.
+    //session.removeAttribute("member");
+    
+    return "completed the HttpSession!";
+  }
 }
 
 
