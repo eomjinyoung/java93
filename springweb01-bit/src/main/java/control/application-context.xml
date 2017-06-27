@@ -21,8 +21,19 @@
   -->
   <mvc:annotation-driven/>
 
+  <!-- 페이지 컨트롤러가 JSP URL을 리턴할 때, 해당 JSP를 찾아 실행하는 객체  
+       => 이렇게 JSP를 실행할 객체를 명시적으로 등록하게 되면,
+          페이지 컨트롤러에서 JSP URL을 리턴할 때 
+          이 설정을 고려해야 한다.
+  -->
+  <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>
 
-  <!-- 방법2) 커스텀 프로퍼티 에디터를 등록하기 -->
+
+  <!-- 커스텀 프로퍼티 에디터를 등록하는 두 번째 방법 -->
   <!--  
   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
     <property name="cacheSeconds" value="0"/>
