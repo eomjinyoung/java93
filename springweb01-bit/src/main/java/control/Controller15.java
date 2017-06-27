@@ -1,12 +1,25 @@
 /* Spring WebMVC: Request Handler의 리턴 값 다루기 
+ * => 리턴 타입으로 가능한 것들
+ *    1) ModelAndView
+ *    2) Model, Map
+ *    3) String
+ *    4) View
+ *    5) void
+ *    6) HttpEntity<?>, ResponseEntity<?>
+ *    7) HttpHeaders
  */
 package control;
 
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,6 +98,7 @@ public class Controller15 {
   public ModelAndView ok7() throws Exception {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("controller15_ok7");
+    
     mv.addObject("title", "제목이네요!");
     
     Member member = new Member();
@@ -95,10 +109,59 @@ public class Controller15 {
     
     /* 이렇게 ModelAndView 바구니에 값을 담아 두면,
      * 프론트 컨트롤러는 이 바구니에 담긴 값을 꺼내
-     * JSP 가 사용할 수 있도록 ServletRequest 바구니에 옮겨 싣는다.
+     * JSP 가 사용할 수 있도록 ServletRequest 바구니에 옮겨 싣는다. 
      */
     return mv;
   } 
+  
+  // 8) JSP URL은 리턴 값으로, JSP가 사용할 데이터는 Model 바구니에 담는다.
+  @RequestMapping("ok8")
+  public String ok8(Model model) throws Exception {
+    model.addAttribute("title", "제목이네요!");
+    
+    Member member = new Member();
+    member.setName("홍길동");
+    member.setAge(20);
+    member.setWorking(true);
+    model.addAttribute("member", member);
+    
+    /* 이렇게 Model 바구니에 값을 담아 두면,
+     * 프론트 컨트롤러는 이 바구니에 담긴 값을 꺼내
+     * JSP 가 사용할 수 있도록 ServletRequest 바구니에 옮겨 싣는다. 
+     */
+    return "controller15_ok8";
+  }   
+  
+  // 9) Model 대신 Map 객체를 바구니로 사용할 수 있다.
+  @RequestMapping("ok9")
+  public String ok9(Map<String,Object> map) throws Exception {
+    map.put("title", "제목이네요!");
+    
+    Member member = new Member();
+    member.setName("홍길동");
+    member.setAge(20);
+    member.setWorking(true);
+    map.put("member", member);
+    
+    /* 이렇게 Map 바구니에 값을 담아 두면,
+     * 프론트 컨트롤러는 이 바구니에 담긴 값을 꺼내
+     * JSP 가 사용할 수 있도록 ServletRequest 바구니에 옮겨 싣는다. 
+     */
+    return "controller15_ok9";
+  }     
+  
+  // 10) 응답 내용을 정교하게 제어하고 싶을 때 HttpEntity나 ReponseEntity 를 사용하라!
+  @RequestMapping("ok10")
+  public ResponseEntity<String> ok10() throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Content-Type", "text/plain;charset=UTF-8");
+    headers.add("aaaa", "ohora");
+    
+    return new ResponseEntity<String>(
+        "안녕하세요!", // 클라이언트에게 보내는 콘텐트
+        headers, // 응답 헤더
+        HttpStatus.OK); // 응답 상태코드
+  }       
 }
 
 

@@ -32,6 +32,15 @@
     <property name="suffix" value=".jsp"/>
   </bean>
 
+  <!-- 멀티파트 요청 데이터를 처리해주는 객체 등록
+       => 이 객체를 등록하지 않으면, multipart/form-data 로 인코딩되어 넘어온 
+          요청 데이터를 처리하지 못한다!  -->
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!-- 각 파일의 최대 크기(byte)를 지정할 수 있다. -->
+    <property name="maxUploadSize" value="10000000"/>
+  </bean>
+
 
   <!-- 커스텀 프로퍼티 에디터를 등록하는 두 번째 방법 -->
   <!--  
