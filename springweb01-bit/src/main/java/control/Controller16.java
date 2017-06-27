@@ -11,7 +11,13 @@
  */
 package control;
 
+import java.io.File;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/control/controller16/") 
 public class Controller16 {
+  
+  // ServletContext 객체는 Request Handler의 아규먼트로 받을 수 없다.
+  // 대신에 주입시켜 달라고 요청하라!
+  @Autowired ServletContext servletContext;
   
   // 1) 업로드 파일 받기 
   //    => controller16_ok1_form.html 에서 요청할 것!
@@ -63,7 +73,65 @@ public class Controller16 {
     
     return "controller16_ok2";
   }
+  
+  // 2) 업로드 파일 저장하기 
+  //    => controller16_ok3_form.html 에서 요청할 것!
+  @RequestMapping("ok3")
+  public String ok3(String name, int age, MultipartFile file1, MultipartFile file2, Model model) throws Exception {
+    
+    model.addAttribute("name", name);
+    model.addAttribute("age", age);
+    
+    if (!file1.isEmpty()) { // 파일이 넘어 왔다면, 파일을 저장한다.
+      String filename = getNewFilename();
+      model.addAttribute("file1", filename); // 저장된 파일명을 JSP가 알 수 있도록 Model에 담는다.
+      
+      file1.transferTo(new File(
+          servletContext.getRealPath("/upload/" + filename)));
+    }
+    
+    if (!file2.isEmpty()) { // 파일이 넘어 왔다면, 파일을 저장한다.
+      String filename = getNewFilename();
+      model.addAttribute("file2", filename); // 저장된 파일명을 JSP가 알 수 있도록 Model에 담는다.
+      
+      file2.transferTo(new File(
+          servletContext.getRealPath("/upload/" + filename)));
+    }
+    
+    return "controller16_ok3";
+  } 
+  
+  int count = 0;
+  synchronized private String getNewFilename() {
+    if (count > 100) {
+      count = 0;
+    }
+    return String.format("%d_%d", System.currentTimeMillis(), ++count); 
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
