@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bitcamp.java93.dao.MemberDao">
+  
+  <resultMap type="member" id="memberMap">
+    <id column="mno" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="pwd" property="password"/>
+  </resultMap>
+
+  <sql id="select1">
+    select mno, name, tel, email 
+    from memb
+  </sql>
+
+  <select id="selectList" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="search != null">
+	    <where>
+	      <choose>
+		      <when test="search == 'email'">email = #{value}</when>
+		      <when test="search == 'name'">name like concat('%', #{value}, '%')</when>
+		      <when test="search == 'tel'">tel like concat('%', #{value}, '%')</when>
+	      </choose>
+	    </where>
+    </if>    
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectListByNames" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="names != null">
+      <where>
+        name in 
+        <foreach collection="names" item="name" open="(" close=")" separator=",">
+          #{name}
+        </foreach>
+      </where> 
+    </if>    
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectOne" resultMap="memberMap" parameterType="int">
+    <include refid="select1"/> 
+    where mno = #{memberNo}
+  </select>
+  
+  <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
+    <include refid="select1"/> 
+    where email=#{email} and pwd=password(#{password})
+  </select>
+  
+  <insert id="insert" parameterType="member" 
+          useGeneratedKeys="true" keyColumn="mno" keyProperty="no">
+    insert into memb(name,tel,email,pwd) 
+    values(#{name},#{tel},#{email},password(#{password}))
+  </insert>
+  
+  <update id="update" parameterType="member">
+    update memb set 
+      name=#{name}, 
+      tel=#{tel}, 
+      email=#{email}, 
+      pwd=password(#{password}) 
+    where mno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from memb 
+    where mno=#{memberNo}
+  </delete>
+
+</mapper>
+
+
+
+
