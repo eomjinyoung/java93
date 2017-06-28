@@ -42,7 +42,25 @@
     <property name="maxUploadSize" value="10000000"/>
   </bean>
 
-
+  <mvc:interceptors>
+<!--  
+    <bean class="control.MyInterceptor"/>
+-->
+<!--  
+    <mvc:interceptor>
+        <mvc:mapping path="/control/controller22/list.do"/>
+        <mvc:mapping path="/control/controller22/insert.do"/>
+        <bean class="control.MyInterceptor"/>
+    </mvc:interceptor>
+-->
+    <mvc:interceptor>
+        <mvc:mapping path="/control/controller22/**"/>
+        <mvc:exclude-mapping path="/control/controller22/delete.do"/>
+        <mvc:exclude-mapping path="/control/controller22/detail.do"/>
+        <bean class="control.MyInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+    
   <!-- 커스텀 프로퍼티 에디터를 등록하는 두 번째 방법 -->
   <!--  
   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
