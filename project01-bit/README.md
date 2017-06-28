@@ -347,6 +347,10 @@ Spring IoC 컨테이너를 이용하여 객체 생성을 자동화시킨다.
 - ViewResolver 등록 
   - JSP를 찾아 실행시키는 객체
   - 모든 페이지 컨트롤러는 등록된 ViewResolver 설정에 맞추어 JSP URL을 변경한다.
+- 페이지 컨트롤러의 Request Handler 아규먼트 정리
+  - LoginControl과 LogoutControl을 합쳐서 AuthControl로 만든다.
+  - Teacher CRUD를 한 개의 TeacherControl로 합친다.
+  - 각각의 페이지 컨트롤러에 대해 아규먼트 및 애노테이션 정리
   
   
   
