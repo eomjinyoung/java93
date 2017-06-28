@@ -7,8 +7,34 @@
  * 2) Spring에서 제공하는 필터
  *    - 인터셉터: 
  *      => 페이지 컨트롤러 실행 전, 후에 뭔가를 삽입하고 싶을 때 사용한다.
+ *      => MyInterceptor.java 작성
+ *      => application-context.xml 에 인터셉터 관련 태그 추가
+  <mvc:interceptors>
+<!--  
+    <bean class="control.MyInterceptor"/>
+-->
+<!--  
+    <mvc:interceptor>
+        <mvc:mapping path="/control/controller22/list.do"/>
+        <mvc:mapping path="/control/controller22/insert.do"/>
+        <bean class="control.MyInterceptor"/>
+    </mvc:interceptor>
+-->
+    <mvc:interceptor>
+        <mvc:mapping path="/control/controller22/**"/>
+        <mvc:exclude-mapping path="/control/controller22/delete.do"/>
+        <mvc:exclude-mapping path="/control/controller22/detail.do"/>
+        <bean class="control.MyInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+  
  *    - AOP(Aspect-Oriented Programming) 객체: 
  *      => 페이지 컨트롤러 뿐만 아니라 모든 객체의 메서드 호출 전, 후에 뭔가를 삽입하는 기술!
+ *      => MyAdvice.java 작성
+ *      => application-context.xml 에 AOP 관련 태그 추가
+<aop:aspectj-autoproxy/>
+        => AOP 라이브러리 추가 
+           - 'aspectjweaver' 라이브러리 추가
  */
 package control;
 

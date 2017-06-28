@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 @WebFilter({"/control/controller22/list.do", "/control/controller22/detail.do"})
-public class Controller22_Filter implements Filter {
+public class MyFilter implements Filter {
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
