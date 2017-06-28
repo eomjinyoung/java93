@@ -20,9 +20,9 @@
 홈페이지:<input type='text' name='homepage' value='${teacher.homepage}'><br>
 페이스북:<input type='text' name='facebook' value='${teacher.facebook}'><br>
 트위터:<input type='text' name='twitter' value='${teacher.twitter}'><br>
-사진1:<input type='file' name='photo1'><br>
-사진2:<input type='file' name='photo2'><br>
-사진3:<input type='file' name='photo3'><br>
+사진1:<input type='file' name='photo'><br>
+사진2:<input type='file' name='photo'><br>
+사진3:<input type='file' name='photo'><br>
 <div>
 <c:forEach items='${teacher.photoList}' var='path'>
 <img class='photo1' src='photo/${path}'>
