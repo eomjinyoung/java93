@@ -33,7 +33,7 @@ public class TeacherListControl {
     List<Teacher> list = teacherService.list(pageNo, pageSize);
     req.setAttribute("list", list);
     
-    return "/teacher/list.jsp";
+    return "teacher/list";
   }
 }
 

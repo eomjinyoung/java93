@@ -6,10 +6,10 @@
 <head>
   <meta charset='UTF-8'>
   <title>강사관리</title>
-  <jsp:include page="/corestyle.jsp"></jsp:include>
+  <jsp:include page="../corestyle.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 <h1>강사 목록 by JSP</h1>
 <a href='form.html'>새강사</a>
 <table border='1'>
@@ -28,7 +28,7 @@
 </c:forEach>
 </tbody>
 </table>
-<jsp:include page="/footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
     

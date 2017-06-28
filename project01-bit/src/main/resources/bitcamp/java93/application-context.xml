@@ -46,6 +46,17 @@
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     <property name="basePackage" value="bitcamp.java93.dao"/>
   </bean>
+  
+  <!-- 페이지 컨트롤러가 JSP URL을 리턴할 때, 해당 JSP를 찾아 실행하는 객체  
+       => 이렇게 JSP를 실행할 객체를 명시적으로 등록하게 되면,
+          페이지 컨트롤러에서 JSP URL을 리턴할 때 
+          이 설정을 고려해야 한다.
+  -->
+  <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/WEB-INF/view/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>  
 </beans>
 
 

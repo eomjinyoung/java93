@@ -6,10 +6,10 @@
 <head>
   <meta charset='UTF-8'>
   <title>강사관리</title>
-  <jsp:include page="/corestyle.jsp"></jsp:include>
+  <jsp:include page="../corestyle.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 <h1>강사 조회 by JSP</h1>
 <form action='update.do' method='POST' enctype='multipart/form-data'>
 번호:<input type='text' name='no' value='${teacher.no}' readonly><br>
@@ -41,7 +41,7 @@ function doList() {
 
 }
 </script>
-<jsp:include page="/footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
     

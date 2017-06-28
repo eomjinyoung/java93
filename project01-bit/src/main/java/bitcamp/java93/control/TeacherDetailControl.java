@@ -25,7 +25,7 @@ public class TeacherDetailControl {
     }
     
     req.setAttribute("teacher", teacher);
-    return "/teacher/detail.jsp";
+    return "teacher/detail";
   }
 }
 

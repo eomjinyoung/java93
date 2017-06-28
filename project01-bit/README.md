@@ -343,6 +343,10 @@ Spring IoC 컨테이너를 이용하여 객체 생성을 자동화시킨다.
   - 요청을 처리할 메서드(예: service()) 앞에 @RequestMapping 애노테이션을 붙인다. 
   - application-context.xml 파일에 Spring WebMVC 관련 기능을 처리할 객체를 등록한다.
   
+## 29 Spring WebMVC 프레임워크 - 세션 및 파일 업로드, WebBindingInitializer 적용
+- ViewResolver 등록 
+  - JSP를 찾아 실행시키는 객체
+  - 모든 페이지 컨트롤러는 등록된 ViewResolver 설정에 맞추어 JSP URL을 변경한다.
   
   
   

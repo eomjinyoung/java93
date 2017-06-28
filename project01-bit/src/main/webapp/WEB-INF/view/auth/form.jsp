@@ -6,10 +6,10 @@
 <head>
   <meta charset='UTF-8'>
   <title>로그인</title>
-  <jsp:include page="/corestyle.jsp"></jsp:include>
+  <jsp:include page="../corestyle.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 <h1>회원 로그인</h1>
 <form action='login.do' method='POST'>
 <p>
@@ -22,6 +22,6 @@
 <input type='checkbox' name='saveEmail'> 이메일 저장
 <p><button>로그인</button></p>
 </form>
-<jsp:include page="/footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
