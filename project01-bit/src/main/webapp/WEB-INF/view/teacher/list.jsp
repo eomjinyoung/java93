@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
 <h1>강사 목록 by JSP</h1>
-<a href='form.html'>새강사</a>
+<a href='form.do'>새강사</a>
 <table border='1'>
 <thead>
   <tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th><th>홈페이지</th></tr>

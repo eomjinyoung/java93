@@ -2,10 +2,9 @@ package bitcamp.java93.control;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,27 +45,40 @@ public class TeacherControl {
   }
   
   @RequestMapping("update")
-  public String update(
-      Teacher teacher, 
-      MultipartFile[] photo,  
-      HttpServletRequest req, HttpServletResponse res) throws Exception {
-    
-    // 사진 데이터 처리
+  public String update(Teacher teacher, MultipartFile[] photo) throws Exception {
+    teacher.setPhotoList(processMultipartFiles(photo));
+    teacherService.update(teacher);
+    return "redirect:list.do";
+  }
+  
+  @RequestMapping("delete")
+  public String delete(int no) throws Exception {
+    teacherService.remove(no);
+    return "redirect:list.do";
+  }  
+  
+  @RequestMapping("form")
+  public void form() throws Exception {}
+
+  @RequestMapping("add")
+  public String add(Teacher teacher, MultipartFile[] photo) throws Exception {
+    teacher.setPhotoList(processMultipartFiles(photo));
+    teacherService.add(teacher);
+    return "redirect:list.do";
+  }  
+  
+  private List<String> processMultipartFiles(MultipartFile[] files) throws Exception {
     ArrayList<String> photoList = new ArrayList<>();
-    for (MultipartFile file : photo) {
+    for (MultipartFile file : files) {
       if (file.isEmpty())
         continue;
       String filename = getNewFilename();
       file.transferTo(new File(servletContext.getRealPath("/teacher/photo/" + filename)));
       photoList.add(filename);
     }
-    
-    teacher.setPhotoList(photoList); // 업로드 한 사진 파일명을 저장한다.
-  
-    teacherService.update(teacher);
-  
-    return "redirect:list.do";
+    return photoList;
   }
+  
   
   int count = 0;
   synchronized private String getNewFilename() {
