@@ -7,16 +7,16 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.service.TeacherService;
 
-@Controller
+@RestController
 @RequestMapping("/teacher/")
 public class TeacherControl {
   
@@ -24,47 +24,40 @@ public class TeacherControl {
   @Autowired TeacherService teacherService;
   
   @RequestMapping("list")
-  public String list(
+  public JsonResult list(
       @RequestParam(defaultValue="1") int pageNo, 
-      @RequestParam(defaultValue="5") int pageSize, 
-      Model model) throws Exception {
+      @RequestParam(defaultValue="5") int pageSize) throws Exception {
     
-    model.addAttribute("list", teacherService.list(pageNo, pageSize));
-    
-    return "teacher/list";
+    return new JsonResult(JsonResult.SUCCESS, teacherService.list(pageNo, pageSize));
   }
   
   @RequestMapping("detail")
-  public String detail(int no, Model model) throws Exception {
+  public JsonResult detail(int no) throws Exception {
     Teacher teacher = teacherService.get(no);
     if (teacher == null) {
-      throw new Exception(no + "번 강사가 없습니다.");
+      return new JsonResult(JsonResult.FAIL, no + "번 강사가 없습니다.");
     }
-    model.addAttribute("teacher", teacher);
-    return "teacher/detail";
+    return new JsonResult(JsonResult.SUCCESS, teacher);
   }
   
   @RequestMapping("update")
-  public String update(Teacher teacher, MultipartFile[] photo) throws Exception {
+  public JsonResult update(Teacher teacher, MultipartFile[] photo) throws Exception {
     teacher.setPhotoList(processMultipartFiles(photo));
     teacherService.update(teacher);
-    return "redirect:list.do";
+    return new JsonResult(JsonResult.SUCCESS, "ok");
   }
   
   @RequestMapping("delete")
-  public String delete(int no) throws Exception {
+  public JsonResult delete(int no) throws Exception {
     teacherService.remove(no);
-    return "redirect:list.do";
+    return new JsonResult(JsonResult.SUCCESS, "ok");
   }  
   
-  @RequestMapping("form")
-  public void form() throws Exception {}
-
   @RequestMapping("add")
-  public String add(Teacher teacher, MultipartFile[] photo) throws Exception {
+  public JsonResult add(Teacher teacher, MultipartFile[] photo) throws Exception {
     teacher.setPhotoList(processMultipartFiles(photo));
     teacherService.add(teacher);
-    return "redirect:list.do";
+    return new JsonResult(JsonResult.SUCCESS, "ok");
   }  
   
   private List<String> processMultipartFiles(MultipartFile[] files) throws Exception {

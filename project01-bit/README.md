@@ -389,7 +389,8 @@ REQUIRES_NEW |
   - 기존에 페이지 컨트롤러 클래스를 복사하여 *.json 패키지에 넣는다. 
   - 페이지 컨트롤러에 @Controller 대신에 @RestController를 붙인다.
   - 각각의 메서드는 JSP URL 대신에 객체를 리턴한다. 
- 
+- JSON 데이터를 요청할 때는 *.do 대신 *.json을 사용하도록 설정한다.
+  - web.xml에 프론트 컨트롤러를 추가한다. 
   
     
   

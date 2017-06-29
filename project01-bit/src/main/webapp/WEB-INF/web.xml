@@ -13,7 +13,17 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:bitcamp/java93/application-context.xml</param-value>
+      <param-value>classpath:bitcamp/java93/dispatcher-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>json</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:bitcamp/java93/json-servlet.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -22,6 +32,12 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet-mapping>
+    <servlet-name>json</servlet-name>
+    <url-pattern>*.json</url-pattern>
+  </servlet-mapping>  
 </web-app>
 
 
