@@ -58,6 +58,12 @@ public class AuthControl {
     session.invalidate();  
     return new JsonResult(JsonResult.SUCCESS, "ok");
   }
+  
+  @RequestMapping("userinfo")
+  public JsonResult userinfo(HttpSession session) throws Exception {
+    Member loginMember = (Member)session.getAttribute("loginMember");
+    return new JsonResult(JsonResult.SUCCESS, loginMember);
+  }
 }
 
 
