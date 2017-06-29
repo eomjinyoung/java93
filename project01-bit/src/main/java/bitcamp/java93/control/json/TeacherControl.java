@@ -2,6 +2,7 @@ package bitcamp.java93.control.json;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -27,7 +28,11 @@ public class TeacherControl {
       @RequestParam(defaultValue="1") int pageNo, 
       @RequestParam(defaultValue="5") int pageSize) throws Exception {
     
-    return new JsonResult(JsonResult.SUCCESS, teacherService.list(pageNo, pageSize));
+    HashMap<String,Object> dataMap = new HashMap<>();
+    dataMap.put("list", teacherService.list(pageNo, pageSize));
+    dataMap.put("totalCount", teacherService.getSize());
+    
+    return new JsonResult(JsonResult.SUCCESS, dataMap);
   }
   
   @RequestMapping("detail")

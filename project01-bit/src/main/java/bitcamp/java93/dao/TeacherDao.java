@@ -9,6 +9,7 @@ public interface TeacherDao {
   List<Teacher> selectList(Map<String,Object> valueMap);
   Teacher selectOne(int no);
   Teacher selectOneByEmailPassword(Map<String,Object> valueMap);
+  int countAll();
   int insert(Teacher teacher);
   int delete(int no);
   int update(Teacher teacher);

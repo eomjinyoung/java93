@@ -39,6 +39,11 @@
     where email=#{email} and pwd=password(#{password})
   </select>
   
+  <select id="countAll" resultType="int">
+    select count(*)
+    from tcher t inner join memb m on t.tno=m.mno
+  </select>
+  
   <insert id="insert" parameterType="teacher">
     insert into tcher(tno, hmpg, fcbk, twit) 
     values(#{no}, #{homepage}, #{facebook}, #{twitter})

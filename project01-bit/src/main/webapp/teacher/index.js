@@ -19,9 +19,9 @@ function displayList(pageNo) {
   // 서버에서 강사 목록 데이터를 받아 온다.
   $.getJSON('list.json', {'pageNo':pageNo, 'pageSize': pageSize}, function(result) {
 	console.log(result);
+	var list = result.data;
 	/*
-    var list = result.list;
-    var totalCount = result.totalCount;
+	var totalCount = result.totalCount;
     var lastPageNo = parseInt(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)
 
     // 템플릿 소스를 가지고 템플릿을 처리할 함수를 얻는다.
