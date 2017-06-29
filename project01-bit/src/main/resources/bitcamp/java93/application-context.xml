@@ -3,12 +3,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/mvc
-      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx.xsd">
 
   <!-- 자동으로 객체를 생성할 클래스가 있는 패키지를 지정한다. 
        자동으로 객체를 생성하려면 그 클래스에 @Component 애노테이션이 붙어 있어야 한다.
@@ -65,6 +71,24 @@
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <property name="maxUploadSize" value="10000000"/>
   </bean>  
+  
+  <!-- point-cut과 advice 지정 -->
+  <aop:config>
+    <!-- 포인트컷 설정
+         => 트랜잭션 관리 필터를 적용할 위치를 지정한다. -->
+    <aop:pointcut id="defaultServiceOperation"
+                expression="execution(* bitcamp.java93.service.*Service.*(..))"/>
+    <aop:advisor pointcut-ref="defaultServiceOperation" advice-ref="defaultTxAdvice"/>
+  </aop:config>
+  
+  <!-- 트랜잭션 관리자를 사용하여 트랜잭션을 관리하는 필터 객체(트랜잭션 AOP 객체) -->
+  <tx:advice id="defaultTxAdvice" transaction-manager="txManager">
+    <tx:attributes> <!-- 트랜잭션 정책 설정 -->
+      <tx:method name="get*" read-only="true"/> <!-- 겟터 메서드에서는 Data 변경 불가 -->
+      <tx:method name="list*" read-only="true"/> <!-- list*() 메서드에서는 Data 변경 불가 -->
+      <tx:method name="*"/> <!-- 그 외 모든 메서드는 트랜잭션을 적용한다. -->
+    </tx:attributes>
+  </tx:advice>
 </beans>
 
 
