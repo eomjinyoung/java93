@@ -6,6 +6,18 @@
   version="3.1">
 
   <display-name>project01-bit</display-name>
+
+<!-- ContextLoaderListener가 사용할 스프링 설정 파일의 경로 정보 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:bitcamp/java93/application-context.xml</param-value>
+  </context-param>
+
+<!-- 리스너 등록 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
   
 <!-- 프론트 컨트롤러 등록 -->
   <servlet>

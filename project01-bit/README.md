@@ -390,7 +390,13 @@ REQUIRES_NEW |
   - 페이지 컨트롤러에 @Controller 대신에 @RestController를 붙인다.
   - 각각의 메서드는 JSP URL 대신에 객체를 리턴한다. 
 - JSON 데이터를 요청할 때는 *.do 대신 *.json을 사용하도록 설정한다.
-  - web.xml에 프론트 컨트롤러를 추가한다. 
+  - web.xml에 프론트 컨트롤러를 추가한다.
+  - application-context.xml 을 복사하여 dispatcher-servlet.xml과 json-servlet.xml을 만든다.
+  - dispatcher-servlet.xml에는 오직 *.do 요청 처리와 관련된 객체만 설정한다.
+  - json-servlet.xml에는 오직 *.json 요청 처리와 관련된 객체만 설정한다.
+- 프론트 컨트롤러가 공통으로 사용할 객체 준비
+  - 기존의 application-context.xml에서 웹 관련 객체를 제외한다.
+  - ContextLoaderListener를 web.xml에 추가한다.  
   
     
   

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+  <!-- *.json 요청을 처리할 페이지 컨트롤러 생성 -->
+  <context:component-scan base-package="bitcamp.java93.control.json"/>
+  
+  <!-- Spring WebMVC 관련 기능을 처리할 객체를 등록한다. -->
+  <mvc:annotation-driven/>
+
+  <!-- 멀티파트 요청 데이터를 처리해주는 객체 등록
+       => 이 객체를 등록하지 않으면, multipart/form-data 로 인코딩되어 넘어온 
+          요청 데이터를 처리하지 못한다!  -->
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="10000000"/>
+  </bean>  
+</beans>
+
+
+
+
+
+
