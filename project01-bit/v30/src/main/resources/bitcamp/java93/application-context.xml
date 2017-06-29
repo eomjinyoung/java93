@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- 자동으로 객체를 생성할 클래스가 있는 패키지를 지정한다. 
+       자동으로 객체를 생성하려면 그 클래스에 @Component 애노테이션이 붙어 있어야 한다.
+  -->
+  <context:component-scan base-package="bitcamp.java93"/>
+  
+  <!-- Spring WebMVC 관련 기능을 처리할 객체를 등록한다. -->
+  <mvc:annotation-driven/>
+
+  <!-- 설정 파일에서 사용할 정보를 담은 .properties 파일 로딩하기 -->
+  <context:property-placeholder location="classpath:bitcamp/java93/jdbc.properties"/>
+
+  <!-- DB의 커넥션 풀을 관리하는 객체이다.
+       우리가 만든 DBConnectionPool의 기능을 갖고 있다.  -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+  </bean>
+
+  <!-- DB 트랜잭션을 관리하는 객체이다.
+       Mybatis에서 관리하던 것을 스프링으로 옮겼다. -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+    
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="typeAliasesPackage" value="bitcamp.java93.domain"/>
+    <property name="mapperLocations" value="classpath*:bitcamp/java93/dao/*Dao.xml"/>
+  </bean>
+  
+  <!-- DAO 인터페이스의 구현체를 자동으로 생성할 객체 준비 -->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="bitcamp.java93.dao"/>
+  </bean>
+  
+  <!-- 페이지 컨트롤러가 JSP URL을 리턴할 때, 해당 JSP를 찾아 실행하는 객체  
+       => 이렇게 JSP를 실행할 객체를 명시적으로 등록하게 되면,
+          페이지 컨트롤러에서 JSP URL을 리턴할 때 
+          이 설정을 고려해야 한다.
+  -->
+  <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/WEB-INF/view/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>  
+  
+  <!-- 멀티파트 요청 데이터를 처리해주는 객체 등록
+       => 이 객체를 등록하지 않으면, multipart/form-data 로 인코딩되어 넘어온 
+          요청 데이터를 처리하지 못한다!  -->
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="10000000"/>
+  </bean>  
+  
+  <!-- point-cut과 advice 지정 -->
+  <aop:config>
+    <!-- 포인트컷 설정
+         => 트랜잭션 관리 필터를 적용할 위치를 지정한다. -->
+    <aop:pointcut id="defaultServiceOperation"
+                expression="execution(* bitcamp.java93.service.*Service.*(..))"/>
+    <aop:advisor pointcut-ref="defaultServiceOperation" advice-ref="defaultTxAdvice"/>
+  </aop:config>
+  
+  <!-- 트랜잭션 관리자를 사용하여 트랜잭션을 관리하는 필터 객체(트랜잭션 AOP 객체) -->
+  <tx:advice id="defaultTxAdvice" transaction-manager="txManager">
+    <tx:attributes> <!-- 트랜잭션 정책 설정 -->
+      <tx:method name="get*" read-only="true"/> <!-- 겟터 메서드에서는 Data 변경 불가 -->
+      <tx:method name="list*" read-only="true"/> <!-- list*() 메서드에서는 Data 변경 불가 -->
+      <tx:method name="*"/> <!-- 그 외 모든 메서드는 트랜잭션을 적용한다. -->
+    </tx:attributes>
+  </tx:advice>
+</beans>
+
+
+
+
+
+

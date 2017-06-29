@@ -1,0 +1,48 @@
+apply plugin: 'java' // 자바 빌드 도구가 들어 있는 플러그인
+//apply plugin: 'eclipse' // 이클립스 설정 파일을 다루는 도구가 들어 있는 플러그인
+apply plugin: 'eclipse-wtp' // 이클립스 설정 파일을 다루는 도구 + 
+                            // 웹 관련 설정 파일을 다루는 도구가 들어 있는 플러그인
+apply plugin: 'war'         // Web ARchive 배포 파일을 만드는 도구가 들어 있는 플러그인
+
+compileJava {
+  // 소스 파일의 인코딩을 알려준다.
+  options.encoding = 'UTF-8'  
+  
+  // 컴파일할 때 기준이 되는 자바 버전을 지정한다.
+  sourceCompatibility = '1.8' 
+}
+
+/* 외부 라이브러리가 보관된 서버
+ * => 이 서버에서 dependencies{} 에 지정된 라이브러리를 다운로드 한다.
+ */
+repositories {
+  mavenCentral()  // <-- https://repo1.maven.org/maven2/
+}
+
+/* 프로젝트에서 참조하는 외부 라이브러리들 정보
+ * 다음 명령을 실행하면 이 라이브러리들을 자동으로 다운로드 받는다.
+ * 또한 프로젝트를 빌드하거나 실행할 때 자동으로 참조한다.
+ * > gradle eclipse 
+ */
+dependencies {
+  // compile : 빌드 및 배포 시 사용하는 라이브러리
+  compile 'org.slf4j:slf4j-api:1.7.22'
+  compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+  compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
+  compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
+  compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+  compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
+  //compile group: 'org.springframework', name: 'spring-context', version: '4.3.9.RELEASE'
+  compile group: 'org.mybatis', name: 'mybatis', version: '3.4.4'
+  compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.1'
+  compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.9.RELEASE'
+  compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.9.RELEASE'
+  compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.10'
+  
+  // providedCompile: 빌드 할 때만 사용한다. 배포에는 제외시킨다.
+  providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+  
+  // testCompile : 단위 테스트 파일을 컴파일 할 때만 사용하는 라이브러리
+  testCompile 'junit:junit:4.12'
+}
+
