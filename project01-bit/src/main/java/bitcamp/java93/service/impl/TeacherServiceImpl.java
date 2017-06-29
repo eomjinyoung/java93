@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
@@ -41,14 +39,16 @@ public class TeacherServiceImpl implements TeacherService {
     return teacherDao.selectOneByEmailPassword(valueMap);
   }
   
-  @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+  // XML 태그로 트랜잭션을 설정하게 되면 @Transactional 애노테이션은 필요없다.
+  //@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public void add(Teacher teacher) throws Exception {
     memberDao.insert(teacher);
     teacherDao.insert(teacher);
     this.insertPhoto(teacher.getNo(), teacher.getPhotoList()); // 강사 사진 추가
   }
   
-  @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+  //XML 태그로 트랜잭션을 설정하게 되면 @Transactional 애노테이션은 필요없다.
+  //@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public void update(Teacher teacher) throws Exception {
     int count = memberDao.update(teacher);
     if (count < 1) {
@@ -75,7 +75,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
   }
   
-  @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+  //XML 태그로 트랜잭션을 설정하게 되면 @Transactional 애노테이션은 필요없다.
+  //@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public void remove(int no) throws Exception {
     teacherDao.deletePhoto(no);
     int count = teacherDao.delete(no);
