@@ -7,6 +7,11 @@ var pageNoTag = $('#page-no'),
 var currPageNo = parseInt(pageNoTag.text())
 
 // 이벤트 핸들러 등록
+$(document.body).on('click', '.detail-link', function(event) {
+  location.href = 'view.html?no=' + $(this).attr('data-no') 
+  event.preventDefault()
+})
+
 prevBtn.click(function() {
   displayList(currPageNo - 1)
 })
@@ -18,7 +23,7 @@ nextBtn.click(function() {
 function displayList(pageNo) {
   // 서버에서 강사 목록 데이터를 받아 온다.
   $.getJSON('list.json', {'pageNo':pageNo, 'pageSize': pageSize}, function(result) {
-	var totalCount = result.data.totalCount;
+    var totalCount = result.data.totalCount;
     var lastPageNo = parseInt(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)
 
     // 템플릿 소스를 가지고 템플릿을 처리할 함수를 얻는다.

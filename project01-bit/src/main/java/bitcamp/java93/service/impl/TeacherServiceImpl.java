@@ -71,6 +71,9 @@ public class TeacherServiceImpl implements TeacherService {
   }
   
   private void insertPhoto(int teacherNo, List<String> photoPathList) {
+    if (photoPathList == null)
+      return;
+    
     HashMap<String,Object> valueMap = new HashMap<>();
     valueMap.put("teacherNo", teacherNo);
     

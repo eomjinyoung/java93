@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel='stylesheet' href='../css/common.css'>
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  a[disabled] {
+    pointer-events: none;
+  }
+  </style>  
+</head>
+<body>
+<div class="container">
+<div class='header'>
+  <div id='logo'>비트캠프</div>
+</div>
+
+<h1>강사 정보</h1>
+
+<form class="form-horizontal">
+  <div class="form-group bit-view">
+    <label class="col-sm-2 control-label">번호</label>
+    <div class="col-sm-10">
+      <p class="form-control-static" id="fi-no"></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-email" class="col-sm-2 control-label">이메일</label>
+    <div class="col-sm-7">
+      <input type="email" class="form-control" id="fi-email" placeholder="이메일">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-name" class="col-sm-2 control-label">이름</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-name" placeholder="이름">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-tel" class="col-sm-2 control-label">전화번호</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-tel" placeholder="전화번호">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-password" class="col-sm-2 control-label">암호</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="fi-password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-homepage" class="col-sm-2 control-label">홈페이지</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-homepage" placeholder="홈페이지">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-facebook" class="col-sm-2 control-label">페이스북</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-facebook" placeholder="페이스북">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-twitter" class="col-sm-2 control-label">트위터</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-twitter" placeholder="트위터">
+    </div>
+  </div>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-primary bit-view" id="upd-btn">변경</button>
+      <button type="button" class="btn btn-primary bit-view" id="del-btn">삭제</button>
+      <button type="button" class="btn btn-primary bit-new" id="add-btn">추가</button>
+      <a href="index.html" class="btn btn-primary" id="lst-btn">목록</a>
+    </div>
+  </div>
+</form>
+
+<div class='footer'>
+  <span>비트캠프 자바93기</span> | 
+  <address>서울시 서초구 서초동 1327-15번지 비트아카데미 빌딩 3층</address>
+</div>
+
+</div><!-- .container -->
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="view.js"></script>
+
+</body>
+</html>
+
+
+
+
+<!-- -->

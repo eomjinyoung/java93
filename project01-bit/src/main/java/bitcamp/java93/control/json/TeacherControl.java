@@ -45,8 +45,7 @@ public class TeacherControl {
   }
   
   @RequestMapping("update")
-  public JsonResult update(Teacher teacher, MultipartFile[] photo) throws Exception {
-    teacher.setPhotoList(processMultipartFiles(photo));
+  public JsonResult update(Teacher teacher) throws Exception {
     teacherService.update(teacher);
     return new JsonResult(JsonResult.SUCCESS, "ok");
   }
@@ -58,8 +57,7 @@ public class TeacherControl {
   }  
   
   @RequestMapping("add")
-  public JsonResult add(Teacher teacher, MultipartFile[] photo) throws Exception {
-    teacher.setPhotoList(processMultipartFiles(photo));
+  public JsonResult add(Teacher teacher) throws Exception {
     teacherService.add(teacher);
     return new JsonResult(JsonResult.SUCCESS, "ok");
   }  
