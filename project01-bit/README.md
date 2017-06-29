@@ -381,8 +381,15 @@ REQUIRES_NEW |
 | MANDATORY |
 | NEVER |
 
-
+## 32 JSON 콘텐트를 출력하는 RESTful 구축하기
+페이지 컨트롤러는 HTML 페이지를 응답하는 대신에 JSON 데이터를 보낸다.
+- JSON 응답 데이터를 표현할 Value Object 클래스를 만든다.
+  - *.json.JsonResult 클래스 생성
+- JSON 데이터를 내보내는 페이지 컨트롤러 만들기
+  - 기존에 페이지 컨트롤러 클래스를 복사하여 *.json 패키지에 넣는다. 
+  - 페이지 컨트롤러에 @Controller 대신에 @RestController를 붙인다.
+  - 각각의 메서드는 JSP URL 대신에 객체를 리턴한다. 
  
   
-  
     
+  
