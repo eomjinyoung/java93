@@ -365,6 +365,22 @@ Spring IoC 컨테이너를 이용하여 객체 생성을 자동화시킨다.
   - 트랜잭션 관리자를 이용하여 트랜잭션을 처리할 AOP 필터를 지정한다.
   - point-cut과 advisor를 연결한다.
 
+## 31 트랜잭션(transaction) 적용하기 II - @Transactional 애노테이션 사용
+애노테이션을 사용하여 트랜잭션을 적용할 메서드를 지정할 수 있다.
+- Spring 설정 파일에 @Transactional 애노테이션을 처리할 객체 등록
+- 서비스 객체의 각 메서드에 대해 @Transactional을 붙인다.
+
+### 트랜잭션 정책
+
+Propagation | caller의 tx 존재 여부 
+----------|----------------------------- 
+REQUIRED |
+REQUIRES_NEW |
+| SUPPORTS |
+| NOT_SUPPORTED |
+| MANDATORY |
+| NEVER |
+
 
  
   
