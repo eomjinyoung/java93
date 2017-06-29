@@ -398,5 +398,23 @@ REQUIRES_NEW |
   - 기존의 application-context.xml에서 웹 관련 객체를 제외한다.
   - ContextLoaderListener를 web.xml에 추가한다.  
 
-    
+## 33 역할에 따라 컴포넌트의 애노테이션을 구분하여 붙이기
+스프링은 @Component 애노테이션 외에 유지보수가 쉽도록 각 클래스의 역할을 구분하기 
+쉽도록 추가 애노테이션을 제공한다. 이 애노테이션들은 @Component와 마찬가지로
+IoC 컨테이너가 관리한다.
+
+- 스프링 IoC 컨테이너가 객체를 생성하여 관리하는 애노테이션
+  - @Component : 일반적인 클래스에 붙인다.
+  - @Controller : 페이지 컨트롤러에 붙인다.
+  - @RestController : RESTful 기능을 제공하는 페이지 컨트롤러에 붙인다.
+  - @Service : 서비스 역할을 하는 클래스에 붙인다.
+  - @Repository : DAO 역할을 하는 클래스에 붙인다.
+- 우리의 예제는 DAO객체를 Mybatis가 자동 생성하기 때문에 Service에 대해서만 붙이면 된다. 
+  
+## 34 AJAX를 이용하여 back-end 와 front-end를 분리하기
+ 
+  
+  
+  
+  
   

@@ -5,15 +5,14 @@ address {
 .footer {
   background-color: gray;
   color: white;
-  margin: 10px 0px;
+  margin: 10px;
   padding: 10px;
   text-align: center;
-  height: 40px;
 }
 .header {
   color: white;
   background-color: navy;
-  height: 30px;
+  height: 20px;
   padding: 5px 10px;
 }
 .photo1 {
