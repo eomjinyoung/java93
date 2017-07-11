@@ -42,7 +42,7 @@
   <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!-- 각 파일의 최대 크기(byte)를 지정할 수 있다. -->
-    <property name="maxUploadSize" value="10000000"/>
+    <property name="maxUploadSize" value="100000000"/>
   </bean>
 
   <mvc:interceptors>
