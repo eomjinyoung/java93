@@ -10,4 +10,5 @@
 **/.DS_Store
 **/.settings
 **/.project
+**/package-lock.json
 !build.gradle
