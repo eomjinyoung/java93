@@ -3,6 +3,7 @@ package bitcamp.java93.control.json;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -56,30 +57,23 @@ public class TeacherControl {
   }  
   
   @RequestMapping("add")
-  public JsonResult add(Teacher teacher, String filenames) throws Exception {
-    String[] nameList = filenames.split(",");
-    ArrayList<String> photoList = new ArrayList<>();
-    for (String name : nameList) {
-      photoList.add(name);
-    }
-    teacher.setPhotoList(photoList);
-    
+  public JsonResult add(Teacher teacher) throws Exception {
     teacherService.add(teacher);
     return new JsonResult(JsonResult.SUCCESS, "ok");
-  }
+  }  
   
-  @RequestMapping("upload")
-  public JsonResult upload(MultipartFile[] files) throws Exception {
-    ArrayList<String> fileList = new ArrayList<>();
+  private List<String> processMultipartFiles(MultipartFile[] files) throws Exception {
+    ArrayList<String> photoList = new ArrayList<>();
     for (MultipartFile file : files) {
       if (file.isEmpty())
         continue;
       String filename = getNewFilename();
       file.transferTo(new File(servletContext.getRealPath("/teacher/photo/" + filename)));
-      fileList.add(filename);
+      photoList.add(filename);
     }
-    return new JsonResult(JsonResult.SUCCESS, fileList);
+    return photoList;
   }
+  
   
   int count = 0;
   synchronized private String getNewFilename() {

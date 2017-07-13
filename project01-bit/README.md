@@ -412,7 +412,13 @@ IoC 컨테이너가 관리한다.
 - 우리의 예제는 DAO객체를 Mybatis가 자동 생성하기 때문에 Service에 대해서만 붙이면 된다. 
   
 ## 34 AJAX를 이용하여 back-end 와 front-end를 분리하기
- 
+## 35 AJAX 파일 업로드 기능 추가하기
+- AJAX 파일 업로드 관련 JavaScript 라이브러리 추가
+  - /webapp/package.json 편집
+  - 명령창에서 "npm install" 실행
+  - 이클립스 프로젝트 리프래시 한다.
+- 강사 등록 폼에 사진항목 추가한다.
+  - /webapp/teacher/view.html 편집
   
   
   

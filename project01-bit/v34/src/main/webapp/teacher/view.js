@@ -7,9 +7,7 @@ var viewTags = $('.bit-view'),
     fiPassword = $('#fi-password'),
     fiHomepage = $('#fi-homepage'),
     fiFacebook = $('#fi-facebook'),
-    fiTwitter = $('#fi-twitter'),
-    fiFilenames = $('#fi-filenames');
-
+    fiTwitter = $('#fi-twitter');
 
 var no = 0
 try {
@@ -28,8 +26,7 @@ if (no == 0) { // 새 학생 등록
       'password': fiPassword.val(),
       'homepage': fiHomepage.val(),
       'facebook': fiFacebook.val(),
-      'twitter': fiTwitter.val(),
-      'filenames': fiFilenames.val()
+      'twitter': fiTwitter.val()
     }, function(result) {
       location.href = 'index.html'
     }, 'json')
@@ -69,21 +66,3 @@ if (no == 0) { // 새 학생 등록
     })
   })
 }
-
-$('#fi-photoupload').fileupload({
-    url: 'upload.json',
-    dataType: 'json',
-    sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
-    singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기.  
-    done: function (e, data) { 
-      console.log('done()...');
-      console.log(data.result); // 서버가 보낸 JSON 객체는 data.result 에 보관되어 있다.
-      var filenames = data.result.data;
-      
-      for (var i = 0; i < filenames.length; i++) {
-        var val = fiFilenames.val();
-        if (val.length > 0) val += ",";
-        fiFilenames.val(val + filenames[i]);
-      }
-    }
-});

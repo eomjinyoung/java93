@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <title>강사관리</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel='stylesheet' href='../css/common.css'>
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  a[disabled] {
+    pointer-events: none;
+  }
+  </style>  
+</head>
+<body>
+<div class="container">
+
+<div class='header'>
+  <div id='logo'>비트캠프</div>
+  <div id='login'></div>
+</div>
+
+<h1>강사 목록 by JSP</h1>
+
+<table id="teacher-tbl" class="table table-hover">
+<thead>
+  <tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th><th>홈페이지</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<button id="prev-btn" class="btn btn-primary">이전</button>
+<span id="page-no">1</span>
+<button id="next-btn" class="btn btn-primary">다음</button>
+<a href="view.html" class="btn btn-primary">추가</a>
+
+<script id="tbody-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <td>{{no}}</td>
+  <td><a class='detail-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{tel}}</td>
+  <td>{{email}}</td>
+  <td>{{homepage}}</td>
+</tr>
+{{/each}}
+</script>
+
+<div class='footer'>
+  <span>비트캠프 자바93기</span> | 
+  <address>서울시 서초구 서초동 1327-15번지 비트아카데미 빌딩 3층</address>
+</div>
+
+</div> <!-- .container -->
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../js/app-context.js"></script>
+<script src="../js/userinfo.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
+
+    

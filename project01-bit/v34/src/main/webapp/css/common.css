@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+address {
+  display: inline-block;
+}
+.footer {
+  background-color: gray;
+  color: white;
+  margin: 10px 0px;
+  padding: 10px;
+  text-align: center;
+  height: 40px;
+}
+.header {
+  color: white;
+  background-color: navy;
+  height: 30px;
+  padding: 5px 10px;
+}
+.photo1 {
+  height: 100px;
+}
+#logo {
+  float: left;
+}
+#login {
+  float: right;
+}
+.header a {
+	color: white;
+	text-decoration: none;
+}
+.header a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
