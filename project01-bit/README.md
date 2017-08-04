@@ -142,7 +142,7 @@ build.gradle 등의 파일이 생성된다.
 - 문제 
   - 세션 관리를 개발자가 직접 해야 하기 때문에 코딩이 번거롭다.
   - 즉 세션 아이디를 발급하고 쿠키에 보관하는 코드를 작성해야 한다.
-  - 세션 아디를 이용하여 저장된 값을 꺼내는 일을 직접해야 한다.
+  - 세션 아이디를 이용하여 저장된 값을 꺼내는 일을 직접해야 한다.
 - 해결
   - Servlet 기술에서 제공하는 HttpSession을 사용하는 것이다.
   - 서블릿 컨테이너는 세션아이디가 없으면 새로운 HttpSession 객체를 생성한다.
@@ -167,6 +167,7 @@ build.gradle 등의 파일이 생성된다.
   - TeacherDetailServlet.java
 - 강사 등록 서블릿 추가
   - TeacherAddServlet.java
+  - /webapp/teacher/form.html
 - 강사 변경 서블릿 추가
   - TeacherUpdateServlet.java
 - 강사 삭제 서블릿 추가
