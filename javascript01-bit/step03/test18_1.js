@@ -14,7 +14,7 @@ console.log(result)
 
 result = divide(10, 0)
 console.log(result)
-\
+
 
 
 
